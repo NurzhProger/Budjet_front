@@ -1,0 +1,134 @@
+<form class="card" style="width: 100%;" [formGroup]="form" *ngIf="classifDetail; else loader">
+    <div style="display: flex; width: 100%; padding-bottom: 10px;">
+        <div class="p-field" style="padding-right: 10px;">
+            <label for="code">Код классификации</label>
+            <div class="p-inputgroup">
+                <input id="code" [readOnly]="true" type="text" pInputText [(ngModel)]="classifDetail.code"
+                    formControlName="code" />
+            </div>
+        </div>
+
+        <div class="p-field" style="padding-right: 10px;">
+            <label for="name_kaz">Наименование на каз. языке <span style="color: red;">*</span></label>
+            <div class="p-inputgroup" style="width: 100%;">
+                <input id="name_kaz" type="text" pInputText [(ngModel)]="classifDetail.name_kaz"
+                    formControlName="name_kaz" />
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['name_kaz'].invalid && form.controls['name_kaz'].touched">
+                <span *ngIf="form.controls['name_kaz'].errors?.required">Наименование не должно быть пустым</span>
+            </span>
+        </div>
+
+        <div class="p-field">
+            <label for="name_rus">Наименование на рус. языке <span style="color: red;">*</span></label>
+            <div class="p-inputgroup" style="width: 100%;">
+                <input id="name_rus" type="text" pInputText [(ngModel)]="classifDetail.name_rus"
+                    formControlName="name_rus" />
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['name_rus'].invalid && form.controls['name_rus'].touched">
+                <span *ngIf="form.controls['name_rus'].errors?.required">Наименование не должно быть пустым</span>
+            </span>
+        </div>
+    </div>
+
+    <div style="display: flex; width: 100%; padding-bottom: 10px;">
+        <div class="p-field" style="padding-right: 10px;">
+            <label for="category_name">Категория по поступлению <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="category_name" [readOnly]="true" type="text" pInputText
+                    [ngModel]="classifDetail._category.code + ' ' + classifDetail._category.name_rus"
+                    formControlName="category_name" />
+                <span class="p-inputgroup-addon cursor-pointer" (click)="viewCategory(classifDetail._category.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-files" viewBox="0 0 16 16">
+                        <path
+                            d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                    </svg>
+                </span>
+                <span class="p-inputgroup-addon cursor-pointer" (click)="addCategory()">...</span>
+            </div>
+            <span class="p-invalid"
+                *ngIf="form.controls['category_name'].invalid && form.controls['category_name'].touched">
+                <span *ngIf="form.controls['category_name'].errors?.required">Категория не должна быть пустым</span>
+            </span>
+        </div>
+
+        <div class="p-field">
+            <label for="classs_name">Класс по поступлению <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="classs_name" [readOnly]="true" type="text" pInputText
+                    [ngModel]="classifDetail._classs.code + ' ' + classifDetail._classs.name_rus"
+                    formControlName="classs_name" />
+                <span class="p-inputgroup-addon cursor-pointer" (click)="viewClass(classifDetail._classs.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-files" viewBox="0 0 16 16">
+                        <path
+                            d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                    </svg>
+                </span>
+                <span class="p-inputgroup-addon cursor-pointer" (click)="addClass()">...</span>
+            </div>
+            <span class="p-invalid"
+                *ngIf="form.controls['classs_name'].invalid && form.controls['classs_name'].touched">
+                <span *ngIf="form.controls['classs_name'].errors?.required">Класс не должен быть пустым</span>
+            </span>
+        </div>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+        <div class="p-field" style="padding-right: 10px;">
+            <label for="podclass_name">Подкласс по поступлению <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="podclass_name" [readOnly]="true" type="text" pInputText
+                    [ngModel]="classifDetail._podclass.code + ' ' + classifDetail._podclass.name_rus"
+                    formControlName="podclass_name" />
+                <span class="p-inputgroup-addon cursor-pointer" (click)="viewPodclass()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-files" viewBox="0 0 16 16">
+                        <path
+                            d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                    </svg>
+                </span>
+                <span class="p-inputgroup-addon cursor-pointer" (click)="addPodclass()">...</span>
+            </div>
+            <span class="p-invalid"
+                *ngIf="form.controls['podclass_name'].invalid && form.controls['podclass_name'].touched">
+                <span *ngIf="form.controls['podclass_name'].errors?.required">Подкласс не должен быть пустым</span>
+            </span>
+        </div>
+
+        <div class="p-field">
+            <label for="spec_name">Специфика по поступлению <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="spec_name" [readOnly]="true" type="text" pInputText
+                    [ngModel]="classifDetail._spec.code + ' ' + classifDetail._spec.name_rus" formControlName="spec_name" />
+                <span class="p-inputgroup-addon cursor-pointer" (click)="viewSpec()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-files" viewBox="0 0 16 16">
+                        <path
+                            d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                    </svg>
+                </span>
+                <span class="p-inputgroup-addon cursor-pointer" (click)="addSpec()">...</span>
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['spec_name'].invalid && form.controls['spec_name'].touched">
+                <span *ngIf="form.controls['spec_name'].errors?.required">Специфика не должна быть пустым</span>
+            </span>
+        </div>
+    </div>
+
+    <div style="width:100%; padding: 10px 0;">
+        <label style="color: red;">* - обязательные поля</label>
+    </div>
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+    <button pButton pRipple label="Сохранить" (click)="saveClassif()" icon="pi pi-check"
+        [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success"></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeClassif(false)"
+        class="p-button-outlined p-button-warning"></button>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>

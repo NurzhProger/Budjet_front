@@ -1,0 +1,271 @@
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <div style="padding-right: 10px;">
+            <button [disabled]="form.invalid" pButton pRipple label="Записать" icon="pi pi-save"
+                class="p-button-secondary p-mr-2" (click)="saveDoc(false)"></button>
+        </div>
+        <button [disabled]="form.invalid" pButton pRipple label="Записать и закрыть" icon="pi pi-save"
+            class="p-button-info p-mr-2" (click)="saveDoc(true)"></button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+        <div style="padding-right: 10px;">
+            <p-splitButton appendTo="body" label="Еще" [model]="this.items"
+                styleClass="p-button-outlined p-button-plain p-mr-2"></p-splitButton>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined p-button-plain p-mr-2"
+                styleClass="p-button-sm" (click)="closeform(true)"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(izmDetail) as utvDetail; else loader">
+    <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
+        <div class="p-field" style="padding-right: 10px;">
+            <label for="number_doc">Номер <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="number_doc" type="text" pInputText [(ngModel)]="utvDetail.doc.nom"
+                    formControlName="number_doc" />
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['number_doc'].invalid && form.controls['number_doc'].touched">
+                <span *ngIf="form.controls['number_doc'].errors?.required">Номер не должен быть пустым</span>
+            </span>
+        </div>
+
+        <div class="p-field" style="padding-right: 10px;">
+
+            <label for="date_doc">Дата <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <p-calendar [showTime]="true" [showSeconds]="true" appendTo="body" (onSelect)="changedate()"
+                    [(ngModel)]="utvDetail.doc._date" dateFormat="dd.mm.yy" [showIcon]="true"
+                    formControlName="date_doc"></p-calendar>
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
+                <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
+            </span>
+        </div>
+
+        <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+            <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="org_name" type="text" pInputText [(ngModel)]="utvDetail.doc.org_name"
+                    formControlName="org_name" />
+                <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-files" viewBox="0 0 16 16">
+                        <path
+                            d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                    </svg>
+                </span>
+                <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()">...</span>
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['org_name'].invalid && form.controls['org_name'].touched">
+                <span *ngIf="form.controls['org_name'].errors?.required">Наименование не должно быть пустым</span>
+            </span>
+        </div>
+
+        <div class="p-field">
+            <label for="type_name">Тип справки <span style="color: red;">*</span></label>
+            <div class="card flex justify-content-center" style="margin: 0; width: 100%;">
+                <p-dropdown id="type_name" [options]="spravkatypes" placeholder="Выберите тип"
+                    optionLabel="type_izm_name" optionValue="_type_izm_doc" appendTo="body" (onClick)="gettypespr()"
+                    [(ngModel)]="utvDetail.doc._type_izm_doc" formControlName="type_name">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <!-- <div class="p-field" style="min-width: 20rem;">
+            <label for="budjet_name">Бюджет организации <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="budjet_name" type="text" pInputText [(ngModel)]="utvDetail.doc.budjet_name"
+                    formControlName="budjet_name" />
+            </div>
+            <span class="p-invalid"
+                *ngIf="form.controls['budjet_name'].invalid && form.controls['budjet_name'].touched">
+                <span *ngIf="form.controls['budjet_name'].errors?.required">Бюджет не должен быть пустым</span>
+            </span>
+        </div> -->
+    </form>
+
+    <div style="padding: 0 0 10px 10px;">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="addClassification()"></button>
+    </div>
+
+    <p-table [value]="utvDetail.tbl1" [scrollable]="true" scrollHeight="calc(100vh - 200px)" selectionMode="single"  [(selection)]="selected"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+        <ng-template pTemplate="header">
+            <tr>
+                <th rowspan="3" style="text-align:center">Номер</th>
+                <th rowspan="3" style="text-align:center; width: 30%;">Код КП</th>
+                <th style="text-align:center">Утв сумма на год</th>
+                <th style="text-align:center">Утв январь</th>
+                <th style="text-align:center">Утв февраль</th>
+                <th style="text-align:center">Утв март</th>
+                <th style="text-align:center">Утв апрель</th>
+                <th style="text-align:center">Утв май</th>
+                <th style="text-align:center">Утв июнь</th>
+                <th style="text-align:center">Утв июль</th>
+                <th style="text-align:center">Утв август</th>
+                <th style="text-align:center">Утв сентябрь</th>
+                <th style="text-align:center">Утв октябрь</th>
+                <th style="text-align:center">Утв ноябрь</th>
+                <th style="text-align:center">Утв декабрь</th>
+                <th rowspan="3" style="text-align:center">Действия</th>
+            </tr>
+            <tr>
+                <th style="text-align:center">Сумма на год</th>
+                <th style="text-align:center">Январь</th>
+                <th style="text-align:center">Февраль</th>
+                <th style="text-align:center">Март</th>
+                <th style="text-align:center">Апрель</th>
+                <th style="text-align:center">Май</th>
+                <th style="text-align:center">Июнь</th>
+                <th style="text-align:center">Июль</th>
+                <th style="text-align:center">Август</th>
+                <th style="text-align:center">Сентябрь</th>
+                <th style="text-align:center">Октябрь</th>
+                <th style="text-align:center">Ноябрь</th>
+                <th style="text-align:center">Декабрь</th>
+            </tr>
+            <tr>
+                <th style="text-align:center">Итог сумма на год</th>
+                <th style="text-align:center">Итог январь</th>
+                <th style="text-align:center">Итог февраль</th>
+                <th style="text-align:center">Итог март</th>
+                <th style="text-align:center">Итог апрель</th>
+                <th style="text-align:center">Итог май</th>
+                <th style="text-align:center">Итог июнь</th>
+                <th style="text-align:center">Итог июль</th>
+                <th style="text-align:center">Итог август</th>
+                <th style="text-align:center">Итог сентябрь</th>
+                <th style="text-align:center">Итог октябрь</th>
+                <th style="text-align:center">Итог ноябрь</th>
+                <th style="text-align:center">Итог декабрь</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-izm let-ri="rowIndex">
+            <tr class="cursor-pointer" [pSelectableRow]="izm">
+                <td rowspan="3" style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td rowspan="3" style="text-align:center; width: 30%;">
+                    <div class="p-inputgroup w-full">
+                        <input pInputText [readOnly]="true"
+                            [ngModel]="izm._classification.code + ' ' + izm._classification.name_rus" />
+                        <span class="p-inputgroup-addon" (click)="viewClassification(izm._classification)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-files" viewBox="0 0 16 16">
+                                <path
+                                    d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                            </svg>
+                        </span>
+                        <span class="p-inputgroup-addon" (click)="editClassification(izm.ri)">...</span>
+                    </div>
+                </td>
+                <td style="text-align:center; font-weight: 700;">
+                    {{izm.utv1 + izm.utv2 + izm.utv3 + izm.utv4 + izm.utv5 + izm.utv6 +
+                    izm.utv7 + izm.utv8 + izm.utv9 + izm.utv10 + izm.utv11 + izm.utv12}}
+                </td>
+                <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+                    <td style="text-align:center; max-width: 7em; min-width: 7em">
+                        {{izm['utv' + i]}}</td>
+                </ng-container>
+                <td rowspan="3" style="padding: 0; margin:0;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                            (click)="onDelete(izm.ri, izm.classification_name)"></button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center; font-weight: 700;">
+                    {{izm.sm1 + izm.sm2 + izm.sm3 + izm.sm4 + izm.sm5 + izm.sm6 +
+                    izm.sm7 + izm.sm8 + izm.sm9 + izm.sm10 + izm.sm11 + izm.sm12}}
+                </td>
+                <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+                    <td style="text-align:right; max-width: 7em; min-width: 7em">
+                        <input type="number" (change)="sumColumn(izm, i)" [(ngModel)]="izm['sm' + i]"
+                            style="text-align:right; width: 100%;">
+                    </td>
+                    <!-- <td style="text-align:center; max-width: 7em; min-width: 7em">
+
+                        {{izm['sm' + i]}}</td> -->
+                </ng-container>
+            </tr>
+            <tr>
+                <td style="text-align:center; font-weight: 700;">
+                    {{izm.itog1 + izm.itog2 + izm.itog3 + izm.itog4 + izm.itog5 + izm.itog6 +
+                    izm.itog7 + izm.itog8 + izm.itog9 + izm.itog10 + izm.itog11 + izm.itog12}}
+                </td>
+                <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+
+                    <td style="text-align:center; max-width: 7em; min-width: 7em">
+                        {{izm['itog' + i]}}</td>
+                </ng-container>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <tr>
+                <th rowspan="3" style="text-align:center"></th>
+                <th rowspan="3" style="text-align:center; width: 30%;">Итого</th>
+                <th style="text-align:center">{{TotalUtvGod}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv1}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv2}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv3}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv4}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv5}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv6}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv7}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv8}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv9}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv10}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv11}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalUtv12}}</th>
+                <th rowspan="3" style="text-align:center"></th>
+            </tr>
+            <tr>
+                <th style="text-align:center">{{TotalIzmGod}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm1}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm2}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm3}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm4}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm5}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm6}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm7}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm8}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm9}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm10}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm11}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{TotalIzm12}}</th>
+            </tr>
+            <tr>
+                <th style="text-align:center">{{TotalGod}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total1}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total2}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total3}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total4}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total5}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total6}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total7}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total8}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total9}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total10}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total11}}</th>
+                <th style="text-align:center; max-width: 7em; min-width: 7em">{{Total12}}</th>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <ng-template *ngIf="!utvDetail.tbl1">
+        <div class="center">
+            Нет ни одной записи
+        </div>
+    </ng-template>
+</div>
+
+<p-confirmDialog [closeOnEscape]="true" [closable]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+</p-confirmDialog>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>

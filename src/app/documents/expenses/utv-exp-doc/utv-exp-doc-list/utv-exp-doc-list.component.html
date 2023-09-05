@@ -1,0 +1,76 @@
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="NewDoc()"></button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left" style="margin-right: 10px;">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" [(ngModel)]="searchutvList" (change)="fetchUtvList()"
+                placeholder="поиск..." />
+        </span>
+        <div style="padding-right: 10px;">
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+                styleClass="p-button-sm" (click)="fetchUtvList()"></button>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+                (click)="closeform()"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(utvList$ | async) as utvList; else loader">
+    <p-table *ngIf="utvList.count !== 0; else empty" [value]="utvList.results" [scrollable]="true"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:10%; text-align:center">Номер</th>
+                <th style="width:10%; text-align:center">Дата</th>
+                <th style="width:75%; text-align:center">Организация</th>
+                <th style="width:5%; text-align:center">Действия</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-utvList let-ri="rowIndex" *ngFor="let item of utvList.results| keyvalue">
+            <tr class="cursor-pointer" (dblclick)="onRowEdit(utvList)">
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(utvList.deleted)">{{utvList.nom}}</span>
+                </td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(utvList.deleted)">{{utvList._date}}</span>
+                </td>
+                <td>
+                    <span [ngClass]="setClass(utvList.deleted)">{{utvList._organization.name_rus}}</span>
+                </td>
+                <td style="padding: 0; margin:0;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                            (click)="onRowEdit(utvList)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                            (click)="onDelete(utvList)"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template #empty>
+        <div class="center">
+            Нет ни одного документа
+        </div>
+    </ng-template>
+    <div *ngIf="utvList.count !== 0" class="flex align-items-center justify-content-center">
+        <span class="mx-1 text-color">Указано</span>
+        <p-paginator [first]="first" [rows]="rows" [totalRecords]="utvList.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (utvList.count || 0)  ? utvList.count : first + rows }} из {{utvList.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+    </div>
+    <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+    </p-confirmDialog>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>

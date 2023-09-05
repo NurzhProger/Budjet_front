@@ -1,0 +1,139 @@
+<div class=" bg-indigo">
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <p-megaMenu [model]="items" styleClass="flex">
+            </p-megaMenu>
+        </div>
+
+        <div class="p-toolbar-group-right">
+            <div style="margin-right: 10px;">
+                {{username}}
+            </div>
+            <p-avatar icon="pi pi-user" (click)="menu.toggle($event)" styleClass="mr-2" size="danger" shape="circle">
+            </p-avatar>
+            <p-menu #menu [model]="User" [popup]="true"></p-menu>
+        </div>
+    </p-toolbar>
+    <p-toast></p-toast>
+    <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="tabcount" style="z-index: 0;">
+        <ng-template #templateRef let-context='context'>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span>{{context.title}}</span>
+                    <!-- <i (click)="removetab()" style="margin-left: 10px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x" viewBox="0 0 16 16">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </i> -->
+                </ng-template>
+                <app-organization *ngIf="context.selector=='app-organization'" [data]="true" (closeEvent)="removetab()">
+                </app-organization>
+
+                <app-category-sotr-list *ngIf="context.selector=='app-category-sotr-list'" [data]="true" (closeEvent)="removetab()">
+                </app-category-sotr-list>
+
+                <app-koeff-category-list *ngIf="context.selector=='app-koeff-category-list'" [data]="true" (closeEvent)="removetab()">
+                </app-koeff-category-list>
+
+                <app-stazh-category-list *ngIf="context.selector=='app-stazh-category-list'" [data]="true" (closeEvent)="removetab()">
+                </app-stazh-category-list>
+
+                <app-dopl-nadbavka-list *ngIf="context.selector=='app-dopl-nadbavka-list'" [data]="true" (closeEvent)="removetab()">
+                </app-dopl-nadbavka-list>
+
+                <app-tip-dopl *ngIf="context.selector=='app-tip-dopl'" [data]="true" (closeEvent)="removetab()">
+                </app-tip-dopl>
+
+                <app-podrazdelenie-list *ngIf="context.selector=='app-podrazdelenie-list'" [data]="true" (closeEvent)="removetab()">
+                </app-podrazdelenie-list>
+                
+                <app-dolznost-list *ngIf="context.selector=='app-dolznost-list'" [data]="true" (closeEvent)="removetab()">
+                </app-dolznost-list>
+
+                <app-category-income *ngIf="context.selector=='app-category-income'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-category-income>
+
+                <app-podclass-list *ngIf="context.selector=='app-podclass-list'" (closeEvent)="removetab()">
+                </app-podclass-list>
+
+                <app-class-income-list *ngIf="context.selector=='app-class-income-list'" (closeEvent)="removetab()">
+                </app-class-income-list>
+
+                <app-specification-income-list *ngIf="context.selector=='app-specification-income-list'"
+                    (closeEvent)="removetab()">
+                </app-specification-income-list>
+
+                <app-classification-income-list *ngIf="context.selector=='app-classification-income-list'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-classification-income-list>
+
+                <app-utv-income-list *ngIf="context.selector=='app-utv-income-list'"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                    (closeEvent)="removetab()">
+                </app-utv-income-list>
+
+                <app-utv-income-detail *ngIf="context.selector=='app-utv-income-detail'" [utv_inc_id]="number"
+                    (closeEvent)="removetab()">
+                </app-utv-income-detail>
+
+                <app-budjet-list *ngIf="context.selector=='app-budjet-list'" (closeEvent)="removetab()">
+                </app-budjet-list>
+
+                <app-izm-inc-doc-list *ngIf="context.selector=='app-izm-inc-doc-list'"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                    (closeEvent)="removetab()">
+                </app-izm-inc-doc-list>
+
+                <app-import219-deteail *ngIf="context.selector=='app-import219-deteail'" (closeEvent)="removetab()">
+                </app-import219-deteail>
+
+                <app-izm-inc-doc-detail #someComp *ngIf="context.selector=='app-izm-inc-doc-detail'"
+                    [izm_inc_id]="number" (closeEvent)="removetab()">
+                </app-izm-inc-doc-detail>
+
+                <app-functional-group-list *ngIf="context.selector=='app-functional-group-list'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-functional-group-list>
+
+                <app-functional-podgroup-list *ngIf="context.selector=='app-functional-podgroup-list'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-functional-podgroup-list>
+
+                <app-abp-list *ngIf="context.selector=='app-abp-list'" [data]="true" (closeEvent)="removetab()">
+                </app-abp-list>
+
+                <app-programm-list *ngIf="context.selector=='app-programm-list'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-programm-list>
+
+                <app-podprogramm-list *ngIf="context.selector=='app-podprogramm-list'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-podprogramm-list>
+
+                <app-fkr-list *ngIf="context.selector=='app-fkr-list'" [data]="true" (closeEvent)="removetab()">
+                </app-fkr-list>
+
+                <app-utv-exp-doc-list *ngIf="context.selector=='app-utv-exp-doc-list'"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                    (closeEvent)="removetab()">
+                </app-utv-exp-doc-list>
+
+                <app-utv-exp-doc-detail *ngIf="context.selector=='app-utv-exp-doc-detail'" [utv_exp_id]="number"
+                    (closeEvent)="removetab()">
+                </app-utv-exp-doc-detail>
+
+                <app-specification-exp-list *ngIf="context.selector=='app-specification-exp-list'"
+                    (closeEvent)="removetab()">
+                </app-specification-exp-list>
+
+
+            </mat-tab>
+        </ng-template>
+    </mat-tab-group>
+</div>
+
+<div #viewContainerRef>
+</div>

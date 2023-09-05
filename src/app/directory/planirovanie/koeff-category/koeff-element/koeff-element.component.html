@@ -1,0 +1,45 @@
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="period">Период<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="period" type="date" pInputText [(ngModel)]="koeff_category_element.period" formControlName="period" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['period'].invalid && form.controls['period'].touched">
+            <span *ngIf="form.controls['period'].errors?.required">Заполните период</span>
+        </span>
+
+        <label>Категория должности</label>
+        <div class="p-inputgroup" >
+          <input id="category" type="text" [readonly]="true" pInputText [(ngModel)]="koeff_category_element.category_name" formControlName="category" 
+          placeholder="Выберите категорию" (click)="selectCategory()"/>
+          <span class="p-inputgroup-addon cursor-pointer" (click)="clearCategory()">×</span>
+              <button pButton pRipple type="button" (click)="selectCategory()" icon="pi pi-pencil"
+                  class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        </div>
+
+        <label>Стаж</label>
+        <div class="p-inputgroup" >
+          <input id="stazh" type="text" [readonly]="true" pInputText [(ngModel)]="koeff_category_element.stazh_name" formControlName="stazh" 
+          placeholder="Выберите стаж" (click)="selectStazh()"/>
+          <span class="p-inputgroup-addon cursor-pointer" (click)="clearStazh()">×</span>
+              <button pButton pRipple type="button" (click)="selectStazh()" icon="pi pi-pencil"
+                  class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        </div>
+
+        <label>Коэффициент</label>
+        <div class="p-inputgroup" >
+          <input id="koeff" type="number" pInputText [(ngModel)]="koeff_category_element.koefficient" formControlName="koeff"/>
+        </div>
+      </div>
+
+      <div style="width:100%; padding: 10px 0;">
+        <label style="color: red;">* - обязательные поля</label>
+      </div>
+
+      <div class="flex align-items-center justify-content-center gap-2">
+        <button pButton pRipple label="Сохранить" (click)="saveKoeff()" icon="pi pi-check"
+          [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
+        <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeKoeff(false)"
+          class="p-button-outlined p-button-warning"></button>
+    </div>
+</form>

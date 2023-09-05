@@ -1,0 +1,65 @@
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name">Наименование<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+          <input id="name" type="text" pInputText [(ngModel)]="doplaty_nadbavky_element.name" formControlName="name" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+          <span *ngIf="form.controls['name'].errors?.required">Наименование не должно быть пустым</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_kaz">Наименование каз</label>
+        <div class="p-inputgroup">
+          <input id="name_kaz" type="text" pInputText [(ngModel)]="doplaty_nadbavky_element.name_kaz" formControlName="name_kaz" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_rus">Наименование рус</label>
+        <div class="p-inputgroup">
+          <input id="name_rus" type="text" pInputText [(ngModel)]="doplaty_nadbavky_element.name_rus" formControlName="name_rus" />
+        </div>
+    </div>
+    
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="_tip_dopl">Тип<span style="color: red;">*</span></label>
+        <div>
+            <p-dropdown placeholder="Выберите" [options]="tip_options" optionLabel="value" optionValue="label"
+                appendTo="body" [(ngModel)]="doplaty_nadbavky_element._tip_dopl" formControlName="_tip_dopl" (click)="selectTip()">
+            </p-dropdown>
+          </div>
+          <span class="p-invalid" *ngIf="form.controls['_tip_dopl'].invalid && form.controls['_tip_dopl'].touched">
+            <span *ngIf="form.controls['_tip_dopl'].errors?.required">Выберите тип</span>
+          </span>
+    </div>
+
+    <div style="display: flex;">
+        <div class="p-field" style="padding-bottom: 10px;">
+          <label for="for_nalog">для налога</label>
+             <div class="p-inputgroup"> 
+              <input id="for_nalog" type="checkbox" [(ngModel)]="doplaty_nadbavky_element.for_nalog" formControlName="for_nalog" />
+            </div>
+        </div>
+
+        <div class="p-field" style="padding-left: 20px;">
+            <label for="for_rb">для РБ</label>
+            <div class="p-inputgroup"> 
+             <input id="for_rb" type="checkbox" [(ngModel)]="doplaty_nadbavky_element.for_rb" formControlName="for_rb" />
+            </div>
+        </div>
+    </div>
+
+    <div style="width:100%; padding: 10px 0;">
+        <label style="color: red;">* - обязательные поля</label>
+      </div>
+
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+    <button id="save" pButton pRipple label="Сохранить" (click)="saveDopl()" icon="pi pi-check"
+      [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeDopl(false)"
+      class="p-button-outlined p-button-warning"></button>
+  </div>

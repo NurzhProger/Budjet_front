@@ -1,0 +1,50 @@
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name">Наименование<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+          <input id="name" type="text" pInputText [(ngModel)]="dolzhnost_element.name" formControlName="name" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+          <span *ngIf="form.controls['name'].errors?.required">Наименование не должно быть пустым</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_kaz">Наименование каз</label>
+        <div class="p-inputgroup">
+          <input id="name_kaz" type="text" pInputText [(ngModel)]="dolzhnost_element.name_kaz" formControlName="name_kaz" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_rus">Наименование рус</label>
+        <div class="p-inputgroup">
+          <input id="name_kaz" type="text" pInputText [(ngModel)]="dolzhnost_element.name_rus" formControlName="name_rus" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="podrazdelenie_name">Подразделение<span style="color: red;">*</span></label>
+        <div class="p-inputgroup" >
+            <input id="podrazdelenie_name" type="text" [readonly]="true" pInputText [(ngModel)]="dolzhnost_element.podrazdelenie_name" formControlName="podrazdelenie_name" 
+            placeholder="Выберите подразделение" (click)="selectPodr()"/>
+             <span class="p-inputgroup-addon cursor-pointer" (click)="clearPodr()">×</span>
+            <button pButton pRipple type="button"  (click)="selectPodr()" icon="pi pi-pencil"         
+            class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['podrazdelenie_name'].invalid && form.controls['podrazdelenie_name'].touched">
+            <span *ngIf="form.controls['podrazdelenie_name'].errors?.required">Подразделение не должно быть пустым</span>
+          </span>
+    </div>
+
+    <div style="width:100%; padding: 10px 0;">
+      <label style="color: red;">* - обязательные поля</label>
+    </div>
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+  <button id="save" pButton pRipple label="Сохранить" (click)="saveDolzhnost()" icon="pi pi-check"
+    [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
+  <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeDolzhnost(false)"
+    class="p-button-outlined p-button-warning"></button>
+</div>

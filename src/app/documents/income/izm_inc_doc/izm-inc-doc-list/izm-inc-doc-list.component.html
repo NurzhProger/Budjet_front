@@ -1,0 +1,98 @@
+<p-toolbar>
+
+  <div class="p-toolbar-group-left">
+    <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+      (click)="NewDoc()"></button>
+  </div>
+
+  <div class="p-toolbar-group-right">
+    <span class="p-input-icon-left" style="margin-right: 10px;">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" [(ngModel)]="searchIzmInc" (change)="search()" placeholder="поиск..." />
+    </span>
+    <div style="padding-right: 10px;">
+      <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined" styleClass="p-button-sm"
+        (click)="fetch_doc_izm()"></button>
+    </div>
+    <div>
+      <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+        (click)="closeform()"></button>
+    </div>
+  </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(doc_izm$ | async) as izmList; else loader">
+  <p-table *ngIf="izmList.count !== 0; else empty" [value]="izmList.results" [scrollable]="true"
+    scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single"
+    styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:10%; text-align:center">Номер</th>
+        <th style="width:10%; text-align:center">Дата</th>
+        <th style="width:40%; text-align:center">Организация</th>
+        <th style="width:35%; text-align:center">Бюджет</th>
+        <th style="width:5%; text-align:center">Действия</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-doc let-ri="rowIndex" *ngFor="let item of izmList.results| keyvalue">
+      <tr class="cursor-pointer" (dblclick)="onRowEdit(doc)">
+        <td style="text-align:center">
+          <!-- <span *ngIf="doc.deleted">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+              <path
+                d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z" />
+              <path
+                d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+            </svg>
+          </span> -->
+          <!-- <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-file-earmark" viewBox="0 0 16 16">
+              <path
+                d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+            </svg>
+          </span> -->
+          <span [ngClass]="setClass(doc.deleted)">{{doc.nom}}</span>
+        </td>
+        <td>
+          <span [ngClass]="setClass(doc.deleted)">{{doc._date}}</span>
+        </td>
+        <td>
+          <span [ngClass]="setClass(doc.deleted)">{{doc.org_name}}</span>
+        </td>
+        <td>
+          <span [ngClass]="setClass(doc.deleted)">{{doc.budjet_name}}</span>
+        </td>
+        <td style="padding: 0; margin:0;">
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+              (click)="onRowEdit(doc)"></button>
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+              (click)="onDelete(doc)"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ng-template #empty>
+    <div class="center">
+      Нет ни одного документа
+    </div>
+  </ng-template>
+  <div *ngIf="izmList.count !== 0" class="flex align-items-center justify-content-center">
+    <span class="mx-1 text-color">Указано</span>
+    <p-paginator [first]="first" [rows]="rows" [totalRecords]="izmList.count || 0" (onPageChange)="onPageChange($event)"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="{{first+1}} - {{((this.first / this.rows) + 1) * rows}} из {{izmList.count}} элементов"
+      [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+  </div>
+
+  <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+  </p-confirmDialog>
+
+</div>
+
+<ng-template #loader>
+  <app-skeleton></app-skeleton>
+</ng-template>

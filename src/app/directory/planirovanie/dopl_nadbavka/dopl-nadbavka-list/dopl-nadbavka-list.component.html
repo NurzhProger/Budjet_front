@@ -1,0 +1,55 @@
+<p-toolbar>
+
+    <div class="p-toolbar-group-left" *ngIf="data!==false">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
+    </div>
+    <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left" style="margin-right: 10px;">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" placeholder="поиск..." />
+        </span>
+        <div style="padding-right: 10px;">
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+                styleClass="p-button-sm" (click)="fetchList()"></button>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+              (click)="closeform()"></button>
+        </div>
+    </div>
+
+</p-toolbar>
+
+<div class="card" *ngIf="(doplaty_nadbavky | async) as doplaty_nadbavky; else loader">
+    <p-table *ngIf="doplaty_nadbavky.count !== 0; else empty" [value]="doplaty_nadbavky.results" [scrollable]="true"
+            scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+            styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+    
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:5%; text-align:center">Номер</th>
+                    <th style="width:95%; text-align:center">Наименование</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-dopl_nadbavky let-ri="rowIndex">
+                <tr class="cursor-pointer"   (dblclick)="onRowClick(dopl_nadbavky)">
+                    <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                    <td style="text-align:center">
+                        {{dopl_nadbavky.name}}
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <ng-template #empty>
+            <div class="center">
+                Нет ни одного элемента
+            </div>
+        </ng-template>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>

@@ -1,0 +1,67 @@
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <button pButton pRipple label="выбрать"  icon="pi pi-check" class="p-button-success p-mr-2"
+            (click)="onSelected(selected)"></button>
+    </div>
+    <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left" style="margin-right: 10px;">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" [(ngModel)]="searchorg" (change)="search()" placeholder="поиск..." />
+        </span>
+        <div style="padding-right: 10px;">
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+                styleClass="p-button-sm" (click)="fetchOrg()"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(organizations$ | async) as organizations; else loader">
+    <p-table *ngIf="organizations.count !== 0; else empty" [value]="organizations.results" [scrollable]="true"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%; text-align:center">Номер</th>
+                <th style="width:10%; text-align:center">БИН организации</th>
+                <th style="width:20%; text-align:center">Бюджет наименование</th>
+                <th style="width:30%; text-align:center">Наименование каз.</th>
+                <th style="width:30%; text-align:center">Наименование русс.</th>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-org let-ri="rowIndex" *ngFor="let item of organizations.results| keyvalue">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(org)" [pSelectableRow]="org">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td style="text-align:center">
+                    {{org.bin}}
+                </td>
+                <td>
+                    {{org.budjet_name}}
+                </td>
+                <td>
+                    {{org.name_kaz}}
+                </td>
+                <td>
+                    {{org.name_rus}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template #empty>
+        <div class="center">
+            Нет ни одной организации
+        </div>
+    </ng-template>
+    <div *ngIf="organizations.count !== 0" class="flex align-items-center justify-content-center">
+        <span class="mx-1 text-color">Указано</span>
+        <p-paginator [first]="first" [rows]="rows" [totalRecords]="organizations.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (organizations.count || 0)  ? organizations.count : first + rows }} из {{organizations.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+    </div>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>
