@@ -36,10 +36,11 @@
         <label style="color: red;">* - обязательные поля</label>
       </div>
 
-      <div class="flex align-items-center justify-content-center gap-2">
-        <button pButton pRipple label="Сохранить" (click)="saveKoeff()" icon="pi pi-check"
-          [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
-        <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeKoeff(false)"
-          class="p-button-outlined p-button-warning"></button>
-    </div>
+      
 </form>
+<div class="flex align-items-center justify-content-center gap-2">
+  <button pButton pRipple label="Сохранить" (click)="saveKoeff()" icon="pi pi-check"
+    [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
+  <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeKoeff(false)"
+    class="p-button-outlined p-button-warning"></button>
+</div>
