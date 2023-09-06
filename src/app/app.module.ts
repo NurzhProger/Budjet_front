@@ -88,6 +88,7 @@ import { TipTruComponent } from './enums/tip_tru/tip-tru/tip-tru.component';
 import { EnstruListComponent } from './directory/planirovanie/ensTRU/enstru-list/enstru-list.component';
 import { EnstruElementComponent } from './directory/planirovanie/ensTRU/enstru-element/enstru-element.component';
 import { FormlistComponent } from './directory/income/forms/formlist/formlist.component';
+import { FormDetailComponent } from './directory/income/forms/form-detail/form-detail.component';
 
 
 @NgModule({
@@ -179,7 +180,8 @@ import { FormlistComponent } from './directory/income/forms/formlist/formlist.co
     TipTruComponent,
     EnstruListComponent,
     EnstruElementComponent,
-    FormlistComponent],
+    FormlistComponent,
+    FormDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {
