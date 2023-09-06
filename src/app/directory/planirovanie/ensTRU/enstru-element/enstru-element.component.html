@@ -1,0 +1,69 @@
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="code">Код<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+          <input id="code" type="text" pInputText [(ngModel)]="ensTRU_element.code" formControlName="code" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['code'].invalid && form.controls['code'].touched">
+          <span *ngIf="form.controls['code'].errors?.required">Код не должен быть пустым</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_kaz">Наименование каз<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+          <input id="name_kaz" type="text" pInputText [(ngModel)]="ensTRU_element.name_kaz" formControlName="name_kaz" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name_kaz'].invalid && form.controls['name_kaz'].touched">
+            <span *ngIf="form.controls['name_kaz'].errors?.required">Наименование каз не должно быть пустым</span>
+          </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_rus">Наименование рус<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+          <input id="name_rus" type="text" pInputText [(ngModel)]="ensTRU_element.name_rus" formControlName="name_rus" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name_rus'].invalid && form.controls['name_rus'].touched">
+            <span *ngIf="form.controls['name_rus'].errors?.required">Наименование рус не должно быть пустым</span>
+          </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="harak_kaz">Характеристика каз</label>
+        <div class="p-inputgroup">
+          <input id="harak_kaz" type="text" pInputText [(ngModel)]="ensTRU_element.harak_kaz" formControlName="harak_kaz" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="harak_rus">Характеристика рус</label>
+        <div class="p-inputgroup">
+          <input id="harak_rus" type="text" pInputText [(ngModel)]="ensTRU_element.harak_rus" formControlName="harak_rus" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="_tip_tru">Тип<span style="color: red;">*</span></label>
+        <div>
+            <p-dropdown placeholder="Выберите тип" [options]="tip_options" optionLabel="name" optionValue="name"
+                appendTo="body" [(ngModel)]="ensTRU_element._tip_tru" formControlName="_tip_tru">
+            </p-dropdown>
+          </div>
+          <span class="p-invalid" *ngIf="form.controls['_tip_tru'].invalid && form.controls['_tip_tru'].touched">
+            <span *ngIf="form.controls['_tip_tru'].errors?.required">Выберите тип</span>
+          </span>
+    </div>
+
+    <div style="width:100%; padding: 10px 0;">
+        <label style="color: red;">* - обязательные поля</label>
+      </div>
+
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+    <button id="save" pButton pRipple label="Сохранить" (click)="saveEns()" icon="pi pi-check"
+    class="p-button-outlined p-button-success" disabled="false"></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeEns(false)"
+      class="p-button-outlined p-button-warning"></button>
+  </div>

@@ -1,3 +1,4 @@
+import { doplata_element } from "src/app/enums/tip_dopl/tip-dopl/interfaces"
 export interface doplaty_nadbavky_element {
     id: number,
     name: string,

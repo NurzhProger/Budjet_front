@@ -46,6 +46,14 @@
                 <app-tip-dopl *ngIf="context.selector=='app-tip-dopl'" [data]="true" (closeEvent)="removetab()">
                 </app-tip-dopl>
 
+                <app-tip-tru *ngIf="context.selector=='app-tip-tru'" [data]="true" (closeEvent)="removetab()">
+                </app-tip-tru>
+
+                <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
+                </app-enstru-list>
+
+                
+
                 <app-podrazdelenie-list *ngIf="context.selector=='app-podrazdelenie-list'" [data]="true" (closeEvent)="removetab()">
                 </app-podrazdelenie-list>
                 

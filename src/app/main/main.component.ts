@@ -65,6 +65,10 @@ export class MainComponent implements OnInit {
               items: [{
                 label: 'Виды доплат и надбавок',
                 command: () => this.openTab('app-dopl-nadbavka-list', 'Виды доплат и надбавок', '')
+              },
+              {
+                label: 'ЕНС ТРУ',
+                command: () => this.openTab('app-enstru-list', 'ЕНС ТРУ', '')
               }]
             }
           ],
@@ -194,6 +198,10 @@ export class MainComponent implements OnInit {
               items: [{
                 label: 'Тип доплат',
                 command: () => this.openTab('app-tip-dopl', 'Тип доплат', '')
+              },
+              {
+                label: 'Тип ТРУ',
+                command: () => this.openTab('app-tip-tru', 'Тип ТРУ', '')
               }]
             }
           ],

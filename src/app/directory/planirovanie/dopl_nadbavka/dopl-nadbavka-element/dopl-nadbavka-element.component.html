@@ -26,8 +26,8 @@
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="_tip_dopl">Тип<span style="color: red;">*</span></label>
         <div>
-            <p-dropdown placeholder="Выберите" [options]="tip_options" optionLabel="value" optionValue="label"
-                appendTo="body" [(ngModel)]="doplaty_nadbavky_element._tip_dopl" formControlName="_tip_dopl" (click)="selectTip()">
+            <p-dropdown placeholder="Выберите тип" [options]="tip_options" optionLabel="name" optionValue="name"
+                appendTo="body" [(ngModel)]="doplaty_nadbavky_element._tip_dopl" formControlName="_tip_dopl">
             </p-dropdown>
           </div>
           <span class="p-invalid" *ngIf="form.controls['_tip_dopl'].invalid && form.controls['_tip_dopl'].touched">

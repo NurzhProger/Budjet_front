@@ -32,7 +32,7 @@ export class DoplNadbavkaElementComponent implements OnInit {
     name_rus: '',
     for_nalog: false,
     for_rb: false,
-    _tip_dopl: ''
+    _tip_dopl:  ''
   }
 
   tip_options: any =[];
@@ -52,14 +52,12 @@ export class DoplNadbavkaElementComponent implements OnInit {
       this.doplatyNadbavkyService.fetchDoplata(this.doplaty_nadbavky_element.id)
         .subscribe(
           (data) => (
-              this.doplaty_nadbavky_element = data,
-              this.tip_options.value = this.doplaty_nadbavky_element._tip_dopl,
-              this.tip_options.label = this.doplaty_nadbavky_element._tip_dopl,
-              console.log(this.tip_options)
+              this.doplaty_nadbavky_element = data
             )
         )
-          
+            
     }
+    this.selectTip()
   }
 
   saveDopl() {
@@ -68,14 +66,14 @@ export class DoplNadbavkaElementComponent implements OnInit {
     this.doplatyNadbavkyService.add(this.doplaty_nadbavky_element)
       .subscribe(
         (data) => (
-          this.doplnadb_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Категория сотрудника сохранена!' })
+          this.doplnadb_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Вид доплат сохранен!' })
         ),
         (error) => (this.doplnadb_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
       }
    else {
         this.doplatyNadbavkyService.edit(this.doplaty_nadbavky_element)
         .subscribe((data) => (
-          this.doplnadb_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Категория сотрудника сохранена!' })
+          this.doplnadb_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Вид доплат сохранен!' })
         ),
         (error) => (this.doplnadb_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
       }

@@ -84,6 +84,9 @@ import { DolznostListComponent } from './directory/planirovanie/dolzhnost/dolzno
 import { TipDoplComponent } from './enums/tip_dopl/tip-dopl/tip-dopl.component';
 import { DoplNadbavkaElementComponent } from './directory/planirovanie/dopl_nadbavka/dopl-nadbavka-element/dopl-nadbavka-element.component';
 import { DoplNadbavkaListComponent } from './directory/planirovanie/dopl_nadbavka/dopl-nadbavka-list/dopl-nadbavka-list.component';
+import { TipTruComponent } from './enums/tip_tru/tip-tru/tip-tru.component';
+import { EnstruListComponent } from './directory/planirovanie/ensTRU/enstru-list/enstru-list.component';
+import { EnstruElementComponent } from './directory/planirovanie/ensTRU/enstru-element/enstru-element.component';
 
 
 @NgModule({
@@ -171,7 +174,10 @@ import { DoplNadbavkaListComponent } from './directory/planirovanie/dopl_nadbavk
     DolznostListComponent,
     TipDoplComponent,
     DoplNadbavkaElementComponent,
-    DoplNadbavkaListComponent],
+    DoplNadbavkaListComponent,
+    TipTruComponent,
+    EnstruListComponent,
+    EnstruElementComponent],
   bootstrap: [AppComponent],
   providers: [
     {
