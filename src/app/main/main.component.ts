@@ -73,6 +73,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'Периодические показатели',
                 command: () => this.openTab('app-period-pokaz-list', 'Периодические показатели', '')
+              },
+              {
+                label: 'Марки авто',
+                command: () => this.openTab('app-marki-avto-list', 'Марки авто', '')
               }]
             }
           ],
@@ -214,6 +218,14 @@ export class MainComponent implements OnInit {
               {
                 label: 'Показатели',
                 command: () => this.openTab('app-stavka-list', 'Показатели', '')
+              },
+              {
+                label: 'Тип топлива',
+                command: () => this.openTab('app-tip-topliva', 'Тип топлива', '')
+              },
+              {
+                label: 'Вид транспорта',
+                command: () => this.openTab('app-vid-transporta', 'Вид транспорта', '')
               }]
             }
           ],
