@@ -88,7 +88,12 @@ import { TipTruComponent } from './enums/tip_tru/tip-tru/tip-tru.component';
 import { EnstruListComponent } from './directory/planirovanie/ensTRU/enstru-list/enstru-list.component';
 import { EnstruElementComponent } from './directory/planirovanie/ensTRU/enstru-element/enstru-element.component';
 import { FormlistComponent } from './directory/income/forms/formlist/formlist.component';
+<<<<<<< Updated upstream
 import { FormDetailComponent } from './directory/income/forms/form-detail/form-detail.component';
+=======
+import { PeriodPokazElementComponent } from './directory/planirovanie/period-pokaz/period-pokaz-element/period-pokaz-element.component';
+import { PeriodPokazListComponent } from './directory/planirovanie/period-pokaz/period-pokaz-list/period-pokaz-list.component';
+>>>>>>> Stashed changes
 
 
 @NgModule({
@@ -181,7 +186,12 @@ import { FormDetailComponent } from './directory/income/forms/form-detail/form-d
     EnstruListComponent,
     EnstruElementComponent,
     FormlistComponent,
+<<<<<<< Updated upstream
     FormDetailComponent],
+=======
+    PeriodPokazElementComponent,
+    PeriodPokazListComponent],
+>>>>>>> Stashed changes
   bootstrap: [AppComponent],
   providers: [
     {

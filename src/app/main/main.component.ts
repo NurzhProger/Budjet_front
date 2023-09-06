@@ -69,6 +69,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'ЕНС ТРУ',
                 command: () => this.openTab('app-enstru-list', 'ЕНС ТРУ', '')
+              },
+              {
+                label: 'Периодические показатели',
+                command: () => this.openTab('app-period-pokaz-list', 'Периодические показатели', '')
               }]
             }
           ],

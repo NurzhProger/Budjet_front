@@ -18,7 +18,7 @@ export class EnsTRUService {
   }
 
   fetchEnsTRU(ensTRU_id: number): Observable<ensTRU_element> {
-      return this.http.get<ensTRU_element>(this.host + `dirs/dopl_nadbitem/${ensTRU_id}`)
+      return this.http.get<ensTRU_element>(this.host + `dirs/enstruitem/${ensTRU_id}`)
   }
 
   add(param: ensTRU_element) {
