@@ -210,6 +210,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'Тип ТРУ',
                 command: () => this.openTab('app-tip-tru', 'Тип ТРУ', '')
+              },
+              {
+                label: 'Показатели',
+                command: () => this.openTab('app-stavka-list', 'Показатели', '')
               }]
             }
           ],

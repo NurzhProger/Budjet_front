@@ -91,6 +91,7 @@ import { FormlistComponent } from './directory/income/forms/formlist/formlist.co
 import { FormDetailComponent } from './directory/income/forms/form-detail/form-detail.component';
 import { PeriodPokazElementComponent } from './directory/planirovanie/period-pokaz/period-pokaz-element/period-pokaz-element.component';
 import { PeriodPokazListComponent } from './directory/planirovanie/period-pokaz/period-pokaz-list/period-pokaz-list.component';
+import { StavkaListComponent } from './enums/stavka/stavka-list/stavka-list.component';
 
 
 @NgModule({
@@ -185,7 +186,8 @@ import { PeriodPokazListComponent } from './directory/planirovanie/period-pokaz/
     FormlistComponent,
     FormDetailComponent,
     PeriodPokazElementComponent,
-    PeriodPokazListComponent],
+    PeriodPokazListComponent,
+    StavkaListComponent],
   bootstrap: [AppComponent],
   providers: [
     {

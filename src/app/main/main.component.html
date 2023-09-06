@@ -49,6 +49,9 @@
                 <app-tip-tru *ngIf="context.selector=='app-tip-tru'" [data]="true" (closeEvent)="removetab()">
                 </app-tip-tru>
 
+                <app-stavka-list *ngIf="context.selector=='app-stavka-list'" [data]="true" (closeEvent)="removetab()">
+                </app-stavka-list>
+
                 <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
                 </app-enstru-list>
 
