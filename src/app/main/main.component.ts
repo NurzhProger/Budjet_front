@@ -91,6 +91,10 @@ export class MainComponent implements OnInit {
                 label: 'Должности',
                 command: () => this.openTab('app-dolznost-list', 'Должности', '')
               },
+              {
+                label: 'Шаблон формы',
+                command: () => this.openTab('app-formlist', 'Шаблон формы', '')
+              },
               ]
             }
           ],
