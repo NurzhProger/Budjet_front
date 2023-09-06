@@ -52,11 +52,11 @@
                 <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
                 </app-enstru-list>
 
-                
+
 
                 <app-podrazdelenie-list *ngIf="context.selector=='app-podrazdelenie-list'" [data]="true" (closeEvent)="removetab()">
                 </app-podrazdelenie-list>
-                
+
                 <app-dolznost-list *ngIf="context.selector=='app-dolznost-list'" [data]="true" (closeEvent)="removetab()">
                 </app-dolznost-list>
 
@@ -136,6 +136,10 @@
                 <app-specification-exp-list *ngIf="context.selector=='app-specification-exp-list'"
                     (closeEvent)="removetab()">
                 </app-specification-exp-list>
+
+                <app-formlist *ngIf="context.selector=='app-formlist'" (closeEvent)="removetab()">
+                </app-formlist>
+
 
 
             </mat-tab>
