@@ -1,1 +1,47 @@
-<p>marki-avto-element works!</p>
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name">Наименование<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="name" type="text" pInputText [(ngModel)]="marki_avto_element.name" formControlName="name" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+            <span *ngIf="form.controls['name'].errors?.required">Заполните наименование</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="engine_capacity">Объем двигателя</label>
+        <div class="p-inputgroup">
+          <input id="engine_capacity" type="number" pInputText [(ngModel)]="marki_avto_element.engine_capacity" formControlName="engine_capacity" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="_tip_topliva">Тип топлива</label>
+        <div>
+            <p-dropdown placeholder="Выберите тип топлива" [options]="tip_topliva" optionLabel="name" optionValue="name"
+                appendTo="body" [(ngModel)]="marki_avto_element._tip_topliva" formControlName="_tip_topliva">
+            </p-dropdown>
+          </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="_vid_transporta">Вид транспорта</label>
+        <div>
+            <p-dropdown placeholder="Выберите вид транспорта" [options]="vid_transporta" optionLabel="name" optionValue="name"
+                appendTo="body" [(ngModel)]="marki_avto_element._vid_transporta" formControlName="_vid_transporta">
+            </p-dropdown>
+          </div>
+    </div>
+
+    <div style="width:100%; padding: 10px 0;">
+      <label style="color: red;">* - обязательные поля</label>
+    </div>
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+    <button pButton pRipple label="Сохранить" (click)="saveAvto()" icon="pi pi-check"
+      [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeAvto(false)"
+      class="p-button-outlined p-button-warning"></button>
+</div>
