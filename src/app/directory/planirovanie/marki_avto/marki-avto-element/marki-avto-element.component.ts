@@ -44,9 +44,6 @@ export class MarkiAvtoElementComponent implements OnInit {
       _vid_transporta: new FormControl()
     })
     this.marki_avto_element.id = this.marki_avto_dialog_config.data.markiavto_id;
-    console.log(this.marki_avto_element.id);
-    
-    
     if (this.marki_avto_element.id !== 0) {
       this.MarkiAvtoService.fetchMarkiAvto(this.marki_avto_element.id)
         .subscribe(

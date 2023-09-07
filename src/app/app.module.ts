@@ -98,6 +98,8 @@ import { MarkiAvtoElementComponent } from './directory/planirovanie/marki_avto/m
 import { MarkiAvtoListComponent } from './directory/planirovanie/marki_avto/marki-avto-list/marki-avto-list.component';
 import { OblastiRegionyElementComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-element/oblasti-regiony-element.component';
 import { OblastiRegionyListComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-list/oblasti-regiony-list.component';
+import { EdIzmListComponent } from './directory/planirovanie/ed-izm/ed-izm-list/ed-izm-list.component';
+import { EdIzmElementComponent } from './directory/planirovanie/ed-izm/ed-izm-element/ed-izm-element.component';
 
 
 @NgModule({
@@ -199,7 +201,9 @@ import { OblastiRegionyListComponent } from './directory/planirovanie/oblasti-re
     MarkiAvtoElementComponent,
     MarkiAvtoListComponent,
     OblastiRegionyElementComponent,
-    OblastiRegionyListComponent],
+    OblastiRegionyListComponent,
+    EdIzmListComponent,
+    EdIzmElementComponent],
   bootstrap: [AppComponent],
   providers: [
     {

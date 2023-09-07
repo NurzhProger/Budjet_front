@@ -81,6 +81,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'Области и регионы',
                 command: () => this.openTab('app-oblasti-regiony-list', 'Области и регионы', '')
+              },
+              {
+                label: 'Единицы измерения',
+                command: () => this.openTab('app-ed-izm-list', 'Единицы измерения', '')
               }]
             }
           ],
