@@ -61,6 +61,9 @@
                 <app-tip-topliva *ngIf="context.selector=='app-tip-topliva'" [data]="true" (closeEvent)="removetab()">
                 </app-tip-topliva>
 
+                <app-oblasti-regiony-list *ngIf="context.selector=='app-oblasti-regiony-list'" [data]="true" (closeEvent)="removetab()">
+                </app-oblasti-regiony-list>
+
                 <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
                 </app-enstru-list>
 

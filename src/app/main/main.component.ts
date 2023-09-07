@@ -77,6 +77,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'Марки авто',
                 command: () => this.openTab('app-marki-avto-list', 'Марки авто', '')
+              },
+              {
+                label: 'Области и регионы',
+                command: () => this.openTab('app-oblasti-regiony-list', 'Области и регионы', '')
               }]
             }
           ],

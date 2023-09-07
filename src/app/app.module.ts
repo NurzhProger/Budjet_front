@@ -96,6 +96,8 @@ import { TipToplivaComponent } from './enums/tip_topliva/tip-topliva/tip-topliva
 import { VidTransportaComponent } from './enums/vid_transporta/vid-transporta/vid-transporta.component';
 import { MarkiAvtoElementComponent } from './directory/planirovanie/marki_avto/marki-avto-element/marki-avto-element.component';
 import { MarkiAvtoListComponent } from './directory/planirovanie/marki_avto/marki-avto-list/marki-avto-list.component';
+import { OblastiRegionyElementComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-element/oblasti-regiony-element.component';
+import { OblastiRegionyListComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-list/oblasti-regiony-list.component';
 
 
 @NgModule({
@@ -195,7 +197,9 @@ import { MarkiAvtoListComponent } from './directory/planirovanie/marki_avto/mark
     TipToplivaComponent,
     VidTransportaComponent,
     MarkiAvtoElementComponent,
-    MarkiAvtoListComponent],
+    MarkiAvtoListComponent,
+    OblastiRegionyElementComponent,
+    OblastiRegionyListComponent],
   bootstrap: [AppComponent],
   providers: [
     {
