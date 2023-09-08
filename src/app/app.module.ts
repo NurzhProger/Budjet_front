@@ -99,6 +99,7 @@ import { EdIzmElementComponent } from './directory/planirovanie/ed-izm/ed-izm-el
 import { RegionsElementComponent } from './directory/planirovanie/regions/regions-element/regions-element.component';
 import { RegionsListComponent } from './directory/planirovanie/regions/regions-list/regions-list.component';
 import { BudjetRegListComponent } from './directory/planirovanie/budjet-reg/budjet-reg-list/budjet-reg-list.component';
+import { BudjetRegElementComponent } from './directory/planirovanie/budjet-reg/budjet-reg-element/budjet-reg-element/budjet-reg-element.component';
 
 
 @NgModule({
@@ -201,7 +202,8 @@ import { BudjetRegListComponent } from './directory/planirovanie/budjet-reg/budj
     EdIzmElementComponent,
     RegionsElementComponent,
     RegionsListComponent,
-    BudjetRegListComponent],
+    BudjetRegListComponent,
+    BudjetRegElementComponent],
   bootstrap: [AppComponent],
   providers: [
     {

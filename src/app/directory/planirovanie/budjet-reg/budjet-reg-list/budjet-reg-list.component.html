@@ -36,7 +36,7 @@
             </ng-template>
 
             <ng-template pTemplate="body" let-budjet_reg let-ri="rowIndex">
-                <tr class="cursor-pointer" >
+                <tr class="cursor-pointer" (dblclick)="onRowClick(budjet_reg)">
                     <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                     <td style="text-align:center">
                         {{budjet_reg.code}}

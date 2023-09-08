@@ -10,21 +10,6 @@
 
   </div>
 
-  <!-- <div class="p-field" style="padding-bottom: 10px;">
-    <label for="_budjet.name_rus">Бюджет наименовании<span style="color: red;">*</span></label>
-    <div class="p-inputgroup">
-      <input id="budjet_name" type="text" pInputText [(ngModel)]="org_detail._budjet.name_rus"
-        formControlName="budjet_name" />
-      <div class="cursor-pointer">
-        <span class="p-inputgroup-addon" >...</span>
-      </div>
-    </div>
-    <span class="p-invalid" *ngIf="form.controls['budjet_name'].invalid && form.controls['budjet_name'].touched">
-      <span *ngIf="form.controls['budjet_name'].errors?.required">Бюджет не должен быть пустым</span>
-    </span>
-  </div> -->
-
-
 
   <div class="p-field" style="padding-bottom: 10px;">
     <label for="name_kaz">Наименование на каз. языке <span style="color: red;">*</span></label>
@@ -55,6 +40,34 @@
       <span *ngIf="form.controls['adress'].errors?.required">Адрес не должен быть пустым</span>
     </span>
   </div>
+
+<div class="p-field" style="padding-bottom: 10px;">
+    <label for="budjet_name">Бюджет<span style="color: red;">*</span></label>
+    <div class="p-inputgroup" >
+        <input id="budjet_name" type="text" [readonly]="true" pInputText [(ngModel)]="org_detail.budjet_name" formControlName="budjet_name" 
+        placeholder="Выберите бюджет" (click)="selectBudjet()"/>
+         <span class="p-inputgroup-addon cursor-pointer" (click)="clearBudjet()">×</span>
+        <button pButton pRipple type="button"  (click)="selectBudjet()" icon="pi pi-pencil"         
+        class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+    </div>
+    <span class="p-invalid" *ngIf="form.controls['budjet_name'].invalid && form.controls['budjet_name'].touched">
+        <span *ngIf="form.controls['budjet_name'].errors?.required">Бюджет не должнен быть пустым</span>
+      </span>
+</div>
+
+<div class="p-field" style="padding-bottom: 10px;">
+  <label for="region_name">Регион<span style="color: red;">*</span></label>
+  <div class="p-inputgroup" >
+      <input id="region_name" type="text" [readonly]="true" pInputText [(ngModel)]="org_detail.region_name" formControlName="region_name" 
+      placeholder="Выберите регион" (click)="selectRegion()"/>
+       <span class="p-inputgroup-addon cursor-pointer" (click)="clearRegion()">×</span>
+      <button pButton pRipple type="button"  (click)="selectBudjet()" icon="pi pi-pencil"         
+      class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+  </div>
+  <span class="p-invalid" *ngIf="form.controls['region_name'].invalid && form.controls['region_name'].touched">
+      <span *ngIf="form.controls['region_name'].errors?.required">Регион не должнен быть пустым</span>
+    </span>
+</div>
 
   <div style="width:100%; padding: 10px 0;">
     <label style="color: red;">* - обязательные поля</label>

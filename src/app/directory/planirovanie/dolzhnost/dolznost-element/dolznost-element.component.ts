@@ -87,6 +87,8 @@ export class DolznostElementComponent implements OnInit {
           height: 'calc(80%)',
       })
     this.podr_select_dialog_ref.onClose.subscribe((podrazdelenie: podrazdelenie_element) => {
+      console.log(podrazdelenie);
+      
       if (podrazdelenie) {
         this.dolzhnost_element._podrazdelenie = podrazdelenie.id;
         this.dolzhnost_element.podrazdelenie_name = podrazdelenie.name;

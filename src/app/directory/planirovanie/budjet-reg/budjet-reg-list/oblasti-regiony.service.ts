@@ -17,9 +17,9 @@ export class BudjetRegService {
       return this.http.get<budjet_reg_list>(this.host + 'dirs/budjet_reglist', { params })
   }
 
-  // fetchOblast(oblasti_id: number): Observable<oblasti_element> {
-  //     return this.http.get<oblasti_element>(this.host + `dirs/oblasti_regitem/${oblasti_id}`)
-  // }
+  fetchBudjetReg(budjetreg_id: number): Observable<budjet_reg__element> {
+      return this.http.get<budjet_reg__element>(this.host + `dirs/budjet_regitem/${budjetreg_id}`)
+  }
 
   // add(param: oblasti_element) {
   //     return this.http.post(this.host + 'dirs/oblasti_regadd', param)

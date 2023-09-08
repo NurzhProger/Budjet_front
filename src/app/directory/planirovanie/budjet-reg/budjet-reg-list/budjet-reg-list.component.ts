@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { budjet_reg_list } from './interfaces';
+import { budjet_reg__element, budjet_reg_list } from './interfaces';
 import { BudjetRegService } from './oblasti-regiony.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { BudjetRegElementComponent } from '../budjet-reg-element/budjet-reg-element/budjet-reg-element.component';
 
 @Component({
   selector: 'app-budjet-reg-list',
@@ -17,7 +19,9 @@ export class BudjetRegListComponent implements OnInit {
   first = 0
   rows = 25
   constructor(
-    private BudjetRegService: BudjetRegService
+    private BudjetRegService: BudjetRegService,
+    private budjet_dialog_ref: DynamicDialogRef,
+    private budjet_dialog_servis: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +35,32 @@ export class BudjetRegListComponent implements OnInit {
 
   openNew() {
 
+  }
+
+  onRowClick(budjet_reg: budjet_reg__element) {
+    if (this.data) {
+      this.onRowEdit(budjet_reg)
+    }
+    else {
+      this.budjet_dialog_ref.close(budjet_reg)
+    }     
+  }
+
+  onRowEdit(budjet_reg: budjet_reg__element) {
+    this.budjet_dialog_ref = this.budjet_dialog_servis.open(BudjetRegElementComponent,
+      {
+        header: 'Редактирование подразделении',
+        width: '60%',
+        height: '60%',
+        data: { budjet_reg_id: budjet_reg.id }
+      })
+
+    this.budjet_dialog_ref.onClose.subscribe((save: boolean) => {
+
+      if (save) {
+        this.fetchList()
+      }
+    })
   }
 
   fetchList() {
