@@ -40,6 +40,9 @@
                 <app-stazh-category-list *ngIf="context.selector=='app-stazh-category-list'" [data]="true" (closeEvent)="removetab()">
                 </app-stazh-category-list>
 
+                <app-marki-avto-list *ngIf="context.selector=='app-marki-avto-list'" [data]="true" (closeEvent)="removetab()">
+                </app-marki-avto-list>
+
                 <app-dopl-nadbavka-list *ngIf="context.selector=='app-dopl-nadbavka-list'" [data]="true" (closeEvent)="removetab()">
                 </app-dopl-nadbavka-list>
 
@@ -51,6 +54,18 @@
 
                 <app-stavka-list *ngIf="context.selector=='app-stavka-list'" [data]="true" (closeEvent)="removetab()">
                 </app-stavka-list>
+
+                <app-vid-transporta *ngIf="context.selector=='app-vid-transporta'" [data]="true" (closeEvent)="removetab()">
+                </app-vid-transporta>
+
+                <app-tip-topliva *ngIf="context.selector=='app-tip-topliva'" [data]="true" (closeEvent)="removetab()">
+                </app-tip-topliva>
+
+                <app-oblasti-regiony-list *ngIf="context.selector=='app-oblasti-regiony-list'" [data]="true" (closeEvent)="removetab()">
+                </app-oblasti-regiony-list>
+
+                <app-ed-izm-list *ngIf="context.selector=='app-ed-izm-list'" [data]="true" (closeEvent)="removetab()">
+                </app-ed-izm-list>
 
                 <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
                 </app-enstru-list>

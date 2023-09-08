@@ -1,23 +1,23 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { stavka_list } from './interfaces';
-import { StavkaService } from './stavka.service';
+import { vid_transporta_list } from './interfaces';
+import { VidTransportaService } from 'src/app/enums/vid_transporta/vid-transporta/vidtransporta.service'
 
 @Component({
-  selector: 'app-stavka-list',
-  templateUrl: './stavka-list.component.html',
-  styleUrls: ['./stavka-list.component.css']
+  selector: 'app-vid-transporta',
+  templateUrl: './vid-transporta.component.html',
+  styleUrls: ['./vid-transporta.component.css']
 })
-export class StavkaListComponent implements OnInit {
+export class VidTransportaComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
   first = 0
   rows = 25
   windowHeight: number
   selected: any
-  stavka: Observable<stavka_list>
+  vid_transporta: Observable<vid_transporta_list>
   constructor(
-    private StavkaService: StavkaService
+    private VidTransportaService: VidTransportaService
   ) { }
 
   ngOnInit(): void {
@@ -34,11 +34,10 @@ export class StavkaListComponent implements OnInit {
       limit: this.rows.toString(),
       offset: this.first.toString()
     }
-    this.stavka = this.StavkaService.fetch();
+    this.vid_transporta = this.VidTransportaService.fetch();
   }
 
   closeform() {
     this.closeEvent.emit()
   }
-
 }

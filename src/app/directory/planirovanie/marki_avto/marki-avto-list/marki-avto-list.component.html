@@ -21,31 +21,35 @@
 
 </p-toolbar>
 
-<div class="card" *ngIf="(period_pokaz | async) as period_pokaz; else loader">
-    <p-table *ngIf="period_pokaz.count !== 0; else empty" [value]="period_pokaz.results" [scrollable]="true"
+<div class="card" *ngIf="(marki_avto | async) as marki_avto; else loader">
+    <p-table *ngIf="marki_avto.count !== 0; else empty" [value]="marki_avto.results" [scrollable]="true"
             scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
             styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width:5%; text-align:center">Номер</th>
-                    <th style="width:20%; text-align:center">Период</th>
-                    <th style="width:30%; text-align:center">Значение</th>
-                    <th style="width:35%; text-align:center">Показатель</th>
+                    <th style="width:35%; text-align:center">Наименование</th>
+                    <th style="width:20%; text-align:center">Объем двигателя</th>
+                    <th style="width:20%; text-align:center">Тип топлива</th>
+                    <th style="width:20%; text-align:center">Вид транспорта</th>
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-period_pokaz let-ri="rowIndex">
-                <tr class="cursor-pointer" (dblclick)="onRowClick(period_pokaz)">
+            <ng-template pTemplate="body" let-marki_avto let-ri="rowIndex">
+                <tr class="cursor-pointer" (dblclick)="onRowClick(marki_avto)">
                     <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                     <td style="text-align:center">
-                        {{period_pokaz.period}}
+                        {{marki_avto.name}}
                     </td>
                     <td style="text-align:center">
-                        {{period_pokaz.znachenie}}
+                        {{marki_avto.engine_capacity}}
                     </td>
                     <td style="text-align:center">
-                        {{period_pokaz._pokazatel}}
+                        {{marki_avto._tip_topliva}}
+                    </td>
+                    <td style="text-align:center">
+                        {{marki_avto._vid_transporta}}
                     </td>
                 </tr>
             </ng-template>
@@ -56,11 +60,11 @@
                 Нет ни одного элемента
             </div>
         </ng-template>
-        <div *ngIf="period_pokaz.count !== 0" class="flex align-items-center justify-content-center">
+        <div *ngIf="marki_avto.count !== 0" class="flex align-items-center justify-content-center">
             <span class="mx-1 text-color">Указано</span>
-            <p-paginator [first]="first" [rows]="rows" [totalRecords]="period_pokaz.count || 0"
+            <p-paginator [first]="first" [rows]="rows" [totalRecords]="marki_avto.count || 0"
                 (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
-                currentPageReportTemplate="{{first+1}} - {{(first + rows) > (period_pokaz.count || 0)  ? period_pokaz.count : first + rows }} из {{period_pokaz.count}} элементов"
+                currentPageReportTemplate="{{first+1}} - {{(first + rows) > (marki_avto.count || 0)  ? marki_avto.count : first + rows }} из {{marki_avto.count}} элементов"
                 [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
         </div>
 </div>

@@ -1,25 +1,27 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { stavka_list } from './interfaces';
-import { StavkaService } from './stavka.service';
+import { tip_topliva_list } from './interfaces';
+import { TipToplivaService } from 'src/app/enums/tip_topliva/tip-topliva/tiptopliva.service'
 
 @Component({
-  selector: 'app-stavka-list',
-  templateUrl: './stavka-list.component.html',
-  styleUrls: ['./stavka-list.component.css']
+  selector: 'app-tip-topliva',
+  templateUrl: './tip-topliva.component.html',
+  styleUrls: ['./tip-topliva.component.css']
 })
-export class StavkaListComponent implements OnInit {
+export class TipToplivaComponent implements OnInit {
+  
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
   first = 0
   rows = 25
   windowHeight: number
   selected: any
-  stavka: Observable<stavka_list>
-  constructor(
-    private StavkaService: StavkaService
-  ) { }
+  tip_topliva: Observable<tip_topliva_list>
 
+  constructor(
+    private TipToplivaService: TipToplivaService
+  ) { }
+  
   ngOnInit(): void {
     this.fetchList(),
     this.updateWindowSize() 
@@ -34,11 +36,10 @@ export class StavkaListComponent implements OnInit {
       limit: this.rows.toString(),
       offset: this.first.toString()
     }
-    this.stavka = this.StavkaService.fetch();
+    this.tip_topliva = this.TipToplivaService.fetch();
   }
 
   closeform() {
     this.closeEvent.emit()
   }
-
 }

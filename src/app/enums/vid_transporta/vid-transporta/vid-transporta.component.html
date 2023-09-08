@@ -18,8 +18,8 @@
     </div>
 </p-toolbar>
 
-<div class="card" *ngIf="(stavka | async) as stavka; else loader">
-    <p-table *ngIf="stavka.count !== 0; else empty" [value]="stavka.results" [scrollable]="true"
+<div class="card" *ngIf="(vid_transporta | async) as vid_transporta; else loader">
+    <p-table *ngIf="vid_transporta.count !== 0; else empty" [value]="vid_transporta.results" [scrollable]="true"
             scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
             styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     
@@ -30,11 +30,11 @@
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-stavka let-ri="rowIndex">
+            <ng-template pTemplate="body" let-vid_transporta let-ri="rowIndex">
                 <tr class="cursor-pointer" >
                     <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                     <td style="text-align:center">
-                        {{stavka.name}}
+                        {{vid_transporta.name}}
                     </td>
                 </tr>
             </ng-template>

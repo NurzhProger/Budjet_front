@@ -92,6 +92,14 @@ import { FormDetailComponent } from './directory/income/forms/form-detail/form-d
 import { PeriodPokazElementComponent } from './directory/planirovanie/period-pokaz/period-pokaz-element/period-pokaz-element.component';
 import { PeriodPokazListComponent } from './directory/planirovanie/period-pokaz/period-pokaz-list/period-pokaz-list.component';
 import { StavkaListComponent } from './enums/stavka/stavka-list/stavka-list.component';
+import { TipToplivaComponent } from './enums/tip_topliva/tip-topliva/tip-topliva.component';
+import { VidTransportaComponent } from './enums/vid_transporta/vid-transporta/vid-transporta.component';
+import { MarkiAvtoElementComponent } from './directory/planirovanie/marki_avto/marki-avto-element/marki-avto-element.component';
+import { MarkiAvtoListComponent } from './directory/planirovanie/marki_avto/marki-avto-list/marki-avto-list.component';
+import { OblastiRegionyElementComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-element/oblasti-regiony-element.component';
+import { OblastiRegionyListComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-list/oblasti-regiony-list.component';
+import { EdIzmListComponent } from './directory/planirovanie/ed-izm/ed-izm-list/ed-izm-list.component';
+import { EdIzmElementComponent } from './directory/planirovanie/ed-izm/ed-izm-element/ed-izm-element.component';
 
 
 @NgModule({
@@ -187,7 +195,15 @@ import { StavkaListComponent } from './enums/stavka/stavka-list/stavka-list.comp
     FormDetailComponent,
     PeriodPokazElementComponent,
     PeriodPokazListComponent,
-    StavkaListComponent],
+    StavkaListComponent,
+    TipToplivaComponent,
+    VidTransportaComponent,
+    MarkiAvtoElementComponent,
+    MarkiAvtoListComponent,
+    OblastiRegionyElementComponent,
+    OblastiRegionyListComponent,
+    EdIzmListComponent,
+    EdIzmElementComponent],
   bootstrap: [AppComponent],
   providers: [
     {
