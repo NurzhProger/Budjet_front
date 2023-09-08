@@ -43,7 +43,7 @@ export class FormDetailComponent implements OnInit {
       spec_name: "",
       _spec: 0
     },
-    tb1: {
+    tbl: [{
       id: 0,
       name: "",
       column: 0,
@@ -60,7 +60,7 @@ export class FormDetailComponent implements OnInit {
       zn_oblasti_reg: null,
       zn_marki_avto: null,
       zn_ed_izm: null
-    },
+    }],
     dopl: {
       id: 0,
       column: 0,
@@ -78,7 +78,7 @@ export class FormDetailComponent implements OnInit {
       spec_name: new FormControl(null, [Validators.required]),
       // budjet_name: new FormControl(null, [Validators.required])
     })
-
+    let res:any
     console.log("Nen");
     if (this.form_doc_id !== '') {
       console.log(this.form_doc_id)
@@ -86,7 +86,7 @@ export class FormDetailComponent implements OnInit {
         .subscribe(
           (detail) => {
             this.form_detail = detail,
-              this.calculate()
+            console.log(this.form_detail)
           }
         )
     }
@@ -101,7 +101,7 @@ export class FormDetailComponent implements OnInit {
           spec_name: "",
           _spec: 0
         },
-        tb1: {
+        tbl: [{
           id: 0,
           name: "",
           column: 0,
@@ -118,7 +118,7 @@ export class FormDetailComponent implements OnInit {
           zn_oblasti_reg: null,
           zn_marki_avto: null,
           zn_ed_izm: null
-        },
+        }],
         dopl: {
           id: 0,
           column: 0,

@@ -18,7 +18,7 @@ export interface form_list {
 
 export interface form_detail {
   form: form_list_doc,
-  tb1: forms_tab1,
+  tbl: [forms_tab1],
   dopl: forms_dopl
 
 }
