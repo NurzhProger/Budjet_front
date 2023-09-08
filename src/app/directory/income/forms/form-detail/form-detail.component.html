@@ -74,7 +74,7 @@
       (click)="addClassification()"></button>
   </div>
 
-  <p-table *ngIf="form_detail.tb1" [scrollable]="true" scrollHeight="calc(100vh - 200px)" selectionMode="single"
+  <p-table  [value]="form_detail.tbl" [scrollable]="true" scrollHeight="calc(100vh - 200px)" selectionMode="single"
     styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header">
       <tr>
@@ -84,26 +84,21 @@
         <th style="text-align:center">Измерение</th>
         <th style="text-align:center">Колонка</th>
         <th style="text-align:center">Используемые колонки</th>
+      </tr>
+    </ng-template>
 
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-tb1 let-ri="rowIndex" *ngFor="let item of form_detail.tb1 | keyvalue">
-      <tr class="cursor-pointer" [pSelectableRow]="form">
+    <ng-template pTemplate="body" let-item let-ri="rowIndex">
+      <tr class="cursor-pointer">
         <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-        <td>
-          {{tb1.id}}
-        </td>
-        <td>
-          {{tb1.name}}
-        </td>
-        <!-- <td style="text-align:center">
-          {{form.num_app}}
-        </td>
-        <td>
-          {{form.spec_code}} {{form.spec_name}}
-        </td> -->
+        <td>{{item.name}}</td>
+        <td>{{item.zn}}</td>
+        <td>{{item.zn_ed_izm}}</td>
+        <td>{{item.column}}</td>
+        <td>{{item.columns_used}}</td>
       </tr>
     </ng-template>
+  </p-table>
+
     <!-- <ng-template pTemplate="body" let-utv let-ri="rowIndex">
           <tr class="cursor-pointer">
               <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
@@ -157,7 +152,7 @@
               <td class="text-center">{{total12}}</td>
           </tr>
       </ng-template> -->
-  </p-table>
+
 
   <ng-template #empty>
     <div class="center">
