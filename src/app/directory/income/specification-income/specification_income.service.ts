@@ -11,11 +11,15 @@ import { specification_income_detail, specification_income_list } from "./interf
 export class SpecificationIncomeService {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.5.27:8000/"
+    host = "http://192.168.10.200:9999/"
 
 
     fetch(params: any): Observable<specification_income_list> {
-        return this.http.get<specification_income_list>(this.host + 'dirs/specinclist', { params })
+        return this.http.get<specification_income_list>(this.host + 'dirs/specexplist', { params })
+    }
+
+    fetchid(id: number): Observable<specification_income_detail> {
+      return this.http.get<specification_income_detail>(this.host + `dirs/specexpitem/${ id }`)
     }
 
     saveSpec(spec: specification_income_detail) {

@@ -143,8 +143,14 @@
                     (closeEvent)="removetab()">
                 </app-specification-exp-list>
 
-                <app-formlist *ngIf="context.selector=='app-formlist'" (closeEvent)="removetab()">
+                <app-formlist *ngIf="context.selector=='app-formlist'" [data]="true"
+                (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                (closeEvent)="removetab()">
                 </app-formlist>
+
+                <app-form-detail *ngIf="context.selector=='app-form-detail'" [form_doc_id]="number"
+                    (closeEvent)="removetab()">
+                </app-form-detail>
 
 
 

@@ -22,7 +22,7 @@ export class SpecificationIncomeDetailComponent implements OnInit {
 
   form: FormGroup
   spec_detail: specification_income_detail
-
+  spec_id = 0
   ngOnInit(): void {
     this.form = new FormGroup({
       code: new FormControl(null, [Validators.required]),
@@ -30,7 +30,16 @@ export class SpecificationIncomeDetailComponent implements OnInit {
       name_rus: new FormControl(null, [Validators.required])
     })
 
-    this.spec_detail = this.SpecDetailconfig.data.spec_inc
+    this.spec_id = this.SpecDetailconfig.data.spec_inc
+
+    if (this.spec_id !== 0) {
+      this.SpecService.fetchid(this.spec_id)
+        .subscribe(
+          (data) => (
+              this.spec_detail = data
+            )
+        )
+    }
   }
 
   saveCategory() {

@@ -17,9 +17,11 @@ export class FormlistComponent implements OnInit {
     private form_list_dialog: DialogService,
     private form_Servise:formsService)  { }
 
-  form_list$: Observable<form_list>
+
+  @Output() newItemEvent = new EventEmitter<any>();
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
+  form_list$: Observable<form_list>
   searcforms = ''
   first = 0
   rows = 25
@@ -41,8 +43,8 @@ export class FormlistComponent implements OnInit {
     this.form_list$ = this.form_Servise.fetch(params)
   }
 
-  openNew(){
-
+  openNew(form_d: form_list_doc){
+    this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ', id: '' } });
   }
 
   onSelected(form_list: form_list_doc){
@@ -51,9 +53,12 @@ export class FormlistComponent implements OnInit {
 
   closeform(){}
 
-  onRowClick(form_list: form_list_doc){
-
+  onRowClick(form_doc: form_list_doc){
+    console.log("dsd")
+    this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
   }
+
+
 
   onRowEdit(form_list: form_list_doc){
 

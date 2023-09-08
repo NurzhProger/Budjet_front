@@ -18,7 +18,9 @@ export interface form_list {
 
 export interface form_detail {
   form: form_list_doc,
-  tb1: forms_tab1
+  tb1: forms_tab1,
+  dopl: forms_dopl
+
 }
 
 export interface forms_tab1 {
@@ -38,4 +40,15 @@ export interface forms_tab1 {
   zn_oblasti_reg: null,
   zn_marki_avto: null,
   zn_ed_izm: null
+}
+
+
+export interface forms_dopl {
+  id: number,
+  column: number,
+  columns_used: string,
+  summ: number,
+  _form: number,
+  doplata: number,
+
 }
