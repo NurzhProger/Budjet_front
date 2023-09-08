@@ -79,12 +79,20 @@ export class MainComponent implements OnInit {
                 command: () => this.openTab('app-marki-avto-list', 'Марки авто', '')
               },
               {
-                label: 'Области и регионы',
-                command: () => this.openTab('app-oblasti-regiony-list', 'Области и регионы', '')
+                label: 'Области',
+                command: () => this.openTab('app-oblasti-regiony-list', 'Области', '')
+              },
+              {
+                label: 'Регионы',
+                command: () => this.openTab('app-regions-list', 'Регионы', '')
               },
               {
                 label: 'Единицы измерения',
                 command: () => this.openTab('app-ed-izm-list', 'Единицы измерения', '')
+              },
+              {
+                label: 'Бюджеты регионов',
+                command: () => this.openTab('app-budjet-reg-list', 'Бюджеты регионов', '')
               }]
             }
           ],

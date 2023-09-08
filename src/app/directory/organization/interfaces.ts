@@ -6,7 +6,11 @@ export interface organization_detail {
     name_kaz: string,
     name_rus: string,
     adress: string,
-    _budjet: Budjet_detail
+    deleted: boolean,
+    budjet_name: string,
+    _budjet_reg: number,
+    region_name: string,
+    _regiondar: number
 }
 
 export interface organization_list {

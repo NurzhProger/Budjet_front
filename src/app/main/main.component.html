@@ -67,6 +67,12 @@
                 <app-ed-izm-list *ngIf="context.selector=='app-ed-izm-list'" [data]="true" (closeEvent)="removetab()">
                 </app-ed-izm-list>
 
+                <app-regions-list *ngIf="context.selector=='app-regions-list'" [data]="true" (closeEvent)="removetab()">
+                </app-regions-list>
+
+                <app-budjet-reg-list *ngIf="context.selector=='app-budjet-reg-list'" [data]="true" (closeEvent)="removetab()">
+                </app-budjet-reg-list>
+
                 <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
                 </app-enstru-list>
 
@@ -98,15 +104,6 @@
                 <app-classification-income-list *ngIf="context.selector=='app-classification-income-list'" [data]="true"
                     (closeEvent)="removetab()">
                 </app-classification-income-list>
-
-                <app-utv-income-list *ngIf="context.selector=='app-utv-income-list'"
-                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                    (closeEvent)="removetab()">
-                </app-utv-income-list>
-
-                <app-utv-income-detail *ngIf="context.selector=='app-utv-income-detail'" [utv_inc_id]="number"
-                    (closeEvent)="removetab()">
-                </app-utv-income-detail>
 
                 <app-budjet-list *ngIf="context.selector=='app-budjet-list'" (closeEvent)="removetab()">
                 </app-budjet-list>
@@ -145,14 +142,6 @@
                 <app-fkr-list *ngIf="context.selector=='app-fkr-list'" [data]="true" (closeEvent)="removetab()">
                 </app-fkr-list>
 
-                <app-utv-exp-doc-list *ngIf="context.selector=='app-utv-exp-doc-list'"
-                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                    (closeEvent)="removetab()">
-                </app-utv-exp-doc-list>
-
-                <app-utv-exp-doc-detail *ngIf="context.selector=='app-utv-exp-doc-detail'" [utv_exp_id]="number"
-                    (closeEvent)="removetab()">
-                </app-utv-exp-doc-detail>
 
                 <app-specification-exp-list *ngIf="context.selector=='app-specification-exp-list'"
                     (closeEvent)="removetab()">

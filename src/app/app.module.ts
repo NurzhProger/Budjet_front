@@ -23,8 +23,6 @@ import { ClassIncomeListComponent } from './directory/income/class-income/class-
 import { ClassIncomeDetailComponent } from './directory/income/class-income/class-income-detail/class-income-detail.component';
 import { ClassificationIncomeListComponent } from './directory/income/classification-income/classification-income-list/classification-income-list.component';
 import { ClassificationIncomeDetailComponent } from './directory/income/classification-income/classification-income-detail/classification-income-detail.component';
-import { UtvIncomeListComponent } from './documents/income/utv-income/utv-income-list/utv-income-list.component';
-import { UtvIncomeDetailComponent } from './documents/income/utv-income/utv-income-detail/utv-income-detail.component';
 
 //dirs/expenses
 
@@ -56,8 +54,6 @@ import { FkrSelectComponent } from './directory/expenses/fkr/fkr-select/fkr-sele
 import { SpecificationIncomeListComponent } from './directory/income/specification-income/specification-income-list/specification-income-list.component';
 import { SpecificationIncomeDetailComponent } from './directory/income/specification-income/specification-income-detail/specification-income-detail.component';
 import { UserComponent } from './user/user.component';
-import { UtvExpDocListComponent } from './documents/expenses/utv-exp-doc/utv-exp-doc-list/utv-exp-doc-list.component';
-import { UtvExpDocDetailComponent } from './documents/expenses/utv-exp-doc/utv-exp-doc-detail/utv-exp-doc-detail.component';
 import { Import219ListComponent } from './documents/import_document/import219/import219-list/import219-list.component';
 import { Import219DeteailComponent } from './documents/import_document/import219/import219-deteail/import219-deteail.component';
 import { UploadComponent } from './documents/import_document/import219/upload/upload.component';
@@ -100,6 +96,9 @@ import { OblastiRegionyElementComponent } from './directory/planirovanie/oblasti
 import { OblastiRegionyListComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-list/oblasti-regiony-list.component';
 import { EdIzmListComponent } from './directory/planirovanie/ed-izm/ed-izm-list/ed-izm-list.component';
 import { EdIzmElementComponent } from './directory/planirovanie/ed-izm/ed-izm-element/ed-izm-element.component';
+import { RegionsElementComponent } from './directory/planirovanie/regions/regions-element/regions-element.component';
+import { RegionsListComponent } from './directory/planirovanie/regions/regions-list/regions-list.component';
+import { BudjetRegListComponent } from './directory/planirovanie/budjet-reg/budjet-reg-list/budjet-reg-list.component';
 
 
 @NgModule({
@@ -161,10 +160,6 @@ import { EdIzmElementComponent } from './directory/planirovanie/ed-izm/ed-izm-el
     FkrListComponent,
     FkrSelectComponent,
     FkrDetailComponent,
-    UtvIncomeListComponent,
-    UtvIncomeDetailComponent,
-    UtvExpDocListComponent,
-    UtvExpDocDetailComponent,
     SkeletonComponent,
     IzmIncDocDetailComponent,
     IzmIncDocListComponent,
@@ -203,7 +198,10 @@ import { EdIzmElementComponent } from './directory/planirovanie/ed-izm/ed-izm-el
     OblastiRegionyElementComponent,
     OblastiRegionyListComponent,
     EdIzmListComponent,
-    EdIzmElementComponent],
+    EdIzmElementComponent,
+    RegionsElementComponent,
+    RegionsListComponent,
+    BudjetRegListComponent],
   bootstrap: [AppComponent],
   providers: [
     {
