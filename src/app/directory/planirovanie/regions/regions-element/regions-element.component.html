@@ -1,0 +1,42 @@
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name">Наименование<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="name" type="text" pInputText [(ngModel)]="regions_element.name" formControlName="name" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+            <span *ngIf="form.controls['name'].errors?.required">Заполните наименование</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_kaz">Наименование каз<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="name_kaz" type="text" pInputText [(ngModel)]="regions_element.name_kaz" formControlName="name_kaz" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name_kaz'].invalid && form.controls['name_kaz'].touched">
+            <span *ngIf="form.controls['name_kaz'].errors?.required">Заполните наименование каз</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="name_rus">Наименование рус<span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="name_rus" type="text" pInputText [(ngModel)]="regions_element.name_rus" formControlName="name_rus" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['name_rus'].invalid && form.controls['name_rus'].touched">
+            <span *ngIf="form.controls['name_rus'].errors?.required">Заполните наименование рус</span>
+        </span>
+    </div>
+
+    <div style="width:100%; padding: 10px 0;">
+      <label style="color: red;">* - обязательные поля</label>
+    </div>
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+    <button pButton pRipple label="Сохранить" (click)="saveRegions()" icon="pi pi-check"
+      [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeRegions(false)"
+      class="p-button-outlined p-button-warning"></button>
+</div>

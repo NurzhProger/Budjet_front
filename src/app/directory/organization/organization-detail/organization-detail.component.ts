@@ -40,13 +40,11 @@ export class OrganizationDetailComponent implements OnInit {
     name_kaz: '',
     name_rus: '',
     adress: '',
-    _budjet: {
-      id: 0,
-      code: '',
-      name_kaz: '',
-      name_rus: '',
-      adress: ''
-    }
+    deleted: false,
+    _budjet_reg: 0,
+    budjet_name: '',
+    _regiondar: 0,
+    region_name: ''
   }
 
   ngOnInit(): void {
@@ -83,20 +81,20 @@ export class OrganizationDetailComponent implements OnInit {
         (error) => (this.org_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
   }
 
-  addClassification() {
-    this.budjet_ref = this.org_dialog_servis.open(BudjetSelectComponent,
-      {
-        header: 'Выбрать бюджет',
-        width: '70%',
-        height: '80%'
-      })
+  // addClassification() {
+  //   this.budjet_ref = this.org_dialog_servis.open(BudjetSelectComponent,
+  //     {
+  //       header: 'Выбрать бюджет',
+  //       width: '70%',
+  //       height: '80%'
+  //     })
 
-    this.budjet_ref.onClose.subscribe((budjet: Budjet_detail) => {
-      if (budjet) {
-          this.org_detail._budjet = budjet
-      }
-    })
-  }
+  //   this.budjet_ref.onClose.subscribe((budjet: Budjet_detail) => {
+  //     if (budjet) {
+  //         this.org_detail._budjet_reg = budjet
+  //     }
+  //   })
+  // }
 
   closeOrg() {
     this.org_dialog_ref.close(this.saved)
