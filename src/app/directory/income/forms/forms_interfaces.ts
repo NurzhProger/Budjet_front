@@ -1,3 +1,37 @@
+export enum Direction {
+  zn_string = "Строка",
+  zn_float = "Число",
+  zn_enstru = "Номенклатура",
+  zn_stazh_category = "Стажы",
+  zn_category_sotr = "Категории должностей",
+  zn_dolzhnost = "Должности работников",
+  zn_podrazdelenie = "Подразделение",
+  zn_dopl_nadb = "Виды доплат и надбавок",
+  zn_oblasti_reg = "Областии регионы",
+  zn_ed_izm = "Едница измерений",
+  zn_marki_avto = "Марки автомобилей"
+
+}
+
+export enum Direction1 {
+  string = "Строка",
+  float = "Число",
+  enstru = "Номенклатура",
+  stazh_category = "Стажы",
+  category_sotr = "Категории должностей",
+  dolzhnost = "Должности работников",
+  podrazdelenie = "Подразделение",
+  dopl_nadb = "Виды доплат и надбавок",
+  oblasti_reg = "Областии регионы",
+  ed_izm = "Едница измерений",
+  marki_avto = "Марки автомобилей"
+
+}
+
+
+
+
+
 export interface form_list_doc {
   id: number,
   name: string,
@@ -19,7 +53,7 @@ export interface form_list {
 export interface form_detail {
   form: form_list_doc,
   tbl: [forms_tab1],
-  dopl: forms_dopl
+  dopl: [forms_dopl]
 
 }
 
@@ -45,10 +79,10 @@ export interface forms_tab1 {
 
 export interface forms_dopl {
   id: number,
-  column: number,
   columns_used: string,
   summ: number,
   _form: number,
   doplata: number,
-
+  _doplata_name: string,
+  _sposob_ras: string,
 }

@@ -51,7 +51,11 @@ export class FormlistComponent implements OnInit {
 
   }
 
-  closeform(){}
+  closeform(){
+
+    this.closeEvent.emit()
+
+  }
 
   onRowClick(form_doc: form_list_doc){
     console.log("dsd")
