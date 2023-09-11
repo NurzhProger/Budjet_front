@@ -111,12 +111,13 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                    <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="item.zn" [style]="{'width':'100%'}"></p-dropdown>
+                  <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="item.zn"
+                    [style]="{'width':'100%'}"></p-dropdown>
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.zn}}
                 </ng-template>
-            </p-cellEditor>
+              </p-cellEditor>
               <!-- <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input pInputText type="text" [(ngModel)]="item.zn">
@@ -163,10 +164,10 @@
               <div class="flex align-items-center justify-content-center gap-2">
                 <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                   class="p-button-rounded p-button-text"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow  icon="pi pi-check"
+                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
                   class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                   class="p-button-rounded p-button-text p-button-danger"></button>
+                  class="p-button-rounded p-button-text p-button-danger"></button>
               </div>
             </td>
           </tr>
@@ -198,28 +199,41 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item._doplata_name">
-                </ng-template>
+                <div class="p-inputgroup">
+                  <input  type="text" pInputText [(ngModel)]="item._doplata_name"/>
+                  <span class="p-inputgroup-addon cursor-pointer" (click)="selectDoplata(ri)">...</span>
+                </div>
+              </ng-template>
                 <ng-template pTemplate="output">
                   {{item._doplata_name}}
                 </ng-template>
               </p-cellEditor>
             </td>
-            <!-- <td>{{item.name}}</td> -->
             <td>
               <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <p-dropdown [options]="sposobOptions" appendTo="body" [(ngModel)]="item._sposob_ras"
+                    [style]="{'width':'100%'}"></p-dropdown>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item._sposob_ras}}
+                </ng-template>
+              </p-cellEditor>
+
+
+              <!-- <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input pInputText type="text" [(ngModel)]="item._sposob_ras">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item._sposob_ras}}
                 </ng-template>
-              </p-cellEditor>
+              </p-cellEditor> -->
             </td>
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.summ">
+                  <input pInputText type="number" [(ngModel)]="item.summ">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.summ}}
@@ -240,10 +254,10 @@
               <div class="flex align-items-center justify-content-center gap-2">
                 <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                   class="p-button-rounded p-button-text"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow  icon="pi pi-check"
+                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
                   class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                   class="p-button-rounded p-button-text p-button-danger"></button>
+                  class="p-button-rounded p-button-text p-button-danger"></button>
               </div>
             </td>
           </tr>

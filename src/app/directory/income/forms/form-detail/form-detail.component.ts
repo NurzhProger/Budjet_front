@@ -2,13 +2,16 @@ import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angula
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService,SelectItem  } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { form_list, form_list_doc,form_detail,forms_tab1, Direction,Direction1 } from "../forms_interfaces";
+import { form_list, form_list_doc,form_detail,forms_tab1 } from "../forms_interfaces";
 import { formsService } from '../forms_servise'
 import { Observable } from 'rxjs';
 import { SpecificationIncomeDetailComponent } from '../../specification-income/specification-income-detail/specification-income-detail.component'
 import { specification_income_detail } from '../../specification-income/interfaces'
 import { SpecificationIncomeSelectComponent } from '../../specification-income/specification-income-select/specification-income-select.component'
 import { SHA256 } from 'crypto-js';
+import { DoplNadbavkaListComponent } from '../../../planirovanie/dopl_nadbavka/dopl-nadbavka-list/dopl-nadbavka-list.component'
+import { doplaty_nadbavky_element } from '../../../planirovanie/dopl_nadbavka/interfaces'
+import { Sposob_ras4eta } from '../../../planirovanie/pere4islenya.interfaces'
 @Component({
   selector: 'app-form-detail',
   templateUrl: './form-detail.component.html',
@@ -34,8 +37,7 @@ export class FormDetailComponent implements OnInit {
   hashBegin = ''
   hashEnd = ''
   statuses!: SelectItem[];
-  selectedColor: Direction1
-
+  sposobOptions = Object.values(Sposob_ras4eta)
 
 
   form_detail: form_detail = {
@@ -71,7 +73,7 @@ export class FormDetailComponent implements OnInit {
       columns_used: "",
       summ: 0,
       _form: 0,
-      doplata: 0,
+      _doplata: 0,
       _doplata_name: '',
       _sposob_ras: "",
     }]
@@ -133,7 +135,7 @@ export class FormDetailComponent implements OnInit {
           columns_used: "",
           summ: 0,
           _form: 0,
-          doplata: 0,
+          _doplata: 0,
           _doplata_name: "",
           _sposob_ras: "",
         }]
@@ -141,7 +143,7 @@ export class FormDetailComponent implements OnInit {
 
 
     }
-    console.log(Direction.zn_ed_izm)
+
     this.statuses = [
       { label: 'Строка', value: 'zn_string' },
       { label: 'Число', value: 'zn_float' },
@@ -154,13 +156,15 @@ export class FormDetailComponent implements OnInit {
       { label: 'Областии регионы', value: 'zn_oblasti_reg' },
       { label: 'Едница измерений', value: 'zn_ed_izm' },
       { label: 'Марки автомобилей', value: 'zn_marki_avto' }
-  ];
+    ];
+
+    console.log(this.sposobOptions)
 
 
   }
 
   saveDoc(close: boolean){
-
+    console.log(this.form_detail)
     this.form_Servise.saveforms(this.form_detail)
     .subscribe(
       (data) => (this.form_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
@@ -253,7 +257,7 @@ export class FormDetailComponent implements OnInit {
         columns_used: "",
         summ: 0,
         _form: 0,
-        doplata: 0,
+        _doplata: 0,
         _doplata_name: "",
         _sposob_ras: "",}
 
@@ -299,6 +303,26 @@ export class FormDetailComponent implements OnInit {
         this.form_detail.form.spec_name = spec.name_rus
       }
     })
+
+  }
+
+
+  selectDoplata(index:number){
+    this.form_detail_ryref = this.form_detail_dialog.open(DoplNadbavkaListComponent,
+      {
+        header: 'Выбор доплаты',
+        width: '60%',
+        height: '80%'
+      })
+
+    this.form_detail_ryref.onClose.subscribe((spec: doplaty_nadbavky_element) => {
+      if (spec) {
+        this.form_detail.dopl[index]._doplata = spec.id
+        this.form_detail.dopl[index]._doplata_name = spec.name_rus
+        // this.form_detail.form.spec_name = spec.name_rus
+      }
+    })
+
 
   }
 }

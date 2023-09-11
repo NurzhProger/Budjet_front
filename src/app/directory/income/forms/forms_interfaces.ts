@@ -82,7 +82,7 @@ export interface forms_dopl {
   columns_used: string,
   summ: number,
   _form: number,
-  doplata: number,
+  _doplata: number,
   _doplata_name: string,
   _sposob_ras: string,
 }
