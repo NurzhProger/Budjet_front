@@ -87,7 +87,7 @@
             <th style="text-align:center">Номер</th>
             <th style="text-align:center">Имя</th>
             <th style="text-align:center">Значение</th>
-            <th style="text-align:center">Измерение</th>
+
             <th style="text-align:center">Колонка</th>
             <th style="text-align:center">Используемые колонки</th>
             <th style="text-align:center"></th>
@@ -130,16 +130,6 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.zn_ed_izm">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.zn_ed_izm}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
                   <input pInputText type="text" [(ngModel)]="item.column">
                 </ng-template>
                 <ng-template pTemplate="output">
@@ -168,6 +158,7 @@
                   class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
                   class="p-button-rounded p-button-text p-button-danger"></button>
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deleted_tbl(ri)"></button>
               </div>
             </td>
           </tr>
@@ -258,6 +249,7 @@
                   class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
                   class="p-button-rounded p-button-text p-button-danger"></button>
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deleted_dopl(ri)"></button>
               </div>
             </td>
           </tr>

@@ -12,6 +12,8 @@ import { SHA256 } from 'crypto-js';
 import { DoplNadbavkaListComponent } from '../../../planirovanie/dopl_nadbavka/dopl-nadbavka-list/dopl-nadbavka-list.component'
 import { doplaty_nadbavky_element } from '../../../planirovanie/dopl_nadbavka/interfaces'
 import { Sposob_ras4eta } from '../../../planirovanie/pere4islenya.interfaces'
+import { EnstruListComponent } from '../../../planirovanie/ensTRU/enstru-list/enstru-list.component'
+import { ensTRU_element } from '../../../planirovanie/ensTRU/interfaces'
 @Component({
   selector: 'app-form-detail',
   templateUrl: './form-detail.component.html',
@@ -145,17 +147,17 @@ export class FormDetailComponent implements OnInit {
     }
 
     this.statuses = [
-      { label: 'Строка', value: 'zn_string' },
-      { label: 'Число', value: 'zn_float' },
-      { label: 'Номенклатура', value: 'zn_enstru' },
-      { label: 'Стажы', value: 'zn_stazh_category' },
-      { label: 'Категории должностей', value: 'zn_category_sotr' },
-      { label: 'Должности работников', value: 'zn_dolzhnost' },
-      { label: 'Подразделение', value: 'zn_podrazdelenie' },
-      { label: 'Виды доплат и надбавок', value: 'zn_dopl_nadb' },
-      { label: 'Областии регионы', value: 'zn_oblasti_reg' },
-      { label: 'Едница измерений', value: 'zn_ed_izm' },
-      { label: 'Марки автомобилей', value: 'zn_marki_avto' }
+      { label: 'Строка', value: 'string' },
+      { label: 'Число', value: 'float' },
+      { label: 'Номенклатура', value: 'enstru' },
+      { label: 'Стажы', value: 'stazh_category' },
+      { label: 'Категории должностей', value: 'category_sotr' },
+      { label: 'Должности работников', value: 'dolzhnost' },
+      { label: 'Подразделение', value: 'podrazdelenie' },
+      { label: 'Виды доплат и надбавок', value: 'dopl_nadb' },
+      { label: 'Областии регионы', value: 'oblasti_reg' },
+      { label: 'Едница измерений', value: 'ed_izm' },
+      { label: 'Марки автомобилей', value: 'marki_avto' }
     ];
 
     console.log(this.sposobOptions)
@@ -324,5 +326,15 @@ export class FormDetailComponent implements OnInit {
     })
 
 
+  }
+
+
+
+  deleted_tbl(index:number){
+    this.form_detail.tbl.splice(index,1)
+  }
+
+  deleted_dopl(index:number){
+    this.form_detail.dopl.splice(index,1)
   }
 }
