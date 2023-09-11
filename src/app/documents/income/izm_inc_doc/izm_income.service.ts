@@ -13,7 +13,7 @@ import { izm_inc_doc_tab, izm_inc_doc, izm_inc_doc_detail, izm_inc_doc_list } fr
 export class IzmIncomeService {
   constructor(private http: HttpClient) {
   }
-  host = "http://192.168.5.27:8000/"
+  host = "http://192.168.5.27:9999/"
 
 
   fetch(params: any): Observable<izm_inc_doc_list> {

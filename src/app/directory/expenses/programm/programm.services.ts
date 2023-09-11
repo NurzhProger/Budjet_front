@@ -11,7 +11,7 @@ import { programm_detail, programm_list } from "./interfaces";
 export class programmService {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.5.27:8000/"
+    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<programm_list> {

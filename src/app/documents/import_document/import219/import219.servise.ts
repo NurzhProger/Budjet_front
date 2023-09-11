@@ -16,7 +16,7 @@ export class import219Servise {
   constructor(private http: HttpClient) {
   }
   // host = "http://192.168.5.27:8000/"
-  host = "http://192.168.10.182:8000/"
+  host = "http://192.168.5.27:9999/"
 
   send_file(body: any) {
     console.log(body)

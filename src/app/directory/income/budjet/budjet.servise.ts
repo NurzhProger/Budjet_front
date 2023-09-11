@@ -12,7 +12,7 @@ import { Budjet_list , Budjet_detail} from '../budjet/interfaces';
 export class Budjet_Service {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.10.200:9999/"
+    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<Budjet_list> {

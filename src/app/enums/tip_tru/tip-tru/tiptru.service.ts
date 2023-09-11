@@ -10,7 +10,7 @@ export class TipTruService {
 
   constructor(private http: HttpClient) {
   }
-  host = "http://192.168.10.200:9999/"
+  host = "http://192.168.5.27:9999/"
 
 
   fetch(): Observable<tip_tru_list> {

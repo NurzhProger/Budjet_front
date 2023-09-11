@@ -11,7 +11,7 @@ import { class_income_detail, class_income_list } from "./interfaces";
 export class ClassIncomeService {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.5.27:8000/"
+    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<class_income_list> {

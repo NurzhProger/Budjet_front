@@ -11,7 +11,7 @@ import { specification_expenses_detail, specification_expenses_list } from "./in
 export class SpecificationExpensesService {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.5.27:8000/"
+    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<specification_expenses_list> {

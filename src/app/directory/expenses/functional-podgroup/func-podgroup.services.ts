@@ -11,7 +11,7 @@ import { func_podgroup_detail, func_podgroup_list } from "./interfaces";
 export class FuncPodgroupService {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.5.27:8000/"
+    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<func_podgroup_list> {

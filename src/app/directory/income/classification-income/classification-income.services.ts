@@ -11,7 +11,7 @@ import { classsification_income_detail, classsification_income_list, classsifica
 export class ClassificationIncomeService {
     constructor(private http: HttpClient) {
     }
-    host = "http://192.168.5.27:8000/"
+    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<classsification_income_list> {
