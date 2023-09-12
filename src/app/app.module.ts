@@ -100,6 +100,8 @@ import { RegionsElementComponent } from './directory/planirovanie/regions/region
 import { RegionsListComponent } from './directory/planirovanie/regions/regions-list/regions-list.component';
 import { BudjetRegListComponent } from './directory/planirovanie/budjet-reg/budjet-reg-list/budjet-reg-list.component';
 import { BudjetRegElementComponent } from './directory/planirovanie/budjet-reg/budjet-reg-element/budjet-reg-element/budjet-reg-element.component';
+import { BudgetRequestListComponent } from './documents/Budget_request/budget-request-list/budget-request-list.component';
+import { BudgetRequestDetailComponent } from './documents/Budget_request/budget-request-detail/budget-request-detail.component';
 
 
 @NgModule({
@@ -203,7 +205,9 @@ import { BudjetRegElementComponent } from './directory/planirovanie/budjet-reg/b
     RegionsElementComponent,
     RegionsListComponent,
     BudjetRegListComponent,
-    BudjetRegElementComponent],
+    BudjetRegElementComponent,
+    BudgetRequestListComponent,
+    BudgetRequestDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {

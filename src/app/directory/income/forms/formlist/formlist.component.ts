@@ -2,8 +2,9 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 import { form_list, form_list_doc } from "../forms_interfaces";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
-import { MessageService } from 'primeng/api';
+import { MessageService,ConfirmationService } from 'primeng/api';
 import { formsService } from '../forms_servise'
+
 @Component({
   selector: 'app-formlist',
   templateUrl: './formlist.component.html',
@@ -15,7 +16,8 @@ export class FormlistComponent implements OnInit {
     private form_list_ryref: DynamicDialogRef,
     private form_list_messageServicedelSelect: MessageService,
     private form_list_dialog: DialogService,
-    private form_Servise:formsService)  { }
+    private form_Servise:formsService,
+    private from_confrim:ConfirmationService)  { }
 
 
   @Output() newItemEvent = new EventEmitter<any>();
@@ -58,13 +60,30 @@ export class FormlistComponent implements OnInit {
   }
 
   onRowClick(form_doc: form_list_doc){
-    console.log("dsd")
     this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
   }
 
+  onDelete(cat: form_list_doc) {
+    // this.from_confrim.confirm({
+    //   message: 'Вы действительно хотите удалить ' + cat.name + cat.head_form + '?',
+    //   header: 'Удаление категории',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: () => {
+    //     this.form_Servise.deleteCategory(cat.id)
+    //       .subscribe((data) => (
+    //         this.categoryListmessage.add({ severity: 'success', summary: 'Успешно', detail: 'Категория удалена!' }),
+    //         this.fetchCat(), this.categoryconfirm.close()),
+    //         (error) => (this.categoryListmessage.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось удалить категорию!' }))
+    //       )
+    //   },
+    //   reject: () => {
+    //     this.categoryconfirm.close();
+    //   }
+    // });
+  }
 
-
-  onRowEdit(form_list: form_list_doc){
+  onRowEdit(form_doc: form_list_doc){
+    this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
 
   }
 

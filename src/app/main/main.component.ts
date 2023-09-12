@@ -177,45 +177,47 @@ export class MainComponent implements OnInit {
           ]
         ]
       },
-      // {
-      //   label: 'Документы',
-      //   icon: 'pi pi-fw pi-file',
-      //   items: [
-      //     [
-      //       {
-      //         label: 'Поступления',
-      //         items: [{
-      //           label: 'Утвержденный план по поступлениям',
-      //           command: () => this.openTab('app-utv-income-list', 'Утвержденный план по поступлениям', '')
-      //         }, {
-      //           label: 'Изменения плана по поступлениям',
-      //           command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
-      //         }]
-      //       }
-      //     ],
-      //     [
-      //       {
-      //         label: 'Расходы',
-      //         items: [{
-      //           label: 'Утвержденный план по расходам',
-      //           command: () => this.openTab('app-utv-exp-doc-list', 'Утвержденный план по расходам', '')
-      //         }, {
-      //           label: 'Изменения плана по расходам',
-      //           command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
-      //         }]
-      //       }
-      //     ],
-      //     [
-      //       {
-      //         label: 'Импорт данных',
-      //         items: [{
-      //           label: 'Импорт формы 2-19',
-      //           command: () => this.openTab('app-import219-deteail', 'Импорт формы 2-19', '')
-      //         }]
-      //       }
-      //     ]
-      //   ]
-      // },
+      {
+        label: 'Документы',
+        icon: 'pi pi-fw pi-file',
+        items: [
+          [
+            {
+              label: 'Документы',
+              items: [{
+                label: 'Бюджетная заявка',
+                command: () => this.openTab('app-budget-request-list', 'Бюджетная заявка', '')
+              }
+              // {
+              //   label: 'Изменения плана по поступлениям',
+              //   command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
+              // }
+            ]
+            }
+          ],
+          // [
+          //   {
+          //     label: 'Расходы',
+          //     items: [{
+          //       label: 'Утвержденный план по расходам',
+          //       command: () => this.openTab('app-utv-exp-doc-list', 'Утвержденный план по расходам', '')
+          //     }, {
+          //       label: 'Изменения плана по расходам',
+          //       command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
+          //     }]
+          //   }
+          // ],
+          // [
+          //   {
+          //     label: 'Импорт данных',
+          //     items: [{
+          //       label: 'Импорт формы 2-19',
+          //       command: () => this.openTab('app-import219-deteail', 'Импорт формы 2-19', '')
+          //     }]
+          //   }
+          // ]
+        ]
+      },
       {
         label: 'Перечисления',
         icon: 'pi pi-fw pi-file',

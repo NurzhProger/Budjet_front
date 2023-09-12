@@ -24,7 +24,11 @@ export class formsService {
 
     saveforms(utv_inc: form_detail) {
       return this.http.post(this.host + 'dirs/formsedit', utv_inc)
-  }
+    }
+
+  //   deleteCategory(category_id: number = 0) {
+  //     return this.http.delete(this.host + `dirs/categorydelete/${category_id}`)
+  // }
 
 
 }

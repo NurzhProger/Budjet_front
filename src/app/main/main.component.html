@@ -156,6 +156,10 @@
                     (closeEvent)="removetab()">
                 </app-form-detail>
 
+                <app-budget-request-list *ngIf="context.selector=='app-budget-request-list'"
+                    (closeEvent)="removetab()">
+                </app-budget-request-list>
+
 
 
             </mat-tab>
