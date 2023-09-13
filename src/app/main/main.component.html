@@ -157,8 +157,13 @@
                 </app-form-detail>
 
                 <app-budget-request-list *ngIf="context.selector=='app-budget-request-list'" [data]="true"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
                     (closeEvent)="removetab()">
                 </app-budget-request-list>
+
+                <app-budget-request-detail *ngIf="context.selector=='app-budget-request-detail'" [Budget_doc_id]="number"
+                    (closeEvent)="removetab()">
+                </app-budget-request-detail>
 
 
 

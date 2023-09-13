@@ -3,7 +3,7 @@ import { budget_list, budget_list_doc } from "../budget_request.interfaces";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { MessageService,ConfirmationService } from 'primeng/api';
-import { formsService } from '../budget_request.servise'
+import { budjetService } from '../budget_request.servise'
 
 @Component({
   selector: 'app-budget-request-list',
@@ -12,6 +12,22 @@ import { formsService } from '../budget_request.servise'
 })
 export class BudgetRequestListComponent implements OnInit {
 
+
+
+
+  constructor(
+    private budget_list_ryref: DynamicDialogRef,
+    private budget_list_messageServicedelSelect: MessageService,
+    private budget_list_dialog: DialogService,
+    private budget_Servise:budjetService,
+    private budget_confrim:ConfirmationService)  { }
+
+
+
+
+  @Output() closeEvent = new EventEmitter<any>()
+  @Output() newItemEvent = new EventEmitter<any>();
+  @Input() data = false
   Budget_list$: Observable<budget_list>
   first = 0
   rows = 25
@@ -19,20 +35,6 @@ export class BudgetRequestListComponent implements OnInit {
   searcforms = ""
   windowHeight: number
   selected: any
-
-
-  constructor(
-    private budget_list_ryref: DynamicDialogRef,
-    private budget_list_messageServicedelSelect: MessageService,
-    private budget_list_dialog: DialogService,
-    private budget_Servise:formsService,
-    private budget_confrim:ConfirmationService)  { }
-
-
-
-
-  @Output() closeEvent = new EventEmitter<any>()
-  @Input() data = false
 
 
   ngOnInit(): void {
@@ -50,8 +52,8 @@ export class BudgetRequestListComponent implements OnInit {
   }
 
 
-  openNew(){
-
+  openNew(Budget_doc: budget_list_doc){
+    this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Шаблон формы ', id: '' } });
   }
 
   onSelected(){
@@ -72,7 +74,9 @@ export class BudgetRequestListComponent implements OnInit {
 
   }
 
-  onRowEdit(form_doc: budget_list_doc){
+  onRowEdit(Budget_doc: budget_list_doc){
+
+    this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка ' + Budget_doc.nom, id: Budget_doc.id } });
 
 
   }

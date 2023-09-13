@@ -2,7 +2,7 @@
 
   <div class="p-toolbar-group-left" *ngIf="data!==false">
     <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
-      (click)="openNew()"></button>
+      (click)="openNew(selected)"></button>
   </div>
 
   <div class="p-toolbar-group-left" *ngIf="data!==true">
@@ -35,22 +35,23 @@
       <tr>
         <th style="width:5%; text-align:center">Номер</th>
         <th style="width:10%; text-align:center">Дата</th>
-        <th style="width:60%; text-align:center">год учета</th>
-        <th style="width:15%; text-align:center">Вид данных</th>
-        <th style="width:15%; text-align:center">Вид операций</th>
+        <th style="width:40%; text-align:center">Организация</th>
+        <th style="width:15%; text-align:center">год учета</th>
+        <th style="width:10%; text-align:center">Вид данных</th>
+        <th style="width:10%; text-align:center">Вид операций</th>
         <th style="width:10%; text-align:center"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item let-ri="rowIndex" *ngFor="let item of category.results| keyvalue">
       <tr class="cursor-pointer" (dblclick)="onRowClick(item)" [pSelectableRow]="item">
         <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-        <td>
+        <td style="text-align:center">
           {{item._date}}
         </td>
         <td>
           {{item.org_name}}
         </td>
-        <td>
+        <td style="text-align:center">
           {{item.god_ucheta}}
         </td>
         <td>
