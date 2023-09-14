@@ -20,7 +20,7 @@ export interface Ras4et_head {
   formhead: string
 }
 
-interface TableItem {
+export interface TableItem {
   stroka: number;
   children: [ChildItem];
 }
@@ -36,7 +36,7 @@ export interface ChildItem  {
   zn: string;
   zn_string: string | null;
   zn_float: number | null;
-  zn_enstru: number | null;
+  zn_enstru: number;
   zn_stazh_category: number | null;
   zn_category_sotr: number | null;
   zn_dolzhnost: number | null;
@@ -55,4 +55,20 @@ export interface Ras4et_dopl {
   stroka: number;
   _doplata: number;
   _sposob_ras: string;
+}
+
+
+export interface TableItemPass {
+  stroka: number;
+  children: [Child];
+}
+
+
+export interface Child  {
+
+  id: number;
+  name_zn: string;
+  namecolumn: number;
+  code: string;
+
 }

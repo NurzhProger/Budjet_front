@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService ,MenuItem } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, throwError, timeout } from 'rxjs'
-import { Ras4et_doc,ChildItem } from "../Budget_ras4et.interfaces";
+import { Ras4et_doc,ChildItem,TableItemPass } from "../Budget_ras4et.interfaces";
 import { budjetRas4et_Service } from "../Budget_ras4et.Services";
 
 @Component({
@@ -25,6 +25,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   Ras4et_detail: Ras4et_doc
   formaid = ""
   colum = 0
+  Table:TableItemPass
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -42,15 +43,16 @@ export class BudgetRas4etDetailComponent implements OnInit {
           (data) => (
               this.Ras4et_detail = data,
               this.colum = this.Ras4et_detail.tbl.length,
-              console.log(this.colum)
+              console.log(this.Ras4et_detail)
+
 
 
             )
         )
     }
-    // for (var val of this.Ras4et_detail.tbl[0].children) {
-    //   console.log(val); // prints values: 10, 20, 30, 40
-    // }
+
+
+
 
 
     // this.Ras4et_detail.tbl.forEach((item) => {
@@ -62,6 +64,24 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
+
+  conculate(){
+    for (var stroka1 of this.Ras4et_detail.tbl) {
+      this.Table.stroka = stroka1.stroka
+      for (var item of stroka1.children){
+        if (item.zn == "enstru"){
+          this.dobavlenya("enstru",item.zn_enstru)
+        }
+      }
+
+
+    }
+  }
+
+  dobavlenya(tip:string,doc:number){
+
+
+  }
 
   saveDoc(step:boolean){
 
