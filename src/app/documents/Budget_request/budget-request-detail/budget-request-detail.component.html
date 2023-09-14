@@ -67,6 +67,80 @@
       </div>
   </form>
 
+  <div class="card">
+    <div class="grid">
+        <div class="col-5 flex align-items-center justify-content-center">
+          <p-tabView>
+            <div style="padding: 0 0 10px 10px;">
+              <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+                (click)="add_tbl()"></button>
+            </div>
+            <p-table [value]="Budget_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
+              scrollHeight="calc(100vh - 200px)" selectionMode="single"
+              styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width:10%;text-align:center">Номер</th>
+                  <th style="width:70%; text-align:center">ФКР</th>
+                  <th style="width:20%;text-align:center">Общая Сумма</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-item  let-ri="rowIndex">
+                <tr [pEditableRow]="item">
+                  <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+
+                  <td >
+                    <div class="p-inputgroup w-full md:w-30rem">
+                        <input pInputText [readOnly]="true" [ngModel]="item.fkrcode + '. ' + item.fkrname" />
+                        <span class="p-inputgroup-addon" (click)="SelectFKR(ri)">...</span>
+                    </div>
+                </td>
+
+                  <!-- <td>{{item.fkrcode}}-{{item.fkrname}} </td> -->
+                  <td style="width:10%; text-align:center">{{summa}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+        </p-tabView>
+        </div>
+
+
+          <p-divider layout="vertical">
+              <b>Расчет</b>
+          </p-divider>
+
+
+        <div class="col-6 flex align-items-center justify-content-center">
+          <p-tabView>
+            <p-table [value]="Budget_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
+              scrollHeight="calc(100vh - 200px)" selectionMode="single"
+              styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="text-align:center">Номер</th>
+                  <th style="text-align:center">Специфика</th>
+                  <th style="text-align:center">Форма</th>
+                  <th style="text-align:center">Сумма</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-item  let-ri="rowIndex">
+                <tr [pEditableRow]="item">
+                  <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                  <td>{{item.specname}}</td>
+                  <td class="cursor-pointer">
+                    <a href="#" (click)="viewForma(ri)">{{item.formname}} {{item.formhead}}</a>
+                  </td>
+                  <td>{{summa}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+        </p-tabView>
+        </div>
+    </div>
+</div>
+
 
 
   <ng-template #empty>

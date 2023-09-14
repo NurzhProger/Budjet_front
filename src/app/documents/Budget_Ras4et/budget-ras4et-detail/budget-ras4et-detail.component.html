@@ -1,0 +1,163 @@
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <div style="padding-right: 10px;">
+      <button [disabled]="form.invalid" pButton pRipple label="Записать" icon="pi pi-save"
+        class="p-button-secondary p-mr-2" (click)="saveDoc(false)"></button>
+    </div>
+    <button [disabled]="form.invalid" pButton pRipple label="Записать и закрыть" icon="pi pi-save"
+      class="p-button-info p-mr-2" (click)="saveDoc(true)"></button>
+  </div>
+
+  <div class="p-toolbar-group-right">
+    <div style="padding-right: 10px;">
+      <p-splitButton appendTo="body" label="Еще" [model]="this.items"
+        styleClass="p-button-outlined p-button-plain p-mr-2"></p-splitButton>
+    </div>
+    <div>
+      <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined p-button-plain p-mr-2"
+        styleClass="p-button-sm" (click)="closeform(true)"></button>
+    </div>
+  </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(Ras4et_detail) as Ras4et_detail; else loader">
+  <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
+
+    <div class="p-field" style="padding-right: 10px;">
+
+      <label for="name_doc">Наименование <span style="color: red;">*</span></label>
+      <div class="p-inputgroup">
+        <input id="name_doc" type="text" pInputText
+          [(ngModel)]="Ras4et_detail.head.formhead" formControlName="name_doc" />
+      </div>
+      <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
+        <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должна быть пустой</span>
+      </span>
+    </div>
+
+
+    <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+      <label for="fkr_name">ФКР<span style="color: red;">*</span></label>
+      <div class="p-inputgroup">
+        <input id="fkr_name" type="text" pInputText [(ngModel)]="Ras4et_detail.head.fkrname"
+          formControlName="fkr_name" />
+        <span class="p-inputgroup-addon cursor-pointer" (click)="selectfkr()">...</span>
+      </div>
+      <span class="p-invalid" *ngIf="form.controls['fkr_name'].invalid && form.controls['fkr_name'].touched">
+        <span *ngIf="form.controls['fkr_name'].errors?.required">ФКР не должно быть пустым</span>
+      </span>
+    </div>
+
+    <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+      <label for="spec_name">Специфика<span style="color: red;">*</span></label>
+      <div class="p-inputgroup">
+        <input id="spec_name" type="text" pInputText [(ngModel)]="Ras4et_detail.head.fkrname"
+          formControlName="spec_name" />
+        <span class="p-inputgroup-addon cursor-pointer" (click)="selectfkr()">...</span>
+      </div>
+      <span class="p-invalid" *ngIf="form.controls['spec_name'].invalid && form.controls['spec_name'].touched">
+        <span *ngIf="form.controls['spec_name'].errors?.required">Специфика не должно быть пустым</span>
+      </span>
+    </div>
+
+
+  </form>
+
+
+
+
+    <p-tabView>
+        <div style="padding: 0 0 10px 10px;">
+          <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="add_tbl()"></button>
+        </div>
+        <p-table [value]="Ras4et_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
+          scrollHeight="calc(100vh - 200px)" selectionMode="single"
+          styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th *ngFor="let header of Ras4et_detail.tbl[0].children">{{ header.name }}</th>
+            </tr>
+          </ng-template>
+
+
+          <div *ngFor="let item of Ras4et_detail.tbl; let i = index">
+            <ng-template pTemplate="body" let-item let-ri="rowIndex">
+              <tr [pEditableRow]="item" *ngFor="let header of Ras4et_detail.tbl[i].children">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td >{{header.name}}</td>
+                <td >{{item.name}}</td>
+              </tr>
+            </ng-template>
+          </div>
+        </p-table>
+    </p-tabView>
+
+  <!-- <ng-template pTemplate="body" let-utv let-ri="rowIndex">
+          <tr class="cursor-pointer">
+              <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+              <td>
+                  <div class="p-inputgroup w-full">
+                      <input pInputText [readOnly]="true"
+                          [ngModel]="utv._classification.code + ' ' + utv._classification.name_rus" />
+                      <span class="p-inputgroup-addon" (click)="viewClassification(utv._classification.id)">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-files" viewBox="0 0 16 16">
+                              <path
+                                  d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                          </svg>
+                      </span>
+                      <span class="p-inputgroup-addon" (click)="editClassification(utv.id)">...</span>
+                  </div>
+              </td>
+              <td style="text-align:center">
+                  {{utv.sm1 + utv.sm2 + utv.sm3 + utv.sm4 + utv.sm5 + utv.sm6 +
+                  utv.sm7 + utv.sm8 + utv.sm9 + utv.sm10 + utv.sm11 + utv.sm12}}
+              </td>
+              <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
+                  <td style="text-align:right;" style="max-width: 7em; min-width: 7em">
+                      <input type="number" [min]="0" [(ngModel)]="utv['sm' + i]" (change)="calculate()"
+                          style="text-align:center; width: 100%;">
+                  </td>
+              </ng-container>
+              <td>
+                  <div class="flex align-items-center justify-content-center gap-2">
+                      <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                          (click)="onDelete(utv._classification, utv.classification_name)"></button>
+                  </div>
+              </td>
+          </tr>
+      </ng-template> -->
+  <!-- <ng-template pTemplate="footer">
+          <tr>
+              <td colspan="2" class="text-right">Итого</td>
+              <td class="text-center">{{totalgod}}</td>
+              <td class="text-center">{{total1}}</td>
+              <td class="text-center">{{total2}}</td>
+              <td class="text-center">{{total3}}</td>
+              <td class="text-center">{{total4}}</td>
+              <td class="text-center">{{total5}}</td>
+              <td class="text-center">{{total6}}</td>
+              <td class="text-center">{{total7}}</td>
+              <td class="text-center">{{total8}}</td>
+              <td class="text-center">{{total9}}</td>
+              <td class="text-center">{{total10}}</td>
+              <td class="text-center">{{total11}}</td>
+              <td class="text-center">{{total12}}</td>
+          </tr>
+      </ng-template> -->
+
+
+  <ng-template #empty>
+    <div class="center">
+      Нет ни одной записи
+    </div>
+  </ng-template>
+</div>
+
+<p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+</p-confirmDialog>
+
+<ng-template #loader>
+  <app-skeleton></app-skeleton>
+</ng-template>

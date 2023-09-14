@@ -35,6 +35,7 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { SplitterModule } from 'primeng/splitter';
+import { DividerModule } from 'primeng/divider';
 
 
 
@@ -76,7 +77,8 @@ import { SplitterModule } from 'primeng/splitter';
         DragDropModule,
         SkeletonModule,
         ContextMenuModule,
-        SplitterModule
+        SplitterModule,
+        DividerModule
     ]
 })
 

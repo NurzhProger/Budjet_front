@@ -5,7 +5,10 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Budget_detail,budget_list_doc } from "../budget_request.interfaces";
 import { budjetService } from '../budget_request.servise'
 import { SHA256 } from 'crypto-js';
-
+import { FkrSelectComponent } from '../../../directory/expenses/fkr/fkr-select/fkr-select.component'
+import { fkr_detail } from '../../../directory/expenses/fkr/interfaces'
+import { BudgetRas4etDetailComponent } from '../../Budget_Ras4et/budget-ras4et-detail/budget-ras4et-detail.component'
+import { Ras4et_head } from '../../Budget_Ras4et/Budget_ras4et.interfaces'
 @Component({
   selector: 'app-budget-request-detail',
   templateUrl: './budget-request-detail.component.html',
@@ -28,6 +31,7 @@ export class BudgetRequestDetailComponent implements OnInit {
   form: FormGroup
   hashBegin = ''
   hashEnd = ''
+  summa = 0
   statuses!: SelectItem[];
 
   Budget_detail: Budget_detail = {
@@ -124,6 +128,44 @@ export class BudgetRequestDetailComponent implements OnInit {
 
   selectspec(){
 
+  }
+
+
+  SelectFKR(index:number){
+
+    this.Budget_detail_ryref = this.Budget_detail_dialog.open(FkrSelectComponent,
+      {
+        header: 'Выбор ФКР',
+        width: '60%',
+        height: '80%'
+      })
+
+    this.Budget_detail_ryref.onClose.subscribe((spec: fkr_detail) => {
+      if (spec) {
+        this.Budget_detail.tbl[index]._fkr = spec.id,
+        this.Budget_detail.tbl[index].fkrcode = spec.code,
+        this.Budget_detail.tbl[index].fkrname = spec.name_rus
+      }
+    })
+
+  }
+
+  viewForma(index:number){
+    this.Budget_detail_ryref = this.Budget_detail_dialog.open(BudgetRas4etDetailComponent,
+      {
+        header: 'Редактирование Формы',
+        width: '60%',
+        height: '80%',
+        data: { formaid: this.Budget_detail.tbl[index]._form}
+      })
+
+    this.Budget_detail_ryref.onClose.subscribe((form: Ras4et_head) => {
+      if (form) {
+        this.Budget_detail.tbl[index]._form = form.id,
+        this.Budget_detail.tbl[index].formhead = form.formhead,
+        this.Budget_detail.tbl[index].formname = form.formname
+      }
+    })
   }
 
   add_tbl(){

@@ -102,6 +102,7 @@ import { BudjetRegListComponent } from './directory/planirovanie/budjet-reg/budj
 import { BudjetRegElementComponent } from './directory/planirovanie/budjet-reg/budjet-reg-element/budjet-reg-element/budjet-reg-element.component';
 import { BudgetRequestListComponent } from './documents/Budget_request/budget-request-list/budget-request-list.component';
 import { BudgetRequestDetailComponent } from './documents/Budget_request/budget-request-detail/budget-request-detail.component';
+import { BudgetRas4etDetailComponent } from './documents/Budget_Ras4et/budget-ras4et-detail/budget-ras4et-detail.component';
 
 
 @NgModule({
@@ -207,7 +208,8 @@ import { BudgetRequestDetailComponent } from './documents/Budget_request/budget-
     BudjetRegListComponent,
     BudjetRegElementComponent,
     BudgetRequestListComponent,
-    BudgetRequestDetailComponent],
+    BudgetRequestDetailComponent,
+    BudgetRas4etDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {
