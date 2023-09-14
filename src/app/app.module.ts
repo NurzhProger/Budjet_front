@@ -103,6 +103,8 @@ import { BudjetRegElementComponent } from './directory/planirovanie/budjet-reg/b
 import { BudgetRequestListComponent } from './documents/Budget_request/budget-request-list/budget-request-list.component';
 import { BudgetRequestDetailComponent } from './documents/Budget_request/budget-request-detail/budget-request-detail.component';
 import { BudgetRas4etDetailComponent } from './documents/Budget_Ras4et/budget-ras4et-detail/budget-ras4et-detail.component';
+import { LimitListComponent } from './documents/Limit/limit-list/limit-list.component';
+import { LimitElementComponent } from './documents/Limit/limit-element/limit-element.component';
 
 
 @NgModule({
@@ -209,7 +211,9 @@ import { BudgetRas4etDetailComponent } from './documents/Budget_Ras4et/budget-ra
     BudjetRegElementComponent,
     BudgetRequestListComponent,
     BudgetRequestDetailComponent,
-    BudgetRas4etDetailComponent],
+    BudgetRas4etDetailComponent,
+    LimitListComponent,
+    LimitElementComponent],
   bootstrap: [AppComponent],
   providers: [
     {
