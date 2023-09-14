@@ -9,12 +9,26 @@ export interface budget_list_doc {
   id: number,
   org_name: string,
   nom: string,
-  _organization: number,
+  _organization: budget_list_organization,
   _date: string,
   god_ucheta: string,
   _vid_dannyh: string,
   _vid_operacii: string,
   deleted: boolean,
+}
+
+
+export interface budget_list_organization {
+  id: number;
+  bin: string;
+  name_kaz: string;
+  name_rus: string;
+  adress: string;
+  deleted: boolean;
+  budjet_name: string;
+  region_name: string;
+  _budjet_reg: number;
+  _regiondar: number;
 }
 
 export interface Budget_detail {
