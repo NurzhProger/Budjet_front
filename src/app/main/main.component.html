@@ -88,6 +88,10 @@
                 (closeEvent)="removetab()">
                 </app-limit-list>
 
+                <app-limit-element *ngIf="context.selector=='app-limit-element'" [limit_id]="number"
+                    (closeEvent)="removetab()">
+                </app-limit-element>
+
                 <app-dolznost-list *ngIf="context.selector=='app-dolznost-list'" [data]="true" (closeEvent)="removetab()">
                 </app-dolznost-list>
 
