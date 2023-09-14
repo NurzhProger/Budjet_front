@@ -84,7 +84,8 @@
                 <app-podrazdelenie-list *ngIf="context.selector=='app-podrazdelenie-list'" [data]="true" (closeEvent)="removetab()">
                 </app-podrazdelenie-list>
 
-                <app-limit-list *ngIf="context.selector=='app-limit-list'" [data]="true" (closeEvent)="removetab()">
+                <app-limit-list *ngIf="context.selector=='app-limit-list'" [data]="true" (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                (closeEvent)="removetab()">
                 </app-limit-list>
 
                 <app-dolznost-list *ngIf="context.selector=='app-dolznost-list'" [data]="true" (closeEvent)="removetab()">
