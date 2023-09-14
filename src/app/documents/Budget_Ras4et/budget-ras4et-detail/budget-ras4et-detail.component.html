@@ -77,19 +77,18 @@
           <ng-template pTemplate="header">
             <tr>
               <th *ngFor="let header of Ras4et_detail.tbl[0].children">{{ header.name }}</th>
+
             </tr>
           </ng-template>
 
 
-          <div *ngFor="let item of Ras4et_detail.tbl; let i = index">
-            <ng-template pTemplate="body" let-item let-ri="rowIndex">
-              <tr [pEditableRow]="item" *ngFor="let header of Ras4et_detail.tbl[i].children">
-                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-                <td >{{header.name}}</td>
-                <td >{{item.name}}</td>
+
+            <ng-template pTemplate="body">
+              <tr *ngFor="let item of Ras4et_detail.tbl; let i = index">
+                <td style="text-align: center; font-weight: 700;" *ngFor="let head of Ras4et_detail.tbl[i].children">{{head.id}}</td>
               </tr>
             </ng-template>
-          </div>
+
         </p-table>
     </p-tabView>
 
