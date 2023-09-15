@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { limit_element, limit_list } from '../interfaces';
+import { limit_doc, limit_list } from '../interfaces';
 import { LimitService } from '../limit.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LimitElementComponent } from '../limit-element/limit-element.component';
@@ -56,11 +56,11 @@ export class LimitListComponent implements OnInit {
     this.fetchList()
   }
 
-  onRowEdit(limit: limit_element) {
-    this.newItemEvent.emit({ params: { selector: 'app-limit-element', nomer: 'Утвержденный план по поступлениям ' + limit.nom, id: limit.id } });
+  onRowEdit(limit: limit_doc) {
+    this.newItemEvent.emit({ params: { selector: 'app-limit-element', nomer: 'Лимит на годовой бюджет ' + limit.nom, id: limit.id } });
   }
 
-  onRowClick(limit: limit_element) {
+  onRowClick(limit: limit_doc) {
     if (this.data) {
       this.onRowEdit(limit)
     }

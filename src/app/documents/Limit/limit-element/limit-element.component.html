@@ -1,1 +1,21 @@
-<p>limit-element works!</p>
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <div style="padding-right: 10px;">
+            <button [disabled]="form.invalid" pButton pRipple label="Записать" icon="pi pi-save"
+                class="p-button-secondary p-mr-2" (click)="saveDoc(false)"></button>
+        </div>
+        <button [disabled]="form.invalid" pButton pRipple label="Записать и закрыть" icon="pi pi-save"
+            class="p-button-info p-mr-2" (click)="saveDoc(true)"></button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+        <div style="padding-right: 10px;">
+            <p-splitButton appendTo="body" label="Еще" [model]="this.items"
+                styleClass="p-button-outlined p-button-plain p-mr-2"></p-splitButton>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined p-button-plain p-mr-2"
+                styleClass="p-button-sm" (click)="closeform(true)"></button>
+        </div>
+    </div>
+</p-toolbar>

@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { limit_detail, limit_doc } from '../interfaces';
+import { budjet_reg__element } from 'src/app/directory/planirovanie/budjet-reg/budjet-reg-list/interfaces';
+import { SHA256 } from 'crypto-js';
 
 @Component({
   selector: 'app-limit-element',
@@ -8,6 +11,7 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./limit-element.component.css']
 })
 export class LimitElementComponent implements OnInit {
+  @Output() closeEvent = new EventEmitter<any>();
   @Input() limit_id = ''
   constructor() {
     this.items = [
@@ -22,7 +26,35 @@ export class LimitElementComponent implements OnInit {
   }
   items: MenuItem[];
   form: FormGroup
+
+  // limitDetail: limit_detail = {
+  //   // head: {
+  //   //   id: 0,
+  //   //   nom: '',
+  //   //   org_name: '',
+  //   //   _date: '',
+  //   //   god_ucheta: '',
+  //   //   _organization: {
+  //   //     id: 0,
+  //   //     bin: '',
+  //   //     name_kaz: '',
+  //   //     name_rus: '',
+  //   //     adress: '',
+  //   //     deleted: false,
+  //   //     budjet_name: '',
+  //   //     _budjet_reg: number,
+  //   //     region_name: string,
+  //   //     _regiondar: number
+  //   //   }
+  //   // }
+  // }
+
+  hashEnd = ''
+  hashBegin = ''
   ngOnInit(): void {
+    this.form = new FormGroup({
+      
+    })
   }
 
   saveDoc(close: boolean): void {
@@ -42,28 +74,28 @@ export class LimitElementComponent implements OnInit {
 
   closeform(close: boolean) {
 
-  //   let objString = JSON.stringify(this.utvDetail)
-  //   this.hashEnd = SHA256(objString).toString()
+    // let objString = JSON.stringify(this.limitDetail)
+    // this.hashEnd = SHA256(objString).toString()
 
-  //   if (close) {
-  //     if (this.hashBegin == this.hashEnd) {
-  //       this.closeEvent.emit()
-  //     }
-  //     else {
-  //       this.utvDetailconfirm.confirm({
-  //         message: 'Данные были изменены. Закрыть документ?',
-  //         header: 'Закрытие',
-  //         icon: 'pi pi-exclamation-triangle',
-  //         accept: () => {
-  //           this.closeEvent.emit()
-  //           this.utvDetailconfirm.close()
-  //         },
-  //         reject: () => {
-  //           this.utvDetailconfirm.close()
-  //         }
-  //       })
-  //     }
-  //   }
+    if (close) {
+      if (this.hashBegin == this.hashEnd) {
+        this.closeEvent.emit()
+      }
+      else {
+      //   this.utvDetailconfirm.confirm({
+      //     message: 'Данные были изменены. Закрыть документ?',
+      //     header: 'Закрытие',
+      //     icon: 'pi pi-exclamation-triangle',
+      //     accept: () => {
+      //       this.closeEvent.emit()
+      //       this.utvDetailconfirm.close()
+      //     },
+      //     reject: () => {
+      //       this.utvDetailconfirm.close()
+      //     }
+      //   })
+      }
+    }
   }
 
 }

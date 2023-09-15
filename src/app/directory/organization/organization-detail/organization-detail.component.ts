@@ -35,6 +35,7 @@ export class OrganizationDetailComponent implements OnInit {
   org_id = 0
   saved = false
  
+  
   org_detail: organization_detail = {
     id: 0,
     bin: '',
@@ -42,10 +43,18 @@ export class OrganizationDetailComponent implements OnInit {
     name_rus: '',
     adress: '',
     deleted: false,
-    _budjet_reg: 0,
-    budjet_name: '',
-    _regiondar: 0,
-    region_name: ''
+    _budjet_reg: {
+        id: 0,
+        code: '',
+        name_kaz: '',
+        name_rus: ''
+    },
+    _regiondar: {
+      id: 0,
+      name: '',
+      name_kaz: '',
+      name_rus: ''
+    },
   }
 
   ngOnInit(): void {
@@ -73,6 +82,7 @@ export class OrganizationDetailComponent implements OnInit {
 
 
   saveOrg() {
+    
     this.orgService.add(this.org_detail)
       .subscribe(
         (data) => (
@@ -90,19 +100,22 @@ export class OrganizationDetailComponent implements OnInit {
           header: 'Выбор бюджета региона',
           width: 'calc(60%)',
           height: 'calc(80%)',
-          data: { budjetreg_id: this.org_detail._budjet_reg }
+          data: { budjetreg_id: this.org_detail._budjet_reg.id }
       })
     this.budjet_select_dialog_ref.onClose.subscribe((budjet_reg: budjet_reg__element) => {
       if (budjet_reg) {
-        this.org_detail._budjet_reg = budjet_reg.id;
-        this.org_detail.budjet_name = budjet_reg.name_rus;
+        this.org_detail._budjet_reg = budjet_reg;
       }
       })
   }
 
   clearBudjet() {
-    this.org_detail._budjet_reg = 0;
-    this.org_detail.budjet_name = '';
+    this.org_detail._budjet_reg = {
+      id: 0,
+      code: '',
+      name_kaz: '',
+      name_rus: ''
+  };
   }
 
   selectRegion() {
@@ -111,19 +124,22 @@ export class OrganizationDetailComponent implements OnInit {
           header: 'Выбор региона',
           width: 'calc(60%)',
           height: 'calc(80%)',
-          data: { regions_id: this.org_detail._regiondar }
+          data: { regions_id: this.org_detail._regiondar.id }
       })
     this.region_select_dialog_ref.onClose.subscribe((regions: regions__element) => {
       if (regions) {
-        this.org_detail._regiondar = regions.id;
-        this.org_detail.region_name = regions.name;
+        this.org_detail._regiondar = regions;
       }
       })
   }
 
   clearRegion() {
-    this.org_detail._regiondar = 0;
-    this.org_detail.region_name = '';
+    this.org_detail._regiondar = {
+      id: 0,
+      name: '',
+      name_kaz: '',
+      name_rus: ''
+    };
   }
 
   closeOrg() {
