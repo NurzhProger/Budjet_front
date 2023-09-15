@@ -27,8 +27,8 @@
 
       <label for="name_doc">Наименование <span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="name_doc" type="text" pInputText
-          [(ngModel)]="Ras4et_detail.head.formhead" formControlName="name_doc" />
+        <input id="name_doc" type="text" pInputText [(ngModel)]="Ras4et_detail.head.formhead"
+          formControlName="name_doc" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
         <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должна быть пустой</span>
@@ -65,8 +65,7 @@
 
 
 
-
-    <p-tabView>
+  <p-tabView>
         <div style="padding: 0 0 10px 10px;">
           <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="add_tbl()"></button>
