@@ -70,10 +70,11 @@
   </div>
 
   <p-table styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" style="width: 100%;">
       <tr style="text-align: center; font-weight: 700;">
         <!-- <th style="text-align: center;">Номер</th> -->
-        <th style="text-align: center;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
+        <th>Номер</th>
+        <th style="text-align: center; width: 10%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
       </tr>
     </ng-template>
     <!-- <ng-template pTemplate="body" let-tbl let-ri="rowIndex">
@@ -85,17 +86,19 @@
 
   </p-table>
   <p-table [value]="children" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-    <ng-template pTemplate="header">
-      <tr *ngFor="let header of children">
+    <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body" style="width: 100%;">
+      <tr>
         <!-- <td style="text-align: center; font-weight: 700;">{{header}}</td> -->
-        <td *ngFor="let kolon of header">
-          <input id="enstru" type="button" *ngIf="kolon.zn == 'enstru'" [ngModel]="kolon.zn_enstru.name_rus"
-            [readonly]="true" (click)="selectENSTRU(kolon.zn_enstru)">
-          <input *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float">
-          <input *ngIf="kolon.zn == 'ed_izm'" [ngModel]="kolon.zn_ed_izm.name">
-          <input *ngIf="kolon.zn == 'category_sotr'" [ngModel]="kolon.zn_category_sotr.name">
-          <!-- {{kolon['zn_'+kolon.zn]}} -->
-        </td>
+          <td>{{ri + 1}}</td>
+          <td *ngFor="let kolon of ChildItem" style="text-align: center; width: 10%;">
+            <input id="enstru" type="button" *ngIf="kolon.zn == 'enstru'" [ngModel]="kolon.zn_enstru.name_rus"
+              [readonly]="true" (click)="selectENSTRU(kolon.zn_enstru)" style="width: 100%;">
+            <input *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float" style="width: 100%;">
+            <input *ngIf="kolon.zn == 'ed_izm'" [ngModel]="kolon.zn_ed_izm.name" style="width: 100%;">
+            <input *ngIf="kolon.zn == 'category_sotr'" [ngModel]="kolon.zn_category_sotr.name" style="width: 100%;">
+            <!-- {{kolon['zn_'+kolon.zn]}} -->
+          </td>
+
       </tr>
     </ng-template>
   </p-table>
