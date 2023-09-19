@@ -258,6 +258,21 @@ export class MainComponent implements OnInit {
         ]
       },
       {
+        label: 'Отчеты',
+        icon: 'pi pi-fw pi-folder',
+        items: [
+          [
+            {
+              label: 'Приложения',
+              items: [{
+                label: 'Приложение 60',
+                command: () => this.openTab('app-prilozhenie60', 'Приложение 60', '')
+              }]
+            }
+          ]
+        ]
+      },
+      {
         label: 'Quit',
         icon: 'pi pi-fw pi-power-off',
         command: () => this.logout()
