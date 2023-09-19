@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { limit_doc, limit_list } from './interfaces';
+import { limit_detail, limit_doc, limit_list } from './interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,13 +17,13 @@ export class LimitService {
       return this.http.get<limit_list>(this.host + 'docs/limit_planlist', { params })
   }
 
-  fetchOblast(limit_id: number): Observable<limit_doc> {
-      return this.http.get<limit_doc>(this.host + `docs/oblasti_regitem/${limit_id}`)
-  }
+  fetch_detail(limit_id: string): Observable<limit_detail> {
+    return this.http.get<limit_detail>(this.host + 'docs/limit_planitem/' + limit_id)
+}
 
-  add(param: limit_doc) {
-      return this.http.post(this.host + 'docs/oblasti_regadd', param)
-  }
+saveLimit(limit: limit_detail) {
+  return this.http.post(this.host + 'docs/limit_plansave', limit)
+}
 
   edit(param: limit_doc) {
     return this.http.post(this.host + 'docs/oblasti_regedit', param)

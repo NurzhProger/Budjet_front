@@ -35,7 +35,7 @@ export class LimitListComponent implements OnInit {
   }
 
   openNew() {
-
+    this.newItemEvent.emit({ params: { selector: 'app-limit-element', nomer: 'Лимит на годовой бюджет ', id: '' } });
   }
   
   fetchList() {

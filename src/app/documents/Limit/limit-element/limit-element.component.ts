@@ -1,19 +1,32 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { limit_detail, limit_doc } from '../interfaces';
 import { budjet_reg__element } from 'src/app/directory/planirovanie/budjet-reg/budjet-reg-list/interfaces';
 import { SHA256 } from 'crypto-js';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { LimitService } from '../limit.service';
+import { FkrSelectComponent } from 'src/app/directory/expenses/fkr/fkr-select/fkr-select.component';
+import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
+import { OrganizationDetailComponent } from 'src/app/directory/organization/organization-detail/organization-detail.component';
+import { organization_detail } from 'src/app/directory/organization/interfaces';
+import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 
 @Component({
   selector: 'app-limit-element',
   templateUrl: './limit-element.component.html',
   styleUrls: ['./limit-element.component.css']
 })
-export class LimitElementComponent implements OnInit {
+export class LimitElementComponent implements OnInit{
   @Output() closeEvent = new EventEmitter<any>();
   @Input() limit_id = ''
-  constructor() {
+  constructor(
+    private LimitService: LimitService,
+    private limitMessage: MessageService,
+    private fkrRef: DynamicDialogRef,
+    private limitDetaildialog: DialogService,
+    private limitDetailconfirm: ConfirmationService 
+  ) {
     this.items = [
       {
         label: 'Записать',
@@ -24,52 +37,168 @@ export class LimitElementComponent implements OnInit {
       }
     ]
   }
+  
   items: MenuItem[];
-  form: FormGroup
+  form: FormGroup;
+  selected = false;
 
-  // limitDetail: limit_detail = {
-  //   // head: {
-  //   //   id: 0,
-  //   //   nom: '',
-  //   //   org_name: '',
-  //   //   _date: '',
-  //   //   god_ucheta: '',
-  //   //   _organization: {
-  //   //     id: 0,
-  //   //     bin: '',
-  //   //     name_kaz: '',
-  //   //     name_rus: '',
-  //   //     adress: '',
-  //   //     deleted: false,
-  //   //     budjet_name: '',
-  //   //     _budjet_reg: number,
-  //   //     region_name: string,
-  //   //     _regiondar: number
-  //   //   }
-  //   // }
-  // }
+  limitDetail: limit_detail = {
+    head: {
+      id: 0,
+      nom: '',
+      org_name: '',
+      _date: '',
+      god_ucheta: '',
+      _organization: {
+        id: 0,
+        bin: '',
+        name_kaz: '',
+        name_rus: '',
+        adress: '',
+        deleted: false,
+        _budjet_reg: {
+          id: 0,
+          code: '',
+          name_kaz: '',
+          name_rus: ''
+        },
+        _regiondar: {
+          id: 0,
+          name: '',
+          name_kaz: '',
+          name_rus: ''
+        }
+      }
+    },
+    tbl: [
+      {
+        id: 0,
+        _fkr: {
+          id: 0,
+          code: '',
+          name_kaz: '',
+          name_rus: ''
+        },
+        summ: 0,
+        _limit_plan: 0
+      }
+    ]
+  }
+
 
   hashEnd = ''
   hashBegin = ''
+  godNumber = 0
   ngOnInit(): void {
     this.form = new FormGroup({
-      
+      number_doc: new FormControl(),
+      date_doc: new FormControl(null, [Validators.required]),
+      org_name: new FormControl(null, [Validators.required]),
+      god_ucheta: new FormControl(null, [Validators.required])
+    })
+    
+    if (this.limit_id !== '') {
+      this.LimitService.fetch_detail(this.limit_id)
+        .subscribe(
+          (detail) => {
+            this.limitDetail = detail,
+            this.preobGodNumber()
+          }
+        )
+    }
+    
+    
+  }
+
+  preobGodNumber() {
+    this.godNumber = parseInt(this.limitDetail.head.god_ucheta.slice(0, 4));
+  }
+
+  addFKR() {
+    this.fkrRef = this.limitDetaildialog.open(FkrSelectComponent,
+      {
+        header: 'Выбор ФКР',
+        width: '60%',
+        height: '80%'
+      })
+
+    this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
+      if (fkr) {
+        this.limitDetail.tbl.push(
+          {
+            _fkr: {
+              id: fkr.id,
+              code: fkr.code,
+              name_kaz: fkr.name_kaz,
+              name_rus: fkr.name_rus
+            },
+            id: 0,
+            summ: 0,
+            _limit_plan: this.limitDetail.head.id
+          })
+      }
     })
   }
 
+  viewOrg() {
+    this.fkrRef = this.limitDetaildialog.open(OrganizationDetailComponent,
+      {
+        header: 'Редактирование организации',
+        width: '60%',
+        height: '80%',
+        data: { org_id: this.limitDetail.head._organization.id }
+      })
+
+    this.fkrRef.onClose.subscribe((org: organization_detail) => {
+      if (org) {
+        this.limitDetail.head._organization.id = org.id,
+          this.limitDetail.head._organization.name_rus = org.name_rus
+      }
+    })
+  }
+
+  selectOrg() {
+    this.fkrRef = this.limitDetaildialog.open(OrganizationSelectComponent,
+      {
+        header: 'Выбор организации',
+        width: '60%',
+        height: '80%'
+      })
+
+    this.fkrRef.onClose.subscribe((org: organization_detail) => {
+      if (org) {
+        this.limitDetail.head._organization.id = org.id,
+          this.limitDetail.head._organization.name_rus = org.name_rus
+      }
+    })
+  }
+ 
   saveDoc(close: boolean): void {
     let responce: any
+    
+    this.limitDetail.head.god_ucheta = String(this.godNumber + '-01-01')
+    
+    this.LimitService.saveLimit(this.limitDetail)
+      .subscribe(
+        (data) => (
+          this.limitMessage.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          responce = data, this.limitDetail = responce, this.closeaftersave(close)
+        ),
+        (error) => (
+          this.limitMessage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
+      )
+  }
 
-    // this.utvDetailService.saveUtv(this.utvDetail)
-    //   .subscribe(
-    //     (data) => (
-    //       this.utvDetailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
-    //       responce = data, this.utvDetail = responce, this.closeaftersave(close)
-    //     ),
-    //     (error) => (
-    //       this.utvDetailmsg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
-    //     )
-    //   )
+  closeaftersave(close: boolean) {
+    let objString = JSON.stringify(this.limitDetail)
+    this.hashEnd = SHA256(objString).toString()
+
+    this.hashBegin = this.hashEnd
+
+    if (close) {
+      this.closeEvent.emit()
+    }
   }
 
   closeform(close: boolean) {
@@ -96,6 +225,51 @@ export class LimitElementComponent implements OnInit {
       //   })
       }
     }
+  }
+
+  viewFKR(fkr_id: number) {
+
+  }
+
+  editFKR(ri:number) {
+    this.fkrRef = this.limitDetaildialog.open(FkrSelectComponent,
+      {
+        header: 'Выбор ФКР',
+        width: '60%',
+        height: '80%'
+      })
+      this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
+        if (fkr) {
+          this.limitDetail.tbl[ri]._fkr = {
+                id: fkr.id,
+                code: fkr.code,
+                name_kaz: fkr.name_kaz,
+                name_rus: fkr.name_rus
+              }
+        }
+      })      
+  }
+
+  onDelete(fkr_id: number, fkr_name: string) {
+    console.log(fkr_name);
+    
+    this.limitDetailconfirm.confirm({
+      message: 'Вы действительно хотите удалить ' + fkr_name + '?',
+      header: 'Удаление классификации',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        for (let i = this.limitDetail.tbl.length - 1; i >= 0; i--) {
+          let index = this.limitDetail.tbl.findIndex(item => fkr_id === item._fkr.id)
+          if (index !== -1) {
+            this.limitDetail.tbl.splice(index, 1)
+          }
+        }
+        this.limitDetailconfirm.close()
+      },
+      reject: () => {
+        this.limitDetailconfirm.close();
+      }
+    });
   }
 
 }
