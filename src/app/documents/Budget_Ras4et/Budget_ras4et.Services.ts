@@ -5,19 +5,19 @@ import { Ras4et_doc } from "./Budget_ras4et.interfaces";
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 
 export class budjetRas4et_Service {
-    constructor(private http: HttpClient) {
-    }
-    host = "http://192.168.5.27:9999/"
+  constructor(private http: HttpClient) {
+  }
+  host = "http://192.168.5.27:9999/"
 
 
-    fetch_detail(form_id: string): Observable<Ras4et_doc> {
-      return this.http.get<Ras4et_doc>(this.host + 'docs/raschetitem/' + "1")
-    }
+  fetch_detail(form_id: string): Observable<Ras4et_doc> {
+    return this.http.get<Ras4et_doc>(this.host + 'docs/raschetitem/' + "1")
+  }
 
 
 

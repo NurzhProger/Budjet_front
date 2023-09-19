@@ -1,8 +1,13 @@
 
-export interface Ras4et_doc{
-  head:Ras4et_head,
-  tbl:[TableItem],
-  dopl:[Ras4et_dopl]
+export interface Ras4et_doc {
+  head: Ras4et_head,
+  head_table: [Ras4et_head_table],
+  tbl: [ChildItem],
+  dopl: [Ras4et_dopl]
+}
+
+export interface Ras4et_head_table {
+  name: string
 }
 
 export interface Ras4et_head {
@@ -21,12 +26,10 @@ export interface Ras4et_head {
 }
 
 export interface TableItem {
-  stroka: number;
   children: [ChildItem];
 }
 
-export interface ChildItem  {
-
+export interface ChildItem {
   id: number;
   name: string;
   column: number;
@@ -64,7 +67,7 @@ export interface TableItemPass {
 }
 
 
-export interface Child  {
+export interface Child {
 
   id: number;
   name_zn: string;

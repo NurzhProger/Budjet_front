@@ -189,14 +189,18 @@ export class MainComponent implements OnInit {
                 command: () => this.openTab('app-budget-request-list', 'Бюджетная заявка', '')
               },
               {
+                label: 'Форма',
+                command: () => this.openTab('app-budget-ras4et-detail', 'Форма', '')
+              },
+              {
                 label: 'Лимит на годовой бюджет',
                 command: () => this.openTab('app-limit-list', 'Лимит на годовой бюджет', '')
               }
-              // {
-              //   label: 'Изменения плана по поступлениям',
-              //   command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
-              // }
-            ]
+                // {
+                //   label: 'Изменения плана по поступлениям',
+                //   command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
+                // }
+              ]
             }
           ],
           // [
