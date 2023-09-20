@@ -4,7 +4,8 @@ import { doplaty_nadbavky_element, doplaty_nadbavky_list } from '../interfaces';
 import { DoplatyNadbavkyService } from '../doplaty-nadbavky.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DoplNadbavkaElementComponent } from '../dopl-nadbavka-element/dopl-nadbavka-element.component';
-
+import { DoplataService } from '../../../../enums/tip_dopl/tip-dopl/doplata.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dopl-nadbavka-list',
@@ -21,17 +22,23 @@ export class DoplNadbavkaListComponent implements OnInit {
   selected: any
   search:string = ""
   first = 0
+  tip_options: any =[];
+  otbor_tip_doplata: string = ''
   rows = 25
 
   constructor(
     private DoplatyNadbavkyService: DoplatyNadbavkyService,
     private dopl_dialog_ref: DynamicDialogRef,
-    private dopl_dialog_servis: DialogService
+    private dopl_dialog_servis: DialogService,
+    private tip_doplata_serv:DoplataService,
+    private japan_massage_body: MessageService
+
   ) { }
 
   ngOnInit(): void {
     this.fetchList(),
-    this.updateWindowSize()
+    this.updateWindowSize(),
+    this.selectTipTop()
   }
 
   private updateWindowSize() {
@@ -53,6 +60,30 @@ export class DoplNadbavkaListComponent implements OnInit {
           this.fetchList()
         }
       })
+  }
+
+
+  selectTipTop() {
+    let responce: any;
+    this.tip_doplata_serv.fetch().subscribe(
+      (data) => (responce = data, this.tip_options = responce.results,
+        console.log(this.tip_options)
+      ),
+        (error) => (this.japan_massage_body.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
+
+  }
+
+  onValueChange(newValue: string){
+
+    this.otbor_tip_doplata = newValue
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      search: this.search,
+      tip_dopl: this.otbor_tip_doplata
+    }
+    this.doplaty_nadbavky = this.DoplatyNadbavkyService.fetch(params);
+
   }
 
   fetchList() {

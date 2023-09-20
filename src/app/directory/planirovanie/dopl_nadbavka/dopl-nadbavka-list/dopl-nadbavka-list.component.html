@@ -3,6 +3,12 @@
     <div class="p-toolbar-group-left" *ngIf="data!==false">
         <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="openNew()"></button>
+
+            <span class="p-input-icon-left" style="margin-left: 10px;">
+              <p-dropdown [ngModel]="otbor_tip_doplata" [options]="tip_options" (onChange)="onValueChange($event.value)" placeholder="Выберите вид доплаты" [showClear]="true" optionLabel="name" optionValue="name"
+              appendTo="body">
+              </p-dropdown>
+            </span>
     </div>
     <div class="p-toolbar-group-right">
         <span class="p-input-icon-left" style="margin-right: 10px;">
@@ -48,6 +54,13 @@
                 Нет ни одного элемента
             </div>
         </ng-template>
+        <div *ngIf="doplaty_nadbavky.count !== 0" class="flex align-items-center justify-content-center">
+          <span class="mx-1 text-color">Указано</span>
+          <p-paginator [first]="first" [rows]="rows" [totalRecords]="doplaty_nadbavky.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (doplaty_nadbavky.count || 0)  ? doplaty_nadbavky.count : first + rows }} из {{doplaty_nadbavky.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+        </div>
 </div>
 
 <ng-template #loader>
