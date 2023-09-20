@@ -19,6 +19,7 @@ export class DoplNadbavkaListComponent implements OnInit {
   doplaty_nadbavky: Observable<doplaty_nadbavky_list>
   windowHeight: number
   selected: any
+  search:string = ""
   first = 0
   rows = 25
 
@@ -30,7 +31,7 @@ export class DoplNadbavkaListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchList(),
-    this.updateWindowSize() 
+    this.updateWindowSize()
   }
 
   private updateWindowSize() {
@@ -47,7 +48,7 @@ export class DoplNadbavkaListComponent implements OnInit {
       })
 
       this.dopl_dialog_ref.onClose.subscribe((save: boolean) => {
-      
+
         if (save) {
           this.fetchList()
         }
@@ -57,7 +58,8 @@ export class DoplNadbavkaListComponent implements OnInit {
   fetchList() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search,
     }
     this.doplaty_nadbavky = this.DoplatyNadbavkyService.fetch(params);
   }
@@ -69,13 +71,13 @@ export class DoplNadbavkaListComponent implements OnInit {
   onPageChange(event: any) {
     this.fetchList()
   }
-  
+
   onRowClick(dopl_nadbavky: doplaty_nadbavky_element) {
     if (this.data) {
       this.onRowEdit(dopl_nadbavky)
     }
     else {
-      this.dopl_dialog_ref.close(dopl_nadbavky) 
+      this.dopl_dialog_ref.close(dopl_nadbavky)
     }
   }
 

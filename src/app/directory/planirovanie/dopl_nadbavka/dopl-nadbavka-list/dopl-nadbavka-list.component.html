@@ -7,7 +7,7 @@
     <div class="p-toolbar-group-right">
         <span class="p-input-icon-left" style="margin-right: 10px;">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" placeholder="поиск..." />
+            <input pInputText type="text" [(ngModel)]="search" (change)="fetchList()" placeholder="поиск..." />
         </span>
         <div style="padding-right: 10px;">
             <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
@@ -25,7 +25,7 @@
     <p-table *ngIf="doplaty_nadbavky.count !== 0; else empty" [value]="doplaty_nadbavky.results" [scrollable]="true"
             scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
             styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-    
+
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width:5%; text-align:center">Номер</th>
@@ -36,7 +36,7 @@
             <ng-template pTemplate="body" let-dopl_nadbavky let-ri="rowIndex">
                 <tr class="cursor-pointer"   (dblclick)="onRowClick(dopl_nadbavky)">
                     <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-                    <td style="text-align:center">
+                    <td>
                         {{dopl_nadbavky.name}}
                     </td>
                 </tr>

@@ -4,7 +4,8 @@ import { marki_avto_element, marki_avto_list } from '../interfaces';
 import { MarkiAvtoService } from 'src/app/directory/planirovanie/marki_avto/marki-avto.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MarkiAvtoElementComponent } from '../marki-avto-element/marki-avto-element.component';
-
+import { TipToplivaService } from 'src/app/enums/tip_topliva/tip-topliva/tiptopliva.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-marki-avto-list',
   templateUrl: './marki-avto-list.component.html',
@@ -17,18 +18,28 @@ export class MarkiAvtoListComponent implements OnInit {
   marki_avto: Observable<marki_avto_list>
   windowHeight: number
   selected: any
+  searchavto:string = ""
+  tip_options: any =[];
+  otbor_tip_topliva: string = ''
   first = 0
   rows = 25
   constructor(
     private MarkiAvtoService: MarkiAvtoService,
     private markiavto_dialog_ref: DynamicDialogRef,
-    private marki_avto_dialog_servis: DialogService
+    private marki_avto_dialog_servis: DialogService,
+    private TipToplivaService: TipToplivaService,
+    private messageServiceadd: MessageService
   ) { }
 
   ngOnInit(): void {
     this.fetchList(),
-    this.updateWindowSize() 
+    this.updateWindowSize(),
+    this.selectTipTop()
+
   }
+
+
+
 
   private updateWindowSize() {
     this.windowHeight = window.innerHeight;
@@ -44,17 +55,29 @@ export class MarkiAvtoListComponent implements OnInit {
       })
 
       this.markiavto_dialog_ref.onClose.subscribe((save: boolean) => {
-      
+
         if (save) {
           this.fetchList()
         }
       })
   }
 
+  selectTipTop() {
+    let responce: any;
+    this.TipToplivaService.fetch().subscribe(
+      (data) => (responce = data, this.tip_options = responce.results,
+        console.log(this.tip_options)
+      ),
+        (error) => (this.messageServiceadd.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
+
+  }
+
   fetchList() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      searchavto: this.searchavto,
+      tip_topliva: this.otbor_tip_topliva
     }
     this.marki_avto = this.MarkiAvtoService.fetch(params);
   }
@@ -69,12 +92,25 @@ export class MarkiAvtoListComponent implements OnInit {
     this.fetchList()
   }
 
+
+  onValueChange(newValue: string) {
+    this.otbor_tip_topliva = newValue
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      searchavto: this.searchavto,
+      tip_topliva: this.otbor_tip_topliva
+    }
+    this.marki_avto = this.MarkiAvtoService.fetch(params);
+  }
+
+
   onRowClick(marki_avto: marki_avto_element) {
     if (this.data) {
       this.onRowEdit(marki_avto)
     }
     else {
-      this.markiavto_dialog_ref.close(marki_avto) 
+      this.markiavto_dialog_ref.close(marki_avto)
     }
   }
 
@@ -94,6 +130,7 @@ export class MarkiAvtoListComponent implements OnInit {
       }
     })
   }
+
 
 }
 
