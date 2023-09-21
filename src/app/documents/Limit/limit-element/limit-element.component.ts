@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { limit_detail, limit_doc } from '../interfaces';
-import { budjet_reg__element } from 'src/app/directory/planirovanie/budjet-reg/budjet-reg-list/interfaces';
 import { SHA256 } from 'crypto-js';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LimitService } from '../limit.service';
@@ -17,7 +16,7 @@ import { OrganizationSelectComponent } from 'src/app/directory/organization/orga
   templateUrl: './limit-element.component.html',
   styleUrls: ['./limit-element.component.css']
 })
-export class LimitElementComponent implements OnInit{
+export class LimitElementComponent implements OnInit, DoCheck{
   @Output() closeEvent = new EventEmitter<any>();
   @Input() limit_id = ''
   constructor(
@@ -37,6 +36,7 @@ export class LimitElementComponent implements OnInit{
       }
     ]
   }
+ 
   
   items: MenuItem[];
   form: FormGroup;
@@ -89,6 +89,8 @@ export class LimitElementComponent implements OnInit{
   hashEnd = ''
   hashBegin = ''
   godNumber = 0
+  nochanged = true
+  
   ngOnInit(): void {
     this.form = new FormGroup({
       number_doc: new FormControl(),
@@ -96,6 +98,8 @@ export class LimitElementComponent implements OnInit{
       org_name: new FormControl(null, [Validators.required]),
       god_ucheta: new FormControl(null, [Validators.required])
     })
+    
+    console.log(this.limit_id);
     
     if (this.limit_id !== '') {
       this.LimitService.fetch_detail(this.limit_id)
@@ -106,12 +110,31 @@ export class LimitElementComponent implements OnInit{
           }
         )
     }
+
+   
+    
     
     
   }
 
+  ngDoCheck(): void {
+    let objString = JSON.stringify(this.limitDetail)
+    let hashBeg = SHA256(objString).toString()
+    
+    if (hashBeg !== this.hashBegin && this.nochanged) {
+      this.nochanged = false
+      this.hashBegin = hashBeg
+    }
+  }
+
   preobGodNumber() {
-    this.godNumber = parseInt(this.limitDetail.head.god_ucheta.slice(0, 4));
+    this.godNumber = parseInt(this.limitDetail.head.god_ucheta.slice(0, 4))
+    let objString = JSON.stringify(this.limitDetail)
+    this.hashBegin = SHA256(objString).toString()
+  }
+
+  changeGodUch() {
+    this.limitDetail.head.god_ucheta = String(this.godNumber + '-01-01')
   }
 
   addFKR() {
@@ -175,9 +198,6 @@ export class LimitElementComponent implements OnInit{
  
   saveDoc(close: boolean): void {
     let responce: any
-    
-    this.limitDetail.head.god_ucheta = String(this.godNumber + '-01-01')
-    
     this.LimitService.saveLimit(this.limitDetail)
       .subscribe(
         (data) => (
@@ -203,26 +223,27 @@ export class LimitElementComponent implements OnInit{
 
   closeform(close: boolean) {
 
-    // let objString = JSON.stringify(this.limitDetail)
-    // this.hashEnd = SHA256(objString).toString()
+    let objString = JSON.stringify(this.limitDetail)
+    this.hashEnd = SHA256(objString).toString()
 
     if (close) {
       if (this.hashBegin == this.hashEnd) {
         this.closeEvent.emit()
       }
       else {
-      //   this.utvDetailconfirm.confirm({
-      //     message: 'Данные были изменены. Закрыть документ?',
-      //     header: 'Закрытие',
-      //     icon: 'pi pi-exclamation-triangle',
-      //     accept: () => {
-      //       this.closeEvent.emit()
-      //       this.utvDetailconfirm.close()
-      //     },
-      //     reject: () => {
-      //       this.utvDetailconfirm.close()
-      //     }
-      //   })
+        
+        this.limitDetailconfirm.confirm({
+          message: 'Данные были изменены. Закрыть документ?',
+          header: 'Закрытие',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.closeEvent.emit()
+            this.limitDetailconfirm.close()
+          },
+          reject: () => {
+            this.limitDetailconfirm.close()
+          }
+        })
       }
     }
   }
@@ -251,7 +272,6 @@ export class LimitElementComponent implements OnInit{
   }
 
   onDelete(fkr_id: number, fkr_name: string) {
-    console.log(fkr_name);
     
     this.limitDetailconfirm.confirm({
       message: 'Вы действительно хотите удалить ' + fkr_name + '?',

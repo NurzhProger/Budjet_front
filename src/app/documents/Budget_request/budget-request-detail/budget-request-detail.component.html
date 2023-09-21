@@ -23,33 +23,31 @@
 <div class="card" *ngIf="(Budget_detail) as Budget_detail; else loader">
   <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
       <div class="p-field" style="padding-right: 10px;">
-          <label for="number_doc">Номер <span style="color: red;">*</span></label>
+          <label for="number_doc">Номер</label>
           <div class="p-inputgroup">
               <input id="number_doc" type="text" pInputText [(ngModel)]="Budget_detail.doc.nom"
                   formControlName="number_doc" />
           </div>
-          <span class="p-invalid" *ngIf="form.controls['number_doc'].invalid && form.controls['number_doc'].touched">
+          <!-- <span class="p-invalid" *ngIf="form.controls['number_doc'].invalid && form.controls['number_doc'].touched">
               <span *ngIf="form.controls['number_doc'].errors?.required">Номер не должен быть пустым</span>
-          </span>
+          </span> -->
       </div>
 
       <div class="p-field" style="padding-right: 10px;">
 
-          <label for="date_doc">Дата <span style="color: red;">*</span></label>
-          <div class="p-inputgroup">
-              <p-calendar [showTime]="true" [showSeconds]="true" appendTo="body" (onSelect)="changedate()"
-                  [(ngModel)]="Budget_detail.doc._date" dateFormat="dd.mm.yy" [showIcon]="true"
-                  formControlName="date_doc"></p-calendar>
-          </div>
-          <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
-              <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
-          </span>
-      </div>
+        <label for="date_doc">Дата <span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="date_doc" type="date" pInputText [(ngModel)]="Budget_detail.doc._date" formControlName="date_doc" />
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
+            <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
+        </span>
+    </div>
 
       <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
           <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
           <div class="p-inputgroup">
-              <input id="org_name" type="text" pInputText [(ngModel)]="Budget_detail.doc.org_name"
+              <input id="org_name" type="text" pInputText [(ngModel)]="Budget_detail.doc._organization.name_rus"
                   formControlName="org_name" />
               <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -65,10 +63,123 @@
                   пустым</span>
           </span>
       </div>
+
+      <div class="p-field" style="padding-right: 10px;">
+
+        <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()" formControlName="god_ucheta"/>
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
+            <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
+        </span>
+    </div>
   </form>
 
-  <div class="card">
-    <div class="grid">
+
+  <p-splitter [panelSizes]="[15, 85]" styleClass="mb-5">
+    <ng-template pTemplate>
+      <div style="width: 100%;">
+          <p-tabView>
+              <p-tabPanel header="Основная">
+                  <div style="padding: 0 0 10px 10px;">
+                      <button pButton pRipple label="добавить ФКР" icon="pi pi-plus" class="p-button-success p-mr-2"
+                          (click)="add_fkr()"></button>
+                  </div>
+                  <p-table [value]="fkr_array" [scrollable]="true" scrollHeight="calc(100vh - 200px)"
+                      selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+                      <ng-template pTemplate="header">
+                          <tr>
+                              <th style="text-align:center">Программа</th>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-fkr let-ri="rowIndex">
+                          <tr class="cursor-pointer">
+                              <td (dblclick)="filterFKR(fkr)">
+                                  {{fkr.code}}
+                              </td>
+                          </tr>
+                      </ng-template>
+                  </p-table>
+
+              </p-tabPanel>
+          </p-tabView>
+      </div>
+  </ng-template>
+  <ng-template pTemplate>
+    <div style="width: 100%;">
+      <p-tabView>
+        <p-tabPanel header="Заявки">
+          <div style="padding: 0 0 10px 10px;">
+          <button [disabled]="fkr == undefined || fkr.id == 0" pButton pRipple
+            label="добавить специфику" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="addSpec(fkr)"></button>
+          </div>
+          <p-table [value]="tbl" [scrollable]="true" scrollHeight="calc(100vh - 200px)"
+                        selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
+                        [resizableColumns]="true" columnResizeMode="expand">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th rowspan="3" style="text-align:center">Номер</th>
+                                <th rowspan="3" style="text-align:center; width: 30%;">Код специфики</th>
+                                <th rowspan="3" style="text-align:center; width: 30%;">Форма</th>
+                                <th rowspan="3" style="text-align:center">Прогноз</th>
+                                <th rowspan="3" *ngIf="fkr !== undefined && fkr.id !== 0"
+                                    style="text-align:center">Действия</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-izm let-ri="rowIndex">
+                            <tr class="cursor-pointer" [pSelectableRow]="izm">
+                                <td rowspan="3" style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                                <td>
+                                  <div class="p-inputgroup w-full">
+                                      <input pInputText [readOnly]="true"
+                                          [ngModel]="izm._spec.code + '. ' + izm._spec.name_rus" />
+                                      <span class="p-inputgroup-addon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                              fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+                                              <path
+                                                  d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                                          </svg>
+                                      </span>
+                                      <span class="p-inputgroup-addon">...</span>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="p-inputgroup w-full">
+                                      <input pInputText [readOnly]="true"
+                                          [ngModel]="izm._form.name + '. ' + izm._form.head_form" />
+                                      <span class="p-inputgroup-addon">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                              fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+                                              <path
+                                                  d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                                          </svg>
+                                      </span>
+                                      <span class="p-inputgroup-addon">...</span>
+                                  </div>
+                                </td>
+                                <td style="text-align:center;">
+                                  {{izm.summ}}
+                                </td>
+                                <td rowspan="3" *ngIf="fkr !== undefined && fkr.id !== 0"
+                                    style="padding: 0; margin:0;">
+                                    <div class="flex align-items-center justify-content-center gap-2">
+                                        <button pButton pRipple type="button" icon="pi pi-trash"
+                                            class="p-button-rounded p-button-text"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+        </p-tabPanel>
+      </p-tabView>
+    </div>  
+  </ng-template>
+  </p-splitter>
+
+  <!-- <div class="card">
+    <div class="container">
         <div class="col-5 flex align-items-center justify-content-center">
           <p-tabView>
             <div style="padding: 0 0 10px 10px;">
@@ -97,7 +208,7 @@
                     </div>
                 </td>
 
-                  <!-- <td>{{item.fkrcode}}-{{item.fkrname}} </td> -->
+                  <td>{{item.fkrcode}}-{{item.fkrname}} </td>
                   <td style="width:10%; text-align:center">{{summa}}</td>
                 </tr>
               </ng-template>
@@ -139,7 +250,7 @@
         </p-tabView>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

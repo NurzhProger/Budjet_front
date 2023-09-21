@@ -37,7 +37,7 @@
         <th style="width:60%; text-align:center">Наименование</th>
         <th style="width:10%; text-align:center">Код</th>
         <th style="width:15%; text-align:center">Специфика</th>
-        <th style="width:10%; text-align:center"></th>
+        <th style="width:10%; text-align:center">Действия</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-form let-ri="rowIndex" *ngFor="let item of category.results| keyvalue">
@@ -50,7 +50,7 @@
           {{form.num_app}}
         </td>
         <td>
-          {{form.spec_code}} {{form.spec_name}}
+          {{form._spec.code}}. {{form._spec.name_rus}}
         </td>
         <td style="padding: 0; margin:0;">
           <div class="flex align-items-center justify-content-center gap-2">

@@ -45,12 +45,15 @@ export class FormDetailComponent implements OnInit {
   form_detail: form_detail = {
     form: {
       id: 0,
-      name: "",
-      head_form: "",
-      num_app: 0,
-      spec_code: "",
-      spec_name: "",
-      _spec: 0
+      _spec: {
+        id: 0,
+        code: '',
+        name_kaz: '',
+        name_rus: ''
+      },
+      name: '',
+      head_form: '',
+      num_app: 0
     },
     tbl: [{
       id: 0,
@@ -90,7 +93,6 @@ export class FormDetailComponent implements OnInit {
       // budjet_name: new FormControl(null, [Validators.required])
     })
 
-    console.log("Nen");
     if (this.form_doc_id !== '') {
       console.log(this.form_doc_id)
       this.form_Servise.fetch_detail(this.form_doc_id)
@@ -104,44 +106,44 @@ export class FormDetailComponent implements OnInit {
         )
     }
     else {
-      this.form_detail = {
-        form: {
-          id: 0,
-          name: "",
-          head_form: "",
-          num_app: 0,
-          spec_code: "",
-          spec_name: "",
-          _spec: 0
-        },
-        tbl: [{
-          id: 0,
-          name: "",
-          column: 0,
-          columns_used: "",
-          zn: "",
-          zn_string: null,
-          zn_float: null,
-          zn_enstru: null,
-          zn_stazh_category: null,
-          zn_category_sotr: null,
-          zn_dolzhnost: null,
-          zn_podrazdelenie: null,
-          zn_dopl_nadb: null,
-          zn_oblasti_reg: null,
-          zn_marki_avto: null,
-          zn_ed_izm: null
-        }],
-        dopl: [{
-          id: 0,
-          columns_used: "",
-          summ: 0,
-          _form: 0,
-          _doplata: 0,
-          _doplata_name: "",
-          _sposob_ras: "",
-        }]
-      }
+      // this.form_detail = {
+      //   form: {
+      //     id: 0,
+      //     name: "",
+      //     head_form: "",
+      //     num_app: 0,
+      //     spec_code: "",
+      //     spec_name: "",
+      //     _spec: 0
+      //   },
+      //   tbl: [{
+      //     id: 0,
+      //     name: "",
+      //     column: 0,
+      //     columns_used: "",
+      //     zn: "",
+      //     zn_string: null,
+      //     zn_float: null,
+      //     zn_enstru: null,
+      //     zn_stazh_category: null,
+      //     zn_category_sotr: null,
+      //     zn_dolzhnost: null,
+      //     zn_podrazdelenie: null,
+      //     zn_dopl_nadb: null,
+      //     zn_oblasti_reg: null,
+      //     zn_marki_avto: null,
+      //     zn_ed_izm: null
+      //   }],
+      //   dopl: [{
+      //     id: 0,
+      //     columns_used: "",
+      //     summ: 0,
+      //     _form: 0,
+      //     _doplata: 0,
+      //     _doplata_name: "",
+      //     _sposob_ras: "",
+      //   }]
+      // }
 
 
     }
@@ -281,9 +283,9 @@ export class FormDetailComponent implements OnInit {
 
     this.form_detail_ryref.onClose.subscribe((spec: specification_income_detail) => {
       if (spec) {
-        this.form_detail.form._spec = spec.id,
-        this.form_detail.form.spec_code = spec.code,
-        this.form_detail.form.spec_name = spec.name_rus
+        this.form_detail.form._spec.id = spec.id,
+        this.form_detail.form._spec.code = spec.code,
+        this.form_detail.form._spec.name_rus = spec.name_rus
       }
     })
 
@@ -300,9 +302,9 @@ export class FormDetailComponent implements OnInit {
 
     this.form_detail_ryref.onClose.subscribe((spec: specification_income_detail) => {
       if (spec) {
-        this.form_detail.form._spec = spec.id,
-        this.form_detail.form.spec_code = spec.code,
-        this.form_detail.form.spec_name = spec.name_rus
+        this.form_detail.form._spec.id = spec.id,
+        this.form_detail.form._spec.code = spec.code,
+        this.form_detail.form._spec.name_rus = spec.name_rus
       }
     })
 

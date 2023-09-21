@@ -64,7 +64,7 @@
 
             <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
             <div class="p-inputgroup">
-                <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" formControlName="god_ucheta"/>
+                <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()" formControlName="god_ucheta"/>
             </div>
             <span class="p-invalid" *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
                 <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
@@ -119,6 +119,9 @@
     </ng-template>
 </p-table>
 </div>
+
+<p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+</p-confirmDialog>
 
 <ng-template #loader>
     <app-skeleton></app-skeleton>

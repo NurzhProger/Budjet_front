@@ -1,3 +1,5 @@
+import { specification_income_detail } from "../specification-income/interfaces"
+
 export enum Direction {
   zn_string = "Строка",
   zn_float = "Число",
@@ -34,12 +36,10 @@ export enum Direction1 {
 
 export interface form_list_doc {
   id: number,
+  _spec: specification_income_detail,
   name: string,
   head_form: string,
-  num_app: number,
-  spec_code: string,
-  spec_name: string,
-  _spec: number
+  num_app: number
 }
 
 export interface form_list {

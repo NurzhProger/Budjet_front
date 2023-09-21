@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { budget_list, budget_list_doc,Budget_detail } from "./budget_request.interfaces";
+import { budget_list, budjet_detail } from "./budget_request.interfaces";
 
 
 @Injectable({
@@ -18,8 +18,8 @@ export class budjetService {
       return this.http.get<budget_list>(this.host + 'docs/planirovanie_list', { params })
     }
 
-    fetch_detail(form_id: string): Observable<Budget_detail> {
-      return this.http.get<Budget_detail>(this.host + 'docs/planirovanie_item/' + form_id)
+    fetch_detail(form_id: string): Observable<budjet_detail> {
+      return this.http.get<budjet_detail>(this.host + 'docs/planirovanie_item/' + form_id)
     }
 
 
