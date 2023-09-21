@@ -182,11 +182,12 @@
                 </app-budget-request-list>
 
                 <app-budget-request-detail *ngIf="context.selector=='app-budget-request-detail'"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
                     [Budget_doc_id]="number" (closeEvent)="removetab()">
                 </app-budget-request-detail>
 
 
-                <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'"
+                <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'" [ras_id]="number"
                     (closeEvent)="removetab()">
                 </app-budget-ras4et-detail>
 

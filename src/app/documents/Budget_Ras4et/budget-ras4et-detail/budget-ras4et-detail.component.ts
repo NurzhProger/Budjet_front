@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService, MenuItem } from 'primeng/api';
+import { MessageService, MenuItem, ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, throwError, timeout } from 'rxjs'
 import { EnstruListComponent } from 'src/app/directory/planirovanie/ensTRU/enstru-list/enstru-list.component';
 import { ensTRU_element } from 'src/app/directory/planirovanie/ensTRU/interfaces';
 import { Ras4et_doc, ChildItem, TableItemPass } from "../Budget_ras4et.interfaces";
 import { budjetRas4et_Service } from "../Budget_ras4et.Services";
+import { SHA256 } from 'crypto-js';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -20,35 +21,35 @@ export class BudgetRas4etDetailComponent implements OnInit {
     private Budget_ras4et_Detailconfig: DynamicDialogConfig,
     private Budget_ras4et_Detailmsg: MessageService,
     private Budget_ras4et_Detailref: DynamicDialogRef,
-    private Budget_ras4et_DialogService: DialogService,) { }
+    private Budget_ras4et_DialogService: DialogService,
+    private Budget_Confirmation: ConfirmationService) { }
 
   @Output() closeEvent = new EventEmitter<any>()
-
+  @Input() ras_id = ''
   form: FormGroup
   items: MenuItem[];
   Ras4et_detail: Ras4et_doc
-  formaid = ""
   children: any = []
   column: any = []
   Table: TableItemPass
+  hashBegin = ''
+  hashEnd = ''
 
   ngOnInit(): void {
     this.form = new FormGroup({
       name_doc: new FormControl(null, [Validators.required]),
-      fkr_name: new FormControl(null, [Validators.required]),
       spec_name: new FormControl(null, [Validators.required])
     })
 
-    this.formaid = '5'
     // this.formaid = this.Budget_ras4et_Detailconfig.data.formaid
-
-    if (this.formaid !== "") {
-      this.Budget_ras4et_Service.fetch_detail(this.formaid)
+    console.log(this.ras_id);
+    
+    if (this.ras_id !== "") {
+      this.Budget_ras4et_Service.fetch_detail(this.ras_id)
         .subscribe(
           (data) => (
             this.Ras4et_detail = data,
-            this.preob(),
-            console.log(this.Ras4et_detail)
+            this.preob()
           )
         )
     }
@@ -106,8 +107,29 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
-  closeform(step: boolean) {
+  closeform(close: boolean) {
+    let objString = JSON.stringify(this.Ras4et_detail)
+    this.hashEnd = SHA256(objString).toString()
 
+    if (close) {
+      if (this.hashBegin == this.hashEnd) {
+        this.closeEvent.emit()
+      }
+      else {
+        this.Budget_Confirmation.confirm({
+          message: 'Данные были изменены. Закрыть документ?',
+          header: 'Закрытие',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.closeEvent.emit()
+            this.Budget_Confirmation.close()
+          },
+          reject: () => {
+            this.Budget_Confirmation.close()
+          }
+        })
+      }
+    }
   }
   viewsfkr() {
 

@@ -37,18 +37,6 @@
 
 
     <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
-      <label for="fkr_name">ФКР<span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
-        <input id="fkr_name" type="text" pInputText [(ngModel)]="Ras4et_detail.head.fkrname"
-          formControlName="fkr_name" />
-        <span class="p-inputgroup-addon cursor-pointer" (click)="selectfkr()">...</span>
-      </div>
-      <span class="p-invalid" *ngIf="form.controls['fkr_name'].invalid && form.controls['fkr_name'].touched">
-        <span *ngIf="form.controls['fkr_name'].errors?.required">ФКР не должно быть пустым</span>
-      </span>
-    </div>
-
-    <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
       <label for="spec_name">Специфика<span style="color: red;">*</span></label>
       <div class="p-inputgroup">
         <input id="spec_name" type="text" pInputText [(ngModel)]="Ras4et_detail.head.fkrname"

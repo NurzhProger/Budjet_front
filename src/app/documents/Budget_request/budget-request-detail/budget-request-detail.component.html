@@ -120,7 +120,6 @@
                         [resizableColumns]="true" columnResizeMode="expand">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th rowspan="3" style="text-align:center">Номер</th>
                                 <th rowspan="3" style="text-align:center; width: 30%;">Код специфики</th>
                                 <th rowspan="3" style="text-align:center; width: 30%;">Форма</th>
                                 <th rowspan="3" style="text-align:center">Прогноз</th>
@@ -129,19 +128,11 @@
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-izm let-ri="rowIndex">
-                            <tr class="cursor-pointer" [pSelectableRow]="izm">
-                                <td rowspan="3" style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                            <tr class="cursor-pointer">
                                 <td>
                                   <div class="p-inputgroup w-full">
                                       <input pInputText [readOnly]="true"
                                           [ngModel]="izm._spec.code + '. ' + izm._spec.name_rus" />
-                                      <span class="p-inputgroup-addon">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                              fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
-                                              <path
-                                                  d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
-                                          </svg>
-                                      </span>
                                       <span class="p-inputgroup-addon">...</span>
                                   </div>
                                 </td>
@@ -165,9 +156,12 @@
                                 <td rowspan="3" *ngIf="fkr !== undefined && fkr.id !== 0"
                                     style="padding: 0; margin:0;">
                                     <div class="flex align-items-center justify-content-center gap-2">
+                                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                                            (click)="onRowEdit(izm.id)"></button>
                                         <button pButton pRipple type="button" icon="pi pi-trash"
                                             class="p-button-rounded p-button-text"></button>
                                     </div>
+                                    
                                 </td>
                             </tr>
                         </ng-template>
@@ -177,82 +171,6 @@
     </div>  
   </ng-template>
   </p-splitter>
-
-  <!-- <div class="card">
-    <div class="container">
-        <div class="col-5 flex align-items-center justify-content-center">
-          <p-tabView>
-            <div style="padding: 0 0 10px 10px;">
-              <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
-                (click)="add_tbl()"></button>
-            </div>
-            <p-table [value]="Budget_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
-              scrollHeight="calc(100vh - 200px)" selectionMode="single"
-              styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th style="width:10%;text-align:center">Номер</th>
-                  <th style="width:70%; text-align:center">ФКР</th>
-                  <th style="width:20%;text-align:center">Общая Сумма</th>
-                </tr>
-              </ng-template>
-
-              <ng-template pTemplate="body" let-item  let-ri="rowIndex">
-                <tr [pEditableRow]="item">
-                  <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-
-                  <td >
-                    <div class="p-inputgroup w-full md:w-30rem">
-                        <input pInputText [readOnly]="true" [ngModel]="item.fkrcode + '. ' + item.fkrname" />
-                        <span class="p-inputgroup-addon" (click)="SelectFKR(ri)">...</span>
-                    </div>
-                </td>
-
-                  <td>{{item.fkrcode}}-{{item.fkrname}} </td>
-                  <td style="width:10%; text-align:center">{{summa}}</td>
-                </tr>
-              </ng-template>
-            </p-table>
-        </p-tabView>
-        </div>
-
-
-          <p-divider layout="vertical">
-              <b>Расчет</b>
-          </p-divider>
-
-
-        <div class="col-6 flex align-items-center justify-content-center">
-          <p-tabView>
-            <p-table [value]="Budget_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
-              scrollHeight="calc(100vh - 200px)" selectionMode="single"
-              styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th style="text-align:center">Номер</th>
-                  <th style="text-align:center">Специфика</th>
-                  <th style="text-align:center">Форма</th>
-                  <th style="text-align:center">Сумма</th>
-                </tr>
-              </ng-template>
-
-              <ng-template pTemplate="body" let-item  let-ri="rowIndex">
-                <tr [pEditableRow]="item">
-                  <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-                  <td>{{item.specname}}</td>
-                  <td class="cursor-pointer">
-                    <a href="#" (click)="viewForma(ri)">{{item.formname}} {{item.formhead}}</a>
-                  </td>
-                  <td>{{summa}}</td>
-                </tr>
-              </ng-template>
-            </p-table>
-        </p-tabView>
-        </div>
-    </div>
-</div> -->
-
-
 
   <ng-template #empty>
       <div class="center">

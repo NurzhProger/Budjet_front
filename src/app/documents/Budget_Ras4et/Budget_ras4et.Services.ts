@@ -16,7 +16,7 @@ export class budjetRas4et_Service {
 
 
   fetch_detail(form_id: string): Observable<Ras4et_doc> {
-    return this.http.get<Ras4et_doc>(this.host + 'docs/raschetitem/' + "1")
+    return this.http.get<Ras4et_doc>(this.host + 'docs/raschetitem/' + form_id)
   }
 
 
