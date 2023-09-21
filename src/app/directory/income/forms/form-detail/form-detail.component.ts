@@ -38,6 +38,7 @@ export class FormDetailComponent implements OnInit {
   // clonedProducts: { [s: string]: forms_tab1 } = {};
   hashBegin = ''
   hashEnd = ''
+  readerOptions = [{ label: 'Да', value: 'true' }, { label: 'Нет', value: 'false' }];
   statuses!: SelectItem[];
   sposobOptions = Object.values(Sposob_ras4eta)
 
@@ -95,12 +96,12 @@ export class FormDetailComponent implements OnInit {
     })
 
     if (this.form_doc_id !== '') {
-      console.log(this.form_doc_id)
+      // console.log(this.form_doc_id)
       this.form_Servise.fetch_detail(this.form_doc_id)
         .subscribe(
           (detail) => {
             this.form_detail = detail
-            // console.log(this.form_detail)
+            console.log(this.form_detail)
             let objString = JSON.stringify(this.form_detail)
             this.hashBegin = SHA256(objString).toString()
           }
@@ -163,13 +164,13 @@ export class FormDetailComponent implements OnInit {
       { label: 'Марки автомобилей', value: 'marki_avto' }
     ];
 
-    console.log(this.sposobOptions)
+    // console.log(this.sposobOptions)
 
 
   }
 
   saveDoc(close: boolean){
-    console.log(this.form_detail)
+    // console.log(this.form_detail)
     this.form_Servise.saveforms(this.form_detail)
     .subscribe(
       (data) => (this.form_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),

@@ -151,16 +151,13 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <p-tableCheckbox [value]="item.itog"></p-tableCheckbox>
+                  <input type="checkbox" [(ngModel)]="item.itog">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  <p-tableCheckbox [value]="item.itog">{{item.itog}}</p-tableCheckbox>
+                  <input type="checkbox" [(ngModel)]="item.itog">
                 </ng-template> 
               </p-cellEditor>
             </td>
-            <!-- <td>{{item.zn_ed_izm}}</td> -->
-            <!-- <td>{{item.column}}</td> -->
-            <!-- <td>{{item.columns_used}}</td> -->
             <td style="padding: 0; margin:0;">
               <div class="flex align-items-center justify-content-center gap-2">
                 <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
