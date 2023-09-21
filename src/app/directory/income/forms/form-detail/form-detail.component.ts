@@ -58,9 +58,10 @@ export class FormDetailComponent implements OnInit {
     tbl: [{
       id: 0,
       name: "",
-      column: 0,
+      _column: 0,
       columns_used: "",
       zn: "",
+      itog: false,
       zn_string: null,
       zn_float: null,
       zn_enstru: null,
@@ -225,8 +226,9 @@ export class FormDetailComponent implements OnInit {
     this.form_detail.tbl.push(
       {id: 0,
       name: "",
-      column: 0,
+      _column: 0,
       columns_used: "",
+      itog: false,
       zn: "",
       zn_string: null,
       zn_float: null,

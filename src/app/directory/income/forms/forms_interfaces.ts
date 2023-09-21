@@ -60,8 +60,9 @@ export interface form_detail {
 export interface forms_tab1 {
   id: number,
   name: string,
-  column: number,
+  _column: number,
   columns_used: string,
+  itog: boolean,
   zn: string,
   zn_string: null,
   zn_float: null,

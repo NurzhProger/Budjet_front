@@ -90,6 +90,7 @@
 
             <th style="text-align:center">Колонка</th>
             <th style="text-align:center">Используемые колонки</th>
+            <th style="text-align:center">Итоговая сумма</th>
             <th style="text-align:center"></th>
           </tr>
         </ng-template>
@@ -130,10 +131,10 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.column">
+                  <input pInputText type="text" [(ngModel)]="item._column">
                 </ng-template>
                 <ng-template pTemplate="output">
-                  {{item.column}}
+                  {{item._column}}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -144,7 +145,17 @@
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.columns_used}}
+                </ng-template> 
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <p-tableCheckbox [value]="item.itog"></p-tableCheckbox>
                 </ng-template>
+                <ng-template pTemplate="output">
+                  <p-tableCheckbox [value]="item.itog">{{item.itog}}</p-tableCheckbox>
+                </ng-template> 
               </p-cellEditor>
             </td>
             <!-- <td>{{item.zn_ed_izm}}</td> -->

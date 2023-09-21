@@ -41,8 +41,8 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-rep class="cursor-pointer">
-            <tr class="cursor-pointer">
-                <td style="padding-left: 10px; font-weight: 700;">{{rep.vid_raskhoda_text}}</td>
+            <tr class="cursor-pointer" [ngClass]="{'row-accessories': rep.prioritet !== 5,  'row-prioritet': rep.prioritet == 5 || rep.prioritet == 8 || rep.prioritet == 13}">
+                <td style="padding-left: 10px;">{{rep.vid_raskhoda_text}}</td>
                 <td style="padding-left: 10px;">{{rep.plan_1}}</td>
                 <td style="padding-left: 10px;">{{rep.plan_2}}</td>
                 <td style="padding-left: 10px;">{{rep.plan_3}}</td>

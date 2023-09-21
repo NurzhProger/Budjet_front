@@ -1,0 +1,6 @@
+:host ::ng-deep .row-accessories {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+}
+:host ::ng-deep .row-prioritet {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
