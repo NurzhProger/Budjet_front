@@ -330,8 +330,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail_ryref.onClose.subscribe((form: Ras4et_head) => {
       if (form) {
         this.Budget_detail.tbl[index]._form.id = form.id,
-        this.Budget_detail.tbl[index]._form.head_form = form.formhead,
-        this.Budget_detail.tbl[index]._form.name = form.formname
+        this.Budget_detail.tbl[index]._form.head_form = form._form.head_form,
+        this.Budget_detail.tbl[index]._form.name = form._form.name
       }
     })
   }

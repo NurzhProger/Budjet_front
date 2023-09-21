@@ -23,11 +23,11 @@
 <div class="card" *ngIf="(Ras4et_detail) as Ras4et_detail; else loader">
   <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
 
-    <div class="p-field" style="padding-right: 10px;">
+    <div class="p-field" style="padding-right: 10px; width: 70%;">
 
       <label for="name_doc">Наименование <span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
-        <input id="name_doc" type="text" pInputText [(ngModel)]="Ras4et_detail.head.formhead"
+      <div class="p-inputgroup" >
+        <input id="name_doc" type="text"  pInputText [readOnly]="true" [(ngModel)]="form_fullname"
           formControlName="name_doc" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
@@ -39,7 +39,7 @@
     <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
       <label for="spec_name">Специфика<span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="spec_name" type="text" pInputText [(ngModel)]="Ras4et_detail.head.fkrname"
+        <input id="spec_name" type="text" pInputText [readOnly]="true" [(ngModel)]="spec_fullname"
           formControlName="spec_name" />
         <span class="p-inputgroup-addon cursor-pointer" (click)="selectfkr()">...</span>
       </div>
@@ -61,7 +61,7 @@
     <ng-template pTemplate="header" style="width: 100%;">
       <tr style="text-align: center; font-weight: 700;">
         <!-- <th style="text-align: center;">Номер</th> -->
-        <th>Номер</th>
+        <th style="text-align: center;">Номер</th>
         <th style="text-align: center; width: 10%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
       </tr>
     </ng-template>
@@ -77,7 +77,7 @@
     <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body" style="width: 100%;">
       <tr>
         <!-- <td style="text-align: center; font-weight: 700;">{{header}}</td> -->
-          <td>{{ri + 1}}</td>
+          <td style="text-align: center;" >{{ri + 1}}</td>
           <td *ngFor="let kolon of ChildItem" style="text-align: center; width: 10%;">
             <input id="enstru" type="button" *ngIf="kolon.zn == 'enstru'" [ngModel]="kolon.zn_enstru.name_rus"
               [readonly]="true" (click)="selectENSTRU(kolon.zn_enstru)" style="width: 100%;">

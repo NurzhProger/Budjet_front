@@ -34,7 +34,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
   Table: TableItemPass
   hashBegin = ''
   hashEnd = ''
-
+  spec_fullname = ''
+  form_fullname = '' 
   ngOnInit(): void {
     this.form = new FormGroup({
       name_doc: new FormControl(null, [Validators.required]),
@@ -49,6 +50,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
         .subscribe(
           (data) => (
             this.Ras4et_detail = data,
+            this.form_fullname = this.Ras4et_detail.head._form.name + ". " + this.Ras4et_detail.head._form.head_form,
+            this.spec_fullname = this.Ras4et_detail.head._spec.code + ". " + this.Ras4et_detail.head._spec.name_rus,
             this.preob()
           )
         )

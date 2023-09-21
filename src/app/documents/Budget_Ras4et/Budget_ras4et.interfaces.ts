@@ -1,3 +1,7 @@
+import { fkr_detail } from "src/app/directory/expenses/fkr/interfaces";
+import { budjet_detail } from "../Budget_request/budget_request.interfaces";
+import { specification_income_detail } from "src/app/directory/income/specification-income/interfaces";
+import { form_list_doc } from "src/app/directory/income/forms/forms_interfaces";
 
 export interface Ras4et_doc {
   head: Ras4et_head,
@@ -12,17 +16,22 @@ export interface Ras4et_head_table {
 
 export interface Ras4et_head {
   id: number,
-  _planirovanie: number,
-  summ: number,
-  _fkr: number,
-  fkrname: string,
-  fkrcode: number,
-  _spec: number,
-  specname: string,
-  speccode: string,
-  _form: number,
-  formname: string,
-  formhead: string
+  _planirovanie: budjet_detail,
+  _fkr: fkr_detail,
+  _spec: specification_income_detail,
+  _form: form_list_doc
+
+  
+  // summ: number,
+  // _fkr: number,
+  // fkrname: string,
+  // fkrcode: number,
+  // _spec: number,
+  // specname: string,
+  // speccode: string,
+  // _form: number,
+  // formname: string,
+  // formhead: string
 }
 
 export interface TableItem {
