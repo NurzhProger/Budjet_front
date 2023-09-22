@@ -84,7 +84,6 @@ export class FormlistComponent implements OnInit {
 
   onRowEdit(form_doc: form_list_doc){
     this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
-
   }
 
   onPageChange(event: any) {

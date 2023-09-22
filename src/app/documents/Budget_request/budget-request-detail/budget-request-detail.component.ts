@@ -11,11 +11,12 @@ import { Ras4et_head } from '../../Budget_Ras4et/Budget_ras4et.interfaces'
 import { budjet_detail } from '../budget_request.interfaces';
 import { SpecificationExpSelectComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-select/specification-exp-select.component';
 import { specification_income_detail } from 'src/app/directory/income/specification-income/interfaces';
-import { form_detail } from 'src/app/directory/income/forms/forms_interfaces';
+import { form_detail, form_list_doc } from 'src/app/directory/income/forms/forms_interfaces';
 import { OrganizationDetailComponent } from 'src/app/directory/organization/organization-detail/organization-detail.component';
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 import { SpecificationExpDetailComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-detail/specification-exp-detail.component';
+import { FormlistComponent } from 'src/app/directory/income/forms/formlist/formlist.component';
 @Component({
   selector: 'app-budget-request-detail',
   templateUrl: './budget-request-detail.component.html',
@@ -341,7 +342,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ', id: izm} });
   }
 
-  pushArray(fkr_detail: fkr_detail, spec_detail: specification_income_detail) {
+  pushArray(fkr_detail: fkr_detail, spec_detail: specification_income_detail, form_detail: form_list_doc) {
     this.Budget_detail.tbl.push(
       {
         id: 0,
@@ -358,16 +359,11 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           name_rus: spec_detail.name_rus
         },
         _form: {
-          id: 0,
-          _spec: {
-            id: 0,
-            code: '',
-            name_kaz: '',
-            name_rus: ''
-          },
-          name: '',
-          head_form:  '',
-          num_app: 0
+           id: form_detail.id,
+          _spec: form_detail._spec,
+          name: form_detail.name,
+          head_form: form_detail.head_form,
+          num_app: form_detail.num_app
         },
         summ: 0,
         _planirovanie: this.Budget_detail.doc.id
@@ -384,8 +380,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         })
       this.Budget_detail_ryref.onClose.subscribe((spec_detail: specification_income_detail) => {
         if (spec_detail) {
-          this.pushArray(fkr_detail, spec_detail)
-          this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
+          // this.pushArray(fkr_detail, spec_detail)
+          // this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
+          this.addForm(fkr_detail, spec_detail)
         }
       }
       )
@@ -397,8 +394,27 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     }
   }
 
-  add_tbl(){
+  addForm(fkr_detail: fkr_detail, spec_detail: specification_income_detail){
+    if (fkr_detail !== undefined) {
+      this.Budget_detail_ryref = this.Budget_detail_dialog.open(FormlistComponent,
+        {
+          header: 'Выбор формы',
+          width: '60%',
+          height: '80%'
+        })
+      this.Budget_detail_ryref.onClose.subscribe((form_detail: form_list_doc) => {
+        if (form_detail) {
+          this.pushArray(fkr_detail, spec_detail, form_detail)
+          this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
+        }
+      }
+      )
+    }
+    else {
+      this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите ФКР!' })
+      return
 
+    }
   }
 
   add_fkr() {

@@ -43,7 +43,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
 
     // this.formaid = this.Budget_ras4et_Detailconfig.data.formaid
-    console.log(this.ras_id);
     
     if (this.ras_id !== "") {
       this.Budget_ras4et_Service.fetch_detail(this.ras_id)
