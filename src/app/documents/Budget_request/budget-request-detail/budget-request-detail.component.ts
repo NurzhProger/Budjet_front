@@ -17,6 +17,7 @@ import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 import { SpecificationExpDetailComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-detail/specification-exp-detail.component';
 import { FormlistComponent } from 'src/app/directory/income/forms/formlist/formlist.component';
+import { FormSelectComponent } from 'src/app/directory/income/forms/form-select/form-select.component';
 @Component({
   selector: 'app-budget-request-detail',
   templateUrl: './budget-request-detail.component.html',
@@ -337,9 +338,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     })
   }
 
-  onRowEdit(izm: number) {
-    
-    this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ', id: izm} });
+  onRowEdit(izm: number, form_id: number) {
+    this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ', id: {'ras_id':izm, 'form_id' : form_id}} });
   }
 
   pushArray(fkr_detail: fkr_detail, spec_detail: specification_income_detail, form_detail: form_list_doc) {
@@ -396,7 +396,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   addForm(fkr_detail: fkr_detail, spec_detail: specification_income_detail){
     if (fkr_detail !== undefined) {
-      this.Budget_detail_ryref = this.Budget_detail_dialog.open(FormlistComponent,
+      this.Budget_detail_ryref = this.Budget_detail_dialog.open(FormSelectComponent,
         {
           header: 'Выбор формы',
           width: '60%',

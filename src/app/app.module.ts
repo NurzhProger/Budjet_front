@@ -106,6 +106,7 @@ import { BudgetRas4etDetailComponent } from './documents/Budget_Ras4et/budget-ra
 import { LimitListComponent } from './documents/Limit/limit-list/limit-list.component';
 import { LimitElementComponent } from './documents/Limit/limit-element/limit-element.component';
 import { Prilozhenie60Component } from './reports/prilozhenie60/prilozhenie60.component';
+import { FormSelectComponent } from './directory/income/forms/form-select/form-select.component';
 
 @NgModule({
   imports: [
@@ -214,7 +215,8 @@ import { Prilozhenie60Component } from './reports/prilozhenie60/prilozhenie60.co
     BudgetRas4etDetailComponent,
     LimitListComponent,
     LimitElementComponent,
-    Prilozhenie60Component],
+    Prilozhenie60Component,
+    FormSelectComponent],
   bootstrap: [AppComponent],
   providers: [
     {

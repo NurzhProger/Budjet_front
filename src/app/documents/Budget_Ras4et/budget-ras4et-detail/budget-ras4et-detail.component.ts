@@ -25,7 +25,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
     private Budget_Confirmation: ConfirmationService) { }
 
   @Output() closeEvent = new EventEmitter<any>()
-  @Input() ras_id = ''
+  @Input() ras_id: any
+  @Input() form_id = ''
   form: FormGroup
   items: MenuItem[];
   Ras4et_detail: Ras4et_doc
@@ -43,9 +44,16 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
 
     // this.formaid = this.Budget_ras4et_Detailconfig.data.formaid
+    console.log(this.ras_id);
+    // console.log(this.form_id);
     
     if (this.ras_id !== "") {
-      this.Budget_ras4et_Service.fetch_detail(this.ras_id)
+      let params = {
+        form: this.ras_id.form_id
+      }
+      
+      
+      this.Budget_ras4et_Service.fetch_detail(this.ras_id.ras_id, params)
         .subscribe(
           (data) => (
             this.Ras4et_detail = data,

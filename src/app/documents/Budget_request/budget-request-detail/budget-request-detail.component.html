@@ -133,31 +133,24 @@
                                   <div class="p-inputgroup w-full">
                                       <input pInputText [readOnly]="true"
                                           [ngModel]="izm._spec.code + '. ' + izm._spec.name_rus" />
-                                      <span class="p-inputgroup-addon">...</span>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="p-inputgroup w-full">
                                       <input pInputText [readOnly]="true"
                                           [ngModel]="izm._form.name + '. ' + izm._form.head_form" />
-                                      <span class="p-inputgroup-addon">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                              fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
-                                              <path
-                                                  d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
-                                          </svg>
-                                      </span>
+                                      
                                       <span class="p-inputgroup-addon">...</span>
                                   </div>
                                 </td>
                                 <td style="text-align:center;">
                                   {{izm.summ}}
                                 </td>
-                                <td rowspan="3" *ngIf="fkr !== undefined && fkr.id !== 0"
+                                <td *ngIf="fkr !== undefined && fkr.id !== 0"
                                     style="padding: 0; margin:0;">
                                     <div class="flex align-items-center justify-content-center gap-2">
                                         <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
-                                            (click)="onRowEdit(izm.id)"></button>
+                                            (click)="onRowEdit(izm.id, izm._form.id)"></button>
                                         <button pButton pRipple type="button" icon="pi pi-trash"
                                             class="p-button-rounded p-button-text"></button>
                                     </div>
