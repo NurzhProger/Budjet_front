@@ -65,44 +65,54 @@
             </span>
         </div>
 
-        <!-- вид расхода -->
-        <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
-            <label for="vid_rashoda">Вид расхода<span style="color: red;">*</span></label>
-            <div>
-                <p-dropdown placeholder="Выберите вид расхода" [options]="_vid_rashoda" optionLabel="name" optionValue="name"
-                    appendTo="body" [(ngModel)]="Budget_detail.doc._vid_rashoda" formControlName="vid_rashoda">
-                </p-dropdown>
+        <div>
+            <!-- вид расхода -->
+            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+                <label for="vid_rashoda">Вид расхода<span style="color: red;">*</span></label>
+                <div>
+                    <p-dropdown placeholder="Выберите вид расхода" [options]="_vid_rashoda" optionLabel="name"
+                        optionValue="name" appendTo="body" [(ngModel)]="Budget_detail.doc._vid_rashoda"
+                        formControlName="vid_rashoda">
+                    </p-dropdown>
+                </div>
+                <span class="p-invalid"
+                    *ngIf="form.controls['vid_rashoda'].invalid && form.controls['vid_rashoda'].touched">
+                    <span *ngIf="form.controls['vid_rashoda'].errors?.required">Выберите вид расход</span>
+                </span>
             </div>
-            <span class="p-invalid" *ngIf="form.controls['vid_rashoda'].invalid && form.controls['vid_rashoda'].touched">
-                <span *ngIf="form.controls['vid_rashoda'].errors?.required">Выберите вид расход</span>
-            </span>
+
+            <!-- вид данных -->
+            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+                <label for="vid_dannyh">Вид данных<span style="color: red;">*</span></label>
+                <div>
+                    <p-dropdown placeholder="Выберите вид данных" [options]="_vid_dannyh" optionLabel="name"
+                        optionValue="name" appendTo="body" [(ngModel)]="Budget_detail.doc._vid_dannyh"
+                        formControlName="vid_dannyh">
+                    </p-dropdown>
+                </div>
+                <span class="p-invalid"
+                    *ngIf="form.controls['vid_dannyh'].invalid && form.controls['vid_dannyh'].touched">
+                    <span *ngIf="form.controls['vid_dannyh'].errors?.required">Выберите вид данных</span>
+                </span>
+            </div>
+
+            <!-- вид операции -->
+            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+                <label for="vid_operacii">Вид операции<span style="color: red;">*</span></label>
+                <div>
+                    <p-dropdown placeholder="Выберите вид операции" [options]="_vid_operacii" optionLabel="name"
+                        optionValue="name" appendTo="body" [(ngModel)]="Budget_detail.doc._vid_operacii"
+                        formControlName="vid_operacii">
+                    </p-dropdown>
+                </div>
+                <span class="p-invalid"
+                    *ngIf="form.controls['vid_operacii'].invalid && form.controls['vid_operacii'].touched">
+                    <span *ngIf="form.controls['vid_operacii'].errors?.required">Выберите вид операции</span>
+                </span>
+            </div>
+
         </div>
 
-        <!-- вид данных -->
-        <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
-            <label for="vid_dannyh">Вид данных<span style="color: red;">*</span></label>
-            <div>
-                <p-dropdown placeholder="Выберите вид данных" [options]="_vid_dannyh" optionLabel="name" optionValue="name"
-                    appendTo="body" [(ngModel)]="Budget_detail.doc._vid_dannyh" formControlName="vid_dannyh">
-                </p-dropdown>
-            </div>
-            <span class="p-invalid" *ngIf="form.controls['vid_dannyh'].invalid && form.controls['vid_dannyh'].touched">
-                <span *ngIf="form.controls['vid_dannyh'].errors?.required">Выберите вид данных</span>
-            </span>
-        </div>
-
-        <!-- вид операции -->
-        <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
-            <label for="vid_operacii">Вид операции<span style="color: red;">*</span></label>
-            <div>
-                <p-dropdown placeholder="Выберите вид операции" [options]="_vid_operacii" optionLabel="name" optionValue="name"
-                    appendTo="body" [(ngModel)]="Budget_detail.doc._vid_operacii" formControlName="vid_operacii">
-                </p-dropdown>
-            </div>
-            <span class="p-invalid" *ngIf="form.controls['vid_operacii'].invalid && form.controls['vid_operacii'].touched">
-                <span *ngIf="form.controls['vid_operacii'].errors?.required">Выберите вид операции</span>
-            </span>
-        </div>
 
         <div class="p-field" style="padding-right: 10px;">
 

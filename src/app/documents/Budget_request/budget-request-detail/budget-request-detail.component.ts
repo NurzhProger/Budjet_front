@@ -149,17 +149,34 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           }
         )
     }
-    this.selectTip()
+    this.selectrashod()
+    this.selectdannyi()
+    this.selectoperacii()
   }
 
-  selectTip() {
+  selectrashod() {
     let responce: any;
     this.Budget_Servise.fetch_vid_rashoda().subscribe(
       (data) => (
-        responce = data, console.log(responce.results), this._vid_rashoda = responce.results
+        responce = data, this._vid_rashoda = responce.results
       ),
-        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));  
-        
+        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));    
+  }
+  selectdannyi() {
+    let responce: any;
+    this.Budget_Servise.fetch_vid_dannyh().subscribe(
+      (data) => (
+        responce = data, this._vid_dannyh = responce.results
+      ),
+        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));    
+  }
+  selectoperacii() {
+    let responce: any;
+    this.Budget_Servise.fetch_vid_oparecii().subscribe(
+      (data) => (
+        responce = data, this._vid_operacii = responce.results
+      ),
+        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));    
   }
 
   ngDoCheck(): void {

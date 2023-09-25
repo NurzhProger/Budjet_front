@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { budget_list, budjet_detail } from "./budget_request.interfaces";
 import { vid_rashoda } from "src/app/enums/vid_rashoda/vid-rashoda/interfaces";
+import { vid_dannyh } from "src/app/enums/vid_dannyh/vid-dannyh/interfaces";
+import { vid_operacii } from "src/app/enums/vid_operacii/vid-operacii/interfaces";
 
 
 @Injectable({
@@ -25,6 +27,14 @@ export class budjetService {
 
     fetch_vid_rashoda(): Observable<vid_rashoda> {
       return this.http.get<vid_rashoda>(this.host + 'enums/vid_rashodalist')
+    }
+
+    fetch_vid_dannyh(): Observable<vid_dannyh> {
+      return this.http.get<vid_dannyh>(this.host + 'enums/vid_dannyhlist')
+    }
+
+    fetch_vid_oparecii(): Observable<vid_operacii> {
+      return this.http.get<vid_operacii>(this.host + 'enums/vid_operaciilist')
     }
 
 
