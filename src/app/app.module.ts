@@ -108,6 +108,8 @@ import { LimitElementComponent } from './documents/Limit/limit-element/limit-ele
 import { Prilozhenie60Component } from './reports/prilozhenie60/prilozhenie60.component';
 import { FormSelectComponent } from './directory/income/forms/form-select/form-select.component';
 import { VidRashodaComponent } from './enums/vid_rashoda/vid-rashoda/vid-rashoda.component';
+import { VidOperaciiComponent } from './enums/vid_operacii/vid-operacii/vid-operacii.component';
+import { VidDannyhComponent } from './enums/vid_dannyh/vid-dannyh/vid-dannyh.component';
 
 @NgModule({
   imports: [
@@ -218,7 +220,9 @@ import { VidRashodaComponent } from './enums/vid_rashoda/vid-rashoda/vid-rashoda
     LimitElementComponent,
     Prilozhenie60Component,
     FormSelectComponent,
-    VidRashodaComponent],
+    VidRashodaComponent,
+    VidOperaciiComponent,
+    VidDannyhComponent],
   bootstrap: [AppComponent],
   providers: [
     {
