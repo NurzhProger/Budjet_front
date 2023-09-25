@@ -26,8 +26,8 @@
     <div class="p-field" style="padding-right: 10px; width: 70%;">
 
       <label for="name_doc">Наименование <span style="color: red;">*</span></label>
-      <div class="p-inputgroup" >
-        <input id="name_doc" type="text"  pInputText [readOnly]="true" [(ngModel)]="form_fullname"
+      <div class="p-inputgroup">
+        <input id="name_doc" type="text" pInputText [readOnly]="true" [(ngModel)]="form_fullname"
           formControlName="name_doc" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
@@ -60,33 +60,47 @@
   <p-table styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header" style="width: 100%;">
       <tr style="text-align: center; font-weight: 700;">
-        <!-- <th style="text-align: center;">Номер</th> -->
         <th style="text-align: center;">Номер</th>
         <th style="text-align: center; width: 10%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
       </tr>
     </ng-template>
-    <!-- <ng-template pTemplate="body" let-tbl let-ri="rowIndex">
-      <tr>
-        <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-        <td>{{ tbl.zn }}</td>
-      </tr>
-    </ng-template> -->
 
   </p-table>
   <p-table [value]="children" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body" style="width: 100%;">
       <tr>
-        <!-- <td style="text-align: center; font-weight: 700;">{{header}}</td> -->
-          <td style="text-align: center;" >{{ri + 1}}</td>
-          <td *ngFor="let kolon of ChildItem" style="text-align: center; width: 10%;">
-            <input id="enstru" type="button" *ngIf="kolon.zn == 'enstru'" [ngModel]="kolon.zn_enstru.name_rus"
-              [readonly]="true" (click)="selectENSTRU(kolon.zn_enstru)" style="width: 100%;">
-            <input *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float" style="width: 100%;">
-            <input *ngIf="kolon.zn == 'ed_izm'" [ngModel]="kolon.zn_ed_izm.name" style="width: 100%;">
-            <input *ngIf="kolon.zn == 'category_sotr'" [ngModel]="kolon.zn_category_sotr.name" style="width: 100%;">
-            <!-- {{kolon['zn_'+kolon.zn]}} -->
-          </td>
-
+        <td style="text-align: center;">{{ri + 1}}</td>
+        <td *ngFor="let kolon of ChildItem" style="text-align: center; width: 10%;">
+          <!-- енстру -->
+          <input id="enstru" type="button" *ngIf="kolon.zn == 'enstru'" [ngModel]="kolon.zn_enstru.name_rus"
+            [readonly]="true" (click)="selectENSTRU(kolon.zn_enstru)" style="width: 100%;">
+          <!-- число -->
+          <input *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float" style="width: 100%;" (ngModelChange)="onInputChange($event, kolon, ri)">
+          <!-- единица измерения -->
+          <input type="button" *ngIf="kolon.zn == 'ed_izm'" [ngModel]="kolon.zn_ed_izm.name" [readonly]="true"
+            (click)="selectEd_Izm(kolon.zn_ed_izm)" style="width: 100%;">
+          <!-- категория сотрудников -->
+          <input type="button" *ngIf="kolon.zn == 'category_sotr'" [ngModel]="kolon.zn_category_sotr.name"
+            [readonly]="true" (click)="selectCategorySotr(kolon.zn_category_sotr)" style="width: 100%;">
+          <!-- должность -->
+          <input type="button" *ngIf="kolon.zn == 'dolzhnost'" [ngModel]="kolon.zn_dolzhnost.name_rus" [readonly]="true"
+            (click)="selectDolzhnost(kolon.zn_dolzhnost)" style="width: 100%;">
+          <!-- подразделение -->
+          <input type="button" *ngIf="kolon.zn == 'podrazdelenie'" [ngModel]="kolon.zn_podrazdelenie.name_rus" [readonly]="true"
+            (click)="selectPodrazdelenie(kolon.zn_podrazdelenie)" style="width: 100%;">
+          <!-- доплата и надбавка -->
+          <input type="button" *ngIf="kolon.zn == 'dopl_nadb'" [ngModel]="kolon.zn_dopl_nadb.name_rus" [readonly]="true"
+            (click)="selectDoplNadb(kolon.zn_dopl_nadb)" style="width: 100%;">
+          <!-- области регионов -->
+          <input type="button" *ngIf="kolon.zn == 'oblasti_reg'" [ngModel]="kolon.zn_oblasti_reg.name" [readonly]="true"
+            (click)="selectOblreg(kolon.zn_oblasti_reg)" style="width: 100%;">
+          <!-- марки авто -->
+          <input type="button" *ngIf="kolon.zn == 'marki_avto'" [ngModel]="kolon.zn_marki_avto.name" [readonly]="true"
+            (click)="selectMarkiAvto(kolon.zn_marki_avto)" style="width: 100%;">
+          <!-- стаж категорий -->
+          <input type="button" *ngIf="kolon.zn == 'stazh_category'" [ngModel]="kolon.zn_stazh_category.name" [readonly]="true"
+            (click)="selectStazh(kolon.zn_stazh_category)" style="width: 100%;">
+        </td>
       </tr>
     </ng-template>
   </p-table>
