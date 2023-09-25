@@ -92,7 +92,9 @@ export class FormDetailComponent implements OnInit {
       number_doc: new FormControl(null, [Validators.required]),
       name_doc: new FormControl(null, [Validators.required]),
       spec_name: new FormControl(null, [Validators.required]),
+      name_form: new FormControl(null, [Validators.required]),
       // budjet_name: new FormControl(null, [Validators.required])
+
     })
 
     if (this.form_doc_id !== '') {

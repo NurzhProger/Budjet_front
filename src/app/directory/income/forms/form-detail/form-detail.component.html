@@ -23,7 +23,7 @@
 <div class="card" *ngIf="(form_detail) as form_detail; else loader">
   <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
     <div class="p-field" style="padding-right: 10px;">
-      <label for="number_doc">Номер <span style="color: red;">*</span></label>
+      <label for="number_doc">Номер приложении<span style="color: red;">*</span></label>
       <div class="p-inputgroup">
         <input id="number_doc" type="text" pInputText [(ngModel)]="form_detail.form.num_app"
           formControlName="number_doc" />
@@ -38,14 +38,13 @@
 
       <label for="name_doc">Наименование <span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="name_doc" type="text" pInputText [(ngModel)]="form_detail.form.head_form"
+        <input  id="name_doc" type="text" pInputText [(ngModel)]="form_detail.form.head_form"
           formControlName="name_doc" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
         <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должна быть пустой</span>
       </span>
     </div>
-
 
     <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
       <label for="spec_name">Специфика <span style="color: red;">*</span></label>
@@ -65,6 +64,21 @@
         <span *ngIf="form.controls['spec_name'].errors?.required">Специфика не должно быть пустым</span>
       </span>
     </div>
+
+    <div class="p-field" style="padding-right: 10px;">
+
+      <label for="name_form">Номер формы<span style="color: red;">*</span></label>
+      <div class="p-inputgroup">
+        <input  id="name_form" type="text" pInputText [(ngModel)]="form_detail.form._spec.code"
+          formControlName="name_form" />
+      </div>
+      <span class="p-invalid" *ngIf="form.controls['name_form'].invalid && form.controls['name_form'].touched">
+        <span *ngIf="form.controls['name_form'].errors?.required">Номер формы не должна быть пустой</span>
+      </span>
+    </div>
+
+
+
 
   </form>
 
@@ -145,7 +159,7 @@
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.columns_used}}
-                </ng-template> 
+                </ng-template>
               </p-cellEditor>
             </td>
             <td>
@@ -155,7 +169,7 @@
                 </ng-template>
                 <ng-template pTemplate="output">
                   <input type="checkbox" [(ngModel)]="item.itog">
-                </ng-template> 
+                </ng-template>
               </p-cellEditor>
             </td>
             <td style="padding: 0; margin:0;">
