@@ -123,14 +123,19 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   nochanged = true
   fkr_array: fkr_detail[] = []
   tbl: any = []
-
+  _vid_dannyh: any = []
+  _vid_operacii: any = []
+  _vid_rashoda: any = []
 
   ngOnInit(): void {
     this.form = new FormGroup({
       number_doc: new FormControl(),
       date_doc: new FormControl(null, [Validators.required]),
       org_name: new FormControl(null, [Validators.required]),
-      god_ucheta: new FormControl(null, [Validators.required])
+      god_ucheta: new FormControl(null, [Validators.required]),
+      vid_rashoda: new FormControl(null, [Validators.required]),
+      vid_dannyh: new FormControl(null, [Validators.required]),
+      vid_operacii: new FormControl(null, [Validators.required])
     })
 
     if (this.Budget_doc_id !== '') {
@@ -144,49 +149,17 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           }
         )
     }
-    // else {
-    //   this.Budget_detail = {
-    //     doc: {
-    //       id: 0,
-    //       org_name: "",
-    //       _organization: {
-    //         id: 0,
-    //         bin: "",
-    //         name_kaz: "",
-    //         name_rus: "",
-    //         adress: "",
-    //         deleted: false,
-    //         budjet_name: "",
-    //         region_name: "",
-    //         _budjet_reg: 0,
-    //         _regiondar: 0,
-    //       },
-    //       _date: "",
-    //       nom:"",
-    //       god_ucheta: "",
-    //       _vid_dannyh: "",
-    //       _vid_operacii: "",
-    //       deleted: false,
-    //     },
-    //     tbl: [{
-    //       id: 0,
-    //       _planirovanie: 0,
-    //       summ: 0,
-    //       _fkr: 0,
-    //       fkrname: "",
-    //       fkrcode: "",
-    //       _spec: 0,
-    //       specname: "",
-    //       speccode: "",
-    //       _form: 0,
-    //       formname: "",
-    //       formhead: ""
-    //     }]
-    //   }
+    this.selectTip()
+  }
 
-
-    // }
-
+  selectTip() {
+    let responce: any;
+    this.Budget_Servise.fetch_vid_rashoda().subscribe(
+      (data) => (
+        responce = data, console.log(responce.results), this._vid_rashoda = responce.results
+      ),
+        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));  
+        
   }
 
   ngDoCheck(): void {

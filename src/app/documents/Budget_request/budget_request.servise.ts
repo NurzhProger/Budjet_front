@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { budget_list, budjet_detail } from "./budget_request.interfaces";
+import { vid_rashoda } from "src/app/enums/vid_rashoda/vid-rashoda/interfaces";
 
 
 @Injectable({
@@ -22,7 +23,9 @@ export class budjetService {
       return this.http.get<budjet_detail>(this.host + 'docs/planirovanie_item/' + form_id)
     }
 
-
+    fetch_vid_rashoda(): Observable<vid_rashoda> {
+      return this.http.get<vid_rashoda>(this.host + 'enums/vid_rashodalist')
+    }
 
 
   //   deleteCategory(category_id: number = 0) {

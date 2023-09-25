@@ -107,6 +107,7 @@ import { LimitListComponent } from './documents/Limit/limit-list/limit-list.comp
 import { LimitElementComponent } from './documents/Limit/limit-element/limit-element.component';
 import { Prilozhenie60Component } from './reports/prilozhenie60/prilozhenie60.component';
 import { FormSelectComponent } from './directory/income/forms/form-select/form-select.component';
+import { VidRashodaComponent } from './enums/vid_rashoda/vid-rashoda/vid-rashoda.component';
 
 @NgModule({
   imports: [
@@ -216,7 +217,8 @@ import { FormSelectComponent } from './directory/income/forms/form-select/form-s
     LimitListComponent,
     LimitElementComponent,
     Prilozhenie60Component,
-    FormSelectComponent],
+    FormSelectComponent,
+    VidRashodaComponent],
   bootstrap: [AppComponent],
   providers: [
     {
