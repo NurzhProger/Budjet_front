@@ -104,6 +104,7 @@
             <th style="text-align:center">Колонка</th>
             <th style="text-align:center">Используемые колонки</th>
             <th style="text-align:center">Итоговая сумма</th>
+            <th style="text-align:center">Суммируемая колонка</th>
             <th style="text-align:center"></th>
           </tr>
         </ng-template>
@@ -168,6 +169,16 @@
                 </ng-template>
                 <ng-template pTemplate="output">
                   <input type="checkbox" [(ngModel)]="item.itog" [disabled]="true">
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input type="checkbox" [(ngModel)]="item.total">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  <input type="checkbox" [(ngModel)]="item.total" [disabled]="true">
                 </ng-template>
               </p-cellEditor>
             </td>

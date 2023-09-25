@@ -63,6 +63,7 @@ export interface forms_tab1 {
   _column: number,
   columns_used: string,
   itog: boolean,
+  total: boolean,
   zn: string,
   zn_string: null,
   zn_float: null,

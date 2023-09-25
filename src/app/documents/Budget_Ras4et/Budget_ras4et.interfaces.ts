@@ -44,6 +44,7 @@ export interface ChildItem {
   column: number;
   columns_used: string;
   itog: boolean;
+  total: boolean;
   stroka: number;
   zn: string;
   zn_string: string | null;
