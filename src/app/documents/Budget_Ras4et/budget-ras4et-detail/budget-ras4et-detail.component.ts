@@ -236,7 +236,12 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   onInputChange(value: number, kolon: ChildItem, ri: number) {
     let mass: any;
-    kolon.zn_float = value;
+    if (value == undefined) {
+      kolon.zn_float = 0;
+    } else {
+      kolon.zn_float = value;
+    }
+    
     mass = [this.Ras4et_detail.tbl[ri]];
     
     let mass_arr = mass[0];
@@ -254,7 +259,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
             formula = formula + mass_simv[y];
           }
         }
-        console.log(formula);
+        // console.log(formula);
         mass_arr[i].zn_float = math.evaluate(formula);
       }
     }
@@ -275,6 +280,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       }
     }
     this.summdoc = summdoc;
+    // console.log(summdoc);
+    
   }
 
   dobavlenya(tip: string, doc: number) {
