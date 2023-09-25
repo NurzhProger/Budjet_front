@@ -26,6 +26,7 @@ import { oblasti_element } from 'src/app/directory/planirovanie/oblasti-regiony/
 import { OblastiRegionyListComponent } from 'src/app/directory/planirovanie/oblasti-regiony/oblasti-regiony-list/oblasti-regiony-list.component';
 import { MarkiAvtoListComponent } from 'src/app/directory/planirovanie/marki_avto/marki-avto-list/marki-avto-list.component';
 import { StazhCategoryListComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-list/stazh-category-list.component';
+import * as math from 'mathjs';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -50,11 +51,11 @@ export class BudgetRas4etDetailComponent implements OnInit {
   Ras4et_detail: Ras4et_doc
   children: any = []
   column: any = []
-  Table: TableItemPass
   hashBegin = ''
   hashEnd = ''
   spec_fullname = ''
   form_fullname = '' 
+  summdoc = 0
   ngOnInit(): void {
     this.form = new FormGroup({
       name_doc: new FormControl(null, [Validators.required]),
@@ -62,7 +63,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
 
     // this.formaid = this.Budget_ras4et_Detailconfig.data.formaid
-    console.log(this.ras_id);
+    // console.log(this.ras_id);
     // console.log(this.form_id);
     
     if (this.ras_id !== "") {
@@ -90,7 +91,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       // }
       this.children.push(this.Ras4et_detail.tbl[i])
     }
-    console.log(this.children)
+    // console.log(this.children)
 
     this.column.push(this.Ras4et_detail.tbl[0])
 
@@ -233,46 +234,47 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
   }
 
-  onInputChange(value: string, kolon: ChildItem, ri: number) {
-    let str_num = kolon.stroka;
-    let filtered_tbl= [this.Ras4et_detail.tbl[ri]]
-    let aaa = '1234567890'
-    for (let i = 0; i <= filtered_tbl.length; i++) {
-      console.log(filtered_tbl[i])
-      if (filtered_tbl[i].columns_used !== '') {
-        console.log(
-          
-          'asdadsasdasdsda'
-        )
-        // let mass_simv = filtered_tbl[i].columns_used.split(' ')
-        // console.log(mass_simv)
-        // for (let y = 0; y < mass_simv.length; y++) {
-        //   console.log(mass_simv[y]);
-          
-        //     // let proverka = aaa.search(y[0])
-        // }
+  onInputChange(value: number, kolon: ChildItem, ri: number) {
+    let mass: any;
+    kolon.zn_float = value;
+    mass = [this.Ras4et_detail.tbl[ri]];
+    
+    let mass_arr = mass[0];
+    let aaa = '1234567890';
+    // this.Ras4et_detail.tbl[ri].
+    for (let i = 0; i < mass[0].length; i++) {
+      if (mass_arr[i].columns_used !== '') {
+        let formula = '';
+        let mass_simv = mass_arr[i].columns_used.split(' ');
+        for (let y = 0; y < mass_simv.length; y++) {
+          if (aaa.includes(mass_simv[y])) {
+            formula = formula + mass_arr[mass_simv[y]-1].zn_float;
+          } 
+          else { 
+            formula = formula + mass_simv[y];
+          }
+        }
+        console.log(formula);
+        mass_arr[i].zn_float = math.evaluate(formula);
       }
-      console.log(filtered_tbl[i]);
-      
     }
-    // console.log(this.Ras4et_detail.tbl[ri]);
-    // console.log(str_num);
-    
-    
-    // Дополнительная обработка здесь
+    this.calculate();
   }
 
-  conculate() {
-    // for (var stroka1 of this.Ras4et_detail.tbl) {
-    //   this.Table.stroka = stroka1.stroka
-    //   for (var item of stroka1.children) {
-    //     if (item.zn == "enstru") {
-    //       this.dobavlenya("enstru", item.zn_enstru)
-    //     }
-    //   }
+  calculate() {
+    let summdoc = 0;
+    let mass : any = []
 
-
-    // }
+    for (let i = 0; i < this.Ras4et_detail.tbl.length; i++) {
+      mass = [this.Ras4et_detail.tbl[i]];
+      let mass_arr = mass[0];
+      for (let y = 0; y < mass[0].length; y++) {
+        if (mass_arr[y].itog) {
+          summdoc = summdoc + mass_arr[y].zn_float;
+        }
+      }
+    }
+    this.summdoc = summdoc;
   }
 
   dobavlenya(tip: string, doc: number) {
