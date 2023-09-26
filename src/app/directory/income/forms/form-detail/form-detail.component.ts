@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService,SelectItem  } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -41,9 +41,10 @@ export class FormDetailComponent implements OnInit {
   // clonedProducts: { [s: string]: forms_tab1 } = {};
   hashBegin = ''
   hashEnd = ''
-  readerOptions = [{ label: 'Да', value: 'true' }, { label: 'Нет', value: 'false' }];
-  statuses!: SelectItem[];
-  tip_options: any =[];
+  readerOptions = [{ label: 'Да', value: 'true' }, { label: 'Нет', value: 'false' }]
+  statuses!: SelectItem[]
+  tip_options: any =[]
+  windowHeight: number
 
   form_detail: form_detail = {
     form: {
@@ -89,7 +90,10 @@ export class FormDetailComponent implements OnInit {
     }]
   }
 
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateWindowSize()
+  }
   ngOnInit(): void {
     this.form = new FormGroup({
       number_doc: new FormControl(null, [Validators.required]),
@@ -171,10 +175,14 @@ export class FormDetailComponent implements OnInit {
     ];
 
     // console.log(this.sposobOptions)
-
+    
+    this.updateWindowSize()
 
   }
 
+  private updateWindowSize() {
+    this.windowHeight = window.innerHeight * 0.85;
+  }
 
   selectTipTop(){
     let responce: any;

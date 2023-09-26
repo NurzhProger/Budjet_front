@@ -90,7 +90,7 @@
           (click)="add_tbl()"></button>
       </div>
       <p-table [value]="form_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
-        scrollHeight="calc(100vh - 200px)" selectionMode="single"
+        scrollHeight="calc({{windowHeight}}px - 200px)" selectionMode="single"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template pTemplate="header">
           <tr>
@@ -201,7 +201,7 @@
           (click)="add_dopl()"></button>
       </div>
       <p-table [value]="form_detail.dopl" [scrollable]="true" dataKey="id" editMode="row"
-        scrollHeight="calc(100vh - 200px)" selectionMode="single"
+        scrollHeight="calc({{windowHeight}}px - 200px)" selectionMode="single"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template pTemplate="header">
           <tr>
