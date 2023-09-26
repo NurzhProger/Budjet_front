@@ -76,7 +76,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
         .subscribe(
           (data) => (
             this.Ras4et_detail = data,
-            console.log(data),
             // this.form_fullname = this.Ras4et_detail.head._form.name + ". " + this.Ras4et_detail.head._form.head_form,
             // this.spec_fullname = this.Ras4et_detail.head._spec.code + ". " + this.Ras4et_detail.head._spec.name_rus,
             this.preob()
@@ -86,23 +85,37 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   preob() {
-    console.log(this.Ras4et_detail.head.id);
     
-    for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
-      // for (let x = 0; this.Ras4et_detail.tbl[i].length > x; x++) {
-      //   this.column.push(this.Ras4et_detail.tbl[i].children[x])
-      // }
-      this.children.push(this.Ras4et_detail.tbl[i])
-      console.log(this.children);
-      
+    if (this.ras_id.ras_id == 0){
+      for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
+        // for (let x = 0; this.Ras4et_detail.tbl[i].length > x; x++) {
+        //   this.column.push(this.Ras4et_detail.tbl[i].children[x])
+        // }
+        this.column.push(this.Ras4et_detail.tbl[i].zn)
+      }
+      this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
-
-    this.column.push(this.Ras4et_detail.tbl[0])
+    else
+    {
+      for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
+        // for (let x = 0; this.Ras4et_detail.tbl[i].length > x; x++) {
+        //   this.column.push(this.Ras4et_detail.tbl[i].children[x])
+        // }
+        this.children.push(this.Ras4et_detail.tbl[i])
+        
+      }
+    }
+    // this.column.push(this.Ras4et_detail.tbl[0])
 
   }
 
-  selectENSTRU(ensTRU: ensTRU_element) {
+  add_tbl() { 
+    for (let i = 0; i < this.column.length; i++) {
+      console.log(this.column[i]);
+  }}
 
+  selectENSTRU(ensTRU: ensTRU_element) {
+    
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EnstruListComponent,
       {
         header: 'Выбор ЕНСТРУ',
@@ -351,8 +364,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
-  add_tbl() { 
-    
-  }
+ 
 
 }
