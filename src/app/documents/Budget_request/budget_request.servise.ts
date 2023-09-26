@@ -37,6 +37,10 @@ export class budjetService {
       return this.http.get<vid_operacii>(this.host + 'enums/vid_operaciilist')
     }
 
+    saveLimit(budjet: budjet_detail) {
+      return this.http.post(this.host + 'docs/planirovanie_save', budjet)
+    }
+
 
   //   deleteCategory(category_id: number = 0) {
   //     return this.http.delete(this.host + `dirs/categorydelete/${category_id}`)

@@ -22,6 +22,7 @@
 
 <div class="card" *ngIf="(Budget_detail) as Budget_detail; else loader">
     <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
+        <div style="display: flex; padding-bottom: 10px;">
         <div class="p-field" style="padding-right: 10px;">
             <label for="number_doc">Номер</label>
             <div class="p-inputgroup">
@@ -65,7 +66,23 @@
             </span>
         </div>
 
-        <div>
+        
+
+
+        <div class="p-field" style="padding-right: 10px;">
+
+            <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
+            <div class="p-inputgroup">
+                <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()"
+                    formControlName="god_ucheta" />
+            </div>
+            <span class="p-invalid" *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
+                <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
+            </span>
+        </div>
+    </div>
+
+        <div style="display: flex; padding-bottom: 10px;">
             <!-- вид расхода -->
             <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
                 <label for="vid_rashoda">Вид расхода<span style="color: red;">*</span></label>
@@ -111,19 +128,6 @@
                 </span>
             </div>
 
-        </div>
-
-
-        <div class="p-field" style="padding-right: 10px;">
-
-            <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
-            <div class="p-inputgroup">
-                <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()"
-                    formControlName="god_ucheta" />
-            </div>
-            <span class="p-invalid" *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
-                <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
-            </span>
         </div>
     </form>
 

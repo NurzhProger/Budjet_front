@@ -219,9 +219,32 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail.doc.god_ucheta = String(this.godNumber + '-01-01')
   }
 
-  saveDoc(set:boolean){
-
+  saveDoc(close: boolean){
+    let responce: any
+    this.Budget_Servise.saveLimit(this.Budget_detail)
+      .subscribe(
+        (data) => (
+          this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          responce = data, this.Budget_detail = responce, this.closeaftersave(close)
+        ),
+        (error) => (
+          this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
+      )
   }
+
+  closeaftersave(close: boolean) {
+    let objString = JSON.stringify(this.Budget_detail)
+    this.hashEnd = SHA256(objString).toString()
+
+    this.hashBegin = this.hashEnd
+
+    if (close) {
+      this.closeEvent.emit()
+    }
+  }
+
+  
 
   closeform(close: boolean){
     let objString = JSON.stringify(this.Budget_detail)
