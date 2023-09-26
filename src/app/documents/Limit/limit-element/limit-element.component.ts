@@ -99,7 +99,6 @@ export class LimitElementComponent implements OnInit, DoCheck{
       god_ucheta: new FormControl(null, [Validators.required])
     })
     
-    console.log(this.limit_id);
     
     if (this.limit_id !== '') {
       this.LimitService.fetch_detail(this.limit_id)

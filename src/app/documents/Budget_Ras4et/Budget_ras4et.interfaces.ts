@@ -19,7 +19,8 @@ export interface Ras4et_head {
   _planirovanie: budjet_detail,
   _fkr: fkr_detail,
   _spec: specification_income_detail,
-  _form: form_list_doc
+  _form: form_list_doc,
+  summ: number
 
   
   // summ: number,

@@ -76,8 +76,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
         .subscribe(
           (data) => (
             this.Ras4et_detail = data,
-            this.form_fullname = this.Ras4et_detail.head._form.name + ". " + this.Ras4et_detail.head._form.head_form,
-            this.spec_fullname = this.Ras4et_detail.head._spec.code + ". " + this.Ras4et_detail.head._spec.name_rus,
+            console.log(data),
+            // this.form_fullname = this.Ras4et_detail.head._form.name + ". " + this.Ras4et_detail.head._form.head_form,
+            // this.spec_fullname = this.Ras4et_detail.head._spec.code + ". " + this.Ras4et_detail.head._spec.name_rus,
             this.preob()
           )
         )
@@ -85,13 +86,16 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   preob() {
+    console.log(this.Ras4et_detail.head.id);
+    
     for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
       // for (let x = 0; this.Ras4et_detail.tbl[i].length > x; x++) {
       //   this.column.push(this.Ras4et_detail.tbl[i].children[x])
       // }
       this.children.push(this.Ras4et_detail.tbl[i])
+      console.log(this.children);
+      
     }
-    // console.log(this.children)
 
     this.column.push(this.Ras4et_detail.tbl[0])
 
@@ -280,7 +284,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       }
     }
     this.summdoc = summdoc;
-    // console.log(summdoc);
+    this.Ras4et_detail.head.summ = this.summdoc;
     
   }
 
@@ -289,8 +293,30 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
-  saveDoc(step: boolean) {
+  saveDoc(close: boolean): void {
+    let responce: any
+    this.Budget_ras4et_Service.saveLimit(this.Ras4et_detail)
+      .subscribe(
+        (data) => (
+          this.Budget_ras4et_Detailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          responce = data, this.Ras4et_detail = responce,
+           this.closeaftersave(close)
+        ),
+        (error) => (
+          this.Budget_ras4et_Detailmsg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
+      )
+  }
 
+  closeaftersave(close: boolean) {
+    let objString = JSON.stringify(this.Ras4et_detail)
+    this.hashEnd = SHA256(objString).toString()
+
+    this.hashBegin = this.hashEnd
+
+    if (close) {
+      this.closeEvent.emit()
+    }
   }
 
   closeform(close: boolean) {
@@ -325,6 +351,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
-  add_tbl() { }
+  add_tbl() { 
+    
+  }
 
 }

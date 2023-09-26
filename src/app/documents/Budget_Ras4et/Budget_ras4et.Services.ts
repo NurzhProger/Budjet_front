@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Ras4et_doc } from "./Budget_ras4et.interfaces";
+import { budjet_detail } from "../Budget_request/budget_request.interfaces";
 
 
 @Injectable({
@@ -17,6 +18,10 @@ export class budjetRas4et_Service {
 
   fetch_detail(id: number, params: any): Observable<Ras4et_doc> {
     return this.http.get<Ras4et_doc>(this.host + 'docs/raschetitem/' + id, {params} )
+  }
+
+  saveLimit(ras4et: Ras4et_doc) {
+    return this.http.post(this.host + 'docs/raschetsave', ras4et)
   }
 
 
