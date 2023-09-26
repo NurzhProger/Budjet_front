@@ -110,6 +110,7 @@ import { FormSelectComponent } from './directory/income/forms/form-select/form-s
 import { VidRashodaComponent } from './enums/vid_rashoda/vid-rashoda/vid-rashoda.component';
 import { VidOperaciiComponent } from './enums/vid_operacii/vid-operacii/vid-operacii.component';
 import { VidDannyhComponent } from './enums/vid_dannyh/vid-dannyh/vid-dannyh.component';
+import { TipSposobRas4etaComponent } from './enums/tip-sposob-ras4eta/tip-sposob-ras4eta.component';
 
 @NgModule({
   imports: [
@@ -222,7 +223,8 @@ import { VidDannyhComponent } from './enums/vid_dannyh/vid-dannyh/vid-dannyh.com
     FormSelectComponent,
     VidRashodaComponent,
     VidOperaciiComponent,
-    VidDannyhComponent],
+    VidDannyhComponent,
+    TipSposobRas4etaComponent],
   bootstrap: [AppComponent],
   providers: [
     {

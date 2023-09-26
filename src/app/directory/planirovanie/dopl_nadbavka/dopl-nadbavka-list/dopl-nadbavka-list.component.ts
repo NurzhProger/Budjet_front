@@ -66,8 +66,7 @@ export class DoplNadbavkaListComponent implements OnInit {
   selectTipTop() {
     let responce: any;
     this.tip_doplata_serv.fetch().subscribe(
-      (data) => (responce = data, this.tip_options = responce.results,
-        console.log(this.tip_options)
+      (data) => (responce = data, this.tip_options = responce.results
       ),
         (error) => (this.japan_massage_body.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
 

@@ -14,6 +14,8 @@ import { doplaty_nadbavky_element } from '../../../planirovanie/dopl_nadbavka/in
 import { Sposob_ras4eta } from '../../../planirovanie/pere4islenya.interfaces'
 import { EnstruListComponent } from '../../../planirovanie/ensTRU/enstru-list/enstru-list.component'
 import { ensTRU_element } from '../../../planirovanie/ensTRU/interfaces'
+import { Sposob_ras4eta_list } from '../../../../enums/tip-sposob-ras4eta/sposob_raslist.interfaces'
+import { Sposob_ras4eta_servise } from '../../../../enums/tip-sposob-ras4eta/sposob_raslist.servise'
 @Component({
   selector: 'app-form-detail',
   templateUrl: './form-detail.component.html',
@@ -26,6 +28,7 @@ export class FormDetailComponent implements OnInit {
     private form_detail_messageServicedelSelect: MessageService,
     private form_detail_dialog: DialogService,
     private form_Servise:formsService,
+    private sposob_servise:Sposob_ras4eta_servise,
     private form_Confirmation:ConfirmationService)  { }
 
 
@@ -40,8 +43,7 @@ export class FormDetailComponent implements OnInit {
   hashEnd = ''
   readerOptions = [{ label: 'Да', value: 'true' }, { label: 'Нет', value: 'false' }];
   statuses!: SelectItem[];
-  sposobOptions = Object.values(Sposob_ras4eta)
-
+  tip_options: any =[];
 
   form_detail: form_detail = {
     form: {
@@ -96,6 +98,8 @@ export class FormDetailComponent implements OnInit {
       nomer_form: new FormControl(null, [Validators.required]),
       // budjet_name: new FormControl(null, [Validators.required])
     })
+
+    this.selectTipTop()
 
     if (this.form_doc_id !== '') {
       // console.log(this.form_doc_id)
@@ -168,6 +172,17 @@ export class FormDetailComponent implements OnInit {
 
     // console.log(this.sposobOptions)
 
+
+  }
+
+
+  selectTipTop(){
+    let responce: any;
+    this.sposob_servise.fetch().subscribe(
+      (data) => (responce = data, this.tip_options = responce.results,
+        console.log(this.tip_options)
+      ),
+        (error) => (this.form_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
 
   }
 

@@ -233,7 +233,7 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <p-dropdown [options]="sposobOptions" appendTo="body" [(ngModel)]="item._sposob_ras"
+                  <p-dropdown [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name" [(ngModel)]="item._sposob_ras"
                     [style]="{'width':'100%'}"></p-dropdown>
                 </ng-template>
                 <ng-template pTemplate="output">
