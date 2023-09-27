@@ -17,7 +17,7 @@ export class budjetRas4et_Service {
 
 
   fetch_detail(params: any): Observable<Ras4et_doc> {
-    return this.http.post<Ras4et_doc>(this.host + 'docs/raschetitem/', params)
+    return this.http.post<Ras4et_doc>(this.host + 'docs/raschetitem', params)
   }
 
   saveLimit(ras4et: Ras4et_doc) {

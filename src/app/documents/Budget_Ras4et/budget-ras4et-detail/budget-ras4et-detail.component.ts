@@ -118,7 +118,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.column = this.Ras4et_detail.tbl[0]
     // }
 
-    if (this.izm.ras_id.ras_id == 0) {
+    if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
     else {
