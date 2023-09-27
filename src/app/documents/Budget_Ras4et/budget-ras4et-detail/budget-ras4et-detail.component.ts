@@ -44,40 +44,66 @@ export class BudgetRas4etDetailComponent implements OnInit {
     private Budget_Confirmation: ConfirmationService) { }
 
   @Output() closeEvent = new EventEmitter<any>()
-  @Input() ras_id: any
-  @Input() form_id = ''
+  @Input() izm: any
+  // @Input() form_id = ''
+  tbl: ChildItem = {
+    id: 0,
+    name: '',
+    column: 0,
+    columns_used: '',
+    itog: false,
+    total: false,
+    stroka: 0,
+    zn: '',
+    zn_string: '',
+    zn_float: null,
+    zn_enstru: {
+      id: 0,
+      code: '',
+      name_kaz: '',
+      name_rus: '',
+      harak_kaz: '',
+      harak_rus: '',
+      _tip_tru: ''
+    },
+    zn_stazh_category: 0,
+    zn_category_sotr: 0,
+    zn_dolzhnost: 0,
+    zn_podrazdelenie: 0,
+    zn_dopl_nadb: 0,
+    zn_oblasti_reg: 0,
+    zn_marki_avto: 0,
+    zn_ed_izm: 0
+  }
   form: FormGroup
   items: MenuItem[];
   Ras4et_detail: Ras4et_doc
   children: any = []
-  column: any = []
+  column: any
   hashBegin = ''
   hashEnd = ''
   spec_fullname = ''
-  form_fullname = '' 
+  form_fullname = ''
   summdoc = 0
+
   ngOnInit(): void {
     this.form = new FormGroup({
       name_doc: new FormControl(null, [Validators.required]),
       spec_name: new FormControl(null, [Validators.required])
     })
 
-    // this.formaid = this.Budget_ras4et_Detailconfig.data.formaid
-    // console.log(this.ras_id);
-    // console.log(this.form_id);
-    
-    if (this.ras_id !== "") {
-      let params = {
-        form: this.ras_id.form_id
-      }
-      
-      
-      this.Budget_ras4et_Service.fetch_detail(this.ras_id.ras_id, params)
+    if (this.izm) {
+
+      console.log(this.izm);
+
+      // let params = {
+      //   form: this.izm.ras_id.form_id
+      // }
+
+      this.Budget_ras4et_Service.fetch_detail(this.izm)
         .subscribe(
           (data) => (
             this.Ras4et_detail = data,
-            // this.form_fullname = this.Ras4et_detail.head._form.name + ". " + this.Ras4et_detail.head._form.head_form,
-            // this.spec_fullname = this.Ras4et_detail.head._spec.code + ". " + this.Ras4et_detail.head._spec.name_rus,
             this.preob()
           )
         )
@@ -85,37 +111,32 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   preob() {
-    
-    if (this.ras_id.ras_id == 0){
-      for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
-        // for (let x = 0; this.Ras4et_detail.tbl[i].length > x; x++) {
-        //   this.column.push(this.Ras4et_detail.tbl[i].children[x])
-        // }
-        this.column.push(this.Ras4et_detail.tbl[i].zn)
-      }
+
+    // for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
+    // console.log(this.Ras4et_detail.tbl);
+
+    this.column = this.Ras4et_detail.tbl[0]
+    // }
+
+    if (this.izm.ras_id.ras_id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
-    else
-    {
+    else {
       for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
-        // for (let x = 0; this.Ras4et_detail.tbl[i].length > x; x++) {
-        //   this.column.push(this.Ras4et_detail.tbl[i].children[x])
-        // }
         this.children.push(this.Ras4et_detail.tbl[i])
-        
       }
     }
-    // this.column.push(this.Ras4et_detail.tbl[0])
 
   }
 
-  add_tbl() { 
-    for (let i = 0; i < this.column.length; i++) {
-      console.log(this.column[i]);
-  }}
+  add_tbl() {
+
+    this.children.push(this.Ras4et_detail.new_str[0])
+
+  }
 
   selectENSTRU(ensTRU: ensTRU_element) {
-    
+
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EnstruListComponent,
       {
         header: 'Выбор ЕНСТРУ',
@@ -258,9 +279,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
     } else {
       kolon.zn_float = value;
     }
-    
-    mass = [this.Ras4et_detail.tbl[ri]];
-    
+
+    mass = [this.children[ri]];
+
     let mass_arr = mass[0];
     let aaa = '1234567890';
     // this.Ras4et_detail.tbl[ri].
@@ -270,9 +291,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
         let mass_simv = mass_arr[i].columns_used.split(' ');
         for (let y = 0; y < mass_simv.length; y++) {
           if (aaa.includes(mass_simv[y])) {
-            formula = formula + mass_arr[mass_simv[y]-1].zn_float;
-          } 
-          else { 
+            formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
+          }
+          else {
             formula = formula + mass_simv[y];
           }
         }
@@ -285,7 +306,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   calculate() {
     let summdoc = 0;
-    let mass : any = []
+    let mass: any = []
 
     for (let i = 0; i < this.Ras4et_detail.tbl.length; i++) {
       mass = [this.Ras4et_detail.tbl[i]];
@@ -298,7 +319,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     }
     this.summdoc = summdoc;
     this.Ras4et_detail.head.summ = this.summdoc;
-    
+
   }
 
   dobavlenya(tip: string, doc: number) {
@@ -308,12 +329,14 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   saveDoc(close: boolean): void {
     let responce: any
-    this.Budget_ras4et_Service.saveLimit(this.Ras4et_detail)
+    this.Ras4et_detail.tbl = this.children
+    this.Budget_ras4et_Service
+      .saveLimit(this.Ras4et_detail)
       .subscribe(
         (data) => (
           this.Budget_ras4et_Detailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
           responce = data, this.Ras4et_detail = responce,
-           this.closeaftersave(close)
+          this.closeaftersave(close)
         ),
         (error) => (
           this.Budget_ras4et_Detailmsg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
@@ -364,6 +387,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
- 
+
 
 }

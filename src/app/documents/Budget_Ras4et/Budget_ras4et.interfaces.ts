@@ -2,12 +2,14 @@ import { fkr_detail } from "src/app/directory/expenses/fkr/interfaces";
 import { budjet_detail } from "../Budget_request/budget_request.interfaces";
 import { specification_income_detail } from "src/app/directory/income/specification-income/interfaces";
 import { form_list_doc } from "src/app/directory/income/forms/forms_interfaces";
+import { ensTRU_element } from "src/app/directory/planirovanie/ensTRU/interfaces";
 
 export interface Ras4et_doc {
   head: Ras4et_head,
   head_table: [Ras4et_head_table],
   tbl: [ChildItem],
-  dopl: [Ras4et_dopl]
+  dopl: [Ras4et_dopl],
+  new_str: [ChildItem]
 }
 
 export interface Ras4et_head_table {
@@ -22,7 +24,7 @@ export interface Ras4et_head {
   _form: form_list_doc,
   summ: number
 
-  
+
   // summ: number,
   // _fkr: number,
   // fkrname: string,
@@ -50,7 +52,7 @@ export interface ChildItem {
   zn: string;
   zn_string: string | null;
   zn_float: number | null;
-  zn_enstru: number;
+  zn_enstru: ensTRU_element;
   zn_stazh_category: number | null;
   zn_category_sotr: number | null;
   zn_dolzhnost: number | null;

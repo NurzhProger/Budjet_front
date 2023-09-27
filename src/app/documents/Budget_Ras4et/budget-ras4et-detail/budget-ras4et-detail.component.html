@@ -27,24 +27,24 @@
 
       <label for="name_doc">Наименование <span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="name_doc" type="text" pInputText [readOnly]="true" [(ngModel)]="form_fullname"
+        <input id="name_doc" type="text" pInputText [readOnly]="true" [(ngModel)]="Ras4et_detail.head._form.head_form"
           formControlName="name_doc" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
-        <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должна быть пустой</span>
+        <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должно быть пустым</span>
       </span>
     </div>
 
 
-    <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+    <div class="p-field" style="min-width: 20rem;">
       <label for="spec_name">Специфика<span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="spec_name" type="text" pInputText [readOnly]="true" [(ngModel)]="spec_fullname"
+        <input id="spec_name" type="text" pInputText [readOnly]="true" [(ngModel)]="Ras4et_detail.head._spec.code"
           formControlName="spec_name" />
-        <span class="p-inputgroup-addon cursor-pointer" (click)="selectfkr()">...</span>
+        <!-- <span class="p-inputgroup-addon cursor-pointer" (click)="selectfkr()">...</span> -->
       </div>
       <span class="p-invalid" *ngIf="form.controls['spec_name'].invalid && form.controls['spec_name'].touched">
-        <span *ngIf="form.controls['spec_name'].errors?.required">Специфика не должно быть пустым</span>
+        <span *ngIf="form.controls['spec_name'].errors?.required">Специфика не должна быть пустой</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@
   <p-table styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header" style="width: 100%;">
       <tr style="text-align: center; font-weight: 700;">
-        <th style="text-align: center;">Номер</th>
+        <th style="text-align: center; width: 2.5%;">Номер</th>
         <th style="text-align: center; width: 10%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
       </tr>
     </ng-template>
@@ -69,16 +69,22 @@
   <p-table [value]="children" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body" style="width: 100%;">
       <tr>
-        <td style="text-align: center;">{{ri + 1}}</td>
+        <td style="text-align: center; width: 2.5%;">{{ri + 1}}</td>
         <td *ngFor="let kolon of ChildItem" style="text-align: center; width: 10%;">
           <!-- енстру -->
-          <input id="enstru" type="button" *ngIf="kolon.zn == 'enstru'" [ngModel]="kolon.zn_enstru.name_rus"
-            [readonly]="true" (click)="selectENSTRU(kolon.zn_enstru)" style="width: 100%;">
+          <div class="p-inputgroup" *ngIf="kolon.zn == 'enstru'">
+            <input id="enstru" type="text" [ngModel]="kolon.zn_enstru.name_rus" [readonly]="true" style="width: 100%;">
+            <span class="p-inputgroup-addon cursor-pointer" (click)="selectENSTRU(kolon.zn_enstru)">...</span>
+          </div>
           <!-- число -->
-          <input *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float" style="width: 100%;" (ngModelChange)="onInputChange($event, kolon, ri)">
+
+          <input type="number" *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float" style="width: 100%;"
+            (ngModelChange)="onInputChange($event, kolon, ri)">
           <!-- единица измерения -->
-          <input type="button" *ngIf="kolon.zn == 'ed_izm'" [ngModel]="kolon.zn_ed_izm.name" [readonly]="true"
-            (click)="selectEd_Izm(kolon.zn_ed_izm)" style="width: 100%;">
+          <div class="p-inputgroup" *ngIf="kolon.zn == 'ed_izm'">
+            <input type="text" [ngModel]="kolon.zn_ed_izm.name" [readonly]="true" style="width: 100%;">
+            <span class="p-inputgroup-addon cursor-pointer" (click)="selectEd_Izm(kolon.zn_ed_izm)">...</span>
+          </div>
           <!-- категория сотрудников -->
           <input type="button" *ngIf="kolon.zn == 'category_sotr'" [ngModel]="kolon.zn_category_sotr.name"
             [readonly]="true" (click)="selectCategorySotr(kolon.zn_category_sotr)" style="width: 100%;">
@@ -86,8 +92,8 @@
           <input type="button" *ngIf="kolon.zn == 'dolzhnost'" [ngModel]="kolon.zn_dolzhnost.name_rus" [readonly]="true"
             (click)="selectDolzhnost(kolon.zn_dolzhnost)" style="width: 100%;">
           <!-- подразделение -->
-          <input type="button" *ngIf="kolon.zn == 'podrazdelenie'" [ngModel]="kolon.zn_podrazdelenie.name_rus" [readonly]="true"
-            (click)="selectPodrazdelenie(kolon.zn_podrazdelenie)" style="width: 100%;">
+          <input type="button" *ngIf="kolon.zn == 'podrazdelenie'" [ngModel]="kolon.zn_podrazdelenie.name_rus"
+            [readonly]="true" (click)="selectPodrazdelenie(kolon.zn_podrazdelenie)" style="width: 100%;">
           <!-- доплата и надбавка -->
           <input type="button" *ngIf="kolon.zn == 'dopl_nadb'" [ngModel]="kolon.zn_dopl_nadb.name_rus" [readonly]="true"
             (click)="selectDoplNadb(kolon.zn_dopl_nadb)" style="width: 100%;">
@@ -98,8 +104,8 @@
           <input type="button" *ngIf="kolon.zn == 'marki_avto'" [ngModel]="kolon.zn_marki_avto.name" [readonly]="true"
             (click)="selectMarkiAvto(kolon.zn_marki_avto)" style="width: 100%;">
           <!-- стаж категорий -->
-          <input type="button" *ngIf="kolon.zn == 'stazh_category'" [ngModel]="kolon.zn_stazh_category.name" [readonly]="true"
-            (click)="selectStazh(kolon.zn_stazh_category)" style="width: 100%;">
+          <input type="button" *ngIf="kolon.zn == 'stazh_category'" [ngModel]="kolon.zn_stazh_category.name"
+            [readonly]="true" (click)="selectStazh(kolon.zn_stazh_category)" style="width: 100%;">
         </td>
       </tr>
     </ng-template>
