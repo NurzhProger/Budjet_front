@@ -112,7 +112,7 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.name">
+                  <input pInputText type="text" [(ngModel)]="item.name" style="width: 100%;">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.name}}
@@ -139,10 +139,10 @@
                 </ng-template>
               </p-cellEditor> -->
             </td>
-            <td>
+            <td style="width: 20px;">
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item._column">
+                  <input pInputText type="text" [(ngModel)]="item._column" style="width: 100%;">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item._column}}
@@ -152,7 +152,7 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.columns_used">
+                  <input pInputText type="text" [(ngModel)]="item.columns_used" style="width: 100%;">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.columns_used}}
@@ -162,7 +162,7 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input type="checkbox" [(ngModel)]="item.itog">
+                  <input type="checkbox" [(ngModel)]="item.itog" style="width: 100%;">
                 </ng-template>
                 <ng-template pTemplate="output">
                   <input type="checkbox" [(ngModel)]="item.itog" [disabled]="true">
@@ -172,7 +172,7 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <input type="checkbox" [(ngModel)]="item.total">
+                  <input type="checkbox" [(ngModel)]="item.total" style="width: 100%;">
                 </ng-template>
                 <ng-template pTemplate="output">
                   <input type="checkbox" [(ngModel)]="item.total" [disabled]="true">

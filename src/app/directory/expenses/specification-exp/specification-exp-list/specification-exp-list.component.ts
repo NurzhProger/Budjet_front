@@ -56,7 +56,8 @@ export class SpecificationExpListComponent implements OnInit {
   fetchSpec() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      searchspec: this.searchspec
     }
 
     this.spec$ = this.specService.fetch(params)
@@ -138,6 +139,14 @@ export class SpecificationExpListComponent implements OnInit {
   }
 
   search() {
+
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      searchspec: this.searchspec
+    }
+
+    this.spec$ = this.specService.fetch(params)
 
   }
 
