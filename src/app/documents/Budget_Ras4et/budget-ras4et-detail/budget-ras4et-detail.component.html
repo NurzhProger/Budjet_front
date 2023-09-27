@@ -62,6 +62,7 @@
       <tr style="text-align: center; font-weight: 700;">
         <th style="text-align: center; width: 2.5%;">Номер</th>
         <th style="text-align: center; width: 10%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
+        <th style="text-align: center; width: 5%;">Действия</th>
       </tr>
     </ng-template>
 
@@ -106,6 +107,13 @@
           <!-- стаж категорий -->
           <input type="button" *ngIf="kolon.zn == 'stazh_category'" [ngModel]="kolon.zn_stazh_category.name"
             [readonly]="true" (click)="selectStazh(kolon.zn_stazh_category)" style="width: 100%;">
+        </td>
+        <td style="padding: 0; margin:0; width: 5%;">
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+              (click)="delStr(ri)"></button>
+          </div>
+
         </td>
       </tr>
     </ng-template>

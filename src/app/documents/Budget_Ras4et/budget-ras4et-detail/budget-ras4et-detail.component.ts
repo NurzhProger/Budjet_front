@@ -94,12 +94,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
     if (this.izm) {
 
-      console.log(this.izm);
-
-      // let params = {
-      //   form: this.izm.ras_id.form_id
-      // }
-
       this.Budget_ras4et_Service.fetch_detail(this.izm)
         .subscribe(
           (data) => (
@@ -112,11 +106,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   preob() {
 
-    // for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
-    // console.log(this.Ras4et_detail.tbl);
-
     this.column = this.Ras4et_detail.tbl[0]
-    // }
 
     if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
@@ -132,6 +122,23 @@ export class BudgetRas4etDetailComponent implements OnInit {
   add_tbl() {
 
     this.children.push(this.Ras4et_detail.new_str[0])
+
+  }
+
+  delStr(ind: number) {
+    this.Budget_Confirmation.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.children.splice(ind, ind)
+        this.Budget_Confirmation.close()
+      },
+      reject: () => {
+        this.Budget_Confirmation.close();
+      }
+    });
+
 
   }
 
