@@ -1,6 +1,6 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ConfirmationService, MenuItem, MessageService,SelectItem  } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService, SelectItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { budjetService } from '../budget_request.servise'
 import { SHA256 } from 'crypto-js';
@@ -29,8 +29,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     private Budget_detail_ryref: DynamicDialogRef,
     private Budget_detail_messageServicedelSelect: MessageService,
     private Budget_detail_dialog: DialogService,
-    private Budget_Servise:budjetService,
-    private Budget_Confirmation:ConfirmationService)  { }
+    private Budget_Servise: budjetService,
+    private Budget_Confirmation: ConfirmationService) { }
 
 
   @Input() Budget_doc_id = ''
@@ -47,7 +47,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   selected = false;
   _lastfkr = 0
   allrecord = true
-  
+
   fkr: fkr_detail = {
     id: 0,
     code: '',
@@ -143,9 +143,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         .subscribe(
           (detail) => {
             this.Budget_detail = detail,
-            this.tbl = this.Budget_detail.tbl,
-            this.preobGodNumber(),
-            this.addFKRtoArray()
+              this.tbl = this.Budget_detail.tbl,
+              this.preobGodNumber(),
+              this.addFKRtoArray()
           }
         )
     }
@@ -160,7 +160,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       (data) => (
         responce = data, this._vid_rashoda = responce.results
       ),
-        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));    
+      (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
   }
   selectdannyi() {
     let responce: any;
@@ -168,7 +168,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       (data) => (
         responce = data, this._vid_dannyh = responce.results
       ),
-        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));    
+      (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
   }
   selectoperacii() {
     let responce: any;
@@ -176,13 +176,13 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       (data) => (
         responce = data, this._vid_operacii = responce.results
       ),
-        (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));    
+      (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
   }
 
   ngDoCheck(): void {
     let objString = JSON.stringify(this.Budget_detail)
     let hashBeg = SHA256(objString).toString()
-    
+
     if (hashBeg !== this.hashBegin && this.nochanged) {
       this.nochanged = false
       this.hashBegin = hashBeg
@@ -219,7 +219,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail.doc.god_ucheta = String(this.godNumber + '-01-01')
   }
 
-  saveDoc(close: boolean){
+  saveDoc(close: boolean) {
     let responce: any
     this.Budget_Servise.saveLimit(this.Budget_detail)
       .subscribe(
@@ -244,9 +244,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     }
   }
 
-  
 
-  closeform(close: boolean){
+
+  closeform(close: boolean) {
     let objString = JSON.stringify(this.Budget_detail)
     this.hashEnd = SHA256(objString).toString()
 
@@ -305,7 +305,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this._lastfkr = _fkr.id
   }
 
-  selectspec(){
+  selectspec() {
 
   }
 
@@ -314,45 +314,45 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   }
 
-  editFKR(ri:number) {
+  editFKR(ri: number) {
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(FkrSelectComponent,
       {
         header: 'Выбор ФКР',
         width: '60%',
         height: '80%'
       })
-      this.Budget_detail_ryref.onClose.subscribe((fkr: fkr_detail) => {
-        if (fkr) {
-          this.Budget_detail.tbl[ri]._fkr = {
-                id: fkr.id,
-                code: fkr.code,
-                name_kaz: fkr.name_kaz,
-                name_rus: fkr.name_rus
-              }
+    this.Budget_detail_ryref.onClose.subscribe((fkr: fkr_detail) => {
+      if (fkr) {
+        this.Budget_detail.tbl[ri]._fkr = {
+          id: fkr.id,
+          code: fkr.code,
+          name_kaz: fkr.name_kaz,
+          name_rus: fkr.name_rus
         }
-      })      
+      }
+    })
   }
 
-  viewForma(index:number){
+  viewForma(index: number) {
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(BudgetRas4etDetailComponent,
       {
         header: 'Редактирование Формы',
         width: '60%',
         height: '80%',
-        data: { formaid: this.Budget_detail.tbl[index]._form}
+        data: { formaid: this.Budget_detail.tbl[index]._form }
       })
 
     this.Budget_detail_ryref.onClose.subscribe((form: Ras4et_head) => {
       if (form) {
         this.Budget_detail.tbl[index]._form.id = form.id,
-        this.Budget_detail.tbl[index]._form.head_form = form._form.head_form,
-        this.Budget_detail.tbl[index]._form.name = form._form.name
+          this.Budget_detail.tbl[index]._form.head_form = form._form.head_form,
+          this.Budget_detail.tbl[index]._form.name = form._form.name
       }
     })
   }
 
-  onRowEdit(izm: number, form_id: number) {
-    this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ', id: {'ras_id':izm, 'form_id' : form_id}} });
+  onRowEdit(izm: any) {
+    this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ' + izm._form.name, id: izm } });
   }
 
   pushArray(fkr_detail: fkr_detail, spec_detail: specification_income_detail, form_detail: form_list_doc) {
@@ -372,7 +372,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           name_rus: spec_detail.name_rus
         },
         _form: {
-           id: form_detail.id,
+          id: form_detail.id,
           _spec: form_detail._spec,
           name: form_detail.name,
           head_form: form_detail.head_form,
@@ -407,7 +407,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     }
   }
 
-  addForm(fkr_detail: fkr_detail, spec_detail: specification_income_detail){
+  addForm(fkr_detail: fkr_detail, spec_detail: specification_income_detail) {
     if (fkr_detail !== undefined) {
       this.Budget_detail_ryref = this.Budget_detail_dialog.open(FormSelectComponent,
         {
@@ -452,20 +452,20 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     )
   }
 
-  add_dopl(){
+  add_dopl() {
 
   }
 
-  deleted_tbl(index:number){
+  deleted_tbl(index: number) {
 
   }
 
-  deleted_dopl(index:number){
+  deleted_dopl(index: number) {
 
   }
 
 
-  viewOrg(){
+  viewOrg() {
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(OrganizationDetailComponent,
       {
         header: 'Редактирование организации',
@@ -482,7 +482,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     })
   }
 
-  selectOrg(){
+  selectOrg() {
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(OrganizationSelectComponent,
       {
         header: 'Выбор организации',

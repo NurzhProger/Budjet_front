@@ -16,8 +16,8 @@ export class budjetRas4et_Service {
   host = "http://192.168.5.27:9999/"
 
 
-  fetch_detail(id: number, params: any): Observable<Ras4et_doc> {
-    return this.http.get<Ras4et_doc>(this.host + 'docs/raschetitem/' + id, {params} )
+  fetch_detail(params: any): Observable<Ras4et_doc> {
+    return this.http.post<Ras4et_doc>(this.host + 'docs/raschetitem/', params)
   }
 
   saveLimit(ras4et: Ras4et_doc) {
