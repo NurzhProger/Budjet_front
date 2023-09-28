@@ -89,12 +89,13 @@ export class BudgetRas4etDetailComponent implements OnInit {
         this.children.push(this.Ras4et_detail.tbl[i])
       }
     }
+    console.log(this.children.length);
 
   }
 
   add_tbl() {
 
-    console.log(this.children.length);
+    
     
     let newnew : any = []
     this.copy_str =  JSON.parse(JSON.stringify(this.Ras4et_detail.new_str));
@@ -326,7 +327,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
       .subscribe(
         (data) => (
           this.Budget_ras4et_Detailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
-          responce = data, this.Ras4et_detail = responce,
           this.closeaftersave(close)
         ),
         (error) => (

@@ -221,11 +221,14 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   saveDoc(close: boolean) {
     let responce: any
+    this.Budget_detail.tbl = this.tbl
+    console.log(this.Budget_detail);
+    
     this.Budget_Servise.saveLimit(this.Budget_detail)
       .subscribe(
         (data) => (
           this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
-          responce = data, this.Budget_detail = responce, this.closeaftersave(close)
+          this.closeaftersave(close)
         ),
         (error) => (
           this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
@@ -358,6 +361,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.tbl.splice(ind, 1)
+        this.Budget_detail.tbl = this.tbl
         this.Budget_Confirmation.close()
       },
       reject: () => {
