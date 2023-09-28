@@ -46,37 +46,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   @Input() izm: any
   // @Input() form_id = ''
-  tbl: ChildItem = {
-    id: 0,
-    name: '',
-    column: 0,
-    columns_used: '',
-    itog: false,
-    total: false,
-    stroka: 0,
-    zn: '',
-    zn_string: '',
-    zn_float: null,
-    zn_enstru: {
-      id: 0,
-      code: '',
-      name_kaz: '',
-      name_rus: '',
-      harak_kaz: '',
-      harak_rus: '',
-      _tip_tru: ''
-    },
-    zn_stazh_category: 0,
-    zn_category_sotr: 0,
-    zn_dolzhnost: 0,
-    zn_podrazdelenie: 0,
-    zn_dopl_nadb: 0,
-    zn_oblasti_reg: 0,
-    zn_marki_avto: 0,
-    zn_ed_izm: 0
-  }
+  tbl: ChildItem
   form: FormGroup
-  items: MenuItem[];
+  items: MenuItem[]
   Ras4et_detail: Ras4et_doc
   children: any = []
   copy_str: any = []
@@ -143,7 +115,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       header: 'Удаление',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.children.splice(ind, ind)
+        this.children.splice(ind, 1)
         this.Budget_Confirmation.close()
       },
       reject: () => {

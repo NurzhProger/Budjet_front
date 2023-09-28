@@ -351,6 +351,23 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     })
   }
 
+  delReq(ind: number, code: number) {
+    this.Budget_Confirmation.confirm({
+      message: 'Вы действительно хотите специфику ' + code + '?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.tbl.splice(ind, 1)
+        this.Budget_Confirmation.close()
+      },
+      reject: () => {
+        this.Budget_Confirmation.close();
+      }
+    });
+
+
+  }
+
   onRowEdit(izm: any) {
     this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ' + izm._form.name, id: izm } });
   }
