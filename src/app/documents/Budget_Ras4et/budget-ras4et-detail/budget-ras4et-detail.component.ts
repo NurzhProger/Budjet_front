@@ -79,6 +79,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   items: MenuItem[];
   Ras4et_detail: Ras4et_doc
   children: any = []
+  copy_str: any = []
   column: any
   hashBegin = ''
   hashEnd = ''
@@ -121,8 +122,19 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   add_tbl() {
 
-    this.children.push(this.Ras4et_detail.new_str[0])
-
+    console.log(this.children.length);
+    
+    let newnew : any = []
+    this.copy_str =  JSON.parse(JSON.stringify(this.Ras4et_detail.new_str));
+    newnew = this.copy_str[0]
+    let asd : any = []
+    asd = newnew
+    for (let i = 0; newnew.length > i; i++) {
+      asd[i].stroka = this.children.length+1
+      }
+    console.log(asd);
+    
+    this.children.push(asd)
   }
 
   delStr(ind: number) {
