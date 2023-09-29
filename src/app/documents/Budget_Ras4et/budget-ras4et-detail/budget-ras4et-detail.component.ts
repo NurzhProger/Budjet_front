@@ -106,7 +106,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     for (let i = 0; newnew.length > i; i++) {
       asd[i].stroka = this.children.length+1
       }
-    console.log(asd);
     
     this.children.push(asd)
   }
@@ -170,7 +169,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((category_sotr_element: category_sotr_element) => {
       if (category_sotr_element) {
-        cat_sotr = category_sotr_element
+        cat_sotr.id = category_sotr_element.id
+        cat_sotr.name = category_sotr_element.name
       }
     })
   }
@@ -185,7 +185,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((dolzhnost_element: dolzhnost_element) => {
       if (dolzhnost_element) {
-        dolzh_el = dolzhnost_element
+        dolzh_el.id = dolzhnost_element.id
+        dolzh_el.name_rus = dolzhnost_element.name_rus
+
       }
     })
   }
@@ -200,7 +202,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((podrazdelenie_element: podrazdelenie_element) => {
       if (podrazdelenie_element) {
-        podr_el = podrazdelenie_element
+        podr_el.id = podrazdelenie_element.id
+        podr_el.name_rus = podrazdelenie_element.name_rus
       }
     })
   }
@@ -215,7 +218,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((doplaty_nadbavky_element: doplaty_nadbavky_element) => {
       if (doplaty_nadbavky_element) {
-        dopl_nad = doplaty_nadbavky_element
+        dopl_nad.id = doplaty_nadbavky_element.id
+        dopl_nad.name_rus = doplaty_nadbavky_element.name_rus
       }
     })
   }
@@ -230,7 +234,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((oblasti_element: oblasti_element) => {
       if (oblasti_element) {
-        obl_reg = oblasti_element
+        obl_reg.id = oblasti_element.id
+        obl_reg.name = oblasti_element.name
       }
     })
   }
@@ -245,7 +250,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((marki_avto_element: marki_avto_element) => {
       if (marki_avto_element) {
-        marki = marki_avto_element
+        marki.id = marki_avto_element.id
+        marki.name = marki_avto_element.name
       }
     })
   }
@@ -260,7 +266,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((stazh_category_element: stazh_category_element) => {
       if (stazh_category_element) {
-        stazh_cat = stazh_category_element
+        stazh_cat.name = stazh_category_element.name
+        stazh_cat.id = stazh_category_element.id
       }
     })
   }
@@ -386,15 +393,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       height: '95%',
       data: {
         'doc': {
-          'id': this.Ras4et_detail.head.id,
-          // 'nom': this.izmPlatezhiDetail.doc.nom,
-          // 'type_doc': 'izm-exp',
-          // 'service': 'report2728',
-          // 'prilozhenieValue': 'obl',
-          // 'prilozhenieType': [
-          //   { label: 'Приложение 27', value: 'obl' },
-          //   { label: 'Приложение 28', value: 'pay' }
-          // ]
+          'id': this.Ras4et_detail.head.id
         },
       },
       contentStyle: { overflow: 'auto' },
