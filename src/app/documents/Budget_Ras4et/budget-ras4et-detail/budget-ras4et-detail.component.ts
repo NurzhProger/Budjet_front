@@ -27,6 +27,7 @@ import { OblastiRegionyListComponent } from 'src/app/directory/planirovanie/obla
 import { MarkiAvtoListComponent } from 'src/app/directory/planirovanie/marki_avto/marki-avto-list/marki-avto-list.component';
 import { StazhCategoryListComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-list/stazh-category-list.component';
 import * as math from 'mathjs';
+import { Ras4etPrintFormComponent } from '../ras4et-print-form/ras4et-print-form/ras4et-print-form.component';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -379,27 +380,27 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   toPrint() {
-    // this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(reportComponent, {
-    //   header: 'Печатная форма',
-    //   width: '95%',
-    //   height: '95%',
-    //   data: {
-    //     'doc': {
-    //       // 'id': this.izmPlatezhiDetail.doc.id,
-    //       // 'nom': this.izmPlatezhiDetail.doc.nom,
-    //       // 'type_doc': 'izm-exp',
-    //       // 'service': 'report2728',
-    //       // 'prilozhenieValue': 'obl',
-    //       // 'prilozhenieType': [
-    //       //   { label: 'Приложение 27', value: 'obl' },
-    //       //   { label: 'Приложение 28', value: 'pay' }
-    //       // ]
-    //     },
-    //   },
-    //   contentStyle: { overflow: 'auto' },
-    //   baseZIndex: 10000,
-    //   maximizable: true
-    // });
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(Ras4etPrintFormComponent, {
+      header: 'Печатная форма',
+      width: '95%',
+      height: '95%',
+      data: {
+        'doc': {
+          'id': this.Ras4et_detail.head.id,
+          // 'nom': this.izmPlatezhiDetail.doc.nom,
+          // 'type_doc': 'izm-exp',
+          // 'service': 'report2728',
+          // 'prilozhenieValue': 'obl',
+          // 'prilozhenieType': [
+          //   { label: 'Приложение 27', value: 'obl' },
+          //   { label: 'Приложение 28', value: 'pay' }
+          // ]
+        },
+      },
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
   }
 
 
