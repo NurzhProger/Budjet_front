@@ -111,6 +111,7 @@ import { VidRashodaComponent } from './enums/vid_rashoda/vid-rashoda/vid-rashoda
 import { VidOperaciiComponent } from './enums/vid_operacii/vid-operacii/vid-operacii.component';
 import { VidDannyhComponent } from './enums/vid_dannyh/vid-dannyh/vid-dannyh.component';
 import { TipSposobRas4etaComponent } from './enums/tip-sposob-ras4eta/tip-sposob-ras4eta.component';
+import { Ras4etPrintFormComponent } from './documents/Budget_Ras4et/ras4et-print-form/ras4et-print-form/ras4et-print-form.component';
 
 @NgModule({
   imports: [
@@ -224,7 +225,8 @@ import { TipSposobRas4etaComponent } from './enums/tip-sposob-ras4eta/tip-sposob
     VidRashodaComponent,
     VidOperaciiComponent,
     VidDannyhComponent,
-    TipSposobRas4etaComponent],
+    TipSposobRas4etaComponent,
+    Ras4etPrintFormComponent],
   bootstrap: [AppComponent],
   providers: [
     {

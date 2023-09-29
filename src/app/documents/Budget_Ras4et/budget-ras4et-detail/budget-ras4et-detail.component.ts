@@ -378,6 +378,30 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
+  toPrint() {
+    // this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(reportComponent, {
+    //   header: 'Печатная форма',
+    //   width: '95%',
+    //   height: '95%',
+    //   data: {
+    //     'doc': {
+    //       // 'id': this.izmPlatezhiDetail.doc.id,
+    //       // 'nom': this.izmPlatezhiDetail.doc.nom,
+    //       // 'type_doc': 'izm-exp',
+    //       // 'service': 'report2728',
+    //       // 'prilozhenieValue': 'obl',
+    //       // 'prilozhenieType': [
+    //       //   { label: 'Приложение 27', value: 'obl' },
+    //       //   { label: 'Приложение 28', value: 'pay' }
+    //       // ]
+    //     },
+    //   },
+    //   contentStyle: { overflow: 'auto' },
+    //   baseZIndex: 10000,
+    //   maximizable: true
+    // });
+  }
+
 
 
 }
