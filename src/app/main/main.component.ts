@@ -6,6 +6,8 @@ import { MenuModule } from 'primeng/menu';
 import { UserComponent } from '../user/user.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+import { MainService } from './main.service';
+import { profileuser } from './interfaces';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -15,6 +17,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private mainservice: MainService,
     private config: PrimeNGConfig,
     private dialog_form: DialogService,
     private user_massage: MessageService,
@@ -33,8 +36,45 @@ export class MainComponent implements OnInit {
   counttabs = 0;
   User: MenuModule[];
   username = ''
+  profileuser: profileuser = {
+    user_id: '',
+    username: '',
+    first_name: '',
+    org_id: '',
+    org_name: '',
+    budjet_id: '',
+    budjet_name: ''
+  }
 
   ngOnInit(): void {
+
+    let responce: any
+
+    // this.mainservice
+    //   .getinfo()
+    //   .subscribe(
+    //     (data) => (responce = data,
+    //       this.profileuser.user_id = responce.user.id,
+    //       this.profileuser.first_name = responce.user.first_name,
+    //       this.profileuser.username = responce.user.username,
+    //       this.profileuser.org_id = responce.profile._organization.id,
+    //       this.profileuser.org_name = responce.profile._organization.name_rus,
+    //       this.profileuser.budjet_id = responce.profile._organization._budjet.id,
+    //       this.profileuser.budjet_name = responce.profile._organization._budjet.name_rus,
+    //       )
+    // )
+
+    this.formMenu()
+
+    this.config.setTranslation({
+      monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+      monthNamesShort: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+      dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+      firstDayOfWeek: 1
+    })
+  }
+
+  formMenu() {
     this.User = [
 
       { label: 'Изменить пароль', icon: 'pi pi-fw pi-lock', command: this.changepass },
@@ -278,16 +318,6 @@ export class MainComponent implements OnInit {
         command: () => this.logout()
       }
     ]
-
-    this.config.setTranslation({
-      monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-      monthNamesShort: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-      dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
-      firstDayOfWeek: 1
-    })
-
-
-
   }
 
   openTab(nameselector: string, nametitle: string, id: string, data?: any) {

@@ -219,12 +219,59 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail.doc.god_ucheta = String(this.godNumber + '-01-01')
   }
 
+  addForm(fkr_detail: fkr_detail, spec_detail: specification_income_detail) {
+
+    if (fkr_detail !== undefined) {
+      this.Budget_detail_ryref = this.Budget_detail_dialog.open(FormSelectComponent,
+        {
+          header: 'Выбор формы',
+          width: '60%',
+          height: '80%'
+        })
+      this.Budget_detail_ryref.onClose.subscribe((form_detail: form_list_doc) => {
+        if (form_detail) {
+
+          this.pushArray(fkr_detail, spec_detail, form_detail)
+
+          let indexx = this.Budget_detail.tbl.findIndex(item => item['_spec'].id == spec_detail.id)
+
+          if (indexx !== -1) {
+            this.saveNewSpecific(indexx, fkr_detail)
+          }
+        }
+      }
+      )
+    }
+    else {
+      this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите ФКР!' })
+      return
+
+    }
+  }
+
+  saveNewSpecific(indexx: number, fkr_detail: fkr_detail) {
+    let responce: any
+
+    this.Budget_Servise
+      .saveLimit(this.Budget_detail)
+      .subscribe(
+        (data) => (
+          responce = data,
+          this.Budget_detail.tbl[indexx].id = responce.new_id,
+          this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
+        ),
+        (error) => (
+          this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
+      )
+  }
+
   saveDoc(close: boolean) {
     let responce: any
     this.Budget_detail.tbl = this.tbl
-    console.log(this.Budget_detail);
-    
-    this.Budget_Servise.saveLimit(this.Budget_detail)
+
+    this.Budget_Servise
+      .saveLimit(this.Budget_detail)
       .subscribe(
         (data) => (
           this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
@@ -369,12 +416,31 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         this.Budget_Confirmation.close();
       }
     });
-    
+
   }
 
-  onRowEdit(izm: any) {
-    console.log(izm);
-    
+  onRowEdit(izm: any, ri: number) {
+
+
+    this.Budget_detail_ryref = this.Budget_detail_dialog.open(BudgetRas4etDetailComponent,
+      {
+        header: 'Редактирование расчетной таблицы',
+        width: '100%',
+        height: '100%',
+        data: { data: izm }
+      })
+
+    this.Budget_detail_ryref.onClose.subscribe((summ: number) => {
+      console.log(summ);
+
+      if (summ) {
+
+        izm.summ = summ
+        // this.Budget_detail.tbl[index]._form.head_form = form._form.head_form,
+        // this.Budget_detail.tbl[index]._form.name = form._form.name
+      }
+    })
+
     // this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ' + izm._form.name, id: izm } });
   }
 
@@ -416,33 +482,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         })
       this.Budget_detail_ryref.onClose.subscribe((spec_detail: specification_income_detail) => {
         if (spec_detail) {
-          // this.pushArray(fkr_detail, spec_detail)
-          // this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
           this.addForm(fkr_detail, spec_detail)
-        }
-      }
-      )
-    }
-    else {
-      this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите ФКР!' })
-      return
-
-    }
-  }
-
-  addForm(fkr_detail: fkr_detail, spec_detail: specification_income_detail) {
-    if (fkr_detail !== undefined) {
-      this.Budget_detail_ryref = this.Budget_detail_dialog.open(FormSelectComponent,
-        {
-          header: 'Выбор формы',
-          width: '60%',
-          height: '80%'
-        })
-      this.Budget_detail_ryref.onClose.subscribe((form_detail: form_list_doc) => {
-        if (form_detail) {
-          this.pushArray(fkr_detail, spec_detail, form_detail)
-          this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
-          this.saveDoc(false)
         }
       }
       )

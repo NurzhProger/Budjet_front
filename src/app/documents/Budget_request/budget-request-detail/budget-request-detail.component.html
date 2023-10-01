@@ -29,9 +29,6 @@
                     <input id="number_doc" type="text" pInputText [(ngModel)]="Budget_detail.doc.nom"
                         formControlName="number_doc" />
                 </div>
-                <!-- <span class="p-invalid" *ngIf="form.controls['number_doc'].invalid && form.controls['number_doc'].touched">
-              <span *ngIf="form.controls['number_doc'].errors?.required">Номер не должен быть пустым</span>
-          </span> -->
             </div>
 
             <div class="p-field" style="padding-right: 10px;">
@@ -45,8 +42,7 @@
                     <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
                 </span>
             </div>
-
-            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+            <div class="p-field" style="padding-right: 10px; width: 20rem;">
                 <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
                 <div class="p-inputgroup">
                     <input id="org_name" type="text" pInputText [(ngModel)]="Budget_detail.doc._organization.name_rus"
@@ -65,10 +61,6 @@
                         пустым</span>
                 </span>
             </div>
-
-
-
-
             <div class="p-field" style="padding-right: 10px;">
 
                 <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
@@ -85,7 +77,7 @@
 
         <div style="display: flex; padding-bottom: 10px;">
             <!-- вид расхода -->
-            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+            <div class="p-field" style="padding-right: 10px;">
                 <label for="vid_rashoda">Вид расхода<span style="color: red;">*</span></label>
                 <div>
                     <p-dropdown placeholder="Выберите вид расхода" [options]="_vid_rashoda" optionLabel="name"
@@ -100,7 +92,7 @@
             </div>
 
             <!-- вид данных -->
-            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+            <div class="p-field" style="padding-right: 10px;">
                 <label for="vid_dannyh">Вид данных<span style="color: red;">*</span></label>
                 <div>
                     <p-dropdown placeholder="Выберите вид данных" [options]="_vid_dannyh" optionLabel="name"
@@ -115,7 +107,7 @@
             </div>
 
             <!-- вид операции -->
-            <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
+            <div class="p-field" style="padding-right: 10px;">
                 <label for="vid_operacii">Вид операции<span style="color: red;">*</span></label>
                 <div>
                     <p-dropdown placeholder="Выберите вид операции" [options]="_vid_operacii" optionLabel="name"
@@ -207,7 +199,7 @@
                                         <div class="flex align-items-center justify-content-center gap-2">
                                             <button pButton pRipple type="button" icon="pi pi-pencil"
                                                 class="p-button-rounded p-button-text"
-                                                (click)="onRowEdit(izm)"></button>
+                                                (click)="onRowEdit(izm, ri)"></button>
                                             <button pButton pRipple type="button" icon="pi pi-trash"
                                                 (click)="delReq(ri, izm._spec.code)"
                                                 class="p-button-rounded p-button-text"></button>

@@ -45,8 +45,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
     private Budget_Confirmation: ConfirmationService) { }
 
   @Output() closeEvent = new EventEmitter<any>()
-  @Input() izm: any
+  // @Input() izm: any
   // @Input() form_id = ''
+  izm: any
   tbl: ChildItem
   form: FormGroup
   items: MenuItem[]
@@ -65,6 +66,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       name_doc: new FormControl(null, [Validators.required]),
       spec_name: new FormControl(null, [Validators.required])
     })
+
+    this.izm = this.Budget_ras4et_Detailconfig.data.data
 
     if (this.izm) {
 
@@ -96,17 +99,17 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   add_tbl() {
 
-    
-    
-    let newnew : any = []
-    this.copy_str =  JSON.parse(JSON.stringify(this.Ras4et_detail.new_str));
+
+
+    let newnew: any = []
+    this.copy_str = JSON.parse(JSON.stringify(this.Ras4et_detail.new_str));
     newnew = this.copy_str[0]
-    let asd : any = []
+    let asd: any = []
     asd = newnew
     for (let i = 0; newnew.length > i; i++) {
-      asd[i].stroka = this.children.length+1
-      }
-    
+      asd[i].stroka = this.children.length + 1
+    }
+
     this.children.push(asd)
   }
 
@@ -304,6 +307,35 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.calculate();
   }
 
+  onInputChangeString(value: string, kolon: ChildItem, ri: number) {
+    // let mass: any;
+
+    kolon.zn_string = value;
+
+    // mass = [this.children[ri]];
+
+    // let mass_arr = mass[0];
+    // let aaa = '1234567890';
+    // // this.Ras4et_detail.tbl[ri].
+    // for (let i = 0; i < mass[0].length; i++) {
+    //   if (mass_arr[i].columns_used !== '') {
+    //     let formula = '';
+    //     let mass_simv = mass_arr[i].columns_used.split(' ');
+    //     for (let y = 0; y < mass_simv.length; y++) {
+    //       if (aaa.includes(mass_simv[y])) {
+    //         formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
+    //       }
+    //       else {
+    //         formula = formula + mass_simv[y];
+    //       }
+    //     }
+    //     // console.log(formula);
+    //     mass_arr[i].zn_float = math.evaluate(formula);
+    //   }
+    // }
+    // this.calculate();
+  }
+
   calculate() {
     let summdoc = 0;
     let mass: any = []
@@ -350,7 +382,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.hashBegin = this.hashEnd
 
     if (close) {
-      this.closeEvent.emit()
+      this.Budget_ras4et_Detailref.close(this.Ras4et_detail.head.summ)
     }
   }
 

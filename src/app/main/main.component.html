@@ -7,7 +7,7 @@
 
         <div class="p-toolbar-group-right">
             <div style="margin-right: 10px;">
-                {{username}}
+                {{profileuser.first_name}}
             </div>
             <p-avatar icon="pi pi-user" (click)="menu.toggle($event)" styleClass="mr-2" size="danger" shape="circle">
             </p-avatar>
@@ -187,7 +187,7 @@
                 </app-budget-request-detail>
 
 
-                <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'" [izm]="number"
+                <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'"
                     (closeEvent)="removetab()">
                 </app-budget-ras4et-detail>
 
