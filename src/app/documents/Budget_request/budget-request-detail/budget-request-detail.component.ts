@@ -363,17 +363,19 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         this.tbl.splice(ind, 1)
         this.Budget_detail.tbl = this.tbl
         this.Budget_Confirmation.close()
+        this.saveDoc(false)
       },
       reject: () => {
         this.Budget_Confirmation.close();
       }
     });
-
-
+    
   }
 
   onRowEdit(izm: any) {
-    this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ' + izm._form.name, id: izm } });
+    console.log(izm);
+    
+    // this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ' + izm._form.name, id: izm } });
   }
 
   pushArray(fkr_detail: fkr_detail, spec_detail: specification_income_detail, form_detail: form_list_doc) {
@@ -440,6 +442,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         if (form_detail) {
           this.pushArray(fkr_detail, spec_detail, form_detail)
           this.tbl = this.Budget_detail.tbl.filter(item => item['_fkr'].id == fkr_detail.id)
+          this.saveDoc(false)
         }
       }
       )
