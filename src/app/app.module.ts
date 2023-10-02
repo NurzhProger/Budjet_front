@@ -113,6 +113,7 @@ import { VidDannyhComponent } from './enums/vid_dannyh/vid-dannyh/vid-dannyh.com
 import { TipSposobRas4etaComponent } from './enums/tip-sposob-ras4eta/tip-sposob-ras4eta.component';
 import { Ras4etPrintFormComponent } from './documents/Budget_Ras4et/ras4et-print-form/ras4et-print-form/ras4et-print-form.component';
 import { Prilozhenie60NewComponent } from './reports/prilozhenie_60/prilozhenie60-new/prilozhenie60-new.component';
+import { Prilozhenie5758Component } from './reports/prilozhenie_57_58/prilozhenie5758/prilozhenie5758.component';
 
 @NgModule({
   imports: [
@@ -228,7 +229,8 @@ import { Prilozhenie60NewComponent } from './reports/prilozhenie_60/prilozhenie6
     VidDannyhComponent,
     TipSposobRas4etaComponent,
     Ras4etPrintFormComponent,
-    Prilozhenie60NewComponent],
+    Prilozhenie60NewComponent,
+    Prilozhenie5758Component],
   bootstrap: [AppComponent],
   providers: [
     {
