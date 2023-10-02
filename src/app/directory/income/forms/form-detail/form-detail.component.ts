@@ -16,6 +16,9 @@ import { EnstruListComponent } from '../../../planirovanie/ensTRU/enstru-list/en
 import { ensTRU_element } from '../../../planirovanie/ensTRU/interfaces'
 import { Sposob_ras4eta_list } from '../../../../enums/tip-sposob-ras4eta/sposob_raslist.interfaces'
 import { Sposob_ras4eta_servise } from '../../../../enums/tip-sposob-ras4eta/sposob_raslist.servise'
+import { specification_expenses_detail } from 'src/app/directory/expenses/specification-exp/interfaces';
+import { SpecificationExpSelectComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-select/specification-exp-select.component';
+import { SpecificationExpDetailComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-detail/specification-exp-detail.component';
 @Component({
   selector: 'app-form-detail',
   templateUrl: './form-detail.component.html',
@@ -304,7 +307,7 @@ export class FormDetailComponent implements OnInit {
 
   viewspec(){
 
-    this.form_detail_ryref = this.form_detail_dialog.open(SpecificationIncomeDetailComponent,
+    this.form_detail_ryref = this.form_detail_dialog.open(SpecificationExpDetailComponent,
       {
         header: 'Редактирование специфики',
         width: '60%',
@@ -312,7 +315,7 @@ export class FormDetailComponent implements OnInit {
         data: { spec_inc: this.form_detail.form._spec}
       })
 
-    this.form_detail_ryref.onClose.subscribe((spec: specification_income_detail) => {
+    this.form_detail_ryref.onClose.subscribe((spec: specification_expenses_detail) => {
       if (spec) {
         this.form_detail.form._spec.id = spec.id,
         this.form_detail.form._spec.code = spec.code,
@@ -324,14 +327,14 @@ export class FormDetailComponent implements OnInit {
 
   selectspec(){
 
-    this.form_detail_ryref = this.form_detail_dialog.open(SpecificationIncomeSelectComponent,
+    this.form_detail_ryref = this.form_detail_dialog.open(SpecificationExpSelectComponent,
       {
         header: 'Выбор специфики',
         width: '60%',
         height: '80%'
       })
 
-    this.form_detail_ryref.onClose.subscribe((spec: specification_income_detail) => {
+    this.form_detail_ryref.onClose.subscribe((spec: specification_expenses_detail) => {
       if (spec) {
         this.form_detail.form._spec.id = spec.id,
         this.form_detail.form._spec.code = spec.code,
