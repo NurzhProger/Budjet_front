@@ -56,7 +56,8 @@ export class SpecificationExpSelectComponent implements OnInit {
   fetchSpec() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      searchspec: this.searchspec
     }
 
     this.spec$ = this.specService.fetch(params)

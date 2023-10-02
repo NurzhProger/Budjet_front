@@ -66,7 +66,14 @@ export class FkrListComponent implements OnInit {
   }
 
   search() {
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      search: this.searchfkr
+    }
 
+    this.fkr$ = this.fkrListService.fetch(params)
   }
+  
 
 }
