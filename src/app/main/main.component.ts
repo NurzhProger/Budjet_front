@@ -229,10 +229,6 @@ export class MainComponent implements OnInit {
                 command: () => this.openTab('app-budget-request-list', 'Бюджетная заявка', '')
               },
               {
-                label: 'Форма',
-                command: () => this.openTab('app-budget-ras4et-detail', 'Форма', '')
-              },
-              {
                 label: 'Лимит на годовой бюджет',
                 command: () => this.openTab('app-limit-list', 'Лимит на годовой бюджет', '')
               }
@@ -242,59 +238,7 @@ export class MainComponent implements OnInit {
                 // }
               ]
             }
-          ],
-          // [
-          //   {
-          //     label: 'Расходы',
-          //     items: [{
-          //       label: 'Утвержденный план по расходам',
-          //       command: () => this.openTab('app-utv-exp-doc-list', 'Утвержденный план по расходам', '')
-          //     }, {
-          //       label: 'Изменения плана по расходам',
-          //       command: () => this.openTab('app-izm-inc-doc-list', 'Изменения плана по поступлениям', '')
-          //     }]
-          //   }
-          // ],
-          // [
-          //   {
-          //     label: 'Импорт данных',
-          //     items: [{
-          //       label: 'Импорт формы 2-19',
-          //       command: () => this.openTab('app-import219-deteail', 'Импорт формы 2-19', '')
-          //     }]
-          //   }
-          // ]
-        ]
-      },
-      {
-        label: 'Перечисления',
-        icon: 'pi pi-fw pi-file',
-        items: [
-          [
-            {
-              label: 'Перечисления',
-              items: [{
-                label: 'Тип доплат',
-                command: () => this.openTab('app-tip-dopl', 'Тип доплат', '')
-              },
-              {
-                label: 'Тип ТРУ',
-                command: () => this.openTab('app-tip-tru', 'Тип ТРУ', '')
-              },
-              {
-                label: 'Показатели',
-                command: () => this.openTab('app-stavka-list', 'Показатели', '')
-              },
-              {
-                label: 'Тип топлива',
-                command: () => this.openTab('app-tip-topliva', 'Тип топлива', '')
-              },
-              {
-                label: 'Вид транспорта',
-                command: () => this.openTab('app-vid-transporta', 'Вид транспорта', '')
-              }]
-            }
-          ],
+          ]
         ]
       },
       {
