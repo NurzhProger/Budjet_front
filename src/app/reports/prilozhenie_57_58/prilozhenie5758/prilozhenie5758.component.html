@@ -8,7 +8,7 @@
             </div>
 
                 <!-- <label for="org_name">Наименование организации</label> -->
-                <div class="p-inputgroup" style="padding-right: 10px; width: 30%;">
+                <div class="p-inputgroup" style="padding-right: 10px; width: 15%;">
                     <input id="org_name" type="text" pInputText [(ngModel)]="_organization.name" />
                     <span *ngIf="_organization.id !== 0" class="p-inputgroup-addon cursor-pointer" (click)="viewOrg()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -20,9 +20,19 @@
                     <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()">...</span>
                 </div>
 
-                <div class="p-inputgroup" style="padding-right: 10px; width: 30%;">
+                <div class="p-inputgroup" style="padding-right: 10px; width: 15%;">
                     <input id="fkr_name" type="text" pInputText [(ngModel)]="_fkr.name" />
                     <span class="p-inputgroup-addon cursor-pointer" (click)="selectFKR()">...</span>
+                </div>
+
+                <div class="p-field">
+                    <!-- <label for="type_name">Приложения </label> -->
+                    <div class="card flex justify-content-center" style="width: 100%;">
+                        <p-dropdown id="type_name" [options]="prilozhenieType" placeholder="Выберите приложение"
+                            optionLabel="label" optionValue="value" appendTo="body" [(ngModel)]="prilozhenieValue"
+                            (ngModelChange)="changePrilozhenie()">
+                        </p-dropdown>
+                    </div>
                 </div>
 
         </div>

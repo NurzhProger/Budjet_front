@@ -9,6 +9,8 @@ export class Prilozhenie5758Component implements OnInit {
 
   constructor() { }
   prilozhenieType: any = []
+  url: any = ''
+  prilozhenieValue = 'prilozhenie57'
   _organization = {
     'id': 0,
     'name': ''
@@ -19,6 +21,10 @@ _fkr = {
   'name': ''
 }
   ngOnInit(): void {
+    this.prilozhenieType = [
+      { label: 'Приложение 57', value: 'prilozhenie57' },
+      { label: 'Приложение 58', value: 'prilozhenie58' }
+  ]
   }
 
   form() {
@@ -35,6 +41,10 @@ _fkr = {
 
   selectFKR() {
 
+  }
+
+  changePrilozhenie() {
+    this.url = ''
   }
 
   closeform() {

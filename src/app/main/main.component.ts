@@ -307,11 +307,8 @@ export class MainComponent implements OnInit {
               items: [{
                 label: 'Приложение 60',
                 command: () => this.openTab('app-prilozhenie60-new', 'Приложение 60', '')
-              }]
-            },
-            {
-              label: 'Приложения',
-              items: [{
+              },
+              {
                 label: 'Приложение №57, 58',
                 command: () => this.openTab('app-prilozhenie5758', 'Приложение №57, 58', '')
               }]
