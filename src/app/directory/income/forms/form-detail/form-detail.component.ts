@@ -83,6 +83,7 @@ export class FormDetailComponent implements OnInit {
       id: 0,
       columns_used: "",
       summ: 0,
+      _column: 0,
       _form: 0,
       _doplata: 0,
       _doplata_name: '',
@@ -175,7 +176,7 @@ export class FormDetailComponent implements OnInit {
     ];
 
     // console.log(this.sposobOptions)
-    
+
     this.updateWindowSize()
 
   }
@@ -290,6 +291,7 @@ export class FormDetailComponent implements OnInit {
         columns_used: "",
         summ: 0,
         _form: 0,
+        _column: 0,
         _doplata: 0,
         _doplata_name: "",
         _sposob_ras: "",}
