@@ -10,6 +10,8 @@ import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
 import { OrganizationDetailComponent } from 'src/app/directory/organization/organization-detail/organization-detail.component';
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
+import { profileuser } from 'src/app/login/interfaces';
+import { MainComponent } from 'src/app/main/main.component';
 
 @Component({
   selector: 'app-limit-element',
@@ -22,10 +24,12 @@ export class LimitElementComponent implements OnInit, DoCheck{
   constructor(
     private LimitService: LimitService,
     private limitMessage: MessageService,
+    private MainComponent: MainComponent,
     private fkrRef: DynamicDialogRef,
     private limitDetaildialog: DialogService,
     private limitDetailconfirm: ConfirmationService 
   ) {
+    this.profileuser = this.MainComponent.profileuser
     this.items = [
       {
         label: 'Записать',
@@ -37,7 +41,7 @@ export class LimitElementComponent implements OnInit, DoCheck{
     ]
   }
  
-  
+  profileuser: profileuser
   items: MenuItem[];
   form: FormGroup;
   selected = false;
@@ -110,9 +114,29 @@ export class LimitElementComponent implements OnInit, DoCheck{
         )
     }
 
-   
-    
-    
+    if (this.limitDetail.head._organization.id == 0) {
+      this.limitDetail.head._organization = {
+        id: parseInt(this.profileuser.org_id),
+        bin: '',
+        name_kaz: '',
+        name_rus: this.profileuser.org_name,
+        adress: '',
+        deleted: false,
+        _budjet_reg: {
+          id: 0,
+          code: '',
+          name_kaz: '',
+          name_rus: ''
+        },
+        _regiondar: {
+          id: 0,
+          name: '',
+          name_kaz: '',
+          name_rus: ''
+        }
+
+    }
+    } 
     
   }
 

@@ -7,6 +7,8 @@ import { OrganizationDetailComponent } from 'src/app/directory/organization/orga
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 import { Prilozhenie60NewService } from './prilojenie60new.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MainComponent } from 'src/app/main/main.component';
+import { profileuser } from 'src/app/login/interfaces';
 
 @Component({
   selector: 'app-prilozhenie60-new',
@@ -17,21 +19,26 @@ export class Prilozhenie60NewComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   constructor(
     private Reportref: DynamicDialogRef,
+    private MainComponent: MainComponent,
     private Reportdialog: DialogService,
     private Reportmsg: MessageService,
     private Prilozhenie60NewService: Prilozhenie60NewService,
     private sanitizer: DomSanitizer,
-
-  ) { }
+    ) {this.profileuser = this.MainComponent.profileuser}
   type_report: ''
   url: any = ''
   _organization = {
     'id': 0,
     'name': ''
 }
+  profileuser: profileuser
 
   ngOnInit(): void {
-
+    
+    this._organization = {
+      id: parseInt(this.profileuser.org_id),
+      name: this.profileuser.org_name
+  } 
   }
 
   form(){

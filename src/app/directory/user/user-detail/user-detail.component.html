@@ -1,0 +1,68 @@
+<form *ngIf="this.user_detail">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="username">Логин пользователя </label>
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+            <input id="username" [readOnly]="readonly" type="text" pInputText [(ngModel)]="user_detail.username"
+                name="username" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label>ФИО пользователя <span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input type="string" pInputText [(ngModel)]="user_detail.first_name" name="first_name" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label>Организация <span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input type="string" pInputText [(ngModel)]="user_detail.organization.name_rus" name="org_name" />
+            <span *ngIf="user_detail.organization.id !== 0" class="p-inputgroup-addon cursor-pointer"
+                (click)="viewOrg()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                </svg>
+            </span>
+            <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()">...</span>
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="email">Почта <span style="color: red;">*</span></label>
+        <div class="p-inputgroup">
+            <input type="email" pInputText id="email" placeholder="email@example.com" [(ngModel)]="user_detail.email"
+                name="email" />
+        </div>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="password">Пароль </label>
+        <div>
+            <p-password [(ngModel)]="user_detail.password" [toggleMask]="true" [feedback]="false"
+                (change)="change(user_detail.password)" name="password" id="password">
+            </p-password>
+        </div>
+    </div>
+
+    <div class="p-field">
+        <label for="secondpassword">Повторите пароль</label>
+        <div>
+            <p-password [(ngModel)]="secondpassword" [toggleMask]="true" [feedback]="false"
+                (ngModelChange)="change(user_detail.password)" name="secondpassword" id="secondpassword">
+            </p-password>
+        </div>
+    </div>
+</form>
+
+<div style="width:100%; padding: 10px 0;">
+    <label style="color: red;">* - обязательные поля</label>
+</div>
+<div class="flex align-items-center justify-content-center gap-2">
+    <button pButton pRipple label="Сохранить" icon="pi pi-check" (click)="saveUser()"
+        class="p-button-outlined p-button-success"></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" class="p-button-outlined p-button-warning"></button>
+</div>

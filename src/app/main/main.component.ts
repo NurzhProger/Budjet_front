@@ -36,6 +36,8 @@ export class MainComponent implements OnInit {
   counttabs = 0;
   User: MenuModule[];
   username = ''
+  first = 0
+  rows = 25
   profileuser: profileuser = {
     user_id: '',
     username: '',
@@ -50,19 +52,19 @@ export class MainComponent implements OnInit {
 
     let responce: any
 
-    // this.mainservice
-    //   .getinfo()
-    //   .subscribe(
-    //     (data) => (responce = data,
-    //       this.profileuser.user_id = responce.user.id,
-    //       this.profileuser.first_name = responce.user.first_name,
-    //       this.profileuser.username = responce.user.username,
-    //       this.profileuser.org_id = responce.profile._organization.id,
-    //       this.profileuser.org_name = responce.profile._organization.name_rus,
-    //       this.profileuser.budjet_id = responce.profile._organization._budjet.id,
-    //       this.profileuser.budjet_name = responce.profile._organization._budjet.name_rus,
-    //       )
-    // )
+    this.mainservice
+      .getinfo()
+      .subscribe(
+        (data) => (responce = data,
+          this.profileuser.user_id = responce.user.id,
+          this.profileuser.first_name = responce.user.first_name,
+          this.profileuser.username = responce.user.username,
+          this.profileuser.org_id = responce.profile._organization.id,
+          this.profileuser.org_name = responce.profile._organization.name_rus,
+          this.profileuser.budjet_id = responce.profile._organization._budjet.id,
+          this.profileuser.budjet_name = responce.profile._organization._budjet.name_rus
+          )
+    )
 
     this.formMenu()
 
@@ -98,6 +100,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'Подразделения',
                 command: () => this.openTab('app-podrazdelenie-list', 'Подразделения', '')
+              },
+              {
+                label: 'Пользователи',
+                command: () => this.openTab('app-user-list', 'Пользователи', '')
               }]
             },
             {

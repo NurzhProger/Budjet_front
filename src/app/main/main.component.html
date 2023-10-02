@@ -200,6 +200,9 @@
                 <app-prilozhenie5758 *ngIf="context.selector=='app-prilozhenie5758'" (closeEvent)="removetab()">
                 </app-prilozhenie5758>
 
+                <app-user-list *ngIf="context.selector=='app-user-list'" [list]="true" (closeEvent)="removetab()">
+                </app-user-list>
+
 
             </mat-tab>
         </ng-template>

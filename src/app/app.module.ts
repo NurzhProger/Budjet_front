@@ -114,6 +114,8 @@ import { TipSposobRas4etaComponent } from './enums/tip-sposob-ras4eta/tip-sposob
 import { Ras4etPrintFormComponent } from './documents/Budget_Ras4et/ras4et-print-form/ras4et-print-form/ras4et-print-form.component';
 import { Prilozhenie60NewComponent } from './reports/prilozhenie_60/prilozhenie60-new/prilozhenie60-new.component';
 import { Prilozhenie5758Component } from './reports/prilozhenie_57_58/prilozhenie5758/prilozhenie5758.component';
+import { UserDetailComponent } from './directory/user/user-detail/user-detail.component';
+import { UserListComponent } from './directory/user/user-list/user-list.component';
 
 @NgModule({
   imports: [
@@ -230,7 +232,9 @@ import { Prilozhenie5758Component } from './reports/prilozhenie_57_58/prilozheni
     TipSposobRas4etaComponent,
     Ras4etPrintFormComponent,
     Prilozhenie60NewComponent,
-    Prilozhenie5758Component],
+    Prilozhenie5758Component,
+    UserDetailComponent,
+    UserListComponent],
   bootstrap: [AppComponent],
   providers: [
     {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FkrSelectComponent } from 'src/app/directory/expenses/fkr/fkr-select/fkr-select.component';
@@ -9,6 +9,8 @@ import { OrganizationSelectComponent } from 'src/app/directory/organization/orga
 import { Prilozhenie5758Service } from './prilojenie5758.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { log } from 'mathjs';
+import { profileuser } from 'src/app/login/interfaces';
+import { MainComponent } from 'src/app/main/main.component';
 
 @Component({
   selector: 'app-prilozhenie5758',
@@ -16,14 +18,16 @@ import { log } from 'mathjs';
   styleUrls: ['./prilozhenie5758.component.css']
 })
 export class Prilozhenie5758Component implements OnInit {
-
+  @Output() closeEvent = new EventEmitter<any>()
   constructor(
     private Reportref: DynamicDialogRef,
     private Reportdialog: DialogService,
+    private MainComponent: MainComponent,
     private Reportmsg: MessageService,
     private Prilozhenie5758Service: Prilozhenie5758Service,
     private sanitizer: DomSanitizer,
-  ) { }
+  ) {this.profileuser = this.MainComponent.profileuser}
+  profileuser: profileuser
   prilozhenieType: any = []
   url: any = ''
   prilozhenieValue = 'prilozhenie57'
@@ -38,6 +42,10 @@ _fkr = {
   'code': ''
 }
   ngOnInit(): void {
+    this._organization = {
+      id: parseInt(this.profileuser.org_id),
+      name: this.profileuser.org_name
+  } 
     this.prilozhenieType = [
       { label: 'Приложение 57', value: 'prilozhenie57' },
       { label: 'Приложение 58', value: 'prilozhenie58' }
@@ -140,7 +148,7 @@ _fkr = {
   }
 
   closeform() {
-
+    this.closeEvent.emit();
   }
 
 

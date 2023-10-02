@@ -1,0 +1,84 @@
+<p-toolbar>
+
+    <div class="p-toolbar-group-left">
+        <div *ngIf="list">
+            <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+                (click)="openNew()"></button>
+        </div>
+        <div *ngIf="!list">
+            <button pButton pRipple label="выбрать" icon="pi pi-check" class="p-button-success p-mr-2"
+                (click)="onSelected(selected)"></button>
+        </div>
+    </div>
+    <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left" style="margin-right: 10px;">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" [(ngModel)]="searchUser" (change)="fetch()" placeholder="поиск..." />
+        </span>
+        <div style="padding-right: 10px;">
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+                styleClass="p-button-sm" (click)="fetch()"></button>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+                (click)="closeform()"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(users$ | async) as users; else loader">
+    <p-table *ngIf="users.count !== 0; else empty" [value]="users.results" [scrollable]="true"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%; text-align:center">Номер</th>
+                <th style="width:20%; text-align:center">Логин</th>
+                <th style="width:50%; text-align:center">ФИО пользователя</th>
+                <th style="width:10%; text-align:center">Активный</th>
+                <th style="width:5%; text-align:center">Действия</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-user let-ri="rowIndex" *ngFor="let item of users.results| keyvalue">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(user)" [pSelectableRow]="user">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td style="text-align:center">
+                    {{user.username}}
+                </td>
+                <td style="padding-left: 10px;">
+                    {{user.first_name + ' ' + user.last_name}}
+                </td>
+                <td style="text-align:center">
+                    <input type="checkbox" [readonly]="true" [ngModel]="user.is_active">
+
+                </td>
+                <td style="padding: 0; margin:0;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                            (click)="onRowEdit(user)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash"
+                            class="p-button-rounded p-button-text"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <ng-template #empty>
+        <div class="center">
+            Нет ни одного пользователя
+        </div>
+    </ng-template>
+    <div *ngIf="users.count !== 0" class="flex align-items-center justify-content-center">
+        <span class="mx-1 text-color">Указано</span>
+        <p-paginator [first]="first" [rows]="rows" [totalRecords]="users.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (users.count || 0)  ? users.count : first + rows }} из {{users.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+    </div>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>
