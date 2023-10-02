@@ -8,9 +8,9 @@
             </div>
 
                 <!-- <label for="org_name">Наименование организации</label> -->
-                <div class="p-inputgroup" style="padding-right: 10px; width: 15%;">
-                    <input id="org_name" type="text" pInputText [(ngModel)]="_organization.name" />
-                    <span *ngIf="_organization.id !== 0" class="p-inputgroup-addon cursor-pointer" (click)="viewOrg()">
+                <div class="p-inputgroup" style="padding-right: 10px; width: 20%;">
+                    <input id="org_name" type="text" pInputText [(ngModel)]="_organization.name" placeholder="Выберите организацию"/>
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-files" viewBox="0 0 16 16">
                             <path
@@ -20,8 +20,8 @@
                     <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()">...</span>
                 </div>
 
-                <div class="p-inputgroup" style="padding-right: 10px; width: 15%;">
-                    <input id="fkr_name" type="text" pInputText [(ngModel)]="_fkr.name" />
+                <div class="p-inputgroup" style="padding-right: 10px; width: 20%;">
+                    <input id="fkr_name" type="text" pInputText [(ngModel)]="_fkr.name" placeholder="Выберите ФКР"/>
                     <span class="p-inputgroup-addon cursor-pointer" (click)="selectFKR()">...</span>
                 </div>
 
@@ -44,9 +44,9 @@
 
     </div>
 
-    <!-- <div *ngIf="url != ''" style="width: 100%; height: calc(110vh - 150px);">
+    <div *ngIf="url != ''" style="width: 100%; height: calc(110vh - 150px);">
         <div style="width: 100%; height: 100%;">
             <iframe [src]="url" [allowFullscreen]="true" style="width: 100%; height: 100%; border: none;"></iframe>
         </div>
-    </div> -->
+    </div>
 </div>
