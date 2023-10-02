@@ -68,7 +68,8 @@ export class PodrazdelenieListComponent implements OnInit {
   fetchList() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      searchPodr: this.searchPodr
     }
     this.podrazdelenie = this.PodrazdelenieService.fetch(params);
   }
