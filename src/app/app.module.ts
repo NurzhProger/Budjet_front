@@ -116,6 +116,7 @@ import { Prilozhenie60NewComponent } from './reports/prilozhenie_60/prilozhenie6
 import { Prilozhenie5758Component } from './reports/prilozhenie_57_58/prilozhenie5758/prilozhenie5758.component';
 import { UserDetailComponent } from './directory/user/user-detail/user-detail.component';
 import { UserListComponent } from './directory/user/user-list/user-list.component';
+import { SelectDoplataComponent } from './documents/Budget_Ras4et/select-doplata/select-doplata.component';
 
 @NgModule({
   imports: [
@@ -234,7 +235,8 @@ import { UserListComponent } from './directory/user/user-list/user-list.componen
     Prilozhenie60NewComponent,
     Prilozhenie5758Component,
     UserDetailComponent,
-    UserListComponent],
+    UserListComponent,
+    SelectDoplataComponent],
   bootstrap: [AppComponent],
   providers: [
     {

@@ -1,0 +1,36 @@
+<div class="p-field" *ngIf="new_dopl">
+    <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="new_dopl">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="text-align:center">Доплаты и надбавки</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-dopl let-ri="rowIndex">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(dopl, ri)">
+                <td>
+                    {{dopl._sposob_ras}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="added_dopl">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="text-align:center">Добавленные</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-adddopl>
+            <tr class="cursor-pointer">
+                <td>
+                    {{adddopl._sposob_ras}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div style="padding-right: 10px;">
+        <button pButton pRipple label="Сохранить" icon="pi pi-save" class="p-button-secondary p-mr-2"
+            (click)="saveDoplata()"></button>
+    </div>
+</div>

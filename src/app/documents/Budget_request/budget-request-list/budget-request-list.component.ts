@@ -1,9 +1,10 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
-import { MessageService,ConfirmationService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { budjetService } from '../budget_request.servise'
 import { budget_list, budjet_doc } from '../budget_request.interfaces';
+import { log } from 'mathjs';
 
 @Component({
   selector: 'app-budget-request-list',
@@ -20,7 +21,7 @@ export class BudgetRequestListComponent implements OnInit {
     private budget_list_messageServicedelSelect: MessageService,
     private budget_list_dialog: DialogService,
     private budget_Servise: budjetService,
-    private budget_confrim:ConfirmationService)  { }
+    private budget_confrim: ConfirmationService) { }
 
 
 
@@ -49,18 +50,19 @@ export class BudgetRequestListComponent implements OnInit {
     }
 
     this.Budget_list$ = this.budget_Servise.fetch(params)
+
   }
 
 
-  openNew(){
+  openNew() {
     this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Шаблон формы ', id: '' } });
   }
 
-  onSelected(){
+  onSelected() {
 
   }
 
-  closeform(){
+  closeform() {
     this.closeEvent.emit()
   }
 
@@ -70,14 +72,14 @@ export class BudgetRequestListComponent implements OnInit {
 
   }
 
-  onRowEdit(budjet: budjet_doc){
+  onRowEdit(budjet: budjet_doc) {
 
     this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка ' + budjet.nom, id: budjet.id } });
 
 
   }
 
-  onRowClick(budjet: budjet_doc){
+  onRowClick(budjet: budjet_doc) {
     if (this.data) {
       this.onRowEdit(budjet)
     }
@@ -85,7 +87,7 @@ export class BudgetRequestListComponent implements OnInit {
       this.budget_list_ryref.close(budjet)
     }
   }
-  
+
 
   onPageChange(event: any) {
     this.first = event.first

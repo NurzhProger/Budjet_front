@@ -9,6 +9,7 @@ export interface Ras4et_doc {
   head_table: [Ras4et_head_table],
   tbl: [ChildItem],
   dopl: [Ras4et_dopl],
+  new_dopl: [Ras4et_new_dopl],
   new_str: [ChildItem]
 }
 
@@ -70,6 +71,17 @@ export interface Ras4et_dopl {
   columns_used: string;
   stroka: number;
   _doplata: number;
+  _column: number;
+  _sposob_ras: string;
+}
+
+export interface Ras4et_new_dopl {
+  id: number;
+  summ: number;
+  columns_used: string;
+  stroka: number;
+  _doplata: number;
+  _column: number;
   _sposob_ras: string;
 }
 

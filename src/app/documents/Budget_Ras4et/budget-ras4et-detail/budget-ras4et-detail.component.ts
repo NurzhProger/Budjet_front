@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService, MenuItem, ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { catchError, throwError, timeout } from 'rxjs'
+import { Observable, catchError, throwError, timeout } from 'rxjs'
 import { EnstruListComponent } from 'src/app/directory/planirovanie/ensTRU/enstru-list/enstru-list.component';
 import { ensTRU_element } from 'src/app/directory/planirovanie/ensTRU/interfaces';
 import { stazh_category_element } from 'src/app/directory/planirovanie/stazh-category/interfaces';
@@ -13,7 +13,7 @@ import { DoplNadbavkaElementComponent } from 'src/app/directory/planirovanie/dop
 import { OblastiRegionyElementComponent } from 'src/app/directory/planirovanie/oblasti-regiony/oblasti-regiony-element/oblasti-regiony-element.component';
 import { marki_avto_element } from 'src/app/directory/planirovanie/marki_avto/interfaces';
 import { ed_izm_element } from 'src/app/directory/planirovanie/ed-izm/interfaces';
-import { Ras4et_doc, ChildItem, TableItemPass } from "../Budget_ras4et.interfaces";
+import { Ras4et_doc, ChildItem, TableItemPass, Ras4et_new_dopl, Ras4et_dopl } from "../Budget_ras4et.interfaces";
 import { budjetRas4et_Service } from "../Budget_ras4et.Services";
 import { SHA256 } from 'crypto-js';
 import { EdIzmListComponent } from 'src/app/directory/planirovanie/ed-izm/ed-izm-list/ed-izm-list.component';
@@ -28,6 +28,7 @@ import { MarkiAvtoListComponent } from 'src/app/directory/planirovanie/marki_avt
 import { StazhCategoryListComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-list/stazh-category-list.component';
 import * as math from 'mathjs';
 import { Ras4etPrintFormComponent } from '../ras4et-print-form/ras4et-print-form/ras4et-print-form.component';
+import { SelectDoplataComponent } from '../select-doplata/select-doplata.component';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -49,9 +50,11 @@ export class BudgetRas4etDetailComponent implements OnInit {
   // @Input() form_id = ''
   izm: any
   tbl: ChildItem
+  new_dopl: [Ras4et_new_dopl]
   form: FormGroup
   items: MenuItem[]
   Ras4et_detail: Ras4et_doc
+  dopl: [Ras4et_dopl]
   children: any = []
   copy_str: any = []
   column: any
@@ -60,6 +63,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
   spec_fullname = ''
   form_fullname = ''
   summdoc = 0
+  have_dopl = false
+
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -79,12 +84,15 @@ export class BudgetRas4etDetailComponent implements OnInit {
           )
         )
     }
+
   }
 
   preob() {
 
     this.column = this.Ras4et_detail.tbl[0]
-
+    if (this.Ras4et_detail.new_dopl.length > 0) {
+      this.have_dopl = true
+    }
     if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
@@ -93,14 +101,69 @@ export class BudgetRas4etDetailComponent implements OnInit {
         this.children.push(this.Ras4et_detail.tbl[i])
       }
     }
-    console.log(this.children.length);
-
   }
 
+  selectDopl(ri: number) {
+
+    let add_dopl: any = []
+    let _dopl: any = []
+    let new_dopl: any = []
+
+
+    if (this.Ras4et_detail.dopl.length > 0) {
+      add_dopl = this.Ras4et_detail.dopl.filter(item => item.stroka == ri + 1)
+      console.log(add_dopl);
+    }
+
+
+
+    if (add_dopl.length > 0) {
+      for (let i = 0; add_dopl.length > i; i++) {
+        _dopl.push(add_dopl[i]._doplata)
+      }
+    }
+
+    for (let i = 0; this.Ras4et_detail.new_dopl.length > i; i++) {
+      let newDoplItem = this.Ras4et_detail.new_dopl[i];
+      // Используйте find() с функцией обратного вызова для поиска элемента
+      let found = _dopl.find((item: number) => item === newDoplItem._doplata);
+
+      if (!found) {
+        new_dopl.push(newDoplItem);
+      }
+    }
+
+
+
+
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectDoplataComponent,
+      {
+        header: 'Выбор доплат и надбавок',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
+        data: { new_dopl: new_dopl, added_dopl: add_dopl }
+      })
+    this.Budget_ras4et_Detailref.onClose.subscribe((dopl: [Ras4et_dopl]) => {
+      if (dopl) {
+
+        for (let i = 0; i < this.Ras4et_detail.dopl.length; i++) {
+          if (this.Ras4et_detail.dopl[i].stroka == ri + 1) {
+            this.Ras4et_detail.dopl.splice(i, 1)
+          }
+        }
+
+        for (let i = 0; dopl.length > i; i++) {
+          dopl[i].stroka = ri + 1
+          this.Ras4et_detail.dopl.push(dopl[i]);
+        }
+
+
+      }
+    })
+  }
+
+
   add_tbl() {
-
-
-
     let newnew: any = []
     this.copy_str = JSON.parse(JSON.stringify(this.Ras4et_detail.new_str));
     newnew = this.copy_str[0]
@@ -114,6 +177,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   delStr(ind: number) {
+
+    let add_dopl: any = []
+
     this.Budget_Confirmation.confirm({
       message: 'Вы действительно хотите удалить?',
       header: 'Удаление',
@@ -126,9 +192,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
         this.Budget_Confirmation.close();
       }
     });
-
-
   }
+
+
 
   selectENSTRU(ensTRU: ensTRU_element) {
 
