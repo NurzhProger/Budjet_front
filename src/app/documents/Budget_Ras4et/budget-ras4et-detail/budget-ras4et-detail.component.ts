@@ -126,6 +126,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
     let ind_dopl: number
     let naiden: boolean = false
     wws = this.children[ri]
+    console.log(wws);
+
     for (let i = 0; wws.length > i; i++) {
       stroka = wws[i].stroka
     }
@@ -171,12 +173,19 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       if (dopl) {
+
         for (let ss = 0; dopl.length > ss; ss++) {
           dopl[ss].stroka = stroka
         }
-        this.Ras4et_detail.dopl.splice(ind_dopl, 1)
+
+        if (ind_dopl !== undefined) {
+          this.Ras4et_detail.dopl.splice(ind_dopl, 1)
+        }
+
         this.Ras4et_detail.dopl.push(dopl);
-        // this.saveDoc(false)
+
+
+        this.saveDoc(false)
       }
     })
   }
