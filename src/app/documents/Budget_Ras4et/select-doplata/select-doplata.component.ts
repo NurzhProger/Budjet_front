@@ -12,7 +12,7 @@ import { log } from 'mathjs';
 export class SelectDoplataComponent implements OnInit {
 
   new_dopl: [Ras4et_new_dopl]
-  added_dopl: [Ras4et_dopl]
+  added_dopl: any = []
   constructor(
     private select_dialog_config: DynamicDialogConfig,
     private select_dialog_Detailref: DynamicDialogRef,
@@ -20,7 +20,11 @@ export class SelectDoplataComponent implements OnInit {
 
   ngOnInit(): void {
     this.new_dopl = this.select_dialog_config.data.new_dopl
-    this.added_dopl = this.select_dialog_config.data.added_dopl
+    if (this.select_dialog_config.data.added_dopl !== undefined) {
+      this.added_dopl = this.select_dialog_config.data.added_dopl
+    }
+
+
     // if (this.added_dopl.length > 0) {
     //   for (let i = 0; this.added_dopl.length > i; i++) {
     //     this.new_dopl = this.new_dopl.filter(item => item._doplata !== this.added_dopl[i]._doplata)
@@ -31,6 +35,8 @@ export class SelectDoplataComponent implements OnInit {
 
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {
     this.added_dopl.push(dopl)
+    console.log(dopl);
+
     this.new_dopl.splice(ri, 1)
   }
 

@@ -110,20 +110,45 @@ export class BudgetRas4etDetailComponent implements OnInit {
     let new_dopl: any = []
 
 
-    if (this.Ras4et_detail.dopl.length >= ri + 1) {
-      add_dopl = this.Ras4et_detail.dopl[ri]
-      console.log(add_dopl);
+    // if (this.Ras4et_detail.dopl.length >= ri + 1) {
+    // add_dopl = this.Ras4et_detail.dopl[ri]
+    // console.log(ri);
 
+    // }
+    // else {
+    // }
+
+
+
+    let wws: any = []
+    let mal: any = []
+    let stroka: number = 0
+    let ind_dopl: number
+    let naiden: boolean = false
+    wws = this.children[ri]
+    for (let i = 0; wws.length > i; i++) {
+      stroka = wws[i].stroka
     }
-    else {
-      console.log(add_dopl);
+
+    for (let y = 0; this.Ras4et_detail.dopl.length > y; y++) {
+      if (naiden == false) {
+        mal = this.Ras4et_detail.dopl[y]
+        if (stroka == mal[0].stroka) {
+          naiden = true
+        }
+      }
+      if (naiden == true) {
+        add_dopl = this.Ras4et_detail.dopl[y]
+        ind_dopl = y
+        break
+      }
     }
 
-
-
-    if (add_dopl.length > 0) {
-      for (let i = 0; add_dopl.length > i; i++) {
-        _dopl.push(add_dopl[i]._doplata)
+    if (add_dopl !== undefined) {
+      if (add_dopl.length > 0) {
+        for (let i = 0; add_dopl.length > i; i++) {
+          _dopl.push(add_dopl[i]._doplata)
+        }
       }
     }
 
@@ -136,9 +161,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
       }
     }
 
-
-
-
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectDoplataComponent,
       {
         header: 'Выбор доплат и надбавок',
@@ -146,24 +168,15 @@ export class BudgetRas4etDetailComponent implements OnInit {
         height: 'calc(80%)',
         data: { new_dopl: new_dopl, added_dopl: add_dopl }
       })
+
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       if (dopl) {
-        console.log(dopl);
-
-        // for (let i = 0; i < this.Ras4et_detail.dopl.length; i++) {
-        //   if (this.Ras4et_detail.dopl[i].stroka == ri + 1) {
-        //     this.Ras4et_detail.dopl.splice(i, 1)
-        //   }
-        // }
-
-        for (let i = 0; dopl.length > i; i++) {
-          dopl[i].stroka = ri + 1
+        for (let ss = 0; dopl.length > ss; ss++) {
+          dopl[ss].stroka = stroka
         }
-
-        this.Ras4et_detail.dopl.splice(ri, 1)
+        this.Ras4et_detail.dopl.splice(ind_dopl, 1)
         this.Ras4et_detail.dopl.push(dopl);
-        console.log(this.Ras4et_detail.dopl);
-
+        // this.saveDoc(false)
       }
     })
   }
@@ -198,7 +211,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
         this.Budget_Confirmation.close();
       }
     });
-    console.log(this.Ras4et_detail.dopl)
   }
 
 
@@ -373,7 +385,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
             formula = formula + mass_simv[y];
           }
         }
-        // console.log(formula);
         mass_arr[i].zn_float = math.evaluate(formula);
       }
     }
@@ -402,7 +413,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     //         formula = formula + mass_simv[y];
     //       }
     //     }
-    //     // console.log(formula);
     //     mass_arr[i].zn_float = math.evaluate(formula);
     //   }
     // }
