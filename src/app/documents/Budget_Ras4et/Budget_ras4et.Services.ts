@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Ras4et_doc } from "./Budget_ras4et.interfaces";
 import { budjet_detail } from "../Budget_request/budget_request.interfaces";
+import { AuthService } from "src/app/login/auth.service";
 
 
 @Injectable({
@@ -11,9 +12,14 @@ import { budjet_detail } from "../Budget_request/budget_request.interfaces";
 
 
 export class budjetRas4et_Service {
-  constructor(private http: HttpClient) {
+
+  host = ""
+
+  constructor(
+    private http: HttpClient,
+    private authservice: AuthService) {
+    this.host = this.authservice.host;
   }
-  host = "http://192.168.5.27:9999/"
 
 
   fetch_detail(params: any): Observable<Ras4et_doc> {

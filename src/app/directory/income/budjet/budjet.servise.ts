@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Budjet_list , Budjet_detail} from '../budjet/interfaces';
+import { Budjet_list, Budjet_detail } from '../budjet/interfaces';
+import { AuthService } from "src/app/login/auth.service";
 
 
 @Injectable({
@@ -10,9 +11,13 @@ import { Budjet_list , Budjet_detail} from '../budjet/interfaces';
 
 
 export class Budjet_Service {
-    constructor(private http: HttpClient) {
+    host = ""
+
+    constructor(
+        private http: HttpClient,
+        private authservice: AuthService) {
+        this.host = this.authservice.host;
     }
-    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<Budjet_list> {

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { AuthService } from "src/app/login/auth.service";
 
 
 
@@ -13,10 +14,15 @@ import { Observable } from "rxjs";
 
 export class import219Servise {
 
-  constructor(private http: HttpClient) {
-  }
+
   // host = "http://192.168.5.27:8000/"
-  host = "http://192.168.5.27:9999/"
+  host = ""
+
+  constructor(
+    private http: HttpClient,
+    private authservice: AuthService) {
+    this.host = this.authservice.host;
+  }
 
   send_file(body: any) {
     console.log(body)

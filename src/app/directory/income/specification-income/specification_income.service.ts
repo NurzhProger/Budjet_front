@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { specification_income_detail, specification_income_list } from "./interfaces";
+import { AuthService } from "src/app/login/auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,9 +10,13 @@ import { specification_income_detail, specification_income_list } from "./interf
 
 
 export class SpecificationIncomeService {
-    constructor(private http: HttpClient) {
+    host = ""
+
+    constructor(
+        private http: HttpClient,
+        private authservice: AuthService) {
+        this.host = this.authservice.host;
     }
-    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<specification_income_list> {
@@ -19,7 +24,7 @@ export class SpecificationIncomeService {
     }
 
     fetchid(id: number): Observable<specification_income_detail> {
-      return this.http.get<specification_income_detail>(this.host + `dirs/specexpitem/${ id }`)
+        return this.http.get<specification_income_detail>(this.host + `dirs/specexpitem/${id}`)
     }
 
     saveSpec(spec: specification_income_detail) {

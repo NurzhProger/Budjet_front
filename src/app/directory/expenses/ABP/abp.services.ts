@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { abp_detail, abp_list } from "./interfaces";
+import { AuthService } from "src/app/login/auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,9 +10,14 @@ import { abp_detail, abp_list } from "./interfaces";
 
 
 export class abpService {
-    constructor(private http: HttpClient) {
+
+    host = ""
+
+    constructor(
+        private http: HttpClient,
+        private authservice: AuthService) {
+        this.host = this.authservice.host;
     }
-    host = "http://192.168.5.27:9999/"
 
 
     fetch(params: any): Observable<abp_list> {

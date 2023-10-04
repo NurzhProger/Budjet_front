@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { izm_inc_doc_tab, izm_inc_doc, izm_inc_doc_detail, izm_inc_doc_list } from './interfaces';
+import { AuthService } from "src/app/login/auth.service";
 
 
 
@@ -11,9 +12,14 @@ import { izm_inc_doc_tab, izm_inc_doc, izm_inc_doc_detail, izm_inc_doc_list } fr
 
 
 export class IzmIncomeService {
-  constructor(private http: HttpClient) {
+
+  host = ""
+
+  constructor(
+    private http: HttpClient,
+    private authservice: AuthService) {
+    this.host = this.authservice.host;
   }
-  host = "http://192.168.5.27:9999/"
 
 
   fetch(params: any): Observable<izm_inc_doc_list> {

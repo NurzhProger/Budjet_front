@@ -61,10 +61,10 @@ export class MainComponent implements OnInit {
           this.profileuser.username = responce.user.username,
           this.profileuser.org_id = responce.profile._organization.id,
           this.profileuser.org_name = responce.profile._organization.name_rus,
-          this.profileuser.budjet_id = responce.profile._organization._budjet.id,
-          this.profileuser.budjet_name = responce.profile._organization._budjet.name_rus
-          )
-    )
+          this.profileuser.budjet_id = responce.profile._organization._budjet_reg.id,
+          this.profileuser.budjet_name = responce.profile._organization._budjet_reg.name_rus
+        )
+      )
 
     this.formMenu()
 
