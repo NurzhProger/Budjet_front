@@ -32,7 +32,6 @@ export class SelectDoplataComponent implements OnInit {
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {
     this.added_dopl.push(dopl)
     this.new_dopl.splice(ri, 1)
-
   }
 
   saveDoplata() {

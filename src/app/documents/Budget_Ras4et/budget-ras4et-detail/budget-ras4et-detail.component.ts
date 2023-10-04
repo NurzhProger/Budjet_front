@@ -110,8 +110,12 @@ export class BudgetRas4etDetailComponent implements OnInit {
     let new_dopl: any = []
 
 
-    if (this.Ras4et_detail.dopl.length > 0) {
-      add_dopl = this.Ras4et_detail.dopl.filter(item => item.stroka == ri + 1)
+    if (this.Ras4et_detail.dopl.length >= ri + 1) {
+      add_dopl = this.Ras4et_detail.dopl[ri]
+      console.log(add_dopl);
+
+    }
+    else {
       console.log(add_dopl);
     }
 
@@ -127,7 +131,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
       let newDoplItem = this.Ras4et_detail.new_dopl[i];
       // Используйте find() с функцией обратного вызова для поиска элемента
       let found = _dopl.find((item: number) => item === newDoplItem._doplata);
-
       if (!found) {
         new_dopl.push(newDoplItem);
       }
@@ -143,20 +146,23 @@ export class BudgetRas4etDetailComponent implements OnInit {
         height: 'calc(80%)',
         data: { new_dopl: new_dopl, added_dopl: add_dopl }
       })
-    this.Budget_ras4et_Detailref.onClose.subscribe((dopl: [Ras4et_dopl]) => {
+    this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       if (dopl) {
+        console.log(dopl);
 
-        for (let i = 0; i < this.Ras4et_detail.dopl.length; i++) {
-          if (this.Ras4et_detail.dopl[i].stroka == ri + 1) {
-            this.Ras4et_detail.dopl.splice(i, 1)
-          }
-        }
+        // for (let i = 0; i < this.Ras4et_detail.dopl.length; i++) {
+        //   if (this.Ras4et_detail.dopl[i].stroka == ri + 1) {
+        //     this.Ras4et_detail.dopl.splice(i, 1)
+        //   }
+        // }
 
         for (let i = 0; dopl.length > i; i++) {
           dopl[i].stroka = ri + 1
-          this.Ras4et_detail.dopl.push(dopl[i]);
         }
 
+        this.Ras4et_detail.dopl.splice(ri, 1)
+        this.Ras4et_detail.dopl.push(dopl);
+        console.log(this.Ras4et_detail.dopl);
 
       }
     })
@@ -179,19 +185,20 @@ export class BudgetRas4etDetailComponent implements OnInit {
   delStr(ind: number) {
 
     let add_dopl: any = []
-
     this.Budget_Confirmation.confirm({
       message: 'Вы действительно хотите удалить?',
       header: 'Удаление',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.children.splice(ind, 1)
+        add_dopl = this.Ras4et_detail.dopl.splice(ind, 1)
         this.Budget_Confirmation.close()
       },
       reject: () => {
         this.Budget_Confirmation.close();
       }
     });
+    console.log(this.Ras4et_detail.dopl)
   }
 
 
