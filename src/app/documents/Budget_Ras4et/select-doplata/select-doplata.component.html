@@ -8,7 +8,7 @@
         <ng-template pTemplate="body" let-dopl let-ri="rowIndex">
             <tr class="cursor-pointer" (dblclick)="onRowClick(dopl, ri)">
                 <td>
-                    {{dopl._sposob_ras}}
+                    {{dopl._doplata_name}}
                 </td>
             </tr>
         </ng-template>
@@ -23,7 +23,7 @@
         <ng-template pTemplate="body" let-adddopl>
             <tr class="cursor-pointer">
                 <td>
-                    {{adddopl._sposob_ras}}
+                    {{adddopl._doplata_name}}
                 </td>
             </tr>
         </ng-template>
