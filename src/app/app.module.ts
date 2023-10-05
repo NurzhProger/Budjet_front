@@ -117,6 +117,8 @@ import { Prilozhenie5758Component } from './reports/prilozhenie_57_58/prilozheni
 import { UserDetailComponent } from './directory/user/user-detail/user-detail.component';
 import { UserListComponent } from './directory/user/user-list/user-list.component';
 import { SelectDoplataComponent } from './documents/Budget_Ras4et/select-doplata/select-doplata.component';
+import { EnstruSelectComponent } from './directory/planirovanie/ensTRU/enstru-select/enstru-select.component';
+import { StazhCategorySelectComponent } from './directory/planirovanie/stazh-category/stazh-category-select/stazh-category-select.component';
 
 @NgModule({
   imports: [
@@ -192,6 +194,7 @@ import { SelectDoplataComponent } from './documents/Budget_Ras4et/select-doplata
     KoeffCategoryListComponent,
     StazhCategoryElementComponent,
     StazhCategoryListComponent,
+    StazhCategorySelectComponent,
     KoeffElementComponent,
     PodrazdelenieElementComponent,
     PodrazdelenieListComponent,
@@ -203,6 +206,7 @@ import { SelectDoplataComponent } from './documents/Budget_Ras4et/select-doplata
     TipTruComponent,
     EnstruListComponent,
     EnstruElementComponent,
+    EnstruSelectComponent,
     FormlistComponent,
     FormDetailComponent,
     PeriodPokazElementComponent,

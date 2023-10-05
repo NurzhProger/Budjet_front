@@ -14,3 +14,9 @@ export interface ensTRU_list {
     previous?: string,
     results: [ensTRU_element]
 }
+export interface ensTRU_select {
+    count?: number,
+    next: string,
+    previous?: string,
+    results: [ensTRU_element]
+}

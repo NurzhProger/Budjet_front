@@ -29,6 +29,8 @@ import { StazhCategoryListComponent } from 'src/app/directory/planirovanie/stazh
 import * as math from 'mathjs';
 import { Ras4etPrintFormComponent } from '../ras4et-print-form/ras4et-print-form/ras4et-print-form.component';
 import { SelectDoplataComponent } from '../select-doplata/select-doplata.component';
+import { EnstruSelectComponent } from 'src/app/directory/planirovanie/ensTRU/enstru-select/enstru-select.component';
+import { StazhCategorySelectComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-select/stazh-category-select.component';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -226,7 +228,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectENSTRU(ensTRU: ensTRU_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EnstruListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EnstruSelectComponent,
       {
         header: 'Выбор ЕНСТРУ',
         width: 'calc(60%)',
@@ -355,7 +357,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectStazh(stazh_cat: stazh_category_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(StazhCategoryListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(StazhCategorySelectComponent,
       {
         header: 'Выбор стажа',
         width: 'calc(60%)',
