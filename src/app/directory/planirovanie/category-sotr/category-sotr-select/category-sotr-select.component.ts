@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 
 
 @Component({
-  selector: 'app-category-sotr-list',
+  selector: 'app-category-sotr-select',
   templateUrl: './category-sotr-select.component.html',
   styleUrls: ['./category-sotr-select.component.css']
 })
