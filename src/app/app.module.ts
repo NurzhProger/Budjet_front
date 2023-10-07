@@ -119,6 +119,13 @@ import { UserListComponent } from './directory/user/user-list/user-list.componen
 import { SelectDoplataComponent } from './documents/Budget_Ras4et/select-doplata/select-doplata.component';
 import { EnstruSelectComponent } from './directory/planirovanie/ensTRU/enstru-select/enstru-select.component';
 import { StazhCategorySelectComponent } from './directory/planirovanie/stazh-category/stazh-category-select/stazh-category-select.component';
+import { CategorySotrSelectComponent } from './directory/planirovanie/category-sotr/category-sotr-select/category-sotr-select.component';
+import { DolznostSelectComponent } from './directory/planirovanie/dolzhnost/dolzhnost-select/dolzhnost-select.component';
+import { PodrazdelenieSelectComponent } from './directory/podrazdelenie/podrazdelenie-select/podrazdelenie-select.component';
+import { OblastiRegionySelectComponent } from './directory/planirovanie/oblasti-regiony/oblasti-regiony-select/oblasti-regiony-select.component';
+import { EdIzmSelectComponent } from './directory/planirovanie/ed-izm/ed-izm-select/ed-izm-select.component';
+import { MarkiAvtoSelectComponent } from './directory/planirovanie/marki_avto/marki-avto-select/marki-avto-select.component';
+import { DoplNadbavkaSelectComponent } from './directory/planirovanie/dopl_nadbavka/dopl-nadbavka-select/dopl-nadbavka-select.component';
 
 @NgModule({
   imports: [
@@ -191,6 +198,7 @@ import { StazhCategorySelectComponent } from './directory/planirovanie/stazh-cat
     UserComponent,
     CategorySotrListComponent,
     CategorySotrElementComponent,
+    CategorySotrSelectComponent,
     KoeffCategoryListComponent,
     StazhCategoryElementComponent,
     StazhCategoryListComponent,
@@ -198,11 +206,14 @@ import { StazhCategorySelectComponent } from './directory/planirovanie/stazh-cat
     KoeffElementComponent,
     PodrazdelenieElementComponent,
     PodrazdelenieListComponent,
+    PodrazdelenieSelectComponent,
     DolznostElementComponent,
     DolznostListComponent,
+    DolznostSelectComponent,
     TipDoplComponent,
     DoplNadbavkaElementComponent,
     DoplNadbavkaListComponent,
+    DoplNadbavkaSelectComponent,
     TipTruComponent,
     EnstruListComponent,
     EnstruElementComponent,
@@ -216,10 +227,13 @@ import { StazhCategorySelectComponent } from './directory/planirovanie/stazh-cat
     VidTransportaComponent,
     MarkiAvtoElementComponent,
     MarkiAvtoListComponent,
+    MarkiAvtoSelectComponent,
     OblastiRegionyElementComponent,
     OblastiRegionyListComponent,
+    OblastiRegionySelectComponent,
     EdIzmListComponent,
     EdIzmElementComponent,
+    EdIzmSelectComponent,
     RegionsElementComponent,
     RegionsListComponent,
     BudjetRegListComponent,

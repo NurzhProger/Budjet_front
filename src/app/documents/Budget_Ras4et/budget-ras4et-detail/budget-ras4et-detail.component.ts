@@ -31,6 +31,13 @@ import { Ras4etPrintFormComponent } from '../ras4et-print-form/ras4et-print-form
 import { SelectDoplataComponent } from '../select-doplata/select-doplata.component';
 import { EnstruSelectComponent } from 'src/app/directory/planirovanie/ensTRU/enstru-select/enstru-select.component';
 import { StazhCategorySelectComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-select/stazh-category-select.component';
+import { CategorySotrSelectComponent } from 'src/app/directory/planirovanie/category-sotr/category-sotr-select/category-sotr-select.component';
+import { DolznostSelectComponent } from 'src/app/directory/planirovanie/dolzhnost/dolzhnost-select/dolzhnost-select.component';
+import { PodrazdelenieSelectComponent } from 'src/app/directory/podrazdelenie/podrazdelenie-select/podrazdelenie-select.component';
+import { OblastiRegionySelectComponent } from 'src/app/directory/planirovanie/oblasti-regiony/oblasti-regiony-select/oblasti-regiony-select.component';
+import { EdIzmSelectComponent } from 'src/app/directory/planirovanie/ed-izm/ed-izm-select/ed-izm-select.component';
+import { MarkiAvtoSelectComponent } from 'src/app/directory/planirovanie/marki_avto/marki-avto-select/marki-avto-select.component';
+import { DoplNadbavkaSelectComponent } from 'src/app/directory/planirovanie/dopl_nadbavka/dopl-nadbavka-select/dopl-nadbavka-select.component';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -247,7 +254,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectEd_Izm(ed_izm: ed_izm_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EdIzmListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EdIzmSelectComponent,
       {
         header: 'Выбор единицы измерения',
         width: 'calc(60%)',
@@ -263,7 +270,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectCategorySotr(cat_sotr: category_sotr_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(CategorySotrListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(CategorySotrSelectComponent,
       {
         header: 'Выбор категории',
         width: 'calc(60%)',
@@ -279,7 +286,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectDolzhnost(dolzh_el: dolzhnost_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(DolznostListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(DolznostSelectComponent,
       {
         header: 'Выбор должности',
         width: 'calc(60%)',
@@ -296,7 +303,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectPodrazdelenie(podr_el: podrazdelenie_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(PodrazdelenieListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(PodrazdelenieSelectComponent,
       {
         header: 'Выбор подразделении',
         width: 'calc(60%)',
@@ -312,7 +319,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectDoplNadb(dopl_nad: doplaty_nadbavky_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(DoplNadbavkaListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(DoplNadbavkaSelectComponent,
       {
         header: 'Выбор доплаты и надбавки',
         width: 'calc(60%)',
@@ -328,7 +335,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectOblreg(obl_reg: oblasti_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(OblastiRegionyListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(OblastiRegionySelectComponent,
       {
         header: 'Выбор области регионов',
         width: 'calc(60%)',
@@ -344,7 +351,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectMarkiAvto(marki: marki_avto_element) {
 
-    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(MarkiAvtoListComponent,
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(MarkiAvtoSelectComponent,
       {
         header: 'Выбор автомобиля',
         width: 'calc(60%)',
