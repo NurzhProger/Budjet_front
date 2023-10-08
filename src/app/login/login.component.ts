@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ChangepassComponent } from '../services/changepass/changepass.component';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -15,7 +17,9 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private msgLogin: MessageService) { }
+    private msgLogin: MessageService,
+    private login_ref: DynamicDialogRef,
+    private login_form: DialogService,) { }
 
   form: FormGroup
   loading = true
@@ -39,19 +43,65 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSubmit() {
+  login() {
     this.form.disable()
-    this.auth.login(this.form.value).subscribe(
-      () => {
-        sessionStorage.setItem("username", this.form.value.username)
-        this.router.navigate([''])
-      },
-      error => {
-        this.form.enable(),
+    this.auth.login(this.form.value)
+      .subscribe(
+        () => {
+          this.router.navigate([''])
+        },
+        error => {
+          this.form.enable(),
+            this.auth.setToken('')
+        }
+      )
+  }
+
+  onSubmit() {
+
+    let responce: any
+    sessionStorage.clear()
+    this.auth
+      .clearToken(this.form.value)
+      .subscribe(
+        (data) => (
+          responce = data,
+          this.changepass(responce)
+        ),
+        error => {
+          this.form.enable()
           this.msgLogin.add({
-            severity: 'error', summary: 'Ошибка', detail: 'Логин или пароль неверный!'
+            severity: 'error', summary: 'Ошибка', detail: error.error.detail
           })
-      }
-    )
+        }
+      )
+  }
+
+  changepass(responce: any) {
+    if (responce.changepass == 'True') {
+      this.login_ref = this.login_form.open(ChangepassComponent,
+        {
+          header: 'Изменение пароля пользователя',
+          width: 'calc(40%)',
+          height: 'calc(40%)',
+          data: { 'byToken': true },
+          closable: true
+        }
+      )
+
+      this.login_ref.onClose.subscribe((save: boolean) => {
+
+        if (save) {
+          this.form.enable(),
+            sessionStorage.setItem('temp-token', ''),
+            this.msgLogin.add({
+              severity: 'success', summary: 'Успешно', detail: 'Пароль успешно изменен! Пожалуйста, войдите в систему заново!'
+            })
+        }
+      })
+    }
+    else {
+      this.login()
+    }
   }
 }

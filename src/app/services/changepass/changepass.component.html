@@ -1,0 +1,52 @@
+<form class="card">
+    <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: center;">
+        <div style="width: 80%;" class="p-fluid">
+            <div class="p-field" style="padding-bottom: 20px;" [formGroup]="form">
+                <label for="pass">Новый пароль</label>
+                <p-password id="pass" [toggleMask]="true" [(ngModel)]="newpassword" formControlName="password"
+                    name="newpassword">
+                    <ng-template pTemplate="header">
+                        <h6>Сложность пароля</h6>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <p-divider></p-divider>
+                        <p class="mt-2">Требования</p>
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li *ngIf="form.controls['password'].errors?.uppercaseLetter">
+                                Хотя бы одна заглавная буква
+                            </li>
+                            <li *ngIf="form.controls['password'].errors?.lowcaseLetter">
+                                Хотя бы одна прописная буква
+                            </li>
+                            <li *ngIf="form.controls['password'].errors?.SpecSimvolLetter">
+                                Хотя бы один спец. символ
+                            </li>
+                            <li *ngIf="form.controls['password'].errors?.NumberLetter">
+                                Хотя бы одна цифра
+                            </li>
+                            <li
+                                *ngIf="form.controls['password'].errors?.['minlength'] || form.controls['password'].errors?.required">
+                                Минимум 8 символов
+                            </li>
+                        </ul>
+                    </ng-template>
+                </p-password>
+            </div>
+
+            <div class="p-field" style="padding-bottom: 20px;">
+                <label for="secpass">Повторите пароль</label>
+                <p-password [disabled]="form.invalid" id="secpass" [toggleMask]="true" [feedback]="false"
+                    [(ngModel)]="secondpassword" name="secondpassword">
+                </p-password>
+                <span class="p-invalid" *ngIf="newpassword !== secondpassword">Пароль не совпадает</span>
+            </div>
+
+            <div class="flex align-items-center justify-content-center gap-2">
+                <button [disabled]="form.invalid || (secondpassword !== newpassword)" pButton pRipple label="Изменить"
+                    icon="pi pi-check" class="p-button-success" (click)="changePass()"></button>
+                <button pButton pRipple label="Отмена" icon="pi pi-times" class="p-button-warning"
+                    (click)="closeRef()"></button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -3,6 +3,11 @@ export interface User {
     password: string
 }
 
+export interface body {
+    "username": string,
+    "password": string
+}
+
 export interface profileuser {
     user_id: string,
     username: string,

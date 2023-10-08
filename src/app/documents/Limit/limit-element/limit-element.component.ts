@@ -11,14 +11,14 @@ import { OrganizationDetailComponent } from 'src/app/directory/organization/orga
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 import { profileuser } from 'src/app/login/interfaces';
-import { MainComponent } from 'src/app/main/main.component';
+import { MainComponent } from 'src/app/main/main.component/main.component';
 
 @Component({
   selector: 'app-limit-element',
   templateUrl: './limit-element.component.html',
   styleUrls: ['./limit-element.component.css']
 })
-export class LimitElementComponent implements OnInit, DoCheck{
+export class LimitElementComponent implements OnInit, DoCheck {
   @Output() closeEvent = new EventEmitter<any>();
   @Input() limit_id = ''
   constructor(
@@ -27,7 +27,7 @@ export class LimitElementComponent implements OnInit, DoCheck{
     private MainComponent: MainComponent,
     private fkrRef: DynamicDialogRef,
     private limitDetaildialog: DialogService,
-    private limitDetailconfirm: ConfirmationService 
+    private limitDetailconfirm: ConfirmationService
   ) {
     this.profileuser = this.MainComponent.profileuser
     this.items = [
@@ -40,7 +40,7 @@ export class LimitElementComponent implements OnInit, DoCheck{
       }
     ]
   }
- 
+
   profileuser: profileuser
   items: MenuItem[];
   form: FormGroup;
@@ -94,7 +94,7 @@ export class LimitElementComponent implements OnInit, DoCheck{
   hashBegin = ''
   godNumber = 0
   nochanged = true
-  
+
   ngOnInit(): void {
     this.form = new FormGroup({
       number_doc: new FormControl(),
@@ -102,14 +102,14 @@ export class LimitElementComponent implements OnInit, DoCheck{
       org_name: new FormControl(null, [Validators.required]),
       god_ucheta: new FormControl(null, [Validators.required])
     })
-    
-    
+
+
     if (this.limit_id !== '') {
       this.LimitService.fetch_detail(this.limit_id)
         .subscribe(
           (detail) => {
             this.limitDetail = detail,
-            this.preobGodNumber()
+              this.preobGodNumber()
           }
         )
     }
@@ -135,15 +135,15 @@ export class LimitElementComponent implements OnInit, DoCheck{
           name_rus: ''
         }
 
+      }
     }
-    } 
-    
+
   }
 
   ngDoCheck(): void {
     let objString = JSON.stringify(this.limitDetail)
     let hashBeg = SHA256(objString).toString()
-    
+
     if (hashBeg !== this.hashBegin && this.nochanged) {
       this.nochanged = false
       this.hashBegin = hashBeg
@@ -218,7 +218,7 @@ export class LimitElementComponent implements OnInit, DoCheck{
       }
     })
   }
- 
+
   saveDoc(close: boolean): void {
     let responce: any
     this.LimitService.saveLimit(this.limitDetail)
@@ -254,7 +254,7 @@ export class LimitElementComponent implements OnInit, DoCheck{
         this.closeEvent.emit()
       }
       else {
-        
+
         this.limitDetailconfirm.confirm({
           message: 'Данные были изменены. Закрыть документ?',
           header: 'Закрытие',
@@ -275,27 +275,27 @@ export class LimitElementComponent implements OnInit, DoCheck{
 
   }
 
-  editFKR(ri:number) {
+  editFKR(ri: number) {
     this.fkrRef = this.limitDetaildialog.open(FkrSelectComponent,
       {
         header: 'Выбор ФКР',
         width: '60%',
         height: '80%'
       })
-      this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
-        if (fkr) {
-          this.limitDetail.tbl[ri]._fkr = {
-                id: fkr.id,
-                code: fkr.code,
-                name_kaz: fkr.name_kaz,
-                name_rus: fkr.name_rus
-              }
+    this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
+      if (fkr) {
+        this.limitDetail.tbl[ri]._fkr = {
+          id: fkr.id,
+          code: fkr.code,
+          name_kaz: fkr.name_kaz,
+          name_rus: fkr.name_rus
         }
-      })      
+      }
+    })
   }
 
   onDelete(fkr_id: number, fkr_name: string) {
-    
+
     this.limitDetailconfirm.confirm({
       message: 'Вы действительно хотите удалить ' + fkr_name + '?',
       header: 'Удаление классификации',

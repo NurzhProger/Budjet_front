@@ -1,18 +1,21 @@
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, HostListener, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MegaMenuItem, PrimeNGConfig } from 'primeng/api';
-import { AuthService } from '../login/auth.service';
+import { AuthService } from '../../login/auth.service';
 import { MenuModule } from 'primeng/menu';
-import { UserComponent } from '../user/user.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { MainService } from './main.service';
 import { profileuser } from './interfaces';
+import { ChangepassComponent } from '../../services/changepass/changepass.component';
+import { UserhistoryDetailComponent } from '../userhistory-detail/userhistory-detail.component';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
+
 export class MainComponent implements OnInit {
 
   constructor(
@@ -20,7 +23,7 @@ export class MainComponent implements OnInit {
     private mainservice: MainService,
     private config: PrimeNGConfig,
     private dialog_form: DialogService,
-    private user_massage: MessageService,
+    private user_message: MessageService,
     private user_ref: DynamicDialogRef,
     private router: Router) { }
 
@@ -28,7 +31,42 @@ export class MainComponent implements OnInit {
   viewContainerRef: ViewContainerRef;
   @ViewChild('templateRef', { read: TemplateRef, static: true })
   templateRef: TemplateRef<any>;
+  @HostListener('window:keydown', ['$event'])
+  @HostListener('window:mousemove', ['$event'])
 
+  onKeyDown(event: KeyboardEvent) {
+    this.checkEvent()
+  }
+
+  onMouseMove(event: MouseEvent) {
+    this.checkEvent()
+
+  }
+
+  checkEvent() {
+    let newEventDatetime = new Date
+    let raznica = (newEventDatetime.getTime() - this.lastEvent.getTime()) / 1000
+    if (raznica > 30000) {
+
+      if (this.quit == false) {
+        this.quit = true
+        this.user_message.add({
+          severity: 'error', summary: 'Ошибка', detail: 'Время сессии истекло! Войдите заново!'
+        })
+        setTimeout(() => {
+          this.logout()
+        }, 2000)
+      }
+
+
+    }
+    else {
+      this.lastEvent = new Date;
+    }
+  }
+
+  quit = false
+  lastEvent = new Date()
   items: MegaMenuItem[];
   mass_tabs: string[] = [];
   tabcount = 0;
@@ -38,6 +76,8 @@ export class MainComponent implements OnInit {
   username = ''
   first = 0
   rows = 25
+  history = []
+
   profileuser: profileuser = {
     user_id: '',
     username: '',
@@ -49,7 +89,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     let responce: any
 
     this.mainservice
@@ -62,29 +101,24 @@ export class MainComponent implements OnInit {
           this.profileuser.org_id = responce.profile._organization.id,
           this.profileuser.org_name = responce.profile._organization.name_rus,
           this.profileuser.budjet_id = responce.profile._organization._budjet_reg.id,
-          this.profileuser.budjet_name = responce.profile._organization._budjet_reg.name_rus
-        )
+          this.profileuser.budjet_name = responce.profile._organization._budjet_reg.name_rus,
+          this.formMenu(),
+          this.openTab("startpage-element", "Начальная страница", ''))
       )
-
-    this.formMenu()
 
     this.config.setTranslation({
       monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
       monthNamesShort: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
       dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+      weak: 'Легкий',
+      medium: 'Средний',
+      strong: 'Сложный',
+      passwordPrompt: 'Введите пароль',
       firstDayOfWeek: 1
     })
   }
 
   formMenu() {
-    this.User = [
-
-      { label: 'Изменить пароль', icon: 'pi pi-fw pi-lock', command: this.changepass },
-      { label: 'Выйти из системы', icon: 'pi pi-fw pi-power-off', command: this.logout }
-    ]
-    const username = sessionStorage.getItem("username");
-    this.username = username !== null ? username : '';
-
     this.items = [
       {
         label: 'Справочники',
@@ -266,11 +300,11 @@ export class MainComponent implements OnInit {
           ]
         ]
       },
-      {
-        label: 'Quit',
-        icon: 'pi pi-fw pi-power-off',
-        command: () => this.logout()
-      }
+      // {
+      //   label: 'Quit',
+      //   icon: 'pi pi-fw pi-power-off',
+      //   command: () => this.logout()
+      // }
     ]
   }
 
@@ -299,29 +333,43 @@ export class MainComponent implements OnInit {
   }
 
   changepass() {
-    this.user_ref = this.dialog_form.open(UserComponent,
-      {
-        header: 'Изменение пароля пользователя',
-        width: 'calc(40%)',
-        height: 'calc(30%)',
-        closable: true
-      });
+    this.user_ref = this.dialog_form.open(ChangepassComponent, {
+      header: 'Изменение пароля пользователя',
+      width: 'calc(40%)',
+      height: 'calc(40%)',
+      closable: true
+    }),
+      this.user_ref.onClose.subscribe((success: boolean) => {
 
-    this.user_ref.onClose.subscribe((save: boolean) => {
-      if (save) {
-        this.user_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Пароль изменен! Войдите, пожалуйста, в систему!' }),
-          this.router.navigate(['login'])
-      }
-    });
+        if (success) {
+
+          setTimeout(() => {
+            sessionStorage.clear(),
+              this.auth.setToken(''),
+              this.router.navigate(['login'])
+          }, 1500)
+        }
+      })
+  }
+
+  userHistory() {
+    this.user_ref = this.dialog_form.open(UserhistoryDetailComponent, {
+      header: 'История входа учетной записи',
+      width: 'calc(50%)',
+      height: 'calc(50%)',
+      closable: true,
+      data: { history: this.history }
+    })
   }
 
   logout() {
-    this.auth.logout().subscribe(
-      () => this.router.navigate(['login']),
-      error => {
-        console.warn(console.error())
-      }
-    )
+    this.auth.logout().
+      subscribe(
+        () => this.router.navigate(['login']),
+        error => {
+          console.warn(console.error())
+        }
+      )
   }
 
   removetab() {

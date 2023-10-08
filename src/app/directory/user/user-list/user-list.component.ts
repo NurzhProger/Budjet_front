@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { MainComponent } from 'src/app/main/main.component';
+import { MainComponent } from 'src/app/main/main.component/main.component';
 import { user_detail, user_list } from '../interfaces';
 import { Observable } from 'rxjs';
 import { UsersService } from '../user.service';

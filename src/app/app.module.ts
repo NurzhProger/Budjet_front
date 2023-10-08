@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
+import { MainComponent } from './main/main.component/main.component';
 import { SkeletonComponent } from './loader/skeleton/skeleton.component'
 import { PrimeModules } from './primeng.module'
 import { MegaMenuModule } from 'primeng/megamenu';
@@ -53,7 +53,6 @@ import { FkrListComponent } from './directory/expenses/fkr/fkr-list/fkr-list.com
 import { FkrSelectComponent } from './directory/expenses/fkr/fkr-select/fkr-select.component';
 import { SpecificationIncomeListComponent } from './directory/income/specification-income/specification-income-list/specification-income-list.component';
 import { SpecificationIncomeDetailComponent } from './directory/income/specification-income/specification-income-detail/specification-income-detail.component';
-import { UserComponent } from './user/user.component';
 import { Import219ListComponent } from './documents/import_document/import219/import219-list/import219-list.component';
 import { Import219DeteailComponent } from './documents/import_document/import219/import219-deteail/import219-deteail.component';
 import { UploadComponent } from './documents/import_document/import219/upload/upload.component';
@@ -126,6 +125,9 @@ import { OblastiRegionySelectComponent } from './directory/planirovanie/oblasti-
 import { EdIzmSelectComponent } from './directory/planirovanie/ed-izm/ed-izm-select/ed-izm-select.component';
 import { MarkiAvtoSelectComponent } from './directory/planirovanie/marki_avto/marki-avto-select/marki-avto-select.component';
 import { DoplNadbavkaSelectComponent } from './directory/planirovanie/dopl_nadbavka/dopl-nadbavka-select/dopl-nadbavka-select.component';
+import { ChangepassComponent } from './services/changepass/changepass.component';
+import { StartPageComponent } from './main/startpage/startpage.component';
+import { UserhistoryDetailComponent } from './main/userhistory-detail/userhistory-detail.component';
 
 @NgModule({
   imports: [
@@ -195,7 +197,6 @@ import { DoplNadbavkaSelectComponent } from './directory/planirovanie/dopl_nadba
     SpecificationExpListComponent,
     SpecificationExpSelectComponent,
     SpecificationExpDetailComponent,
-    UserComponent,
     CategorySotrListComponent,
     CategorySotrElementComponent,
     CategorySotrSelectComponent,
@@ -254,7 +255,10 @@ import { DoplNadbavkaSelectComponent } from './directory/planirovanie/dopl_nadba
     Prilozhenie5758Component,
     UserDetailComponent,
     UserListComponent,
-    SelectDoplataComponent],
+    SelectDoplataComponent,
+    ChangepassComponent,
+    StartPageComponent,
+    UserhistoryDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {

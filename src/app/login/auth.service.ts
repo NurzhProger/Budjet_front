@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
-import { User } from "./interfaces";
+import { User, body } from "./interfaces";
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,12 @@ export class AuthService {
     host = "http://192.168.10.200:9999/"
     // host = "https://planback.qazna24.kz/"
 
+
+
+
+
     login(user: User): Observable<{ auth_token: string }> {
+
         return this.http.post<{ auth_token: string }>
             (this.host + 'api/auth/token/login', user)
             .pipe(
@@ -30,8 +35,23 @@ export class AuthService {
             )
     }
 
+    clearToken(body: body) {
+
+        let temp_token = 'Basic ' + btoa(unescape(encodeURIComponent(body.username + ":" + body.password)))
+        sessionStorage.setItem('temp-token', temp_token)
+
+        let myHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Authorization', temp_token);
+        return this.http.get(this.host + "dirs/cleartoken", { headers: myHeaders })
+    }
+
     setToken(token: string) {
         this.auth_token = token
+    }
+
+    setStorageToken() {
+        sessionStorage.setItem('auth-token', '')
     }
 
     getToken(): string {
@@ -39,7 +59,7 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return !!this.auth_token
+        return this.auth_token != ''
     }
 
     logout(): Observable<any> {
@@ -48,8 +68,8 @@ export class AuthService {
             .pipe(
                 tap(
                     () => {
-                        this.setToken('')
                         sessionStorage.clear()
+                        this.auth_token = ''
                     }
                 )
             )

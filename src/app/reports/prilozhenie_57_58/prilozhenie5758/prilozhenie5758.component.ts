@@ -10,7 +10,7 @@ import { Prilozhenie5758Service } from './prilojenie5758.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { log } from 'mathjs';
 import { profileuser } from 'src/app/login/interfaces';
-import { MainComponent } from 'src/app/main/main.component';
+import { MainComponent } from 'src/app/main/main.component/main.component';
 
 @Component({
   selector: 'app-prilozhenie5758',
@@ -26,7 +26,7 @@ export class Prilozhenie5758Component implements OnInit {
     private Reportmsg: MessageService,
     private Prilozhenie5758Service: Prilozhenie5758Service,
     private sanitizer: DomSanitizer,
-  ) {this.profileuser = this.MainComponent.profileuser}
+  ) { this.profileuser = this.MainComponent.profileuser }
   profileuser: profileuser
   prilozhenieType: any = []
   url: any = ''
@@ -34,22 +34,22 @@ export class Prilozhenie5758Component implements OnInit {
   _organization = {
     'id': 0,
     'name': ''
-}
+  }
 
-_fkr = {
-  'id': 0,
-  'name': '',
-  'code': ''
-}
+  _fkr = {
+    'id': 0,
+    'name': '',
+    'code': ''
+  }
   ngOnInit(): void {
     this._organization = {
       id: parseInt(this.profileuser.org_id),
       name: this.profileuser.org_name
-  } 
+    }
     this.prilozhenieType = [
       { label: 'Приложение 57', value: 'prilozhenie57' },
       { label: 'Приложение 58', value: 'prilozhenie58' }
-  ]
+    ]
   }
 
   form() {
@@ -61,13 +61,13 @@ _fkr = {
     if (this._organization.id == 0) {
       this.Reportmsg.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите организацию' })
       return
-    } else if(this._fkr.id == 0) {
+    } else if (this._fkr.id == 0) {
       this.Reportmsg.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите ФКР' })
       return
     }
-      
-      if (this.prilozhenieValue == 'prilozhenie57') {
-        this.Prilozhenie5758Service
+
+    if (this.prilozhenieValue == 'prilozhenie57') {
+      this.Prilozhenie5758Service
         .getReport57(params)
         .subscribe
         (data => {
@@ -75,11 +75,11 @@ _fkr = {
           let url = window.URL.createObjectURL(blob);
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         })
-        // console.log(this.prilozhenieType.value);
-        
-      } 
-      else if (this.prilozhenieValue == 'prilozhenie58') {
-        this.Prilozhenie5758Service
+      // console.log(this.prilozhenieType.value);
+
+    }
+    else if (this.prilozhenieValue == 'prilozhenie58') {
+      this.Prilozhenie5758Service
         .getReport58(params)
         .subscribe
         (data => {
@@ -87,59 +87,59 @@ _fkr = {
           let url = window.URL.createObjectURL(blob);
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
         })
-        //  console.log(this.prilozhenieType.value);
-         
-      }
-        
-    
+      //  console.log(this.prilozhenieType.value);
+
+    }
+
+
   }
 
   viewOrg() {
     this.Reportref = this.Reportdialog.open(OrganizationDetailComponent,
-        {
-            header: 'Редактирование организации',
-            width: '60%',
-            height: '80%',
-            data: { org_id: this._organization.id }
-        })
+      {
+        header: 'Редактирование организации',
+        width: '60%',
+        height: '80%',
+        data: { org_id: this._organization.id }
+      })
 
     this.Reportref.onClose.subscribe((org: organization_detail) => {
-        if (org) {
+      if (org) {
 
-        }
+      }
     })
-}
+  }
 
- selectOrg() {
-        this.Reportref = this.Reportdialog.open(OrganizationSelectComponent,
-            {
-                header: 'Выбор организации',
-                width: '60%',
-                height: '80%'
-            })
+  selectOrg() {
+    this.Reportref = this.Reportdialog.open(OrganizationSelectComponent,
+      {
+        header: 'Выбор организации',
+        width: '60%',
+        height: '80%'
+      })
 
-        this.Reportref.onClose.subscribe((org: organization_detail) => {
-            if (org) {
-                this._organization.id = org.id,
-                    this._organization.name = org.name_rus
-            }
-        })
-    }
+    this.Reportref.onClose.subscribe((org: organization_detail) => {
+      if (org) {
+        this._organization.id = org.id,
+          this._organization.name = org.name_rus
+      }
+    })
+  }
 
   selectFKR() {
     this.Reportref = this.Reportdialog.open(FkrSelectComponent,
       {
-          header: 'Выбор организации',
-          width: '60%',
-          height: '80%'
+        header: 'Выбор организации',
+        width: '60%',
+        height: '80%'
       })
 
-  this.Reportref.onClose.subscribe((fkr: fkr_detail) => {
+    this.Reportref.onClose.subscribe((fkr: fkr_detail) => {
       if (fkr) {
-          this._fkr.id = fkr.id,
+        this._fkr.id = fkr.id,
           this._fkr.name = fkr.code + '. ' + fkr.name_rus
       }
-  })
+    })
   }
 
   changePrilozhenie() {
