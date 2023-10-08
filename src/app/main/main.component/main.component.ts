@@ -102,6 +102,7 @@ export class MainComponent implements OnInit {
           this.profileuser.org_name = responce.profile._organization.name_rus,
           this.profileuser.budjet_id = responce.profile._organization._budjet_reg.id,
           this.profileuser.budjet_name = responce.profile._organization._budjet_reg.name_rus,
+          this.history = responce.history,
           this.formMenu(),
           this.openTab("startpage-element", "Начальная страница", ''))
       )
