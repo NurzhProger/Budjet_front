@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CategorySotrElementComponent } from '../category-sotr-element/category-sotr-element.component';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
+import { log } from 'mathjs';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CategorySotrSelectComponent implements OnInit {
     private category_sotr_dialog_ref: DynamicDialogRef,
     private category_sotr_dialog_servis: DialogService,
     private grconfig: DynamicDialogConfig,
-    private category_message_service: MessageService
+    private messageService: MessageService
   ) {}
 
   @Output() closeEvent = new EventEmitter<any>()
@@ -28,7 +29,7 @@ export class CategorySotrSelectComponent implements OnInit {
   first = 0
   rows = 25
   searchorg = ''
-  selected: any
+  selected: category_sotr_element
   windowHeight: number 
 
   ngOnInit(): void {
@@ -46,53 +47,48 @@ export class CategorySotrSelectComponent implements OnInit {
     this.windowHeight = window.innerHeight;
   }
 
-  openNew() {
-    this.category_sotr_dialog_ref = this.category_sotr_dialog_servis.open(CategorySotrElementComponent,
-      {
-        header: 'Создание категории сотрудников',
-        width: '60%',
-        height: '60%',
-        data: { category_id: 0 }
-      })
+ 
 
-    this.category_sotr_dialog_ref.onClose.subscribe((save: boolean) => {
-      
-      if (save) {
-        this.fetchList()
-      }
-    })
-  }
-
-  
-  onSelected(category_sotrs:category_sotr_element) {
+  onSelected(category:category_sotr_element) {
     if (!this.selected) {
-    this.category_message_service.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите категорию!' })
+      this.messageService.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите категорию!' })
     return
     }
-    this.category_sotr_dialog_ref.close(category_sotrs)
+      this.category_sotr_dialog_ref.close(category)
     }
 
-  onRowClick(category_sotrs: category_sotr_element) {
+  onRowClick(category: category_sotr_element) {
       
-    if (this.grconfig.data) {
-      this.category_sotr_dialog_ref.close(category_sotrs)
-    }
+    // if (this.grconfig.data) {
+    //   this.category_sotr_dialog_ref.close(category)
+    // }
 
-    else if (this.data) {
-      this.onRowEdit(category_sotrs)
+     if (this.data) {
+      this.onRowEdit(category)
     }
     else {
-      this.category_sotr_dialog_ref.close(category_sotrs) 
+      this.category_sotr_dialog_ref.close(category) 
     }
   }
 
-  onRowEdit(category_sotrs: category_sotr_element) {
+  setclass(roww: any){
+    // console.log(this.selected, roww);
+    if (this.selected && roww.id == this.selected.id){
+      return 'blue-class'
+    }
+    else{
+    return ''}
+    
+    // if (roww == this.selected)
+  }
+
+  onRowEdit(category: category_sotr_element) {
     this.category_sotr_dialog_ref = this.category_sotr_dialog_servis.open(CategorySotrElementComponent,
       {
         header: 'Редактирование категории сотрудника',
         width: '60%',
         height: '60%',
-        data: { category_id: category_sotrs.id }
+        data: { category_id: category.id }
       })
 
     this.category_sotr_dialog_ref.onClose.subscribe((save: boolean) => {
@@ -110,7 +106,7 @@ export class CategorySotrSelectComponent implements OnInit {
   fetchList() {
     
     let params = {
-      etogruppa: !this.data,      
+      etogruppa: this.data,      
       limit: this.rows.toString(),
       offset: this.first.toString()
     }

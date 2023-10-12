@@ -27,9 +27,9 @@
 
     <div class="card" *ngIf="(category_sotrs$ | async) as category_sotrs; else loader">
         <p-table *ngIf="category_sotrs.count !== 0; else empty" [value]="category_sotrs.results" [scrollable]="true"
-            scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+            scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single"
             rowGroupMode="subheader" groupRowsBy="parent" dataKey="parent_name"
-            styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+            styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines" [(selection)]="selected">
     
             <ng-template pTemplate="header">
                 <tr>
@@ -44,7 +44,7 @@
 
             <ng-template pTemplate="groupheader" let-category let-expanded="expanded">
                 <tr>
-                    <td colspan="7">
+                    <td colspan="3">
                         <button type="button" pButton pRipple [pRowToggler]="category"
                             class="p-button-text p-button-rounded p-button-plain mr-4"
                             [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
@@ -53,14 +53,14 @@
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="rowexpansion" let-category let-ri="rowIndex">
-                <tr class="cursor-pointer"  (dblclick)="onRowClick(category)" [pSelectableRow]="category">
-                    <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-                    <td style="text-align:center">
-                        {{category.name}}
+            <ng-template pTemplate="rowexpansion" let-category1 let-ri="rowIndex">
+                <tr class="cursor-pointer"(dblclick)="onRowClick(category1)" >
+                    <td style="text-align: center; font-weight: 700;"  [ngClass]="setclass(category1)" >{{ri + 1}}</td>
+                    <td style="text-align:center" [pSelectableRow]="category1"  [ngClass]="setclass(category1)" >
+                        {{category1.name}}
                     </td>
-                    <td style="text-align:center">
-                        {{category.parent_name}}
+                    <td style="text-align:center"  [ngClass]="setclass(category1)" >
+                        {{category1.parent_name}}
                     </td>
                 </tr>
             </ng-template>
