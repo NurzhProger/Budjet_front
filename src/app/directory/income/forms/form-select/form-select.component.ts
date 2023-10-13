@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { formsService } from '../forms_servise';
 import { Observable } from 'rxjs';
 import { form_list, form_list_doc } from '../forms_interfaces';
@@ -17,6 +17,7 @@ export class FormSelectComponent implements OnInit {
     private form_list_messageServicedelSelect: MessageService,
     private form_list_dialog: DialogService,
     private form_Servise:formsService,
+    private form_config: DynamicDialogConfig,
     private from_confrim:ConfirmationService)  { }
 
 
@@ -30,8 +31,10 @@ export class FormSelectComponent implements OnInit {
   last = 3
   selected: any
   windowHeight: number
+  spec_id: number = 0
 
   ngOnInit(): void {
+    this.spec_id =  this.form_config.data._spec
     this.fetchCat()
   }
 
@@ -39,7 +42,8 @@ export class FormSelectComponent implements OnInit {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
-      search: this.searcforms.toString()
+      search: this.searcforms.toString(),
+      _spec: this.spec_id
     }
 
     this.form_list$ = this.form_Servise.fetch(params)

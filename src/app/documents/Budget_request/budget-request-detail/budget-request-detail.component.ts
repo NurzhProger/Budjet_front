@@ -226,7 +226,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         {
           header: 'Выбор формы',
           width: '60%',
-          height: '80%'
+          height: '80%',
+          data: { _spec: spec_detail.id}
         })
       this.Budget_detail_ryref.onClose.subscribe((form_detail: form_list_doc) => {
         if (form_detail) {
