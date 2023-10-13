@@ -15,10 +15,8 @@ export class FormSelectComponent implements OnInit {
   constructor(
     private form_list_ryref: DynamicDialogRef,
     private form_list_messageServicedelSelect: MessageService,
-    private form_list_dialog: DialogService,
     private form_Servise:formsService,
-    private form_config: DynamicDialogConfig,
-    private from_confrim:ConfirmationService)  { }
+    private form_config: DynamicDialogConfig)  { }
 
 
   @Output() newItemEvent = new EventEmitter<any>();
