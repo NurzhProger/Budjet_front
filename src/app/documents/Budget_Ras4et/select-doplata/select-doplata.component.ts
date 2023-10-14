@@ -13,6 +13,7 @@ export class SelectDoplataComponent implements OnInit {
 
   new_dopl: [Ras4et_new_dopl]
   added_dopl: any = []
+  tbl: any = []
   constructor(
     private select_dialog_config: DynamicDialogConfig,
     private select_dialog_Detailref: DynamicDialogRef,
@@ -35,8 +36,12 @@ export class SelectDoplataComponent implements OnInit {
 
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {
     this.added_dopl.push(dopl)
-
     this.new_dopl.splice(ri, 1)
+  }
+
+  onRowClickForDelete(dopl: Ras4et_new_dopl, ri: number) {
+    this.new_dopl.push(dopl)
+    this.added_dopl.splice(ri, 1)
   }
 
   saveDoplata() {

@@ -131,6 +131,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
     let wws: any = []
     let mal: any = []
+    let tbl: any = []
     let stroka: number = 0
     let ind_dopl: number
     let naiden: boolean = false
@@ -143,6 +144,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     for (let y = 0; this.Ras4et_detail.dopl.length > y; y++) {
       if (naiden == false) {
         mal = this.Ras4et_detail.dopl[y]
+
         if (stroka == mal[0].stroka) {
           naiden = true
         }
@@ -170,33 +172,33 @@ export class BudgetRas4etDetailComponent implements OnInit {
         new_dopl.push(newDoplItem);
       }
     }
-
+    tbl = this.Ras4et_detail.tbl[stroka]
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectDoplataComponent,
       {
         header: 'Выбор доплат и надбавок',
         width: 'calc(60%)',
         height: 'calc(80%)',
-        data: { new_dopl: new_dopl, added_dopl: add_dopl }
+        data: { new_dopl: new_dopl, added_dopl: add_dopl, tbl: tbl }
       })
 
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       if (dopl) {
 
-        // console.log(dopl);
         let fff: any = []
         fff = JSON.parse(JSON.stringify(dopl))
         for (let ss = 0; fff.length > ss; ss++) {
-          // console.log(fff[ss]);
-
           fff[ss].stroka = stroka
-          console.log(fff[ss]);
         }
 
         if (ind_dopl !== undefined) {
           this.Ras4et_detail.dopl.splice(ind_dopl, 1)
         }
 
-        this.Ras4et_detail.dopl.push(fff);
+        if (fff.length !== 0) {
+          this.Ras4et_detail.dopl.push(fff);
+        }
+
+
         // this.saveDoc(false)
       }
     })
@@ -212,7 +214,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     for (let i = 0; newnew.length > i; i++) {
       asd[i].stroka = this.children.length + 1
     }
-
     this.children.push(asd)
   }
 

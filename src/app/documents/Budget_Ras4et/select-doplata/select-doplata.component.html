@@ -13,17 +13,21 @@
             </tr>
         </ng-template>
     </p-table>
-
+    <hr>
     <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="added_dopl">
         <ng-template pTemplate="header">
             <tr>
                 <th style="text-align:center">Добавленные</th>
+                <th style="text-align:center">Сумма доплаты</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-adddopl>
-            <tr class="cursor-pointer">
+        <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
+            <tr class="cursor-pointer" (dblclick)="onRowClickForDelete(adddopl, ri)">
                 <td>
                     {{adddopl._doplata_name}}
+                </td>
+                <td>
+                    {{adddopl.summ}}
                 </td>
             </tr>
         </ng-template>
