@@ -2,25 +2,38 @@
 
 th:nth-child(1),
 td:nth-child(1) {
-    width: 50px; 
+    width: 2%; 
+    background-color:rgb(238, 235, 232);
 }
 
 /* Функциональная классификация расходов */
 th:nth-child(2),
 td:nth-child(2) {
-    width: 1000px; 
+    width: 68%; 
     height: 50px;
+    background-color:rgb(238, 235, 232);
 }
 
 /* Сумма на год */
 th:nth-child(3),
 td:nth-child(3) {
-    width: 300px;
+    width: 27%;
     height: 50px;
+    background-color:rgb(238, 235, 232);
 }
 
 /* Действия */
 th:nth-child(4),
 td:nth-child(4) {
-    width: 100px;
+    width: 3%;
+    background-color:rgb(238, 235, 232);
 }
+
+
+
+  label {
+    font-weight: bold;
+    color: blue;
+  }
+
+ 
