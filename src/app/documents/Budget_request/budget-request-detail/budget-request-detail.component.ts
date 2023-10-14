@@ -158,23 +158,28 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     let responce: any;
     this.Budget_Servise.fetch_vid_rashoda().subscribe(
       (data) => (
-        responce = data, this._vid_rashoda = responce.results
+        responce = data,
+        this._vid_rashoda = responce.results
       ),
       (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
   }
+
   selectdannyi() {
     let responce: any;
     this.Budget_Servise.fetch_vid_dannyh().subscribe(
       (data) => (
-        responce = data, this._vid_dannyh = responce.results
+        responce = data,
+        this._vid_dannyh = responce.results
       ),
       (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
   }
+
   selectoperacii() {
     let responce: any;
     this.Budget_Servise.fetch_vid_oparecii().subscribe(
       (data) => (
-        responce = data, this._vid_operacii = responce.results
+        responce = data,
+        this._vid_operacii = responce.results
       ),
       (error) => (this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
   }
@@ -227,7 +232,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           header: 'Выбор формы',
           width: '60%',
           height: '80%',
-          data: { _spec: spec_detail.id}
+          data: { _spec: spec_detail.id }
         })
       this.Budget_detail_ryref.onClose.subscribe((form_detail: form_list_doc) => {
         if (form_detail) {
@@ -428,17 +433,15 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         header: 'Редактирование расчетной таблицы',
         width: '100%',
         height: '100%',
-        data: { data: izm }
+        data: {
+          data: izm,
+          period: this.Budget_detail.doc._date
+        }
       })
 
     this.Budget_detail_ryref.onClose.subscribe((summ: number) => {
-      console.log(summ);
-
       if (summ) {
-
         izm.summ = summ
-        // this.Budget_detail.tbl[index]._form.head_form = form._form.head_form,
-        // this.Budget_detail.tbl[index]._form.name = form._form.name
       }
     })
 

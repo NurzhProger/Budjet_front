@@ -73,6 +73,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   form_fullname = ''
   summdoc = 0
   have_dopl = false
+  period = ''
 
 
   ngOnInit(): void {
@@ -82,6 +83,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
 
     this.izm = this.Budget_ras4et_Detailconfig.data.data
+    this.period = this.Budget_ras4et_Detailconfig.data.period
 
     if (this.izm) {
 
@@ -117,18 +119,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     let add_dopl: any = []
     let _dopl: any = []
     let new_dopl: any = []
-
-
-    // if (this.Ras4et_detail.dopl.length >= ri + 1) {
-    // add_dopl = this.Ras4et_detail.dopl[ri]
-    // console.log(ri);
-
-    // }
-    // else {
-    // }
-
-
-
     let wws: any = []
     let mal: any = []
     let tbl: any = []
@@ -166,7 +156,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
     for (let i = 0; this.Ras4et_detail.new_dopl.length > i; i++) {
       let newDoplItem = this.Ras4et_detail.new_dopl[i];
-      // Используйте find() с функцией обратного вызова для поиска элемента
       let found = _dopl.find((item: number) => item === newDoplItem._doplata);
       if (!found) {
         new_dopl.push(newDoplItem);
@@ -178,7 +167,12 @@ export class BudgetRas4etDetailComponent implements OnInit {
         header: 'Выбор доплат и надбавок',
         width: 'calc(60%)',
         height: 'calc(80%)',
-        data: { new_dopl: new_dopl, added_dopl: add_dopl, tbl: tbl }
+        data: {
+          period: this.period,
+          new_dopl: new_dopl,
+          added_dopl: add_dopl,
+          tbl: tbl
+        }
       })
 
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
@@ -198,8 +192,14 @@ export class BudgetRas4etDetailComponent implements OnInit {
           this.Ras4et_detail.dopl.push(fff);
         }
 
+        let column = dopl[0]._column
+        let summ_mass = 0
 
-        // this.saveDoc(false)
+        for (let i = 0; dopl.length > i; i++) {
+          summ_mass = summ_mass + dopl[i].summ
+        }
+
+        wws[column - 1].zn_float = summ_mass
       }
     })
   }
@@ -235,8 +235,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     });
   }
 
-
-
   selectENSTRU(ensTRU: ensTRU_element) {
 
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(EnstruSelectComponent,
@@ -251,6 +249,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
         ensTRU.id = ensTRU_element.id
       }
     })
+
   }
 
   selectEd_Izm(ed_izm: ed_izm_element) {
@@ -328,6 +327,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       })
     this.Budget_ras4et_Detailref.onClose.subscribe((doplaty_nadbavky_element: doplaty_nadbavky_element) => {
       if (doplaty_nadbavky_element) {
+
         dopl_nad.id = doplaty_nadbavky_element.id
         dopl_nad.name_rus = doplaty_nadbavky_element.name_rus
       }

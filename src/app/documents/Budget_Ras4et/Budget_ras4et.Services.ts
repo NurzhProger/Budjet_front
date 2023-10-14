@@ -30,6 +30,10 @@ export class budjetRas4et_Service {
     return this.http.post(this.host + 'docs/raschetsave', ras4et)
   }
 
+  period_pokazatel_detail(body: any) {
+    return this.http.post(this.host + 'dirs/period_pokazdetail', body)
+  }
+
 
 
 

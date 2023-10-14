@@ -12,14 +12,14 @@
   </div>
 
   <div class="p-toolbar-group-right">
-    <div style="padding-right: 10px;">
+    <!-- <div style="padding-right: 10px;">
       <p-splitButton appendTo="body" label="Еще" [model]="this.items"
         styleClass="p-button-outlined p-button-plain p-mr-2"></p-splitButton>
     </div>
     <div>
       <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined p-button-plain p-mr-2"
         styleClass="p-button-sm" (click)="closeform(true)"></button>
-    </div>
+    </div> -->
   </div>
 </p-toolbar>
 
@@ -66,8 +66,8 @@
         <ng-template pTemplate="header">
           <tr style="text-align: center; font-weight: 700;">
             <th style="text-align: center; width: 2.5%;">Номер</th>
-            <th style="text-align: center; width: 8%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
-            <th style="text-align: center; width: 8%;" *ngIf="have_dopl">Доплаты</th>
+            <th style="text-align: center; width: 5%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
+            <th style="text-align: center; width: 5%;" *ngIf="have_dopl">Доплаты</th>
             <th style="text-align: center; width: 5%;">Действия</th>
           </tr>
         </ng-template>
@@ -87,7 +87,7 @@
                   (click)="selectCategorySotr(kolon.zn_category_sotr)">...</span>
               </div>
               <!-- число -->
-              <input type="number" *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float"
+              <input type="number" step="0.001" *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float"
                 (ngModelChange)="onInputChange($event, kolon, ri)">
               <!-- строка -->
               <input type="text" *ngIf="kolon.zn == 'string'" [ngModel]="kolon.zn_string"

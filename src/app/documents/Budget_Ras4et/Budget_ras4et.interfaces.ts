@@ -74,6 +74,7 @@ export interface Ras4et_dopl {
   _doplata_name: string;
   _column: number;
   _sposob_ras: string;
+  stavka_name: string;
 }
 
 export interface Ras4et_new_dopl {
@@ -85,6 +86,7 @@ export interface Ras4et_new_dopl {
   _column: number;
   _doplata_name: string;
   _sposob_ras: string;
+  stavka_name: string;
 }
 
 
