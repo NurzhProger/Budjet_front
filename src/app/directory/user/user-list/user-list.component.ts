@@ -64,7 +64,20 @@ export class UserListComponent implements OnInit {
   }
 
   openNew() {
+    this.userListref = this.userListdialogservice.open(UserDetailComponent,
+      {
+        header: 'Добавление нового пользователя',
+        width: '60%',
+        height: '60%',
+        data: { user_id: 0 }
+      })
 
+    this.userListref.onClose.subscribe((save: boolean) => {
+
+      if (save) {
+        this.fetch()
+      }
+    })
   }
 
   onSelected(user: user_detail) {

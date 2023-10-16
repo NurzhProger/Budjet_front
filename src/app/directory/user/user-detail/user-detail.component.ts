@@ -24,7 +24,21 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   userForm: FormGroup;
-  user_detail: user_detail
+  user_detail: user_detail = {
+    id: 0,
+    last_login: '',
+    date_joined: '',
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    is_active: true,
+    organization: {
+      id: 0,
+      name_rus: ''
+    }
+  }
   user_id = 0
   readonly = true
   changepass = false
@@ -40,7 +54,7 @@ export class UserDetailComponent implements OnInit {
     //   PasswordFormControl: new FormControl('', [Validators.minLength(8)])
     // })
 
-    this.user_id = this.userdetconfig.data.user_id
+    this.user_id = this.userdetconfig.data.user_id || 0
 
     if (this.user_id !== 0) {
       this.userService
