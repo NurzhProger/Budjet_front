@@ -161,7 +161,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
         new_dopl.push(newDoplItem);
       }
     }
-    tbl = this.Ras4et_detail.tbl[stroka]
+    tbl = this.Ras4et_detail.tbl[stroka - 1]
+
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectDoplataComponent,
       {
         header: 'Выбор доплат и надбавок',
@@ -169,6 +170,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
         height: 'calc(80%)',
         data: {
           period: this.period,
+          first_dopl: this.Ras4et_detail.new_dopl,
           new_dopl: new_dopl,
           added_dopl: add_dopl,
           tbl: tbl
