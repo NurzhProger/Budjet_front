@@ -39,33 +39,41 @@ export class SelectDoplataComponent implements OnInit {
 
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {
 
-    console.log(this.first_dopl);
-    let new_dopl = this.first_dopl.filter(item => item._doplata == dopl._doplata)
+    let filter_dopl: any
+    filter_dopl = this.first_dopl.filter(item => item._doplata == dopl._doplata)
 
-    console.log(new_dopl);
+    if (filter_dopl.length > 0) {
+      if (filter_dopl[0].stavka_name !== '') {
 
-    if (new_dopl[0].stavka_name !== '') {
-      let params = {
-        period: this.period,
-        _pokazatel: dopl.stavka_name
-      }
-      let zn: any
-      this.select_budjetRas4et_Service
-        .period_pokazatel_detail(params)
-        .subscribe(
-          (data) => (
-            this.rashetSummyStavka(dopl, data, ri)
-          ),
-          (error) => (
-            this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        let params = {
+          period: this.period,
+          _pokazatel: filter_dopl[0].stavka_name
+        }
+
+        let responce: any
+
+        this.select_budjetRas4et_Service
+          .period_pokazatel_detail(params)
+          .subscribe(
+            (data) => (
+              responce = data,
+              this.rashetSummyStavka(dopl, responce.znachenie, filter_dopl, ri)
+            ),
+            (error) => (
+              this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+            )
           )
-        )
-    } else {
-      this.rashetSummy(dopl, ri)
+      }
+      else {
+        this.rashetSummy(dopl, filter_dopl, ri)
+      }
+    }
+    else {
+      this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось найти доплату ' + dopl._doplata_name })
     }
   }
 
-  rashetSummy(dopl: Ras4et_new_dopl, ri: number) {
+  rashetSummy(dopl: Ras4et_new_dopl, filter_dopl: any, ri: number) {
 
     let mass: any;
     mass = [dopl];
@@ -97,7 +105,7 @@ export class SelectDoplataComponent implements OnInit {
 
   }
 
-  rashetSummyStavka(dopl: Ras4et_new_dopl, zn: any, ri: number) {
+  rashetSummyStavka(dopl: Ras4et_new_dopl, znachenie: number, filter_dopl: any, ri: number) {
 
     // let mass = dopl._sposob_ras.split(" ")
 
@@ -111,14 +119,11 @@ export class SelectDoplataComponent implements OnInit {
     //     dopl.summ = dopl.summ * zn.znachenie
     //   }
     // }
-    let summ = 0
     if (dopl._sposob_ras == 'Процент МРП') {
-      summ = dopl.summ * zn.znachenie / 100
+      dopl.summ = filter_dopl[0].summ * znachenie / 100
     } else if (dopl._sposob_ras == 'Количество МРП') {
-      summ = dopl.summ * zn.znachenie
+      dopl.summ = filter_dopl[0].summ * znachenie
     }
-
-    dopl.summ = summ
 
     this.added_dopl.push(dopl),
       this.new_dopl.splice(ri, 1)
