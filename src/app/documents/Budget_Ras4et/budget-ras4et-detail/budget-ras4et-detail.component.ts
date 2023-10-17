@@ -175,7 +175,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
           added_dopl: add_dopl,
           tbl: tbl
         }
-      })
+      }
+    )
 
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       if (dopl) {

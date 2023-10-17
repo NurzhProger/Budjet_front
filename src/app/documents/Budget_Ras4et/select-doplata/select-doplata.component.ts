@@ -14,6 +14,7 @@ export class SelectDoplataComponent implements OnInit {
 
   new_dopl: [Ras4et_new_dopl]
   first_dopl: [Ras4et_new_dopl]
+  fff: any = []
   added_dopl: any = []
   tbl: any = []
   period = ''
@@ -28,7 +29,8 @@ export class SelectDoplataComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.first_dopl = this.select_dialog_config.data.first_dopl
+    this.first_dopl = JSON.parse(JSON.stringify(this.select_dialog_config.data.first_dopl))
+
     this.new_dopl = this.select_dialog_config.data.new_dopl
     this.period = this.select_dialog_config.data.period
     if (this.select_dialog_config.data.added_dopl !== undefined) {
@@ -39,8 +41,9 @@ export class SelectDoplataComponent implements OnInit {
 
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {
 
-    let filter_dopl: any
+    let filter_dopl: any = []
     filter_dopl = this.first_dopl.filter(item => item._doplata == dopl._doplata)
+
 
     if (filter_dopl.length > 0) {
       if (filter_dopl[0].stavka_name !== '') {
@@ -99,7 +102,8 @@ export class SelectDoplataComponent implements OnInit {
       }
     }
 
-    dopl.summ = dopl.summ * this.rezult / 100
+    dopl.summ = filter_dopl[0].summ * this.rezult / 100
+
     this.added_dopl.push(dopl),
       this.new_dopl.splice(ri, 1)
 
