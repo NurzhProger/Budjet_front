@@ -25,16 +25,26 @@ export class KoeffElementComponent implements OnInit {
     private koeff_category_dialog_ref: DynamicDialogRef,
     private stazhSelectdialogService: DialogService,
     private koeff_category_dialog_config: DynamicDialogConfig
-  ) {}
+  ) { }
 
   koeff_category_element: koeff_category_element = {
     id: 0,
     period: '',
     koefficient: 0,
-    _category: 0,
-    category_name: '',
-    _stazh: 0,
-    stazh_name: ''
+    _category: {
+      id: 0,
+      name: '',
+      deleted: '',
+      parent_name: '',
+      parent: 0,
+      group: false
+    },
+    _stazh: {
+      id: 0,
+      name: '',
+      ot: 0,
+      do: 0
+    },
   }
 
   form: FormGroup;
@@ -51,8 +61,8 @@ export class KoeffElementComponent implements OnInit {
       this.koeffCategoryService.fetchKoeff(this.koeff_category_element.id)
         .subscribe(
           (data) => (
-              this.koeff_category_element = data
-            )
+            this.koeff_category_element = data
+          )
         )
     }
   }
@@ -61,50 +71,50 @@ export class KoeffElementComponent implements OnInit {
   selectCategory() {
     this.category_dialog_select = this.categorySelectdialogService.open(CategorySotrListComponent,
       {
-          header: 'Выбор категории должности',
-          width: 'calc(60%)',
-          height: 'calc(80%)',
-          data: {etogruppa: true}
+        header: 'Выбор категории должности',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
+        data: { etogruppa: true }
       })
     this.category_dialog_select.onClose.subscribe((category: category_sotr_element) => {
       if (category) {
-        this.koeff_category_element._category = category.id;
-        this.koeff_category_element.category_name = category.name;
+        this.koeff_category_element._category.id = category.id;
+        this.koeff_category_element._category.name = category.name;
       }
-      })
+    })
   }
 
   selectStazh() {
     this.stazh_dialog_select = this.stazhSelectdialogService.open(StazhCategoryListComponent,
       {
-          header: 'Выберите стаж',
-          width: 'calc(60%)',
-          height: 'calc(80%)',
+        header: 'Выберите стаж',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
       })
     this.stazh_dialog_select.onClose.subscribe((stazh: stazh_category_element) => {
       if (stazh) {
-        this.koeff_category_element._stazh = stazh.id;
-        this.koeff_category_element.stazh_name = stazh.name;
+        this.koeff_category_element._stazh.id = stazh.id;
+        this.koeff_category_element._stazh.name = stazh.name;
       }
     })
   }
 
   saveKoeff() {
-    if (this.koeff_category_element.id == 0){      
+    if (this.koeff_category_element.id == 0) {
       this.koeffCategoryService.add(this.koeff_category_element)
         .subscribe(
           (data) => (
             this.koef_category_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Коэффициент сохранен!' })
           ),
           (error) => (this.koef_category_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
-        }
+    }
     else {
-          this.koeffCategoryService.edit(this.koeff_category_element)
-          .subscribe((data) => (
-            this.koef_category_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Коэффициент сохранен!' })
-          ),
+      this.koeffCategoryService.edit(this.koeff_category_element)
+        .subscribe((data) => (
+          this.koef_category_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Коэффициент сохранен!' })
+        ),
           (error) => (this.koef_category_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
-        }
+    }
     this.closeKoeff(true);
   }
 
@@ -113,13 +123,13 @@ export class KoeffElementComponent implements OnInit {
   }
 
   clearCategory() {
-    this.koeff_category_element._category = 0;
-    this.koeff_category_element.category_name = '';
+    this.koeff_category_element._category.id = 0;
+    this.koeff_category_element._category.name = '';
   }
 
   clearStazh() {
-    this.koeff_category_element._stazh = 0;
-    this.koeff_category_element.stazh_name = '';
+    this.koeff_category_element._stazh.id = 0;
+    this.koeff_category_element._stazh.name = '';
   }
 
 }
