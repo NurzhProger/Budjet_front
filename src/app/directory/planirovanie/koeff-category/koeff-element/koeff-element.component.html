@@ -1,5 +1,5 @@
 <form class="card" [formGroup]="form">
-  <div class="p-field" style="padding-bottom: 10px;">
+  <div class="p-field" style="padding-bottom: 20px;">
     <label for="period">Период<span style="color: red;">*</span></label>
     <div class="p-inputgroup">
       <input id="period" type="date" pInputText [(ngModel)]="koeff_category_element.period" formControlName="period" />
@@ -7,7 +7,7 @@
     <span class="p-invalid" *ngIf="form.controls['period'].invalid && form.controls['period'].touched">
       <span *ngIf="form.controls['period'].errors?.required">Заполните период</span>
     </span>
-
+    <div style="padding-bottom: 20px;"></div>
     <label>Категория должности</label>
     <div class="p-inputgroup">
       <input id="category" type="text" [readonly]="true" pInputText [(ngModel)]="koeff_category_element._category.name"
@@ -16,7 +16,7 @@
       <button pButton pRipple type="button" (click)="selectCategory()" icon="pi pi-pencil"
         class="p-button-outlined p-button-text" style="color:dimgrey"></button>
     </div>
-
+    <div style="padding-bottom: 20px;"></div>
     <label>Стаж</label>
     <div class="p-inputgroup">
       <input id="stazh" type="text" [readonly]="true" pInputText [(ngModel)]="koeff_category_element._stazh.name"
@@ -25,14 +25,14 @@
       <button pButton pRipple type="button" (click)="selectStazh()" icon="pi pi-pencil"
         class="p-button-outlined p-button-text" style="color:dimgrey"></button>
     </div>
-
+    <div style="padding-bottom: 20px;"></div>
     <label>Коэффициент</label>
     <div class="p-inputgroup">
       <input id="koeff" type="number" pInputText [(ngModel)]="koeff_category_element.koefficient"
         formControlName="koeff" />
     </div>
   </div>
-
+  <div style="padding-bottom: 20px;"></div>
   <div style="width:100%; padding: 10px 0;">
     <label style="color: red;">* - обязательные поля</label>
   </div>

@@ -1,5 +1,6 @@
 <form class="card" [formGroup]="form">
-    <div class="p-field" style="padding-bottom: 10px;">
+    <div class="p-field" style="padding-bottom: 20px;">
+      
       <label for="name">Наименование<span style="color: red;">*</span></label>
       <div class="p-inputgroup">
         <input id="name" type="text" pInputText [(ngModel)]="category_sotr_element.name" formControlName="name" />
@@ -10,7 +11,7 @@
     </div>
   
   
-    <div class="p-field" style="padding-bottom: 10px;">
+    <div class="p-field" style="padding-bottom: 20px;">
       <label>Родитель</label>
       <div class="p-inputgroup" >
         <input id="parent" type="text" [readonly]="true" pInputText [(ngModel)]="category_sotr_element.parent_name" formControlName="parent" 
@@ -21,7 +22,7 @@
       </div>
     </div>
 
-    <div class="p-field" style="padding-bottom: 10px;">
+    <div class="p-field" style="padding-bottom: 20px;">
       <label>Это группа</label>
       <div>
       <p-dropdown placeholder="Выберите" [options]="directory_options" optionLabel="label" optionValue="value"
@@ -29,7 +30,7 @@
       </p-dropdown>
     </div>
   </div>
-    <div style="width:100%; padding: 10px 0;">
+    <div style="width:100%; padding: 20px 0;">
       <label style="color: red;">* - обязательные поля</label>
     </div>
 </form>
