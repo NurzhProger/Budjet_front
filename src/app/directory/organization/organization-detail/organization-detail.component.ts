@@ -36,15 +36,15 @@ export class OrganizationDetailComponent implements OnInit {
     private org_dialog_service: DialogService,
     private org_confirm: ConfirmationService,
     private period_dialog_ref: DynamicDialogRef
-  ) { }
+    ) { }
 
   form: FormGroup
   org_id = 0
   saved = false
   windowHeight: number
   _date = new Date
-
-
+ 
+  
   org_detail: organization_detail = {
     id: 0,
     bin: '',
@@ -53,10 +53,10 @@ export class OrganizationDetailComponent implements OnInit {
     adress: '',
     deleted: false,
     _budjet_reg: {
-      id: 0,
-      code: '',
-      name_kaz: '',
-      name_rus: ''
+        id: 0,
+        code: '',
+        name_kaz: '',
+        name_rus: ''
     },
     _regiondar: {
       id: 0,
@@ -91,8 +91,8 @@ export class OrganizationDetailComponent implements OnInit {
       this.orgService.fetchOrg(this.org_id)
         .subscribe(
           (data) => (
-            this.org_detail = data
-          )
+              this.org_detail = data
+            )
         )
     }
 
@@ -112,7 +112,6 @@ export class OrganizationDetailComponent implements OnInit {
       }
     })
   }
-
   SelectPeriod(org: organization_detail) {
     this.period_dialog_ref = this.org_dialog_service.open(PeriodDetailComponent,
       {
@@ -122,9 +121,7 @@ export class OrganizationDetailComponent implements OnInit {
       })
     this.period_dialog_ref.onClose.subscribe((date: any) => {
       if (date) {
-
         let new_date = this.toLocaleDate(date)
-        date = new Date(date).toLocaleDateString()
 
         let params = {
           _organization_id: this.org_detail.id,
@@ -137,7 +134,7 @@ export class OrganizationDetailComponent implements OnInit {
           .parent_organization_add(params)
           .subscribe(
             (data) => (resp = data,
-              this.PushtoTable(org, resp.id, date),
+              this.PushtoTable(org, resp.id, new_date),
               this.org_massage.add({ severity: 'success', summary: 'Успешно', detail: resp.status })),
             (error) => (this.org_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
           )
@@ -146,7 +143,7 @@ export class OrganizationDetailComponent implements OnInit {
     }
     )
   }
-  PushtoTable(org: organization_detail, id_str: number, date: string) {
+  PushtoTable(org: organization_detail, id_str: number,date: string) {
     this.org_detail.parent_organizations.push({
       id: id_str,
       _date: date,
@@ -178,32 +175,40 @@ export class OrganizationDetailComponent implements OnInit {
         this.org_confirm.close();
       }
     })
-  }
 
+
+  }
   toLocaleDate(dateForStr: string) {
     return new Date(dateForStr).toLocaleDateString() + ' ' + new Date(dateForStr).toLocaleTimeString();
   }
 
-
+  
   saveOrg() {
-
-    this.org_dialog_ref.close(this.saved)
+    
+    this.orgService.add(this.org_detail)
+      .subscribe(
+        (data) => (
+          this.org_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Организация сохранена!' }),
+          this.saved = true,
+          this.closeOrg()
+        ),
+        (error) => (this.org_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
   }
 
 
   selectBudjet() {
     this.budjet_select_dialog_ref = this.budjetDialogService.open(BudjetRegListComponent,
       {
-        header: 'Выбор бюджета региона',
-        width: 'calc(60%)',
-        height: 'calc(80%)',
-        data: { budjetreg_id: this.org_detail._budjet_reg.id }
+          header: 'Выбор бюджета региона',
+          width: 'calc(60%)',
+          height: 'calc(80%)',
+          data: { budjetreg_id: this.org_detail._budjet_reg.id }
       })
     this.budjet_select_dialog_ref.onClose.subscribe((budjet_reg: budjet_reg__element) => {
       if (budjet_reg) {
         this.org_detail._budjet_reg = budjet_reg;
       }
-    })
+      })
   }
 
   clearBudjet() {
@@ -212,22 +217,22 @@ export class OrganizationDetailComponent implements OnInit {
       code: '',
       name_kaz: '',
       name_rus: ''
-    };
+  };
   }
 
   selectRegion() {
     this.region_select_dialog_ref = this.regionDialogService.open(RegionsListComponent,
       {
-        header: 'Выбор региона',
-        width: 'calc(60%)',
-        height: 'calc(80%)',
-        data: { regions_id: this.org_detail._regiondar.id }
+          header: 'Выбор региона',
+          width: 'calc(60%)',
+          height: 'calc(80%)',
+          data: { regions_id: this.org_detail._regiondar.id }
       })
     this.region_select_dialog_ref.onClose.subscribe((regions: regions__element) => {
       if (regions) {
         this.org_detail._regiondar = regions;
       }
-    })
+      })
   }
 
   clearRegion() {
