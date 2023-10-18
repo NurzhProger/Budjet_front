@@ -271,7 +271,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
   }
 
-  selectCategorySotr(cat_sotr: category_sotr_element) {
+  selectCategorySotr(cat_sotr: category_sotr_element, ri: number) {
 
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(CategorySotrSelectComponent,
       {
@@ -279,12 +279,58 @@ export class BudgetRas4etDetailComponent implements OnInit {
         width: 'calc(60%)',
         height: 'calc(80%)'
       })
+
     this.Budget_ras4et_Detailref.onClose.subscribe((category_sotr_element: category_sotr_element) => {
       if (category_sotr_element) {
         cat_sotr.id = category_sotr_element.id
         cat_sotr.name = category_sotr_element.name
+        this.getKoefficient(ri)
       }
     })
+
+  }
+
+  getKoefficient(ri: number) {
+
+    let _category_id = 0
+    let _stazh_id = 0
+    for (let i = 0; i < this.children[ri].length; i++) {
+      if (this.children[ri][i].zn == 'category_sotr') {
+        _category_id = this.children[ri][i].zn_category_sotr.id
+      }
+
+      if (this.children[ri][i].zn == 'stazh_category') {
+        _stazh_id = this.children[ri][i].zn_stazh_category.id
+      }
+    }
+
+    if (_category_id !== 0 && _stazh_id !== 0) {
+
+      let body = {
+        _category_id: _category_id,
+        _stazh_id: _stazh_id
+      }
+
+      let responce: any
+
+      this.Budget_ras4et_Service
+        .getKoeff(body)
+        .subscribe(
+          (data) => (
+            responce = data,
+            this.PasteKoeff(ri, responce.znachenie)
+          ),
+          (error) => (this.Budget_ras4et_Detailmsg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+        )
+    }
+  }
+
+  PasteKoeff(ri: number, znachenie: number) {
+    for (let i = 0; i < this.children[ri].length; i++) {
+      if (this.children[ri][i].zn == 'float' && this.children[ri][i].name == 'Коэффициент') {
+        this.children[ri][i].zn_float = znachenie
+      }
+    }
   }
 
   selectDolzhnost(dolzh_el: dolzhnost_element) {
@@ -369,7 +415,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     })
   }
 
-  selectStazh(stazh_cat: stazh_category_element) {
+  selectStazh(stazh_cat: stazh_category_element, ri: number) {
 
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(StazhCategorySelectComponent,
       {
@@ -377,12 +423,16 @@ export class BudgetRas4etDetailComponent implements OnInit {
         width: 'calc(60%)',
         height: 'calc(80%)'
       })
+
     this.Budget_ras4et_Detailref.onClose.subscribe((stazh_category_element: stazh_category_element) => {
       if (stazh_category_element) {
         stazh_cat.name = stazh_category_element.name
         stazh_cat.id = stazh_category_element.id
+        this.getKoefficient(ri)
       }
     })
+
+
   }
 
   onInputChange(value: number, kolon: ChildItem, ri: number) {

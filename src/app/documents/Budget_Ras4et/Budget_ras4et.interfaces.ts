@@ -3,6 +3,8 @@ import { budjet_detail } from "../Budget_request/budget_request.interfaces";
 import { specification_income_detail } from "src/app/directory/income/specification-income/interfaces";
 import { form_list_doc } from "src/app/directory/income/forms/forms_interfaces";
 import { ensTRU_element } from "src/app/directory/planirovanie/ensTRU/interfaces";
+import { category_sotr_element } from "src/app/directory/planirovanie/category-sotr/interfaces";
+import { stazh_category_element } from "src/app/directory/planirovanie/stazh-category/interfaces";
 
 export interface Ras4et_doc {
   head: Ras4et_head,
@@ -54,8 +56,8 @@ export interface ChildItem {
   zn_string: string | null;
   zn_float: number | null;
   zn_enstru: ensTRU_element;
-  zn_stazh_category: number | null;
-  zn_category_sotr: number | null;
+  zn_stazh_category: stazh_category_element;
+  zn_category_sotr: category_sotr_element;
   zn_dolzhnost: number | null;
   zn_podrazdelenie: number | null;
   zn_dopl_nadb: number | null;
@@ -97,10 +99,13 @@ export interface TableItemPass {
 
 
 export interface Child {
-
   id: number;
   name_zn: string;
   namecolumn: number;
   code: string;
+}
 
+export interface body_koeff {
+  _category_id: number,
+  _stazh_id: number
 }

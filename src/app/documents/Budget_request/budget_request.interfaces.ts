@@ -34,5 +34,4 @@ export interface budjet_doc_tab {
     _form: form_list_doc,
     summ: number,
     _planirovanie: number
-
 }

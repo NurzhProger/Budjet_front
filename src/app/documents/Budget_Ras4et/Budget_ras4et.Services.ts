@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Ras4et_doc } from "./Budget_ras4et.interfaces";
+import { Ras4et_doc, body_koeff } from "./Budget_ras4et.interfaces";
 import { budjet_detail } from "../Budget_request/budget_request.interfaces";
 import { AuthService } from "src/app/login/auth.service";
 
@@ -32,6 +32,12 @@ export class budjetRas4et_Service {
 
   period_pokazatel_detail(body: any) {
     return this.http.post(this.host + 'dirs/period_pokazdetail', body)
+  }
+
+
+
+  getKoeff(body: body_koeff) {
+    return this.http.post(this.host + 'dirs/koeff_category_get', body)
   }
 
 
