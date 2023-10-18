@@ -17,7 +17,7 @@
 
 <div class="card" *ngIf="(stazh_categorys$ | async) as stazh_categorys; else loader">
     <p-table *ngIf="stazh_categorys.count !== 0; else empty" [value]="stazh_categorys.results" [scrollable]="true"
-        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="stazh"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template pTemplate="header">
             <tr>
