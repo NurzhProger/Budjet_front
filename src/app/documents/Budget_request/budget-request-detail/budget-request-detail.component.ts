@@ -78,7 +78,17 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           name: '',
           name_kaz: '',
           name_rus: ''
-        }
+        },
+        parent_organizations: [{
+              id: 0,
+              _date: '',
+              _organization: 0,
+              _parent: {
+                  id: 0,
+                  name_rus: ''
+              }
+            }
+        ]
       },
       nom: '',
       _date: '',

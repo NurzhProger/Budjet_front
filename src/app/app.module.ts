@@ -128,6 +128,7 @@ import { DoplNadbavkaSelectComponent } from './directory/planirovanie/dopl_nadba
 import { ChangepassComponent } from './services/changepass/changepass.component';
 import { StartPageComponent } from './main/startpage/startpage.component';
 import { UserhistoryDetailComponent } from './main/userhistory-detail/userhistory-detail.component';
+import { PeriodDetailComponent } from './directory/period/period-detail/period-detail.component';
 
 @NgModule({
   imports: [
@@ -258,7 +259,8 @@ import { UserhistoryDetailComponent } from './main/userhistory-detail/userhistor
     SelectDoplataComponent,
     ChangepassComponent,
     StartPageComponent,
-    UserhistoryDetailComponent],
+    UserhistoryDetailComponent,
+    PeriodDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {

@@ -69,10 +69,59 @@
     </span>
 </div>
 
-  <div style="width:100%; padding: 10px 0;">
+  <div style="width:100%; padding: 5px 0;">
     <label style="color: red;">* - обязательные поля</label>
   </div>
 </form>
+
+<div class="card" style="padding-bottom: 25px;">
+  <h3>Родитель</h3>
+  <div style="padding-bottom: 5px;">
+    <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+      (click)="addOrg()"></button>
+  </div>
+  <p-table *ngIf="org_detail.parent_organizations; else empty" [value]="org_detail.parent_organizations"
+    [scrollable]="true" scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single"
+    styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:5%; text-align:center">Номер</th>
+        <th style="width:10%; text-align:center">Период</th>
+        <th style="text-align:center">Наименование</th>
+        <th style="width:10%; text-align:center">Действия</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-org let-ri="rowIndex">
+      <tr class="cursor-pointer">
+        <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+        <td style="text-align:center">
+          {{org._date}}
+        </td>
+        <td>
+          {{org._parent.name_rus}}
+        </td>
+        <td style="padding: 0; margin:0;">
+          <div class="flex align-items-center justify-content-center gap-2">
+            <!-- <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button> -->
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+              (click)="delParent(ri, org.id, org._parent.name_rus)"></button>
+            <!-- <button pButton pRipple type="button" icon="pi pi-check" style="color: green"
+              class="p-button-rounded p-button-text"></button>
+            <button pButton pRipple type="button" icon="pi pi-times" style="color: red"
+              class="p-button-rounded p-button-text"></button> -->
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ng-template #empty>
+    <div class="center">
+      Нет ни одного родителя
+    </div>
+  </ng-template>
+</div>
+
 
 <div class="flex align-items-center justify-content-center gap-2">
   <button pButton pRipple label="Сохранить" (click)="saveOrg()" icon="pi pi-check"
@@ -80,6 +129,9 @@
   <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeOrg()"
     class="p-button-outlined p-button-warning"></button>
 </div>
+
+<p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+</p-confirmDialog>
 
 <ng-template #loader>
   <app-skeleton></app-skeleton>

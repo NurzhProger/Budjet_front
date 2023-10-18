@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { organization_list, organization_detail } from "./interfaces";
+import { organization_list, organization_detail, params_org } from "./interfaces";
 import { AuthService } from "src/app/login/auth.service";
 
 
@@ -30,5 +30,12 @@ export class OrganizationsService {
 
     add(param: organization_detail) {
         return this.http.post(this.host + 'dirs/organizationsave', param)
+    }
+    parent_organization_add(params: params_org) {
+        return this.http.post(this.host + 'dirs/parent_organization_add', params)
+    }
+
+    parent_organization_del(id: number) {
+        return this.http.delete(this.host + `dirs/parent_organization_del/${id}`)
     }
 }

@@ -46,48 +46,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
   form: FormGroup;
   selected = false;
 
-  limitDetail: limit_detail = {
-    head: {
-      id: 0,
-      nom: '',
-      org_name: '',
-      _date: '',
-      god_ucheta: '',
-      _organization: {
-        id: 0,
-        bin: '',
-        name_kaz: '',
-        name_rus: '',
-        adress: '',
-        deleted: false,
-        _budjet_reg: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        _regiondar: {
-          id: 0,
-          name: '',
-          name_kaz: '',
-          name_rus: ''
-        }
-      }
-    },
-    tbl: [
-      {
-        id: 0,
-        _fkr: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        summ: 0,
-        _limit_plan: 0
-      }
-    ]
-  }
+  limitDetail: limit_detail
 
 
   hashEnd = ''
@@ -133,7 +92,17 @@ export class LimitElementComponent implements OnInit, DoCheck {
           name: '',
           name_kaz: '',
           name_rus: ''
-        }
+        },
+        parent_organizations: [{
+              id: 0,
+              _date: '',
+              _organization: 0,
+              _parent: {
+                  id: 0,
+                  name_rus: ''
+              }
+            }
+        ]
 
       }
     }

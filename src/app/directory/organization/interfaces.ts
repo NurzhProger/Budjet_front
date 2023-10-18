@@ -10,9 +10,18 @@ export interface organization_detail {
     adress: string,
     deleted: boolean,
     _budjet_reg: budjet_reg__element,
-    _regiondar: regions__element
+    _regiondar: regions__element,
+    parent_organizations: [parent_detail]
 }
-
+export interface parent_detail {
+    id: number,
+    _date: string,
+    _organization: number,
+    _parent: {
+        id: number,
+        name_rus: string
+    }
+}
 export interface organization_list {
     count?: number,
     next: string,
@@ -25,4 +34,9 @@ export interface organization_select {
     next: string,
     previous?: string,
     results: [organization_detail]
+}
+export interface params_org {
+    _organization_id: number,
+    _parent_id: number,
+    _date: string
 }
