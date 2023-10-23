@@ -456,6 +456,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
           if (aaa.includes(mass_simv[y])) {
             formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
           }
+          else if (mass_simv[y] == "БДО") {
+            formula = formula + 17967
+          }
           else {
             formula = formula + mass_simv[y];
           }

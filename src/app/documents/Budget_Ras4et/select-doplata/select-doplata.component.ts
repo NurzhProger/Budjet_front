@@ -92,7 +92,6 @@ export class SelectDoplataComponent implements OnInit {
 
           if (aaa.includes(mass_simv[y].slice(0, 1))) {
             formula = formula + this.tbl[mass_simv[y] - 1].zn_float;
-
           }
           else {
             formula = formula + mass_simv[y];
@@ -126,6 +125,10 @@ export class SelectDoplataComponent implements OnInit {
     if (dopl._sposob_ras == 'Процент МРП') {
       dopl.summ = filter_dopl[0].summ * znachenie / 100
     } else if (dopl._sposob_ras == 'Количество МРП') {
+      dopl.summ = filter_dopl[0].summ * znachenie
+    } else if (dopl._sposob_ras == 'Процент от БДО') {
+      dopl.summ = filter_dopl[0].summ * znachenie / 100
+    } else if (dopl._sposob_ras == 'Количество БДО') {
       dopl.summ = filter_dopl[0].summ * znachenie
     }
 
