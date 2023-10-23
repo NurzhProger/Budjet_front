@@ -30,7 +30,7 @@
 
       <label for="name_doc">Наименование <span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="name_doc" type="text" pInputText [readOnly]="true" [(ngModel)]="Ras4et_detail.head._form.name + ' - ' + Ras4et_detail.head._form.head_form" 
+        <input id="name_doc" type="text" pInputText [readOnly]="true" [(ngModel)]="Ras4et_detail.head._form.name + '. ' + Ras4et_detail.head._form.head_form" 
         formControlName="name_doc" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
