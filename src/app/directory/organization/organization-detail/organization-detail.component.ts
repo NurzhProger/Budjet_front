@@ -122,6 +122,7 @@ export class OrganizationDetailComponent implements OnInit {
     this.period_dialog_ref.onClose.subscribe((date: any) => {
       if (date) {
         let new_date = this.toLocaleDate(date)
+        date = new Date(date).toLocaleDateString()
 
         let params = {
           _organization_id: this.org_detail.id,
@@ -134,7 +135,7 @@ export class OrganizationDetailComponent implements OnInit {
           .parent_organization_add(params)
           .subscribe(
             (data) => (resp = data,
-              this.PushtoTable(org, resp.id, new_date),
+              this.PushtoTable(org, resp.id, date),
               this.org_massage.add({ severity: 'success', summary: 'Успешно', detail: resp.status })),
             (error) => (this.org_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
           )
@@ -143,7 +144,7 @@ export class OrganizationDetailComponent implements OnInit {
     }
     )
   }
-  PushtoTable(org: organization_detail, id_str: number,date: string) {
+  PushtoTable(org: organization_detail, id_str: number, date: string) {
     this.org_detail.parent_organizations.push({
       id: id_str,
       _date: date,
@@ -155,7 +156,7 @@ export class OrganizationDetailComponent implements OnInit {
     })
   }
   delParent(ri: number, id: number, org_name: string) {
-    console.log(id);
+    
     this.org_confirm.confirm({
       message: 'Удалить с родителя ' + org_name + '?',
       header: 'Удаление родителя',
