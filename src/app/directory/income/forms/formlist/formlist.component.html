@@ -29,7 +29,7 @@
 
 <div class="card" *ngIf="(form_list$ | async) as category; else loader">
   <p-table *ngIf="category.count !== 0; else empty" [value]="category.results" [scrollable]="true"
-    scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+    scrollHeight="700px" selectionMode="single" [(selection)]="selected"
     styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header">
       <tr>
