@@ -108,7 +108,10 @@ export class LimitElementComponent implements OnInit, DoCheck {
     }
 
   }
-
+  formatNumber(value: number): string {
+    return value.toFixed(3);
+  }
+  
   ngDoCheck(): void {
     let objString = JSON.stringify(this.limitDetail)
     let hashBeg = SHA256(objString).toString()
