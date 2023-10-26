@@ -435,6 +435,10 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
+  formatNumber(value: number): string {
+    return value.toFixed(3);
+  }
+  
   onInputChange(value: number, kolon: ChildItem, ri: number) {
     let mass: any;
     if (value == undefined) {
