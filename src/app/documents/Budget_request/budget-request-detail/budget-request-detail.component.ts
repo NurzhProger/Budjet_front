@@ -80,14 +80,14 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           name_rus: ''
         },
         parent_organizations: [{
-              id: 0,
-              _date: '',
-              _organization: 0,
-              _parent: {
-                  id: 0,
-                  name_rus: ''
-              }
-            }
+          id: 0,
+          _date: '',
+          _organization: 0,
+          _parent: {
+            id: 0,
+            name_rus: ''
+          }
+        }
         ]
       },
       nom: '',
@@ -580,6 +580,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     return new Date(dateForStr).toLocaleDateString() + ' ' + new Date(dateForStr).toLocaleTimeString();
   }
 
+  exportExcel() {
+
+  }
 
 
 
