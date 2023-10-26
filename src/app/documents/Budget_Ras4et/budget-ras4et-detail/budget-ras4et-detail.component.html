@@ -67,14 +67,14 @@
         <ng-template pTemplate="header">
           <tr style="text-align: center; font-weight: 700;">
             <th style="text-align: center; width: 2.5%;">Номер</th>
-            <th style="text-align: center; width: 8%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
-            <th style="text-align: center; width: 8%;" *ngIf="have_dopl">Доплаты</th>
-            <th style="text-align: center; width: 8%;">Действия</th>
+            <th style="text-align: center; width: 5%;" *ngFor="let header of Ras4et_detail.head_table">{{ header }}</th>
+            <th style="text-align: center; width: 5%;" *ngIf="have_dopl">Доплаты</th>
+            <th style="text-align: center; width: 5%;">Действия</th>
           </tr>
         </ng-template>
         <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body" style="width: 100%;">
           <tr>
-            <td style="text-align: center; width: 2.5%;">{{ri + 1}}</td>
+            <td style="text-align: center;">{{ri + 1}}</td>
             <td *ngFor="let kolon of ChildItem" style="text-align: center; width: 8%;">
               <!-- енстру -->
               <div class="p-inputgroup" *ngIf="kolon.zn == 'enstru'">
@@ -139,7 +139,7 @@
                 <span class="p-inputgroup-addon cursor-pointer" (click)="selectDopl(ri)">...</span>
               </div>
             </td>
-            <td style="padding: 0; margin:0; width: 8%;">
+            <td style="padding: 0; margin:0;">
               <div class="flex align-items-center justify-content-center gap-2">
                 <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
                   (click)="delStr(ri)"></button>
