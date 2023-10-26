@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { budget_list, budjet_detail } from "./budget_request.interfaces";
@@ -21,6 +21,19 @@ export class budjetService {
     private http: HttpClient,
     private authservice: AuthService) {
     this.host = this.authservice.host;
+  }
+
+  gettablexls(id: string = '') {
+
+    return this.http.get(this.host + 'reports/pechatnaya_excell/' + id, { responseType: 'blob' })
+      .subscribe(blob => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = 'Выгрузка.zip';
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      })
   }
 
   fetch(params: any): Observable<budget_list> {

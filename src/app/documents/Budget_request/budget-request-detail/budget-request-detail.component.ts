@@ -581,7 +581,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   }
 
   exportExcel() {
-
+    this.Budget_Servise
+      .gettablexls(this.Budget_doc_id)
   }
 
 
