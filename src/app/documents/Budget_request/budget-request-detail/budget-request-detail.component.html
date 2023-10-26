@@ -160,11 +160,11 @@
                 <p-tabView>
                     <p-tabPanel header="Заявки">
 
-                        <div class="p-toolbar-group-left">
-                            <div style="padding-right: 10px;">
+                        <div class="p-toolbar-group-left" style="padding: 0 0 10px 10px;">
+                            <div>
                                 <button [disabled]="fkr == undefined || fkr.id == 0" pButton pRipple
                                     label="добавить специфику" icon="pi pi-plus" class="p-button-success p-mr-2"
-                                    (click)="addSpec(fkr)" style="padding-right: 10px;"></button>
+                                    (click)="addSpec(fkr)" style="padding-right: 10px; margin-right: 5px;"></button>
                             </div>
                             <button type="button" pButton pRipple icon="pi pi-file-excel" styleClass="p-button-sm"
                                 (click)="exportExcel()" class="p-button-info p-mr-2" label="Выгрузить в XLS"
