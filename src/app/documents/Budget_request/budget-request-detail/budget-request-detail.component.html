@@ -187,16 +187,12 @@
                                 <tr class="cursor-pointer">
                                     <td>
                                         <div class="p-inputgroup w-full">
-                                            <input pInputText [readOnly]="true"
-                                                [ngModel]="izm._spec.code + '. ' + izm._spec.name_rus" />
+                                            {{ izm._spec.code + '. ' + izm._spec.name_rus }}
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="p-inputgroup w-full">
-                                            <input pInputText [readOnly]="true"
-                                                [ngModel]="izm._form.name + '. ' + izm._form.head_form" />
-
-                                            <span class="p-inputgroup-addon">...</span>
+                                        <div class="p-inputgroup w-full">                                     
+                                                {{ izm._form.name + '. ' + izm._form.head_form }}
                                         </div>
                                     </td>
                                     <td style="text-align:center;">
