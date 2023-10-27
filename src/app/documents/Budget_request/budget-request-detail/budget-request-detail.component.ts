@@ -54,7 +54,15 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     name_kaz: '',
     name_rus: ''
   }
+  setClassSelect_pay(id: number) {
 
+    if (!this.allrecord && this._lastfkr == id) {
+      return 'green-class'
+    }
+    else {
+      return ''
+    }
+  }
 
 
   Budget_detail: budjet_detail = {

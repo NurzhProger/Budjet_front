@@ -144,7 +144,7 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-fkr let-ri="rowIndex">
                                 <tr class="cursor-pointer">
-                                    <td (dblclick)="filterFKR(fkr)">
+                                    <td (dblclick)="filterFKR(fkr)" [ngClass]="setClassSelect_pay(fkr.id)">
                                         {{fkr.code}}
                                     </td>
                                 </tr>
