@@ -1,11 +1,11 @@
 <p-toolbar>
     <div class="p-toolbar-group-left">
         <div style="padding-right: 10px;">
-            <button [disabled]="form.invalid" pButton pRipple label="Записать" icon="pi pi-save"
-                class="p-button-secondary p-mr-2" (click)="saveDoc(false)"></button>
+            <button pButton pRipple label="Записать" icon="pi pi-save" class="p-button-secondary p-mr-2"
+                (click)="saveDoc(false)"></button>
         </div>
-        <button [disabled]="form.invalid" pButton pRipple label="Записать и закрыть" icon="pi pi-save"
-            class="p-button-info p-mr-2" (click)="saveDoc(true)"></button>
+        <button pButton pRipple label="Записать и закрыть" icon="pi pi-save" class="p-button-info p-mr-2"
+            (click)="saveDoc(true)"></button>
     </div>
 
     <div class="p-toolbar-group-right">
@@ -26,10 +26,10 @@
             <div class="p-field" style="padding-right: 10px; ">
                 <label for="number_doc">Номер</label>
                 <div class="p-inputgroup">
-                    <input id="number_doc" type="text" pInputText [(ngModel)]="Budget_detail.doc.nom" formControlName="number_doc"
-                      style="width: 130px; height: 25px;" />
-                  </div>
-                  
+                    <input id="number_doc" type="text" pInputText [(ngModel)]="Budget_detail.doc.nom"
+                        formControlName="number_doc" style="width: 130px; height: 25px;" />
+                </div>
+
             </div>
 
             <div class="p-field" style="padding-right: 10px;">
@@ -37,8 +37,8 @@
                 <label for="date_doc">Дата <span style="color: red;">*</span></label>
                 <div class="p-inputgroup">
                     <input id="date_doc" type="date" pInputText [(ngModel)]="Budget_detail.doc._date"
-                      formControlName="date_doc" style="width: 130px; height: 25px;" />
-                  </div>                  
+                        formControlName="date_doc" style="width: 130px; height: 25px;" />
+                </div>
                 <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
                     <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
                 </span>
@@ -47,15 +47,17 @@
                 <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
                 <div class="p-inputgroup">
                     <input id="org_name" type="text" pInputText [(ngModel)]="Budget_detail.doc._organization.name_rus"
-                        formControlName="org_name" style="width: 130px; height: 25px;"/>
-                    <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg() " style="width: 30px; height: 25px;">
+                        formControlName="org_name" style="width: 130px; height: 25px;" />
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg() "
+                        style="width: 30px; height: 25px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                             class="bi bi-files" viewBox="0 0 16 16">
                             <path
                                 d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                         </svg>
                     </span>
-                    <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()" style="width: 30px; height: 25px;">...</span>
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()"
+                        style="width: 30px; height: 25px;">...</span>
                 </div>
                 <span class="p-invalid" *ngIf="form.controls['org_name'].invalid && form.controls['org_name'].touched">
                     <span *ngIf="form.controls['org_name'].errors?.required">Наименование не должно быть
@@ -67,7 +69,7 @@
                 <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
                 <div class="p-inputgroup">
                     <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()"
-                        formControlName="god_ucheta" style="width: 130px; height: 25px;"/>
+                        formControlName="god_ucheta" style="width: 130px; height: 25px;" />
                 </div>
                 <span class="p-invalid"
                     *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
@@ -192,8 +194,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="p-inputgroup w-full">                                     
-                                                {{ izm._form.name + '. ' + izm._form.head_form }}
+                                        <div class="p-inputgroup w-full">
+                                            {{ izm._form.name + '. ' + izm._form.head_form }}
                                         </div>
                                     </td>
                                     <td style="text-align:center;">

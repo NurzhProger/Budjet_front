@@ -54,16 +54,6 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     name_kaz: '',
     name_rus: ''
   }
-  setClassSelect_pay(id: number) {
-
-    if (!this.allrecord && this._lastfkr == id) {
-      return 'green-class'
-    }
-    else {
-      return ''
-    }
-  }
-
 
   Budget_detail: budjet_detail = {
     doc: {
@@ -146,8 +136,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   _vid_rashoda: any = []
 
   ngOnInit(): void {
+
     this.form = new FormGroup({
-      number_doc: new FormControl(),
+      number_doc: new FormControl(null),
       date_doc: new FormControl(null, [Validators.required]),
       org_name: new FormControl(null, [Validators.required]),
       god_ucheta: new FormControl(null, [Validators.required]),
@@ -170,6 +161,16 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.selectrashod()
     this.selectdannyi()
     this.selectoperacii()
+  }
+
+  setClassSelect_pay(id: number) {
+
+    if (!this.allrecord && this._lastfkr == id) {
+      return 'green-class'
+    }
+    else {
+      return ''
+    }
   }
 
   selectrashod() {

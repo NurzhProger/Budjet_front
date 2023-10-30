@@ -38,6 +38,7 @@ import { OblastiRegionySelectComponent } from 'src/app/directory/planirovanie/ob
 import { EdIzmSelectComponent } from 'src/app/directory/planirovanie/ed-izm/ed-izm-select/ed-izm-select.component';
 import { MarkiAvtoSelectComponent } from 'src/app/directory/planirovanie/marki_avto/marki-avto-select/marki-avto-select.component';
 import { DoplNadbavkaSelectComponent } from 'src/app/directory/planirovanie/dopl_nadbavka/dopl-nadbavka-select/dopl-nadbavka-select.component';
+import { string } from 'mathjs';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -318,7 +319,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
         .subscribe(
           (data) => (
             responce = data,
-            this.PasteKoeff(ri, responce.znachenie)
+            this.PasteKoeff(ri, parseInt(responce.znachenie))
           ),
           (error) => (this.Budget_ras4et_Detailmsg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
         )
@@ -436,9 +437,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   formatNumber(value: number): string {
-    return value.toFixed(3);
+    return value.toFixed(3)
   }
-  
+
   onInputChange(value: number, kolon: ChildItem, ri: number) {
     let mass: any;
     if (value == undefined) {
@@ -519,6 +520,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     }
     this.summdoc = summdoc;
     this.Ras4et_detail.head.summ = this.summdoc;
+
 
   }
 
