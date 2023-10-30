@@ -88,7 +88,7 @@
                   (click)="selectCategorySotr(kolon.zn_category_sotr, ri)">...</span>
               </div>
               <!-- число -->
-              <input type="number" step="0.001" *ngIf="kolon.zn == 'float'" [ngModel]="formatNumber(kolon.zn_float)"
+              <input type="number" step="0" *ngIf="kolon.zn == 'float'" [ngModel]="formatNumber(kolon.zn_float)"
                 (ngModelChange)="onInputChange($event, kolon, ri)" [readonly]="kolon.name == 'Коэффициент'">
               <!-- строка -->
               <input type="text" *ngIf="kolon.zn == 'string'" [ngModel]="kolon.zn_string"
