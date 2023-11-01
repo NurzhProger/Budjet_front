@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { category_sotr_element } from '../interfaces';
+import { category_sotr_detail, category_sotr_element } from '../interfaces';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CategorySotrService } from '../category-sotr.service';
 import { MessageService } from 'primeng/api';
 import { CategorySotrListComponent } from '../category-sotr-list/category-sotr-list.component';
+import { number, string } from 'mathjs';
+import { StazhCategorySelectComponent } from '../../stazh-category/stazh-category-select/stazh-category-select.component';
+import { stazh_category_element } from '../../stazh-category/interfaces';
 
 @Component({
   selector: 'app-category-sotr-element',
@@ -12,7 +15,6 @@ import { CategorySotrListComponent } from '../category-sotr-list/category-sotr-l
   styleUrls: ['./category-sotr-element.component.css']
 })
 export class CategorySotrElementComponent implements OnInit {
-
   constructor(
     private category_sotr_dialog_ref: DynamicDialogRef,
     private category_sotr_dialog_select: DynamicDialogRef,
@@ -20,24 +22,47 @@ export class CategorySotrElementComponent implements OnInit {
     private category_sotr_massage: MessageService,
     public category_sotr_dialog_config: DynamicDialogConfig,
     private parentSelectdialogService: DialogService,
-  ) {}
+  ) { }
 
   form: FormGroup
   saved = false;
   category_list: CategorySotrListComponent
-  
-  category_sotr_element: category_sotr_element = {
-    id: 0,
-    name: '',
-    deleted: '',
-    parent_name: '',
-    parent: 0,
-    group: false
+  selected = false;
+
+  category_sotr_element: category_sotr_detail = {
+    category_sotrudnikov: {
+      id: 0,
+      name: '',
+      deleted: false,
+      parent_name: '',
+      parent: 0,
+      group: false
+    },
+    tbl: [{
+      id: 0,
+      _category: {
+        id: 0,
+        name: '',
+        deleted: false,
+        parent_name: '',
+        parent: 0,
+        group: false
+      },
+      _stazh: {
+        id: 0,
+        name: '',
+        ot: 0,
+        do: 0
+      },
+      period: '',
+      koefficient: 0
+    }]
   }
+
   directory_options = [
     { label: 'Да', value: true },
     { label: 'Нет', value: false }
-];
+  ];
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -45,56 +70,58 @@ export class CategorySotrElementComponent implements OnInit {
       parent: new FormControl(),
       group: new FormControl()
     })
-    this.category_sotr_element.id = this.category_sotr_dialog_config.data.category_id;
-    
-    if (this.category_sotr_element.id !== 0) {
-      this.categorySotrService.fetchCategory(this.category_sotr_element.id)
+
+
+    this.category_sotr_element.category_sotrudnikov.id = this.category_sotr_dialog_config.data.category_id;
+
+    if (this.category_sotr_element.category_sotrudnikov.id !== 0) {
+      this.categorySotrService.fetchCategory(this.category_sotr_element.category_sotrudnikov.id)
         .subscribe(
           (data) => (
-              this.category_sotr_element = data
-            )
+            this.category_sotr_element = data
+          )
         )
     }
-    
+
   }
 
   saveCategory() {
-    
-    if (this.category_sotr_element.id == 0){      
-    this.categorySotrService.add(this.category_sotr_element)
-      .subscribe(
-        (data) => (
-          this.category_sotr_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Категория сотрудника сохранена!' })
-        ),
-        (error) => (this.category_sotr_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
-      }
-   else {
-        this.categorySotrService.edit(this.category_sotr_element)
+
+    if (this.category_sotr_element.category_sotrudnikov.id == 0) {
+      this.categorySotrService.add(this.category_sotr_element)
+        .subscribe(
+          (data) => (
+            this.category_sotr_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Категория сотрудника сохранена!' })
+          ),
+          (error) => (this.category_sotr_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
+    }
+    else {
+      this.categorySotrService.edit(this.category_sotr_element)
         .subscribe((data) => (
           this.category_sotr_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Категория сотрудника сохранена!' })
         ),
-        (error) => (this.category_sotr_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
-      }
-  this.closeCategory(true);
-  this.category_list.fetchList()
+          (error) => (this.category_sotr_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
+    }
+    this.closeCategory(true);
+    this.category_list.fetchList()
   }
 
   selectParent() {
     this.category_sotr_dialog_select = this.parentSelectdialogService.open(CategorySotrListComponent,
       {
-          header: 'Выбор родителя',
-          width: 'calc(60%)',
-          height: 'calc(80%)'
+        header: 'Выбор родителя',
+        width: 'calc(60%)',
+        height: 'calc(80%)'
       })
 
-  this.category_sotr_dialog_select.onClose.subscribe((parent: category_sotr_element) => {
+    this.category_sotr_dialog_select.onClose.subscribe((parent: category_sotr_element) => {
       if (parent) {
-        
-        this.category_sotr_element.parent = parent.id;
-        this.category_sotr_element.parent_name = parent.name;
-            
+
+        this.category_sotr_element.category_sotrudnikov.parent = parent.id;
+        this.category_sotr_element.category_sotrudnikov.parent_name = parent.name;
+
       }
-  })
+    })
   }
 
   closeCategory(save: boolean) {
@@ -102,8 +129,95 @@ export class CategorySotrElementComponent implements OnInit {
   }
 
   clearParent() {
-    this.category_sotr_element.parent = 0;
-    this.category_sotr_element.parent_name = '';
+    this.category_sotr_element.category_sotrudnikov.parent = 0;
+    this.category_sotr_element.category_sotrudnikov.parent_name = '';
   }
 
+  addKoeff() {
+    this.category_sotr_dialog_ref = this.parentSelectdialogService.open(StazhCategorySelectComponent,
+      {
+        header: 'Выбор стажа',
+        width: '60%',
+        height: '80%'
+      })
+
+    this.category_sotr_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
+      let formattedDate = ''
+      let today = new Date().toLocaleDateString();
+      let parts = today.split(".");
+      if (parts.length === 3) {
+        let year = parts[2];
+        let month = parts[1];
+        let day = parts[0];
+        formattedDate = `${year}-${month}-${day}`;
+      }
+
+      if (stazh) {
+        this.category_sotr_element.tbl.push(
+          {
+            _stazh: {
+              id: stazh.id,
+              name: stazh.name,
+              ot: stazh.ot,
+              do: stazh.do
+            },
+            id: 0,
+            koefficient: 0,
+            _category: {
+              id: this.category_sotr_element.category_sotrudnikov.id,
+              name: this.category_sotr_element.category_sotrudnikov.name,
+              deleted: this.category_sotr_element.category_sotrudnikov.deleted,
+              parent_name: this.category_sotr_element.category_sotrudnikov.parent_name,
+              parent: this.category_sotr_element.category_sotrudnikov.parent,
+              group: this.category_sotr_element.category_sotrudnikov.group
+            },
+            period: formattedDate
+          })
+      }
+    })
+  }
+
+  viewStazh(stazh_id: number) {
+
+  }
+
+  editStazh(ri: number) {
+    this.category_sotr_dialog_ref = this.parentSelectdialogService.open(StazhCategorySelectComponent,
+      {
+        header: 'Выбор стажа',
+        width: '60%',
+        height: '80%'
+      })
+    this.category_sotr_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
+      if (stazh) {
+        this.category_sotr_element.tbl[ri]._stazh = {
+          id: stazh.id,
+          name: stazh.name,
+          ot: stazh.ot,
+          do: stazh.do
+        }
+      }
+    })
+  }
+
+  onDelete() {
+
+    // this.limitDetailconfirm.confirm({
+    //   message: 'Вы действительно хотите удалить ' + fkr_name + '?',
+    //   header: 'Удаление классификации',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: () => {
+    //     for (let i = this.limitDetail.tbl.length - 1; i >= 0; i--) {
+    //       let index = this.limitDetail.tbl.findIndex(item => fkr_id === item._fkr.id)
+    //       if (index !== -1) {
+    //         this.limitDetail.tbl.splice(index, 1)
+    //       }
+    //     }
+    //     this.limitDetailconfirm.close()
+    //   },
+    //   reject: () => {
+    //     this.limitDetailconfirm.close();
+    //   }
+    // });
+  }
 }

@@ -18,7 +18,7 @@ export class CategorySotrListComponent implements OnInit {
     private category_sotr_dialog_ref: DynamicDialogRef,
     private category_sotr_dialog_servis: DialogService,
     private grconfig: DynamicDialogConfig
-  ) {}
+  ) { }
 
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
@@ -27,17 +27,17 @@ export class CategorySotrListComponent implements OnInit {
   rows = 25
   searchorg = ''
   selected: any
-  windowHeight: number 
+  windowHeight: number
 
   ngOnInit(): void {
-    
+
     if (this.grconfig.data) {
       this.data = this.grconfig.data.etogruppa;
     }
-     
+
     this.fetchList()
-    this.updateWindowSize() 
-        
+    this.updateWindowSize()
+
   }
 
   private updateWindowSize() {
@@ -48,13 +48,13 @@ export class CategorySotrListComponent implements OnInit {
     this.category_sotr_dialog_ref = this.category_sotr_dialog_servis.open(CategorySotrElementComponent,
       {
         header: 'Создание категории сотрудников',
-        width: '60%',
-        height: '60%',
+        width: '100%',
+        height: '100%',
         data: { category_id: 0 }
       })
 
     this.category_sotr_dialog_ref.onClose.subscribe((save: boolean) => {
-      
+
       if (save) {
         this.fetchList()
       }
@@ -62,11 +62,11 @@ export class CategorySotrListComponent implements OnInit {
   }
 
   onSelected(category_sotr: category_sotr_element) {
-    
+
   }
 
   onRowClick(category: category_sotr_element) {
-      
+
     if (this.grconfig.data) {
       this.category_sotr_dialog_ref.close(category)
     }
@@ -75,7 +75,7 @@ export class CategorySotrListComponent implements OnInit {
       this.onRowEdit(category)
     }
     else {
-      this.category_sotr_dialog_ref.close(category) 
+      this.category_sotr_dialog_ref.close(category)
     }
   }
 
@@ -83,8 +83,8 @@ export class CategorySotrListComponent implements OnInit {
     this.category_sotr_dialog_ref = this.category_sotr_dialog_servis.open(CategorySotrElementComponent,
       {
         header: 'Редактирование категории сотрудника',
-        width: '60%',
-        height: '60%',
+        width: '100%',
+        height: '100%',
         data: { category_id: category.id }
       })
 
@@ -101,9 +101,9 @@ export class CategorySotrListComponent implements OnInit {
   }
 
   fetchList() {
-    
+
     let params = {
-      etogruppa: !this.data,      
+      etogruppa: !this.data,
       limit: this.rows.toString(),
       offset: this.first.toString()
     }
@@ -119,6 +119,6 @@ export class CategorySotrListComponent implements OnInit {
     this.rows = event.rows
     this.fetchList()
   }
- 
+
 
 }

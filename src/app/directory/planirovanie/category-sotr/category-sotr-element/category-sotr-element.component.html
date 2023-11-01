@@ -1,47 +1,103 @@
-<form class="card" [formGroup]="form">
+<div class="card" *ngIf="(category_sotr_element) as category_sotr_element; else loader">
+  <form class="card" [formGroup]="form">
     <div class="p-field" style="padding-bottom: 20px;">
-      
+
       <label for="name">Наименование<span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="name" type="text" pInputText [(ngModel)]="category_sotr_element.name" formControlName="name" />
+        <input id="name" type="text" pInputText [(ngModel)]="category_sotr_element.category_sotrudnikov.name"
+          formControlName="name" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
         <span *ngIf="form.controls['name'].errors?.required">Наименование не должен быть пустым</span>
       </span>
     </div>
-  
-  
+
+
     <div class="p-field" style="padding-bottom: 20px;">
       <label>Родитель</label>
-      <div class="p-inputgroup" >
-        <input id="parent" type="text" [readonly]="true" pInputText [(ngModel)]="category_sotr_element.parent_name" formControlName="parent" 
-        placeholder="Выберите родителя" (click)="selectParent()"/>
+      <div class="p-inputgroup">
+        <input id="parent" type="text" [readonly]="true" pInputText
+          [(ngModel)]="category_sotr_element.category_sotrudnikov.parent_name" formControlName="parent"
+          placeholder="Выберите родителя" (click)="selectParent()" />
         <span class="p-inputgroup-addon cursor-pointer" (click)="clearParent()">×</span>
-            <button pButton pRipple type="button"  (click)="selectParent()" icon="pi pi-pencil"
-                class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        <button pButton pRipple type="button" (click)="selectParent()" icon="pi pi-pencil"
+          class="p-button-outlined p-button-text" style="color:dimgrey"></button>
       </div>
     </div>
 
     <div class="p-field" style="padding-bottom: 20px;">
       <label>Это группа</label>
       <div>
-      <p-dropdown placeholder="Выберите" [options]="directory_options" optionLabel="label" optionValue="value"
-          appendTo="body" [(ngModel)]="category_sotr_element.group"  formControlName="group" >
-      </p-dropdown>
+        <p-dropdown placeholder="Выберите" [options]="directory_options" optionLabel="label" optionValue="value"
+          appendTo="body" [(ngModel)]="category_sotr_element.category_sotrudnikov.group" formControlName="group">
+        </p-dropdown>
+      </div>
     </div>
+
+  </form>
+
+  <div style="padding: 0 0 10px 10px;">
+    <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+      (click)="addKoeff()"></button>
   </div>
-    <div style="width:100%; padding: 20px 0;">
-      <label style="color: red;">* - обязательные поля</label>
-    </div>
-</form>
-  
-<div class="flex align-items-center justify-content-center gap-2">
-    <button pButton pRipple label="Сохранить" (click)="saveCategory()" icon="pi pi-check"
-      [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success" ></button>
-    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeCategory(false)"
-      class="p-button-outlined p-button-warning"></button>
+
+  <p-table *ngIf="category_sotr_element.tbl" [value]="category_sotr_element.tbl" [scrollable]="true"
+    scrollHeight="calc(100vh - 200px)" [(selection)]="selected" selectionMode="single"
+    styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+    <ng-template class="" pTemplate="header">
+      <tr>
+        <th style="text-align:center;">Период</th>
+        <th style="text-align:center;">Стаж</th>
+        <th style="text-align:center;">Коэффициент</th>
+        <th style="text-align:center;">Действия</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-lim let-ri="rowIndex">
+      <tr class="cursor-pointer" [pSelectableRow]="lim">
+        <td style="text-align:left">
+          <div class="p-inputgroup">
+            <input type="date" pInputText [(ngModel)]="lim.period" />
+          </div>
+
+        </td>
+        <td>
+          <div class="p-inputgroup w-full">
+            <input pInputText [readOnly]="true" [(ngModel)]="lim._stazh.name" />
+            <span class="p-inputgroup-addon" (click)="viewStazh(lim._stazh.id)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files"
+                viewBox="0 0 16 16">
+                <path
+                  d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+              </svg>
+            </span>
+            <span class="p-inputgroup-addon" (click)="editStazh(ri)">...</span>
+          </div>
+        </td>
+
+        <td style="text-align:center;">
+          <input type="number" [ngModel]="lim.koefficient" style="text-align:center; width: 100%; height: 100%;">
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+              (click)="onDelete()"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div style="width:100%; padding: 20px 0;">
+    <label style="color: red;">* - обязательные поля</label>
+  </div>
 </div>
-  
+
+<div class="flex align-items-center justify-content-center gap-2">
+  <button pButton pRipple label="Сохранить" (click)="saveCategory()" icon="pi pi-check"
+    [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success"></button>
+  <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeCategory(false)"
+    class="p-button-outlined p-button-warning"></button>
+</div>
+
 <ng-template #loader>
-    <app-skeleton></app-skeleton>
+  <app-skeleton></app-skeleton>
 </ng-template>

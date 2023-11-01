@@ -34,7 +34,7 @@ export class KoeffElementComponent implements OnInit {
     _category: {
       id: 0,
       name: '',
-      deleted: '',
+      deleted: false,
       parent_name: '',
       parent: 0,
       group: false
