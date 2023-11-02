@@ -22,6 +22,8 @@ export class CategorySotrElementComponent implements OnInit {
     private category_sotr_massage: MessageService,
     public category_sotr_dialog_config: DynamicDialogConfig,
     private parentSelectdialogService: DialogService,
+    private stazh_dialog_ref: DynamicDialogRef,
+    private koeff_dialog_ref: DynamicDialogRef
   ) { }
 
   form: FormGroup
@@ -134,14 +136,14 @@ export class CategorySotrElementComponent implements OnInit {
   }
 
   addKoeff() {
-    this.category_sotr_dialog_ref = this.parentSelectdialogService.open(StazhCategorySelectComponent,
+    this.koeff_dialog_ref = this.parentSelectdialogService.open(StazhCategorySelectComponent,
       {
         header: 'Выбор стажа',
         width: '60%',
         height: '80%'
       })
 
-    this.category_sotr_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
+    this.koeff_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
       let formattedDate = ''
       let today = new Date().toLocaleDateString();
       let parts = today.split(".");
@@ -182,13 +184,13 @@ export class CategorySotrElementComponent implements OnInit {
   }
 
   editStazh(ri: number) {
-    this.category_sotr_dialog_ref = this.parentSelectdialogService.open(StazhCategorySelectComponent,
+    this.stazh_dialog_ref = this.parentSelectdialogService.open(StazhCategorySelectComponent,
       {
         header: 'Выбор стажа',
         width: '60%',
         height: '80%'
       })
-    this.category_sotr_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
+    this.stazh_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
       if (stazh) {
         this.category_sotr_element.tbl[ri]._stazh = {
           id: stazh.id,
