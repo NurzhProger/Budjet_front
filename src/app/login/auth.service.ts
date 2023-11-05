@@ -14,8 +14,8 @@ export class AuthService {
         private http: HttpClient) { }
 
     private auth_token = ''
-    host = "http://192.168.10.200:9999/"
-    // host = "http://192.168.5.27:9999/"
+    // host = "http://192.168.10.200:9999/"
+    host = "http://192.168.5.27:9999/"
     // host = "https://planback.qazna24.kz/"
 
 
