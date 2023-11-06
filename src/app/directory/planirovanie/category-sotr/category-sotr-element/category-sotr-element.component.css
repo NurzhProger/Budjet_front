@@ -1,0 +1,4 @@
+input .ng-untouched .ng-pristine .ng-valid {
+    padding: 0;
+    margin: 0;
+}
