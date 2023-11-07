@@ -1,7 +1,7 @@
 <form *ngIf="this.user_detail">
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="username">Логин пользователя </label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
             <input id="username" type="text" pInputText [(ngModel)]="user_detail.username" name="username" />
         </div>
@@ -9,14 +9,14 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label>ФИО пользователя <span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input type="string" pInputText [(ngModel)]="user_detail.first_name" name="first_name" />
         </div>
     </div>
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label>Организация <span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input [readOnly]="true" pInputText [(ngModel)]="user_detail.organization.name_rus" name="org_name" />
             <span *ngIf="user_detail.organization.id !== 0" class="p-inputgroup-addon cursor-pointer"
                 (click)="viewOrg()">
@@ -32,7 +32,7 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="email">Почта <span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input type="email" pInputText id="email" placeholder="email@example.com" [(ngModel)]="user_detail.email"
                 name="email" />
         </div>

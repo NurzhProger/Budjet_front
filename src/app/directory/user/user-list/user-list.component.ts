@@ -102,7 +102,7 @@ export class UserListComponent implements OnInit {
       {
         header: 'Редактирование пользователя',
         width: '60%',
-        height: '60%',
+        height: '80%',
         data: { user_id: user.id }
       })
 

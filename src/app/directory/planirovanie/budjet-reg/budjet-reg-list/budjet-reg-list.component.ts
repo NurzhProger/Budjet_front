@@ -38,12 +38,12 @@ export class BudjetRegListComponent implements OnInit {
   }
 
   onRowClick(budjet_reg: budjet_reg__element) {
-    if (this.data) {
-      this.onRowEdit(budjet_reg)
-    }
-    else {
-      this.budjet_dialog_ref.close(budjet_reg)
-    }     
+    // if (this.data) {
+    //   this.onRowEdit(budjet_reg)
+    // }
+    // else {
+    //   this.budjet_dialog_ref.close(budjet_reg)
+    // }     
   }
 
   onRowEdit(budjet_reg: budjet_reg__element) {

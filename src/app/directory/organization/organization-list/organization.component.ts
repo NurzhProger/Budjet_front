@@ -69,8 +69,8 @@ export class OrganizationComponent implements OnInit {
     this.org_dialog_ref = this.org_dialog_servis.open(OrganizationDetailComponent,
       {
         header: 'Редактирование организации',
-        width: '60%',
-        height: '80%',
+        width: '80%',
+        height: '100%',
         data: { org_id: org.id }
       })
 
@@ -109,7 +109,7 @@ export class OrganizationComponent implements OnInit {
       {
         header: 'Создание организации',
         width: '80%',
-        height: '80%',
+        height: '100%',
         data: { org_id: 0 }
       })
 

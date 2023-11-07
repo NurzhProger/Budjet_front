@@ -87,12 +87,12 @@ export class SpecificationExpListComponent implements OnInit {
   }
 
   onRowClick(spec_inc: specification_expenses_detail) {
-    // if (this.data) {
-      this.onRowEdit(spec_inc)
-    // }
-    // else {
-    //   this.specref.close(spec_inc)
-    // }
+    // // if (this.data) {
+    //   this.onRowEdit(spec_inc)
+    // // }
+    // // else {
+    // //   this.specref.close(spec_inc)
+    // // }
   }
 
   onSelected(spec_inc: specification_expenses_detail) {

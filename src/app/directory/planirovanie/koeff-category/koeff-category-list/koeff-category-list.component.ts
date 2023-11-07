@@ -90,7 +90,7 @@ export class KoeffCategoryListComponent implements OnInit {
       {
         header: 'Редактирование коэффициента категории',
         width: '60%',
-        height: '40%',
+        height: '60%',
         data: { koeff_id: koeff.id }
       })
 
