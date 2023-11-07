@@ -1,29 +1,29 @@
 <form class="card" [formGroup]="form">
-  <div class="p-field" style="padding-bottom: 20px;">
+  <div class="p-field" style="padding-bottom: 10px;">
       <label for="name">Наименование<span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
           <input id="name" type="text" pInputText [(ngModel)]="podrazdelenie_element.name" formControlName="name" />
       </div>
       <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
           <span *ngIf="form.controls['name'].errors?.required">Наименование не должно быть пустым</span>
       </span>
 
-      <div style="padding-bottom: 20px;"></div>
+      <div style="padding-bottom: 10px;"></div>
 
       <label for="name_kaz">Наименование каз</label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
           <input id="name_kaz" type="text" pInputText [(ngModel)]="podrazdelenie_element.name_kaz" formControlName="name_kaz" />
       </div>
 
-      <div style="padding-bottom: 20px;"></div>
+      <div style="padding-bottom: 10px;"></div>
 
       <label for="name_rus">Наименование рус</label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
           <input id="name_rus" type="text" pInputText [(ngModel)]="podrazdelenie_element.name_rus" formControlName="name_rus" />
       </div>
   </div>
 
-  <div style="width:100%; padding: 20px 0;">
+  <div style="width:100%; padding: 10px 0;">
       <label style="color: red;">* - обязательные поля</label>
   </div>
 </form>
