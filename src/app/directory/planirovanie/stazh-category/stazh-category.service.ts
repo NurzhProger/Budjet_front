@@ -34,4 +34,8 @@ export class StazhCategoryService {
   edit(param: stazh_category_element) {
     return this.http.post(this.host + 'dirs/stazh_categoryedit', param)
   }
+
+  fetchWithOtbor(param: any): Observable<stazh_category_list> {
+    return this.http.post<stazh_category_list>(this.host + 'dirs/stazh_otbor', param)
+  }
 }

@@ -417,12 +417,36 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   selectStazh(stazh_cat: stazh_category_element, ri: number) {
+    let _category_id = 0
+    for (let i = 0; i < this.children[ri].length; i++) {
+      if (this.children[ri][i].zn == 'category_sotr') {
+        _category_id = this.children[ri][i].zn_category_sotr.id
+      }
+    }
 
+    // if (this.Ras4et_detail.tbl[ri].zn_category_sotr.id !== 0) {
+    //   this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(StazhCategorySelectComponent,
+    //     {
+    //       header: 'Выбор стажа',
+    //       width: 'calc(60%)',
+    //       height: 'calc(80%)',
+    //       data: { category_id: this.Ras4et_detail.tbl[ri].zn_category_sotr.id }
+    //     })
+
+    //   this.Budget_ras4et_Detailref.onClose.subscribe((stazh_category_element: stazh_category_element) => {
+    //     if (stazh_category_element) {
+    //       stazh_cat.name = stazh_category_element.name
+    //       stazh_cat.id = stazh_category_element.id
+    //       this.getKoefficient(ri)
+    //     }
+    //   })
+    // } else {
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(StazhCategorySelectComponent,
       {
         header: 'Выбор стажа',
         width: 'calc(60%)',
-        height: 'calc(80%)'
+        height: 'calc(80%)',
+        data: { category_id: _category_id }
       })
 
     this.Budget_ras4et_Detailref.onClose.subscribe((stazh_category_element: stazh_category_element) => {
@@ -432,6 +456,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
         this.getKoefficient(ri)
       }
     })
+    // }
+
+
 
 
   }

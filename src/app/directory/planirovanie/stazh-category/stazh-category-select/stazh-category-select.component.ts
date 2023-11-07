@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { stazh_category_element, stazh_category_list } from '../interfaces';
 import { StazhCategoryElementComponent } from '../stazh-category-element/stazh-category-element.component';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StazhCategoryService } from '../stazh-category.service';
 import { MessageService } from 'primeng/api';
 
@@ -16,7 +16,8 @@ export class StazhCategorySelectComponent implements OnInit {
     private stazhCategoryService: StazhCategoryService,
     private stazh_category_dialog_ref: DynamicDialogRef,
     private stazh_category_dialog_servis: DialogService,
-    private stazh_category_message_servis: MessageService
+    private stazh_category_message_servis: MessageService,
+    private stazh_category_config: DynamicDialogConfig
   ) { }
 
   @Output() closeEvent = new EventEmitter<any>()
@@ -28,14 +29,30 @@ export class StazhCategorySelectComponent implements OnInit {
   rows = 25
   searchSta = ''
   stazh: any
+  id_category: 0
 
   ngOnInit(): void {
-    this.fetchSta(),
-      this.updateWindowSize()
+    this.id_category = this.stazh_category_config.data.category_id;
+    if (this.id_category !== 0) {
+      this.fetchStazhOtbor()
+    } else {
+      this.fetchSta()
+    }
+    this.updateWindowSize()
   }
 
   private updateWindowSize() {
     this.windowHeight = window.innerHeight;
+  }
+
+  fetchStazhOtbor() {
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      searchSta: this.searchSta,
+      _category_id: this.id_category
+    }
+    this.stazh_categorys$ = this.stazhCategoryService.fetchWithOtbor(params);
   }
 
   fetchSta() {
