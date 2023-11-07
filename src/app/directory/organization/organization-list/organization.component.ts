@@ -70,7 +70,7 @@ export class OrganizationComponent implements OnInit {
       {
         header: 'Редактирование организации',
         width: '80%',
-        height: '100%',
+        height: '80%',
         data: { org_id: org.id }
       })
 
