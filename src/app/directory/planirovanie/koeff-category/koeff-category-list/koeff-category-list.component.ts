@@ -84,9 +84,9 @@ export class KoeffCategoryListComponent implements OnInit {
   onRowEdit(koeff: koeff_category_element) {
     this.koeff_category_dialog_ref = this.koeff_category_dialog_servis.open(KoeffElementComponent,
       {
-        header: 'Редактирование категории сотрудника',
+        header: 'Редактирование коэффициента категории',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { koeff_id: koeff.id }
       })
 
