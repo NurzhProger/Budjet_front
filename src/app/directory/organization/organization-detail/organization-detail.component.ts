@@ -16,6 +16,8 @@ import { regions__element } from '../../planirovanie/regions/interfaces';
 import { OrganizationSelectComponent } from '../organization-select/organization-select.component';
 import { log } from 'mathjs';
 import { PeriodDetailComponent } from '../../period/period-detail/period-detail.component';
+import { ABPSelectComponent } from '../../expenses/ABP/abp-select/abp-select.component';
+import { abp_detail } from '../../expenses/ABP/interfaces';
 
 @Component({
   selector: 'app-organization-detail',
@@ -89,6 +91,7 @@ export class OrganizationDetailComponent implements OnInit {
       name_rus: new FormControl(null, [Validators.required]),
       adress: new FormControl(null, [Validators.required]),
       region_name: new FormControl(null, [Validators.required]),
+      abp_name: new FormControl(null, [Validators.required])
     })
 
     this.org_id = this.org_dialog_config.data.org_id
@@ -226,6 +229,32 @@ export class OrganizationDetailComponent implements OnInit {
       name_rus: ''
     };
   }
+
+  selectABP() {
+    this.budjet_select_dialog_ref = this.budjetDialogService.open(ABPSelectComponent,
+      {
+        header: 'Выбор АБП',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
+        data: { apb_id: this.org_detail._abp.id }
+      })
+    this.budjet_select_dialog_ref.onClose.subscribe((abp: abp_detail) => {
+      if (abp) {
+        this.org_detail._abp = abp;
+      }
+    })
+  }
+
+  clearABP() {
+    this.org_detail._abp = {
+      id: 0,
+      code: '',
+      name_kaz: '',
+      name_rus: ''
+    };
+  }
+
+
 
   selectRegion() {
     this.region_select_dialog_ref = this.regionDialogService.open(RegionsListComponent,
