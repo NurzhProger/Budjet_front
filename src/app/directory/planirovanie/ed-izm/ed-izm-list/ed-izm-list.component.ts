@@ -82,7 +82,7 @@ export class EdIzmListComponent implements OnInit {
       {
         header: 'Редактирование категории сотрудника',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { edizm_id: ed_izm.id }
       })
 

@@ -84,7 +84,7 @@ export class StazhCategoryListComponent implements OnInit {
       {
         header: 'Редактирование стажа категории',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { stazh_id: stazh.id }
       })
 

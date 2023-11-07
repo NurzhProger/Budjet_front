@@ -1,7 +1,7 @@
 <form class="card" [formGroup]="form">
-  <div class="p-field" style="padding-bottom: 20px;">
+  <div class="p-field" style="padding-bottom: 10px;">
       <label for="code">Код функциональной группы<span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
           <input id="code" [readOnly]="func_detail.id > 0" type="text" pInputText
               [(ngModel)]="func_detail.code" formControlName="code" />
       </div>
@@ -11,9 +11,9 @@
 
   </div>
 
-  <div class="p-field" style="padding-bottom: 20px;">
+  <div class="p-field" style="padding-bottom: 10px;">
       <label for="name_kaz">Наименование на каз. языке <span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
           <input id="name_kaz" type="text" pInputText [(ngModel)]="func_detail.name_kaz"
               formControlName="name_kaz" />
       </div>
@@ -22,9 +22,9 @@
       </span>
   </div>
 
-  <div class="p-field" style="padding-bottom: 20px;">
+  <div class="p-field" style="padding-bottom: 10px;">
       <label for="name_rus">Наименование на рус. языке <span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
           <input id="name_rus" type="text" pInputText [(ngModel)]="func_detail.name_rus"
               formControlName="name_rus" />
       </div>

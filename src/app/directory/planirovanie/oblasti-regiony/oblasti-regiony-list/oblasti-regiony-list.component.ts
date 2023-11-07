@@ -82,7 +82,7 @@ export class OblastiRegionyListComponent implements OnInit {
       {
         header: 'Редактирование',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { oblasti_id: oblasti.id }
       })
 

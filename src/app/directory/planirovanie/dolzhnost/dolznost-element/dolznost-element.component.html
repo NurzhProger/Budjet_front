@@ -1,7 +1,7 @@
 <form class="card" [formGroup]="form">
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name">Наименование<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="name" type="text" pInputText [(ngModel)]="dolzhnost_element.name" formControlName="name" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
@@ -11,21 +11,21 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name_kaz">Наименование каз</label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="name_kaz" type="text" pInputText [(ngModel)]="dolzhnost_element.name_kaz" formControlName="name_kaz" />
         </div>
     </div>
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name_rus">Наименование рус</label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="name_kaz" type="text" pInputText [(ngModel)]="dolzhnost_element.name_rus" formControlName="name_rus" />
         </div>
     </div>
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="podrazdelenie_name">Подразделение<span style="color: red;">*</span></label>
-        <div class="p-inputgroup" >
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="podrazdelenie_name" type="text" [readonly]="true" pInputText [(ngModel)]="dolzhnost_element.podrazdelenie_name" formControlName="podrazdelenie_name" 
             placeholder="Выберите подразделение" (click)="selectPodr()"/>
              <span class="p-inputgroup-addon cursor-pointer" (click)="clearPodr()">×</span>

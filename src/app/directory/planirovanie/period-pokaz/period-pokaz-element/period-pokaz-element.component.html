@@ -1,7 +1,7 @@
 <form class="card" [formGroup]="form">
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="period">Период<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="period" type="date" pInputText [(ngModel)]="period_pokaz_element.period" formControlName="period" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['period'].invalid && form.controls['period'].touched">
@@ -11,7 +11,7 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="znachenie">Значение<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="znachenie" type="number" pInputText [(ngModel)]="period_pokaz_element.znachenie" formControlName="znachenie" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['znachenie'].invalid && form.controls['znachenie'].touched">

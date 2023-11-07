@@ -119,7 +119,7 @@ export class MarkiAvtoListComponent implements OnInit {
       {
         header: 'Редактирование авто',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { markiavto_id: marki_avto.id }
       })
 

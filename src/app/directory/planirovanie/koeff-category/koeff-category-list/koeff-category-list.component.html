@@ -74,6 +74,13 @@
                 Нет ни одной категории сотрудников
             </div>
         </ng-template>
+        <div *ngIf="koeff_category.count !== 0" class="flex align-items-center justify-content-center">
+            <span class="mx-1 text-color">Указано</span>
+            <p-paginator [first]="first" [rows]="rows" [totalRecords]="koeff_category.count || 0"
+                (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+                currentPageReportTemplate="{{first+1}} - {{(first + rows) > (koeff_category.count || 0)  ? koeff_category.count : first + rows }} из {{koeff_category.count}} элементов"
+                [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+        </div>
 </div>
 
 <ng-template #loader>

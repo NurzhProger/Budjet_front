@@ -82,7 +82,7 @@ export class RegionsListComponent implements OnInit {
       {
         header: 'Редактирование региона',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { regions_id: regions.id }
       })
   }

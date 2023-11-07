@@ -83,7 +83,7 @@ export class PeriodPokazListComponent implements OnInit {
       {
         header: 'Редактирование периода показателей',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { periodpokaz_id: period_pokaz.id }
       })
 

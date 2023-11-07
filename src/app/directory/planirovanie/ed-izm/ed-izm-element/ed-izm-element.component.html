@@ -1,7 +1,7 @@
 <form class="card" [formGroup]="form">
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name">Наименование<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="name" type="text" pInputText [(ngModel)]="ed_izm_element.name" formControlName="name" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
@@ -11,7 +11,7 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="code">Код<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="code" type="number" pInputText [(ngModel)]="ed_izm_element.code" formControlName="code" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['code'].invalid && form.controls['code'].touched">
@@ -21,7 +21,7 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="usl_oboz">Условное обозначение<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup"style="height: 20px;">
             <input id="usl_oboz" type="text" pInputText [(ngModel)]="ed_izm_element.usl_oboz" formControlName="usl_oboz" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['usl_oboz'].invalid && form.controls['usl_oboz'].touched">

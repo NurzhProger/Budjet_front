@@ -84,7 +84,7 @@ export class CategorySotrListComponent implements OnInit {
       {
         header: 'Редактирование категории сотрудника',
         width: '100%',
-        height: '100%',
+        height: '80%',
         data: { category_id: category.id }
       })
 

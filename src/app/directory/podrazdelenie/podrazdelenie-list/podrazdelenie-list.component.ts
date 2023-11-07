@@ -98,7 +98,7 @@ export class PodrazdelenieListComponent implements OnInit {
       {
         header: 'Редактирование подразделении',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { podrazdelenie_id: podr.id }
       })
 

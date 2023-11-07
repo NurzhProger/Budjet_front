@@ -1,7 +1,7 @@
 <form class="card" [formGroup]="form">
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name">Наименование<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="name" type="text" pInputText [(ngModel)]="regions_element.name" formControlName="name" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
@@ -11,7 +11,7 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name_kaz">Наименование каз<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="name_kaz" type="text" pInputText [(ngModel)]="regions_element.name_kaz" formControlName="name_kaz" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['name_kaz'].invalid && form.controls['name_kaz'].touched">
@@ -21,7 +21,7 @@
 
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name_rus">Наименование рус<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
             <input id="name_rus" type="text" pInputText [(ngModel)]="regions_element.name_rus" formControlName="name_rus" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['name_rus'].invalid && form.controls['name_rus'].touched">

@@ -1,9 +1,9 @@
 <div class="card" *ngIf="(category_sotr_element) as category_sotr_element; else loader">
   <form class="card" [formGroup]="form">
-    <div class="p-field" style="padding-bottom: 20px;">
+    <div class="p-field" style="padding-bottom: 10px;">
 
       <label for="name">Наименование<span style="color: red;">*</span></label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
         <input id="name" type="text" pInputText [(ngModel)]="category_sotr_element.category_sotrudnikov.name"
           formControlName="name" />
       </div>
@@ -13,9 +13,9 @@
     </div>
 
 
-    <div class="p-field" style="padding-bottom: 20px;">
+    <div class="p-field" style="padding-bottom: 10px;">
       <label>Родитель</label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="height: 20px;">
         <input id="parent" type="text" [readonly]="true" pInputText
           [(ngModel)]="category_sotr_element.category_sotrudnikov.parent_name" formControlName="parent"
           placeholder="Выберите родителя" (click)="selectParent()" />
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="p-field" style="padding-bottom: 20px;">
+    <div class="p-field" style="padding-bottom: 10px;">
       <label>Это группа</label>
       <div>
         <p-dropdown placeholder="Выберите" [options]="directory_options" optionLabel="label" optionValue="value"

@@ -117,7 +117,7 @@ export class DoplNadbavkaListComponent implements OnInit {
       {
         header: 'Редактирование категории сотрудника',
         width: '60%',
-        height: '60%',
+        height: '40%',
         data: { doplata_id: dopl_nadbavky.id }
       })
 

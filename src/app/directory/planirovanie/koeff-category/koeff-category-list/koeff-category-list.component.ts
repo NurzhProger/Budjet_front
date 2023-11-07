@@ -38,7 +38,11 @@ export class KoeffCategoryListComponent implements OnInit {
   private updateWindowSize() {
     this.windowHeight = window.innerHeight;
   }
-
+  onPageChange(event: any) {
+    this.first = event.first
+    this.rows = event.rows
+    this.fetchList()
+  }
   openNew() {
     this.dialog_ref = this.koeff_category_dialog_servis.open(KoeffElementComponent,   
       {

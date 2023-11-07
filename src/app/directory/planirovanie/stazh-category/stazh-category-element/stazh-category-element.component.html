@@ -1,7 +1,7 @@
 <form class="card" [formGroup]="form">
     <div class="p-field" style="padding-bottom: 10px;">
         <label for="name">Наименование<span style="color: red;">*</span></label>
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="name" type="text" pInputText [(ngModel)]="stazh_category_element.name" formControlName="name" />
         </div>
         <span class="p-invalid" *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
@@ -12,7 +12,7 @@
     <label for="name">Стаж<span style="color: red;">*</span></label>
     <div style="display: flex;">
       <div style="width: 50%;">
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="ot" type="number" (input)="checkinput()" pInputText [(ngModel)]="stazh_category_element.ot" formControlName="ot" required/>
         </div>
         <span class="p-invalid" *ngIf="form.controls['ot'].invalid && form.controls['ot'].touched">
@@ -21,7 +21,7 @@
       </div>
 
       <div style="padding-left: 10px; width: 50%;">
-        <div class="p-inputgroup">
+        <div class="p-inputgroup" style="height: 20px;">
           <input id="do" type="number" (input)="checkinput()" pInputText [(ngModel)]="stazh_category_element.do" formControlName="do" required/>
         </div>
         <span class="p-invalid" *ngIf="form.controls['do'].invalid && form.controls['do'].touched">
