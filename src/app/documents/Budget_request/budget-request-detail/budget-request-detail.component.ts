@@ -524,11 +524,13 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   }
 
   add_fkr() {
+
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(FkrSelectComponent,
       {
         header: 'Выбор ФКР',
         width: '60%',
-        height: '80%'
+        height: '80%',
+        data: { _org_id: this.Budget_detail.doc._organization.id }
       })
 
     this.Budget_detail_ryref.onClose.subscribe((fkr_detail: fkr_detail) => {

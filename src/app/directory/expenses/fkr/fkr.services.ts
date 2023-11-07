@@ -24,4 +24,8 @@ export class fkrService {
         return this.http.get<fkr_list>(this.host + 'dirs/fkrlist', { params })
     }
 
+    fetchOtbor(params: any): Observable<fkr_list> {
+        return this.http.post<fkr_list>(this.host + 'dirs/fkrlist', { params })
+    }
+
 }

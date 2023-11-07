@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { fkrService } from '../fkr.services';
 import { fkr_detail, fkr_select } from '../interfaces';
@@ -19,6 +19,7 @@ export class FkrSelectComponent implements OnInit {
     private fkrSelectconfirm: ConfirmationService,
     private fkrSelectdialog: DialogService,
     private fkrSelectmessage: MessageService,
+    private abp_config: DynamicDialogConfig
   ) { }
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
@@ -28,6 +29,7 @@ export class FkrSelectComponent implements OnInit {
   rows = 25
   selected: any
   windowHeight: number
+  _org_id = 0
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -35,7 +37,12 @@ export class FkrSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchPr(),
+    this._org_id = this.abp_config.data._org_id;
+    if (this._org_id !== 0) {
+      this.fetchPrOtbor()
+    } else {
+      this.fetchPr()
+    }
     this.updateWindowSize()
   }
 
@@ -51,6 +58,17 @@ export class FkrSelectComponent implements OnInit {
     }
 
     this.fkr$ = this.fkrSelectService.fetch(params)
+  }
+
+  fetchPrOtbor() {
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      search: this.searchfkr.toString(),
+      _org_id: this._org_id,
+    }
+
+    this.fkr$ = this.fkrSelectService.fetchOtbor(params)
   }
 
   onSelected(fkrr: fkr_detail) {

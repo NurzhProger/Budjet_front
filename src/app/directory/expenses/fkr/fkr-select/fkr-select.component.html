@@ -1,16 +1,17 @@
 <p-toolbar>
     <div class="p-toolbar-group-left" *ngIf="data!==true">
-        <button pButton pRipple label="выбрать"  icon="pi pi-check" class="p-button-success p-mr-2"
+        <button pButton pRipple label="выбрать" icon="pi pi-check" class="p-button-success p-mr-2"
             (click)="onSelected(selected)"></button>
     </div>
     <div class="p-toolbar-group-right">
         <span class="p-input-icon-left" style="margin-right: 10px;">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" [(ngModel)]="searchfkr" (change)="fetchPr()" placeholder="поиск по коду" />
+            <input pInputText type="text" [(ngModel)]="searchfkr" (change)="fetchPrOtbor()"
+                placeholder="поиск по коду" />
         </span>
         <div style="padding-right: 10px;">
             <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
-                styleClass="p-button-sm" (click)="fetchPr()"></button>
+                styleClass="p-button-sm" (click)="fetchPrOtbor()"></button>
         </div>
     </div>
 </p-toolbar>
@@ -18,7 +19,7 @@
 <div class="card" *ngIf="(fkr$ | async) as fkr; else loader">
     <form style="display: flex;"></form>
     <p-table *ngIf="fkr.count !== 0; else empty" [value]="fkr.results" [scrollable]="true"
-        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single"  [(selection)]="selected"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template pTemplate="header">
             <tr>
