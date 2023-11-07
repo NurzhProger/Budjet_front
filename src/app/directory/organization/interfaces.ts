@@ -1,3 +1,4 @@
+import { abp_detail } from "../expenses/ABP/interfaces"
 import { Budjet_detail } from "../income/budjet/interfaces"
 import { budjet_reg__element } from "../planirovanie/budjet-reg/budjet-reg-list/interfaces"
 import { regions__element } from "../planirovanie/regions/interfaces"
@@ -11,6 +12,7 @@ export interface organization_detail {
     deleted: boolean,
     _budjet_reg: budjet_reg__element,
     _regiondar: regions__element,
+    _abp: abp_detail
     parent_organizations: [parent_detail]
 }
 export interface parent_detail {

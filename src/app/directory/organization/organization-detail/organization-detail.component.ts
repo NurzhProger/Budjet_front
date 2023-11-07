@@ -36,15 +36,15 @@ export class OrganizationDetailComponent implements OnInit {
     private org_dialog_service: DialogService,
     private org_confirm: ConfirmationService,
     private period_dialog_ref: DynamicDialogRef
-    ) { }
+  ) { }
 
   form: FormGroup
   org_id = 0
   saved = false
   windowHeight: number
   _date = new Date
- 
-  
+
+
   org_detail: organization_detail = {
     id: 0,
     bin: '',
@@ -53,14 +53,20 @@ export class OrganizationDetailComponent implements OnInit {
     adress: '',
     deleted: false,
     _budjet_reg: {
-        id: 0,
-        code: '',
-        name_kaz: '',
-        name_rus: ''
+      id: 0,
+      code: '',
+      name_kaz: '',
+      name_rus: ''
     },
     _regiondar: {
       id: 0,
       name: '',
+      name_kaz: '',
+      name_rus: ''
+    },
+    _abp: {
+      id: 0,
+      code: '',
       name_kaz: '',
       name_rus: ''
     },
@@ -91,8 +97,8 @@ export class OrganizationDetailComponent implements OnInit {
       this.orgService.fetchOrg(this.org_id)
         .subscribe(
           (data) => (
-              this.org_detail = data
-            )
+            this.org_detail = data
+          )
         )
     }
 
@@ -156,7 +162,7 @@ export class OrganizationDetailComponent implements OnInit {
     })
   }
   delParent(ri: number, id: number, org_name: string) {
-    
+
     this.org_confirm.confirm({
       message: 'Удалить с родителя ' + org_name + '?',
       header: 'Удаление родителя',
@@ -183,9 +189,9 @@ export class OrganizationDetailComponent implements OnInit {
     return new Date(dateForStr).toLocaleDateString() + ' ' + new Date(dateForStr).toLocaleTimeString();
   }
 
-  
+
   saveOrg() {
-    
+
     this.orgService.add(this.org_detail)
       .subscribe(
         (data) => (
@@ -200,16 +206,16 @@ export class OrganizationDetailComponent implements OnInit {
   selectBudjet() {
     this.budjet_select_dialog_ref = this.budjetDialogService.open(BudjetRegListComponent,
       {
-          header: 'Выбор бюджета региона',
-          width: 'calc(60%)',
-          height: 'calc(80%)',
-          data: { budjetreg_id: this.org_detail._budjet_reg.id }
+        header: 'Выбор бюджета региона',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
+        data: { budjetreg_id: this.org_detail._budjet_reg.id }
       })
     this.budjet_select_dialog_ref.onClose.subscribe((budjet_reg: budjet_reg__element) => {
       if (budjet_reg) {
         this.org_detail._budjet_reg = budjet_reg;
       }
-      })
+    })
   }
 
   clearBudjet() {
@@ -218,22 +224,22 @@ export class OrganizationDetailComponent implements OnInit {
       code: '',
       name_kaz: '',
       name_rus: ''
-  };
+    };
   }
 
   selectRegion() {
     this.region_select_dialog_ref = this.regionDialogService.open(RegionsListComponent,
       {
-          header: 'Выбор региона',
-          width: 'calc(60%)',
-          height: 'calc(80%)',
-          data: { regions_id: this.org_detail._regiondar.id }
+        header: 'Выбор региона',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
+        data: { regions_id: this.org_detail._regiondar.id }
       })
     this.region_select_dialog_ref.onClose.subscribe((regions: regions__element) => {
       if (regions) {
         this.org_detail._regiondar = regions;
       }
-      })
+    })
   }
 
   clearRegion() {

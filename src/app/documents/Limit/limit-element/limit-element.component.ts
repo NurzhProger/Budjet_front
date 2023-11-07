@@ -93,15 +93,21 @@ export class LimitElementComponent implements OnInit, DoCheck {
           name_kaz: '',
           name_rus: ''
         },
+        _abp: {
+          id: 0,
+          code: '',
+          name_kaz: '',
+          name_rus: ''
+        },
         parent_organizations: [{
-              id: 0,
-              _date: '',
-              _organization: 0,
-              _parent: {
-                  id: 0,
-                  name_rus: ''
-              }
-            }
+          id: 0,
+          _date: '',
+          _organization: 0,
+          _parent: {
+            id: 0,
+            name_rus: ''
+          }
+        }
         ]
 
       }
@@ -111,7 +117,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
   formatNumber(value: number): string {
     return value.toFixed(3);
   }
-  
+
   ngDoCheck(): void {
     let objString = JSON.stringify(this.limitDetail)
     let hashBeg = SHA256(objString).toString()
