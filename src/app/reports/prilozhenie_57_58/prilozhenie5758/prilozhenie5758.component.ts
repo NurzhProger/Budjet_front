@@ -131,7 +131,8 @@ export class Prilozhenie5758Component implements OnInit {
       {
         header: 'Выбор организации',
         width: '60%',
-        height: '80%'
+        height: '80%',
+        data: { _org_id: 0 }
       })
 
     this.Reportref.onClose.subscribe((fkr: fkr_detail) => {
