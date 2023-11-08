@@ -9,6 +9,7 @@ export interface organization_detail {
     name_kaz: string,
     name_rus: string,
     adress: string,
+    codeorg: string,
     deleted: boolean,
     _budjet_reg: budjet_reg__element,
     _regiondar: regions__element,

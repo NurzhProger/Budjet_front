@@ -64,6 +64,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         name_kaz: '',
         name_rus: '',
         adress: '',
+        codeorg: '',
         deleted: false,
         _budjet_reg: {
           id: 0,

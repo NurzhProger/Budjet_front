@@ -80,6 +80,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
         name_kaz: '',
         name_rus: this.profileuser.org_name,
         adress: '',
+        codeorg: '',
         deleted: false,
         _budjet_reg: {
           id: 0,

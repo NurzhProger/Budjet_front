@@ -45,7 +45,7 @@
     <label for="budjet_name">Бюджет<span style="color: red;">*</span></label>
     <div class="p-inputgroup" style="height: 20px;">
       <input id="budjet_name" type="text" [readonly]="true" pInputText [(ngModel)]="org_detail._budjet_reg.name_rus"
-        formControlName="budjet_name" placeholder="Выберите бюджет" (click)="selectBudjet()" />
+        formControlName="budjet_name" placeholder="Выберите бюджет" />
       <span class="p-inputgroup-addon cursor-pointer" (click)="clearBudjet()">×</span>
       <button pButton pRipple type="button" (click)="selectBudjet()" icon="pi pi-pencil"
         class="p-button-outlined p-button-text" style="color:dimgrey"></button>
@@ -58,8 +58,8 @@
   <div class="p-field" style="padding-bottom: 10px;">
     <label for="abp_name">АБП<span style="color: red;">*</span></label>
     <div class="p-inputgroup" style="height: 20px;">
-      <input id="abp_name" type="text" [readonly]="true" pInputText [(ngModel)]="org_detail._abp.name_rus"
-        formControlName="abp_name" placeholder="Выберите АБП" (click)="selectABP()" />
+      <input id="abp_name" type="text" [readonly]="true" pInputText [ngModel]="org_detail._abp.code + '-' + org_detail._abp.name_rus"
+        formControlName="abp_name" placeholder="Выберите АБП" />
       <span class="p-inputgroup-addon cursor-pointer" (click)="clearABP()">×</span>
       <button pButton pRipple type="button" (click)="selectABP()" icon="pi pi-pencil"
         class="p-button-outlined p-button-text" style="color:dimgrey"></button>
@@ -73,13 +73,24 @@
     <label for="region_name">Регион<span style="color: red;">*</span></label>
     <div class="p-inputgroup" style="height: 20px;">
       <input id="region_name" type="text" [readonly]="true" pInputText [(ngModel)]="org_detail._regiondar.name"
-        formControlName="region_name" placeholder="Выберите регион" (click)="selectRegion()" />
+        formControlName="region_name" placeholder="Выберите регион" />
       <span class="p-inputgroup-addon cursor-pointer" (click)="clearRegion()">×</span>
       <button pButton pRipple type="button" (click)="selectRegion()" icon="pi pi-pencil"
         class="p-button-outlined p-button-text" style="color:dimgrey"></button>
     </div>
     <span class="p-invalid" *ngIf="form.controls['region_name'].invalid && form.controls['region_name'].touched">
       <span *ngIf="form.controls['region_name'].errors?.required">Регион не должнен быть пустым</span>
+    </span>
+  </div>
+
+
+  <div class="p-field" style="padding-bottom: 10px;">
+    <label for="codeorg">Код учреждения <span style="color: red;">*</span></label>
+    <div class="p-inputgroup" style="height: 20px;">
+      <input id="codeorg" type="text" pInputText [(ngModel)]="org_detail.codeorg" formControlName="codeorg" />
+    </div>
+    <span class="p-invalid" *ngIf="form.controls['codeorg'].invalid && form.controls['codeorg'].touched">
+      <span *ngIf="form.controls['adress'].errors?.required">Заполните код учреждения</span>
     </span>
   </div>
 

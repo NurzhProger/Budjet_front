@@ -53,6 +53,7 @@ export class OrganizationDetailComponent implements OnInit {
     name_kaz: '',
     name_rus: '',
     adress: '',
+    codeorg: '',
     deleted: false,
     _budjet_reg: {
       id: 0,
@@ -91,7 +92,8 @@ export class OrganizationDetailComponent implements OnInit {
       name_rus: new FormControl(null, [Validators.required]),
       adress: new FormControl(null, [Validators.required]),
       region_name: new FormControl(null, [Validators.required]),
-      abp_name: new FormControl(null, [Validators.required])
+      abp_name: new FormControl(null, [Validators.required]),
+      codeorg: new FormControl(null, [Validators.required]),
     })
 
     this.org_id = this.org_dialog_config.data.org_id
