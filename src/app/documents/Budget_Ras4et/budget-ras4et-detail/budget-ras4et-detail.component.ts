@@ -479,6 +479,16 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
     let mass_arr = mass[0];
     let aaa = '1234567890';
+    let koeffBolshe100 = false
+
+    for (let i = 0; i < mass[0].length; i++) {
+      if (mass_arr[i].name == 'Коэффициент') {
+        if (mass_arr[i].zn_float > 99) {
+          koeffBolshe100 = true
+        }
+      }
+    }
+
     // this.Ras4et_detail.tbl[ri].
     for (let i = 0; i < mass[0].length; i++) {
       if (mass_arr[i].columns_used !== '') {
@@ -492,7 +502,11 @@ export class BudgetRas4etDetailComponent implements OnInit {
             formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
           }
           else if (mass_simv[y] == "БДО") {
-            formula = formula + 17967
+            if (koeffBolshe100 == false) {
+              formula = formula + 17967
+            } else {
+              formula = formula + 1
+            }
           }
           else {
             formula = formula + mass_simv[y];
