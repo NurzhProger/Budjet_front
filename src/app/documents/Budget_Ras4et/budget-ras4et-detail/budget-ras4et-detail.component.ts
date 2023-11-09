@@ -488,7 +488,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
         }
       }
     }
-
     // this.Ras4et_detail.tbl[ri].
     for (let i = 0; i < mass[0].length; i++) {
       if (mass_arr[i].columns_used !== '') {
@@ -497,6 +496,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
         for (let y = 0; y < mass_simv.length; y++) {
           if (aaa.includes(mass_simv[y])) {
             formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
+          }
+          else if (mass_simv[y] > mass_arr.length) {
+            formula = formula + mass_simv[y];
           }
           else if (aaa.includes(mass_simv[y][1])) {
             formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
