@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { category_sotr_detail, category_sotr_element } from '../interfaces';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CategorySotrService } from '../category-sotr.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CategorySotrListComponent } from '../category-sotr-list/category-sotr-list.component';
 import { number, string } from 'mathjs';
 import { StazhCategorySelectComponent } from '../../stazh-category/stazh-category-select/stazh-category-select.component';
@@ -23,7 +23,8 @@ export class CategorySotrElementComponent implements OnInit {
     public category_sotr_dialog_config: DynamicDialogConfig,
     private parentSelectdialogService: DialogService,
     private stazh_dialog_ref: DynamicDialogRef,
-    private koeff_dialog_ref: DynamicDialogRef
+    private koeff_dialog_ref: DynamicDialogRef,
+    private koef_cate_confirm: ConfirmationService
   ) { }
 
   form: FormGroup
@@ -202,24 +203,21 @@ export class CategorySotrElementComponent implements OnInit {
     })
   }
 
-  onDelete() {
+  onDelete(ri: number) {
 
-    // this.limitDetailconfirm.confirm({
-    //   message: 'Вы действительно хотите удалить ' + fkr_name + '?',
-    //   header: 'Удаление классификации',
-    //   icon: 'pi pi-exclamation-triangle',
-    //   accept: () => {
-    //     for (let i = this.limitDetail.tbl.length - 1; i >= 0; i--) {
-    //       let index = this.limitDetail.tbl.findIndex(item => fkr_id === item._fkr.id)
-    //       if (index !== -1) {
-    //         this.limitDetail.tbl.splice(index, 1)
-    //       }
-    //     }
-    //     this.limitDetailconfirm.close()
-    //   },
-    //   reject: () => {
-    //     this.limitDetailconfirm.close();
-    //   }
-    // });
+    this.koef_cate_confirm.confirm({
+      message: 'Удалить коэффициент категории?',
+      header: 'Удаление коэффициента категории',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.category_sotr_element.tbl.splice(ri, 1),
+        this.category_sotr_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Удален коэфициент категории!' })
+      },
+      reject: () => {
+        this.koef_cate_confirm.close();
+      }
+    })
+
+
   }
 }
