@@ -64,8 +64,9 @@ export interface ChildItem {
   zn_oblasti_reg: number | null;
   zn_marki_avto: number | null;
   zn_ed_izm: number | null;
-
 }
+
+
 
 export interface Ras4et_dopl {
   id: number;
