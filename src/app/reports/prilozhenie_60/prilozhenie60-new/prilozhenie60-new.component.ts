@@ -32,6 +32,7 @@ export class Prilozhenie60NewComponent implements OnInit {
     'name': ''
   }
   profileuser: profileuser
+  _date: string
 
   ngOnInit(): void {
 
@@ -39,11 +40,13 @@ export class Prilozhenie60NewComponent implements OnInit {
       id: parseInt(this.profileuser.org_id),
       name: this.profileuser.org_name
     }
+
   }
 
   form() {
     let params = {
       org_id: this._organization.id,
+      _date: this._date
     }
 
     if (this._organization.id == 0) {
