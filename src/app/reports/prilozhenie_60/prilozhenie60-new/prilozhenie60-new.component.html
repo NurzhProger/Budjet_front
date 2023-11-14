@@ -9,18 +9,19 @@
             <div class="p-field" style="padding-right: 10px;">
 
                 <!-- <label for="date_doc">Дата <span style="color: red;">*</span></label> -->
-                <div class="p-inputgroup">
+                <!-- <div class="p-inputgroup">
                     <input id="date_doc" type="date" pInputText [(ngModel)]="_date"
                          style="width: 130px; height: 25px;" />
-                </div>
+                </div> -->
+                <p-calendar appendTo="body" placeholder="Дата" [(ngModel)]="_date" dateFormat="dd.mm.yy"
+                    [readonlyInput]="true" [showIcon]="true" inputId="calendar"></p-calendar>
                 <!-- <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
                     <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
                 </span> -->
             </div>
                 <!-- <label for="org_name">Наименование организации</label> -->
                 <div class="p-inputgroup" style="padding-right: 10px; width: 20%;">
-                    <input id="org_name" type="text" pInputText [(ngModel)]="_organization.name"
-                     style="width: 130px; height: 25px;" />
+                    <input id="org_name" type="text" pInputText [(ngModel)]="_organization.name"/>
                     <!-- <span *ngIf="_organization.id !== 0" class="p-inputgroup-addon cursor-pointer" (click)="viewOrg()"
                     style="width: 30px; height: 25px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -29,8 +30,7 @@
                                 d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                         </svg>
                     </span> -->
-                    <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()"
-                    style="width: 30px; height: 25px;">...</span>
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()">...</span>
                 </div>
 
         </div>

@@ -35,7 +35,7 @@ export class Prilozhenie5758Component implements OnInit {
     'id': 0,
     'name': ''
   }
-  _date: string
+  _date: Date = new Date;
   _fkr = {
     'id': 0,
     'name': '',
@@ -56,7 +56,7 @@ export class Prilozhenie5758Component implements OnInit {
     let params = {
       org_id: this._organization.id,
       fkr_id: this._fkr.id,
-      _date: this._date
+      _date:this.toLocaleDate(this._date)
     }
 
     if (this._organization.id == 0) {
@@ -94,7 +94,9 @@ export class Prilozhenie5758Component implements OnInit {
 
 
   }
-
+  toLocaleDate(dateForStr: Date) {
+    return new Date(dateForStr).toLocaleDateString();
+}
   viewOrg() {
     this.Reportref = this.Reportdialog.open(OrganizationDetailComponent,
       {

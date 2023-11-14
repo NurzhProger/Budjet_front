@@ -32,7 +32,7 @@ export class Prilozhenie60NewComponent implements OnInit {
     'name': ''
   }
   profileuser: profileuser
-  _date: string
+  _date: Date = new Date;
 
   ngOnInit(): void {
 
@@ -43,10 +43,14 @@ export class Prilozhenie60NewComponent implements OnInit {
 
   }
 
+  toLocaleDate(dateForStr: Date) {
+    return new Date(dateForStr).toLocaleDateString();
+}
+
   form() {
     let params = {
       org_id: this._organization.id,
-      _date: this._date
+      _date: this.toLocaleDate(this._date)
     }
 
     if (this._organization.id == 0) {
