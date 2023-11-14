@@ -35,7 +35,7 @@ export class Prilozhenie5758Component implements OnInit {
     'id': 0,
     'name': ''
   }
-
+  _date: string
   _fkr = {
     'id': 0,
     'name': '',
@@ -55,7 +55,8 @@ export class Prilozhenie5758Component implements OnInit {
   form() {
     let params = {
       org_id: this._organization.id,
-      fkr_id: this._fkr.id
+      fkr_id: this._fkr.id,
+      _date: this._date
     }
 
     if (this._organization.id == 0) {
