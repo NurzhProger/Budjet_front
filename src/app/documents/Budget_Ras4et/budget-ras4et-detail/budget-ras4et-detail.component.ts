@@ -53,7 +53,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
     private Budget_ras4et_Detailmsg: MessageService,
     private Budget_ras4et_Detailref: DynamicDialogRef,
     private Budget_ras4et_DialogService: DialogService,
-    private Budget_Confirmation: ConfirmationService) { }
+    private Budget_Confirmation: ConfirmationService,
+    private Budget_ras4et_DetailrefModal: DynamicDialogRef) { }
 
   @Output() closeEvent = new EventEmitter<any>()
   // @Input() izm: any
@@ -195,6 +196,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
         if (fff.length !== 0) {
           this.Ras4et_detail.dopl.push(fff);
         }
+
 
         let column = dopl[0]._column
         let summ_mass = 0
@@ -595,7 +597,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.hashBegin = this.hashEnd
 
     if (close) {
-      this.Budget_ras4et_Detailref.close(this.Ras4et_detail.head.summ)
+      this.Budget_ras4et_DetailrefModal.close(this.Ras4et_detail.head.summ)
     }
   }
 
