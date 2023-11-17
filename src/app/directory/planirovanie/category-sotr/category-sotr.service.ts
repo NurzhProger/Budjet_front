@@ -34,4 +34,8 @@ export class CategorySotrService {
   edit(param: category_sotr_detail) {
     return this.http.post(this.host + 'dirs/category_sotredit', param)
   }
+
+  category_del(id: number) {
+    return this.http.delete(this.host + `dirs/category_sotrdelete/${id}`)
+  }
 }

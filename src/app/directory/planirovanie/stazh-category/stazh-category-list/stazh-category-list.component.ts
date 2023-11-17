@@ -4,6 +4,7 @@ import { stazh_category_element, stazh_category_list } from '../interfaces';
 import { StazhCategoryElementComponent } from '../stazh-category-element/stazh-category-element.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StazhCategoryService } from '../stazh-category.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-stazh-category-list',
@@ -15,7 +16,9 @@ export class StazhCategoryListComponent implements OnInit {
   constructor(
     private stazhCategoryService: StazhCategoryService,
     private stazh_category_dialog_ref: DynamicDialogRef,
-    private stazh_category_dialog_servis: DialogService
+    private stazh_category_dialog_servis: DialogService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
   ) { }
 
   @Output() closeEvent = new EventEmitter<any>()
@@ -28,7 +31,7 @@ export class StazhCategoryListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchList(),
-    this.updateWindowSize() 
+      this.updateWindowSize()
   }
 
   private updateWindowSize() {
@@ -44,12 +47,39 @@ export class StazhCategoryListComponent implements OnInit {
         data: { stazh_id: 0 }
       })
 
-      this.stazh_category_dialog_ref.onClose.subscribe((save: boolean) => {
-      
-        if (save) {
-          this.fetchList()
-        }
-      })
+    this.stazh_category_dialog_ref.onClose.subscribe((save: boolean) => {
+
+      if (save) {
+        this.fetchList()
+      }
+    })
+  }
+
+  onDelete(stazh: stazh_category_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.stazhCategoryService.stazh_del(stazh.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
   }
 
   fetchList() {

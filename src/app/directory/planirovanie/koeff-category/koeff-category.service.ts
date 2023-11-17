@@ -34,4 +34,8 @@ export class KoeffCategoryService {
   edit(param: koeff_category_element) {
     return this.http.post(this.host + 'dirs/koeff_categoryedit', param)
   }
+
+  koeff_del(id: number) {
+    return this.http.delete(this.host + `dirs/koeff_categorydelete/${id}`)
+  }
 }

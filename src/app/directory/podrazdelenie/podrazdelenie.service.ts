@@ -35,4 +35,8 @@ export class PodrazdelenieService {
   edit(param: podrazdelenie_element) {
     return this.http.post(this.host + 'dirs/podrazdelenieedit', param)
   }
+
+  podr_del(id: number) {
+    return this.http.delete(this.host + `dirs/podrazdeleniedelete/${id}`)
+  }
 }

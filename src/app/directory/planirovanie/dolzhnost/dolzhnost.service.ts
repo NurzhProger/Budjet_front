@@ -35,4 +35,8 @@ export class DolzhnostService {
   edit(param: dolzhnost_element) {
     return this.http.post(this.host + 'dirs/dolzhnostedit', param)
   }
+
+  dolzh_del(id: number) {
+    return this.http.delete(this.host + `dirs/dolzhnostdelete/${id}`)
+  }
 }

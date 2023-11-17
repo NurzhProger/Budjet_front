@@ -15,7 +15,7 @@
         </div>
         <div>
             <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
-              (click)="closeform()"></button>
+                (click)="closeform()"></button>
         </div>
     </div>
 
@@ -23,40 +23,48 @@
 
 <div class="card" *ngIf="(stazh_categorys$ | async) as stazh_categorys; else loader">
     <p-table *ngIf="stazh_categorys.count !== 0; else empty" [value]="stazh_categorys.results" [scrollable]="true"
-            scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
-            styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-    
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width:5%; text-align:center">Номер</th>
-                    <th style="width:95%; text-align:center">Наименование</th>
-                </tr>
-            </ng-template>
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
 
-            <ng-template pTemplate="body" let-stazh let-ri="rowIndex">
-                <tr class="cursor-pointer"  (dblclick)="onRowClick(stazh)">
-                    <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-                    <td style="text-align:center">
-                        {{stazh.name}}
-                    </td>
-                </tr>
-            </ng-template>
-
-        </p-table>
-        <ng-template #empty>
-            <div class="center">
-                Нет ни одного стажа категории
-            </div>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%; text-align:center">Номер</th>
+                <th style="width:90%; text-align:center">Наименование</th>
+                <th style="width:5%; text-align:center">Действия</th>
+            </tr>
         </ng-template>
 
-        <div *ngIf="stazh_categorys.count !== 0" class="flex align-items-center justify-content-center">
-            <span class="mx-1 text-color">Указано</span>
-            <p-paginator [first]="first" [rows]="rows" [totalRecords]="stazh_categorys.count || 0"
-                (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
-                currentPageReportTemplate="{{first+1}} - {{(first + rows) > (stazh_categorys.count || 0)  ? stazh_categorys.count : first + rows }} из {{stazh_categorys.count}} элементов"
-                [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
-        </div>
+        <ng-template pTemplate="body" let-stazh let-ri="rowIndex">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(stazh)">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td style="text-align:center">
+                    {{stazh.name}}
+                </td>
+                <td style="padding: 0; margin:0;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                            (click)="onDelete(stazh)"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
 
+    </p-table>
+    <ng-template #empty>
+        <div class="center">
+            Нет ни одного стажа категории
+        </div>
+    </ng-template>
+
+    <div *ngIf="stazh_categorys.count !== 0" class="flex align-items-center justify-content-center">
+        <span class="mx-1 text-color">Указано</span>
+        <p-paginator [first]="first" [rows]="rows" [totalRecords]="stazh_categorys.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (stazh_categorys.count || 0)  ? stazh_categorys.count : first + rows }} из {{stazh_categorys.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+    </div>
+    <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+    </p-confirmDialog>
 </div>
 
 <ng-template #loader>

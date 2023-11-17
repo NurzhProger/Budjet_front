@@ -38,4 +38,8 @@ export class StazhCategoryService {
   fetchWithOtbor(param: any): Observable<stazh_category_list> {
     return this.http.post<stazh_category_list>(this.host + 'dirs/stazh_otbor', param)
   }
+
+  stazh_del(id: number) {
+    return this.http.delete(this.host + `dirs/stazh_categorydelete/${id}`)
+  }
 }

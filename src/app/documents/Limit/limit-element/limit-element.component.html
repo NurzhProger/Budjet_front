@@ -23,10 +23,9 @@
 <div class="card" *ngIf="(limitDetail) as limitDetail; else loader">
     <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
         <div class="p-field" style="padding-right: 10px;">
-            <label >Номер</label>
+            <label>Номер</label>
             <div class="p-inputgroup">
-                <input type="text" pInputText [(ngModel)]="limitDetail.head.nom"
-                    formControlName="number_doc" />
+                <input type="text" pInputText [(ngModel)]="limitDetail.head.nom" formControlName="number_doc" />
             </div>
         </div>
 
@@ -34,7 +33,8 @@
 
             <label for="date_doc">Дата <span style="color: red;">*</span></label>
             <div class="p-inputgroup">
-                <input id="date_doc" type="date" pInputText [(ngModel)]="limitDetail.head._date" formControlName="date_doc" />
+                <input id="date_doc" type="date" pInputText [(ngModel)]="limitDetail.head._date"
+                    formControlName="date_doc" />
             </div>
             <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
                 <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
@@ -64,7 +64,8 @@
 
             <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
             <div class="p-inputgroup">
-                <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()" formControlName="god_ucheta"/>
+                <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()"
+                    formControlName="god_ucheta" />
             </div>
             <span class="p-invalid" *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
                 <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
@@ -73,28 +74,28 @@
     </form>
 
 
-<div style="padding: 0 0 10px 10px;">
-    <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
-        (click)="addFKR()"></button>
-</div>
+    <div style="padding: 0 0 10px 10px;">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="addFKR()"></button>
+    </div>
 
-<p-table *ngIf="limitDetail.tbl" [value]="limitDetail.tbl" [scrollable]="true" scrollHeight="calc(100vh - 200px)"  [(selection)]="selected" 
-    selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-    <ng-template class="" pTemplate="header">
-        <tr>
-            <th style="text-align:center;">Номер</th>
-            <th style="text-align:center;">Функциональная классификация расходов</th>
-            <th style="text-align:center;">Сумма на год</th>
-            <th style="text-align:center;">Действия</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-lim let-ri="rowIndex">
-        <tr class="cursor-pointer" [pSelectableRow]="lim">
-            <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-                    <td style="text-align:left">
-                        <div class="p-inputgroup w-full">
-                        <input pInputText [readOnly]="true"
-                            [(ngModel)]="lim._fkr.code + ' ' + lim._fkr.name_rus" />
+    <p-table *ngIf="limitDetail.tbl" [value]="limitDetail.tbl" [scrollable]="true" scrollHeight="calc(100vh - 200px)"
+        [(selection)]="selected" selectionMode="single"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+        <ng-template class="" pTemplate="header">
+            <tr>
+                <th style="text-align:center;">Номер</th>
+                <th style="text-align:center;">Функциональная классификация расходов</th>
+                <th style="text-align:center;">Сумма на год</th>
+                <th style="text-align:center;">Действия</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-lim let-ri="rowIndex">
+            <tr class="cursor-pointer" [pSelectableRow]="lim">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td style="text-align:left">
+                    <div class="p-inputgroup w-full">
+                        <input pInputText [readOnly]="true" [(ngModel)]="lim._fkr.code" />
                         <span class="p-inputgroup-addon" (click)="viewFKR(lim._fkr.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-files" viewBox="0 0 16 16">
@@ -104,20 +105,20 @@
                         </span>
                         <span class="p-inputgroup-addon" (click)="editFKR(ri)">...</span>
                     </div>
-                    </td>
-                    <td style="text-align:center;" >
-                        <input type="number" [ngModel]="formatNumber(lim.summ)"
+                </td>
+                <td style="text-align:center;">
+                    <input type="number" [ngModel]="formatNumber(lim.summ)"
                         style="text-align:center; width: 100%; height: 100%;">
-                    </td>
-                    <td>
-                        <div class="flex align-items-center justify-content-center gap-2">
-                            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
-                                (click)="onDelete(lim._fkr.id, lim._fkr.name_rus)"></button>
-                        </div>
-                    </td>
-        </tr>
-    </ng-template>
-</p-table>
+                </td>
+                <td>
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                            (click)="onDelete(lim._fkr.id, lim._fkr.name_rus)"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 
 <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">

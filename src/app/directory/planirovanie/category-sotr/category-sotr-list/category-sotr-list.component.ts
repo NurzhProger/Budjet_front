@@ -4,6 +4,7 @@ import { category_sotr_list, category_sotr_element } from '../interfaces';
 import { Observable } from 'rxjs';
 import { CategorySotrElementComponent } from '../category-sotr-element/category-sotr-element.component';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @Component({
@@ -17,7 +18,9 @@ export class CategorySotrListComponent implements OnInit {
     private categorySotrService: CategorySotrService,
     private category_sotr_dialog_ref: DynamicDialogRef,
     private category_sotr_dialog_servis: DialogService,
-    private grconfig: DynamicDialogConfig
+    private grconfig: DynamicDialogConfig,
+    private message_confirm: ConfirmationService,
+    private stazh_message: MessageService
   ) { }
 
   @Output() closeEvent = new EventEmitter<any>()
@@ -63,6 +66,33 @@ export class CategorySotrListComponent implements OnInit {
 
   onSelected(category_sotr: category_sotr_element) {
 
+  }
+
+  onDelete(category: category_sotr_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.categorySotrService.category_del(category.id)
+          .subscribe((data) => (
+            this.stazh_message.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.stazh_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
   }
 
   onRowClick(category: category_sotr_element) {

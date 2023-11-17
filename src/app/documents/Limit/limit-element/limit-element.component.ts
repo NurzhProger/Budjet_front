@@ -259,7 +259,8 @@ export class LimitElementComponent implements OnInit, DoCheck {
       {
         header: 'Выбор ФКР',
         width: '60%',
-        height: '80%'
+        height: '80%',
+        data: { _org_id: this.limitDetail.head._organization.id }
       })
     this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
       if (fkr) {
@@ -276,8 +277,8 @@ export class LimitElementComponent implements OnInit, DoCheck {
   onDelete(fkr_id: number, fkr_name: string) {
 
     this.limitDetailconfirm.confirm({
-      message: 'Вы действительно хотите удалить ' + fkr_name + '?',
-      header: 'Удаление классификации',
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         for (let i = this.limitDetail.tbl.length - 1; i >= 0; i--) {

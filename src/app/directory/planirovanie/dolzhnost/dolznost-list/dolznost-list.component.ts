@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DolzhnostService } from '../dolzhnost.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DolznostElementComponent } from '../dolznost-element/dolznost-element.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dolznost-list',
@@ -17,7 +18,9 @@ export class DolznostListComponent implements OnInit {
   constructor(
     private DolzhnostService: DolzhnostService,
     private dolzhost_dialog_ref: DynamicDialogRef,
-    private dolzhnost_dialog_servis: DialogService
+    private dolzhnost_dialog_servis: DialogService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
 
   ) { }
 
@@ -30,9 +33,9 @@ export class DolznostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchList(),
-    this.updateWindowSize() 
+      this.updateWindowSize()
   }
-  
+
   private updateWindowSize() {
     this.windowHeight = window.innerHeight;
   }
@@ -46,16 +49,43 @@ export class DolznostListComponent implements OnInit {
         data: { dolzhnost_id: 0 }
       })
 
-      this.dolzhost_dialog_ref.onClose.subscribe((save: boolean) => {
-      
-        if (save) {
-          this.fetchList()
-        }
-      })
+    this.dolzhost_dialog_ref.onClose.subscribe((save: boolean) => {
+
+      if (save) {
+        this.fetchList()
+      }
+    })
   }
 
   search() {
 
+  }
+
+  onDelete(dolzh: dolzhnost_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.DolzhnostService.dolzh_del(dolzh.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
   }
 
   fetchList() {
@@ -67,7 +97,7 @@ export class DolznostListComponent implements OnInit {
   }
 
   closeform() {
-    this.closeEvent.emit() 
+    this.closeEvent.emit()
   }
 
   onPageChange(event: any) {
@@ -77,7 +107,7 @@ export class DolznostListComponent implements OnInit {
   }
 
   onRowClick(dolzh: dolzhnost_element) {
-    
+
     if (this.data) {
       this.onRowEdit(dolzh)
     }
@@ -87,8 +117,8 @@ export class DolznostListComponent implements OnInit {
   }
 
   onRowEdit(dolzh: dolzhnost_element) {
-    
-    this.dolzhost_dialog_ref = this.dolzhnost_dialog_servis.open(DolznostElementComponent,      
+
+    this.dolzhost_dialog_ref = this.dolzhnost_dialog_servis.open(DolznostElementComponent,
       {
         header: 'Редактирование должности',
         width: '60%',
