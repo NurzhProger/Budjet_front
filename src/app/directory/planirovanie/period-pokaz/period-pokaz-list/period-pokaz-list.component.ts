@@ -4,6 +4,7 @@ import { period_pokaz_element, period_pokaz_list } from '../interfaces';
 import { PeriodPokazService } from '../period-pokaz.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PeriodPokazElementComponent } from '../period-pokaz-element/period-pokaz-element.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-period-pokaz-list',
@@ -22,7 +23,9 @@ export class PeriodPokazListComponent implements OnInit {
   constructor(
     private PeriodPokazService: PeriodPokazService,
     private period_pokaz_dialog_ref: DynamicDialogRef,
-    private period_pokaz_dialog_servis: DialogService
+    private period_pokaz_dialog_servis: DialogService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +53,32 @@ export class PeriodPokazListComponent implements OnInit {
         }
       })
   }
-
+  onDelete(period_pokaz: period_pokaz_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.PeriodPokazService.period_del(period_pokaz.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
+  }
   fetchList() {
     let params = {
       limit: this.rows.toString(),

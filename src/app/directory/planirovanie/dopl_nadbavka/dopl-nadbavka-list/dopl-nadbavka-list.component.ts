@@ -5,7 +5,7 @@ import { DoplatyNadbavkyService } from '../doplaty-nadbavky.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DoplNadbavkaElementComponent } from '../dopl-nadbavka-element/dopl-nadbavka-element.component';
 import { DoplataService } from '../../../../enums/tip_dopl/tip-dopl/doplata.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dopl-nadbavka-list',
@@ -31,7 +31,9 @@ export class DoplNadbavkaListComponent implements OnInit {
     private dopl_dialog_ref: DynamicDialogRef,
     private dopl_dialog_servis: DialogService,
     private tip_doplata_serv:DoplataService,
-    private japan_massage_body: MessageService
+    private japan_massage_body: MessageService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
 
   ) { }
 
@@ -84,7 +86,32 @@ export class DoplNadbavkaListComponent implements OnInit {
     this.doplaty_nadbavky = this.DoplatyNadbavkyService.fetch(params);
 
   }
-
+  onDelete(dopl_nadbavky: doplaty_nadbavky_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.DoplatyNadbavkyService.dopl_del(dopl_nadbavky.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
+  }
   fetchList() {
     let params = {
       limit: this.rows.toString(),

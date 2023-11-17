@@ -34,4 +34,7 @@ export class PeriodPokazService {
   edit(param: period_pokaz_element) {
     return this.http.post(this.host + 'dirs/period_pokazedit', param)
   }
+  period_del(id: number) {
+    return this.http.delete(this.host + `dirs/period_pokazdelete/${id}`)
+  }
 }

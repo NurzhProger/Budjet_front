@@ -34,4 +34,7 @@ export class DoplatyNadbavkyService {
   edit(param: doplaty_nadbavky_element) {
     return this.http.post(this.host + 'dirs/dopl_nadbedit', param)
   }
+  dopl_del(id: number) {
+    return this.http.delete(this.host + `dirs/dopl_nadbdelete/${id}`)
+  }
 }

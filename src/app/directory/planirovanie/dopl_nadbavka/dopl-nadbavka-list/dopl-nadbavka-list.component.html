@@ -36,6 +36,7 @@
                 <tr>
                     <th style="width:5%; text-align:center">Номер</th>
                     <th style="width:95%; text-align:center">Наименование</th>
+                    <th style="width:5%; text-align:center">Действия</th>
                 </tr>
             </ng-template>
 
@@ -44,6 +45,12 @@
                     <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                     <td>
                         {{dopl_nadbavky.name}}
+                    </td>
+                    <td style="padding: 0; margin:0;">
+                        <div class="flex align-items-center justify-content-center gap-2">
+                            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                                (click)="onDelete(dopl_nadbavky)"></button>
+                        </div>
                     </td>
                 </tr>
             </ng-template>
@@ -61,6 +68,8 @@
             currentPageReportTemplate="{{first+1}} - {{(first + rows) > (doplaty_nadbavky.count || 0)  ? doplaty_nadbavky.count : first + rows }} из {{doplaty_nadbavky.count}} элементов"
             [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
         </div>
+        <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+        </p-confirmDialog>
 </div>
 
 <ng-template #loader>
