@@ -306,7 +306,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     let responce: any
     this.tbl = this.Budget_detail.tbl
     this.Budget_detail.tbl = this.tbl
-    
+
     this.Budget_Servise
       .saveLimit(this.Budget_detail)
       .subscribe(
@@ -444,10 +444,20 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       header: 'Удаление',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.tbl.splice(ind, 1)
-        for ( let ff in this.tbl ){
-          this.Budget_detail.tbl.push(this.tbl[ff])
+        // this.tbl.splice(ind, 1)
+        let tek = this.tbl[ind]
+        // let dd = this.Budget_detail.tbl.filter(item => item._fkr == tek._fkr && item._spec == tek._spec && item._form == tek._form)
+        // console.log(dd);
+        for (let i = 0; i < this.Budget_detail.tbl.length; i++) {
+          if (this.Budget_detail.tbl[i]._fkr == tek._fkr && this.Budget_detail.tbl[i]._spec == tek._spec && this.Budget_detail.tbl[i]._form == tek._form) {
+            this.Budget_detail.tbl.splice(i, 1)
+          }
         }
+        this.tbl.splice(ind, 1)
+
+        // for (let ff in this.tbl) {
+        // this.tbl = this.Budget_detail.tbl.filter(item => item.id !== )
+        // }
         this.Budget_Confirmation.close()
         this.saveDoc(false)
       },
