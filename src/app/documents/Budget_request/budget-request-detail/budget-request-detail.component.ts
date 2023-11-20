@@ -155,19 +155,23 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     })
 
     if (this.Budget_doc_id !== '') {
-      this.Budget_Servise.fetch_detail(this.Budget_doc_id)
-        .subscribe(
-          (detail) => {
-            this.Budget_detail = detail,
-              this.tbl = this.Budget_detail.tbl,
-              this.preobGodNumber(),
-              this.addFKRtoArray()
-          }
-        )
+      this.fetch_form()
     }
     this.selectrashod()
     this.selectdannyi()
     this.selectoperacii()
+  }
+
+  fetch_form() {
+    this.Budget_Servise.fetch_detail(this.Budget_doc_id)
+      .subscribe(
+        (detail) => {
+          this.Budget_detail = detail,
+            this.tbl = this.Budget_detail.tbl,
+            this.preobGodNumber(),
+            this.addFKRtoArray()
+        }
+      )
   }
 
   setClassSelect_pay(id: number) {
@@ -300,8 +304,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   saveDoc(close: boolean) {
     let responce: any
+    this.tbl = this.Budget_detail.tbl
     this.Budget_detail.tbl = this.tbl
-
+    
     this.Budget_Servise
       .saveLimit(this.Budget_detail)
       .subscribe(
@@ -440,7 +445,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.tbl.splice(ind, 1)
-        this.Budget_detail.tbl = this.tbl
+        for ( let ff in this.tbl ){
+          this.Budget_detail.tbl.push(this.tbl[ff])
+        }
         this.Budget_Confirmation.close()
         this.saveDoc(false)
       },
@@ -546,6 +553,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       }
     }
     )
+    this.fetch_form()
   }
 
   add_dopl() {
