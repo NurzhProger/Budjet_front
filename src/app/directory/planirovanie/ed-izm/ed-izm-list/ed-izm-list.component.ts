@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EdIzmService } from 'src/app/directory/planirovanie/ed-izm/ed-izm.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EdIzmElementComponent } from '../ed-izm-element/ed-izm-element.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-ed-izm-list',
@@ -21,7 +22,9 @@ export class EdIzmListComponent implements OnInit {
   constructor(
     private EdIzmService: EdIzmService,
     private edizm_dialog_ref: DynamicDialogRef,
-    private edizm_dialog_servis: DialogService
+    private edizm_dialog_servis: DialogService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +61,32 @@ export class EdIzmListComponent implements OnInit {
     this.first = event.first
     this.rows = event.rows
     this.fetchList()
+  }
+  onDelete(ed_izm: ed_izm_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.EdIzmService.ed_del(ed_izm.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
   }
 
   fetchList() {

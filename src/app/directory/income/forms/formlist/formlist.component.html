@@ -56,7 +56,8 @@
           <div class="flex align-items-center justify-content-center gap-2">
             <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
               (click)="onRowEdit(form)"></button>
-            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+            (click)="onDelete(form)"></button>
           </div>
         </td>
       </tr>
@@ -74,6 +75,8 @@
       currentPageReportTemplate="{{first+1}} - {{(first + rows) > (category.count || 0)  ? category.count : first + rows }} из {{category.count}} элементов"
       [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
   </div>
+  <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+  </p-confirmDialog>
 </div>
 
 <ng-template #loader>

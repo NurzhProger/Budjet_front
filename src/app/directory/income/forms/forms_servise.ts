@@ -32,9 +32,9 @@ export class formsService {
     return this.http.post(this.host + 'dirs/formsedit', utv_inc)
   }
 
-  //   deleteCategory(category_id: number = 0) {
-  //     return this.http.delete(this.host + `dirs/categorydelete/${category_id}`)
-  // }
+  form_del(id: number) {
+    return this.http.delete(this.host + `dirs/formsdelete/${id}`)
+  }
 
 
 }

@@ -34,4 +34,7 @@ export class EdIzmService {
   edit(param: ed_izm_element) {
     return this.http.post(this.host + 'dirs/ed_izmedit', param)
   }
+  ed_del(id: number) {
+    return this.http.delete(this.host + `dirs/ed_izmdelete/${id}`)
+  }
 }

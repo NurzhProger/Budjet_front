@@ -34,4 +34,7 @@ export class OblastiService {
   edit(param: oblasti_element) {
     return this.http.post(this.host + 'dirs/oblasti_regedit', param)
   }
+  obl_del(id: number) {
+    return this.http.delete(this.host + `dirs/oblasti_regdelete/${id}`)
+  }
 }

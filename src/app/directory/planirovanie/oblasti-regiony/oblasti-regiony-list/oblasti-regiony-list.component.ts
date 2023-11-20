@@ -4,6 +4,7 @@ import { oblasti_element, oblasti_list } from '../interfaces';
 import { OblastiService } from 'src/app/directory/planirovanie/oblasti-regiony/oblasti-regiony.service'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OblastiRegionyElementComponent } from '../oblasti-regiony-element/oblasti-regiony-element.component';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
  
 @Component({
   selector: 'app-oblasti-regiony-list',
@@ -21,8 +22,9 @@ export class OblastiRegionyListComponent implements OnInit {
   constructor(
     private OblastiService: OblastiService,
     private oblasti_dialog_ref: DynamicDialogRef,
-    private oblasti_dialog_servis: DialogService
-
+    private oblasti_dialog_servis: DialogService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,32 @@ export class OblastiRegionyListComponent implements OnInit {
           this.fetchList()
         }
       })
+  }
+  onDelete(oblasti: oblasti_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.OblastiService.obl_del(oblasti.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
   }
 
   fetchList() {
