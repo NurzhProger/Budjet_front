@@ -40,6 +40,7 @@
         <th style="width:20%; text-align:center">Объем двигателя</th>
         <th style="width:20%; text-align:center">Тип топлива</th>
         <th style="width:20%; text-align:center">Вид транспорта</th>
+        <th style="width:5%; text-align:center">Действия</th>
       </tr>
     </ng-template>
 
@@ -58,6 +59,12 @@
         <td style="text-align:center">
           {{marki_avto._vid_transporta}}
         </td>
+        <td style="padding: 0; margin:0;">
+          <div class="flex align-items-center justify-content-center gap-2">
+              <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                  (click)="onDelete(marki_avto)"></button>
+          </div>
+      </td>
       </tr>
     </ng-template>
 
@@ -74,6 +81,8 @@
       currentPageReportTemplate="{{first+1}} - {{(first + rows) > (marki_avto.count || 0)  ? marki_avto.count : first + rows }} из {{marki_avto.count}} элементов"
       [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
   </div>
+  <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+  </p-confirmDialog>
 </div>
 
 <ng-template #loader>

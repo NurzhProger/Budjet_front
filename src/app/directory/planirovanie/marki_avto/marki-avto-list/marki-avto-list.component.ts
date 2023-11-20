@@ -5,7 +5,7 @@ import { MarkiAvtoService } from 'src/app/directory/planirovanie/marki_avto/mark
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MarkiAvtoElementComponent } from '../marki-avto-element/marki-avto-element.component';
 import { TipToplivaService } from 'src/app/enums/tip_topliva/tip-topliva/tiptopliva.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-marki-avto-list',
   templateUrl: './marki-avto-list.component.html',
@@ -28,7 +28,9 @@ export class MarkiAvtoListComponent implements OnInit {
     private markiavto_dialog_ref: DynamicDialogRef,
     private marki_avto_dialog_servis: DialogService,
     private TipToplivaService: TipToplivaService,
-    private messageServiceadd: MessageService
+    private messageServiceadd: MessageService,
+    private message_confirm: ConfirmationService,
+    private message_responce: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -71,7 +73,32 @@ export class MarkiAvtoListComponent implements OnInit {
         (error) => (this.messageServiceadd.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
 
   }
-
+  onDelete(marki_avto: marki_avto_element) {
+    this.message_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.MarkiAvtoService.marki_del(marki_avto.id)
+          .subscribe((data) => (
+            this.message_responce.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.message_confirm.close()
+          ),
+            (error) => (this.message_responce.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.message_confirm.close();
+      }
+    })
+  }
   fetchList() {
     let params = {
       limit: this.rows.toString(),

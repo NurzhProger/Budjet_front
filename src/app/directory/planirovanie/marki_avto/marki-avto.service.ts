@@ -34,4 +34,7 @@ export class MarkiAvtoService {
   edit(param: marki_avto_element) {
     return this.http.post(this.host + 'dirs/marki_avtoedit', param)
   }
+  marki_del(id: number) {
+    return this.http.delete(this.host + `dirs/marki_avtodelete/${id}`)
+  }
 }
