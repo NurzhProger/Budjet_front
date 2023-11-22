@@ -128,7 +128,7 @@
     </form>
 
 
-    <p-splitter [panelSizes]="[15, 85]" styleClass="mb-5">
+    <p-splitter [panelSizes]="[15, 85]" styleClass="mb-5;">
         <ng-template pTemplate>
             <div style="width: 100%;">
                 <p-tabView>
@@ -175,20 +175,18 @@
                         </div>
 
                         <p-table [value]="tbl" [scrollable]="true" scrollHeight="calc(100vh - 200px)"
-                            selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
-                            [resizableColumns]="true" columnResizeMode="expand">
+                            selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th rowspan="3" style="text-align:center; width: 30%;">Код специфики</th>
-                                    <th rowspan="3" style="text-align:center; width: 30%;">Форма</th>
-                                    <th rowspan="3" style="text-align:center">Прогноз</th>
-                                    <th rowspan="3" *ngIf="fkr !== undefined && fkr.id !== 0" style="text-align:center">
-                                        Действия</th>
+                                    <th  style="text-align:center; width: 35%;">Код специфики</th>
+                                    <th  style="text-align:center;width: 35%;">Форма</th>
+                                    <th  style="text-align:center; width: 15%;">Прогноз</th>
+                                    <th  *ngIf="fkr !== undefined && fkr.id !== 0" style="text-align:center; width: 15%;">Действия</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
                                 <tr class="cursor-pointer">
-                                    <td>
+                                    <td> 
                                         <div class="p-inputgroup w-full">
                                             {{ izm._spec.code + '. ' + izm._spec.name_rus }}
                                         </div>
