@@ -40,20 +40,21 @@
                 <tr class="cursor-pointer" (dblclick)="onRowClick(limit)">
                     <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                     <td style="text-align:center">
-                        {{limit.nom}}
+                        <span [ngClass]="setClass(limit.deleted)">{{limit.nom}}</span>
                     </td>
                     <td style="text-align:center">
-                        {{limit._organization.name_rus}}
+                        <span [ngClass]="setClass(limit.deleted)">{{limit._organization.name_rus}}</span>
+                        
                     </td>
                     <td style="text-align:center">
-                        {{limit.god_ucheta}}
+                        <span [ngClass]="setClass(limit.deleted)">{{limit.god_ucheta}}</span>
                     </td>
                     <td style="padding: 0; margin:0;">
                     <div class="flex align-items-center justify-content-center gap-2">
                         <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
                             (click)="onRowEdit(limit)"></button>
-                        <button pButton pRipple type="button" icon="pi pi-trash"
-                            class="p-button-rounded p-button-text"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash"  class="p-button-rounded p-button-text"
+                        (click)="onDelete(limit)"></button>
                     </div>
                 </td>
                 </tr>
@@ -72,6 +73,8 @@
                 currentPageReportTemplate="{{first+1}} - {{(first + rows) > (limit.count || 0)  ? limit.count : first + rows }} из {{limit.count}} элементов"
                 [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
         </div>
+        <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+        </p-confirmDialog>
 </div>
 
 <ng-template #loader>

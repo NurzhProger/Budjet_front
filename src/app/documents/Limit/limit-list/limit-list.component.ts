@@ -4,6 +4,7 @@ import { limit_doc, limit_list } from '../interfaces';
 import { LimitService } from '../limit.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LimitElementComponent } from '../limit-element/limit-element.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-limit-list',
@@ -22,7 +23,9 @@ export class LimitListComponent implements OnInit {
   constructor(
     private LimitService: LimitService,
     private limit_dialog_ref: DynamicDialogRef,
-    private limit_dialog_servis: DialogService
+    private limit_dialog_servis: DialogService,
+    private limit_confirm: ConfirmationService,
+    private limit_message_service: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +59,32 @@ export class LimitListComponent implements OnInit {
     this.fetchList()
   }
 
+  onDelete(limit: limit_doc) {
+    let msg = !limit.deleted ? "Пометить " + limit.nom + " на удаление?" : "Снять с " + limit.nom + " пометку на удаление?"
+    let header = !limit.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
+    let msgsuccess = !limit.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
+
+    this.limit_confirm.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.LimitService.delLimit(limit.id)
+          .subscribe((data) => (
+            this.limit_message_service.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetchList(),
+            this.limit_confirm.close()
+          ),
+            (error) => (
+              this.limit_message_service.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+            )
+          )
+      },
+      reject: () => {
+        this.limit_confirm.close();
+      }
+    });
+  }
   onRowEdit(limit: limit_doc) {
     this.newItemEvent.emit({ params: { selector: 'app-limit-element', nomer: 'Лимит на годовой бюджет ' + limit.nom, id: limit.id } });
   }
@@ -67,6 +96,16 @@ export class LimitListComponent implements OnInit {
     else {
       this.limit_dialog_ref.close(limit)
     }
+  }
+  setClass(deleted: boolean) {
+    let classs = ''
+
+    if (deleted) {
+      classs = 'class-deleted'
+    }
+
+    return classs
+
   }
 
 }

@@ -7,7 +7,8 @@ export interface limit_doc {
     org_name: string,
     _organization: organization_detail,
     _date: string,
-    god_ucheta: string
+    god_ucheta: string,
+    deleted: boolean,
 }
 
 export interface limit_list {
