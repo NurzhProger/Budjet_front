@@ -56,7 +56,7 @@ export class BudgetRequestListComponent implements OnInit {
 
 
   openNew() {
-    this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Шаблон формы ', id: '' } });
+    this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка ', id: '' } });
   }
 
   onSelected() {
