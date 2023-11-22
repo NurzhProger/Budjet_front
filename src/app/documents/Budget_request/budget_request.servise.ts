@@ -61,9 +61,9 @@ export class budjetService {
   }
 
 
-  //   deleteCategory(category_id: number = 0) {
-  //     return this.http.delete(this.host + `dirs/categorydelete/${category_id}`)
-  // }
+  deleteReq(item_id: number = 0) {
+    return this.http.delete(this.host + `docs/planirovanie_delete/${item_id}`)
+}
 
 
 }

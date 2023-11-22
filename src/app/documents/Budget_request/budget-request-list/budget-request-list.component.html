@@ -40,25 +40,26 @@
       <tr class="cursor-pointer" (dblclick)="onRowClick(item)">
         <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
         <td style="text-align:center">
-          {{item._date}}
+          <span [ngClass]="setClass(item.deleted)">{{item._date}}</span>
         </td>
         <td>
-          {{item._organization.name_rus}}
+          <span [ngClass]="setClass(item.deleted)">{{item._organization.name_rus}}</span>
         </td>
         <td style="text-align:center">
-          {{item.god_ucheta}}
+          <span [ngClass]="setClass(item.deleted)">{{item.god_ucheta}}</span>
         </td>
         <td>
-          {{item._vid_dannyh}}
+          <span [ngClass]="setClass(item.deleted)">{{item._vid_dannyh}}</span>
         </td>
         <td>
-          {{item._vid_operacii}}
+          <span [ngClass]="setClass(item.deleted)">{{item._vid_operacii}}</span>
         </td>
         <td style="padding: 0; margin:0;">
           <div class="flex align-items-center justify-content-center gap-2">
             <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
             (click)="onRowEdit(item)"></button>
-            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+            (click)="onDelete(item)"></button>
           </div>
         </td>
       </tr>
@@ -76,6 +77,8 @@
       currentPageReportTemplate="{{first+1}} - {{(first + rows) > (category.count || 0)  ? category.count : first + rows }} из {{category.count}} элементов"
       [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
   </div>
+  <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+  </p-confirmDialog>
 </div>
 
 <ng-template #loader>

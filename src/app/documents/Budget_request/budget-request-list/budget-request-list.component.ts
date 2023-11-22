@@ -21,7 +21,8 @@ export class BudgetRequestListComponent implements OnInit {
     private budget_list_messageServicedelSelect: MessageService,
     private budget_list_dialog: DialogService,
     private budget_Servise: budjetService,
-    private budget_confrim: ConfirmationService) { }
+    private budget_confrim: ConfirmationService,
+    private Budget_request_Service: budjetService) { }
 
 
 
@@ -68,8 +69,31 @@ export class BudgetRequestListComponent implements OnInit {
 
 
 
-  onDelete() {
+  onDelete(item: budjet_doc) {
+    let msg = !item.deleted ? "Пометить " + item._organization.name_rus + " на удаление?" : "Снять с " + item._organization.name_rus + " пометку на удаление?"
+    let header = !item.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
+    let msgsuccess = !item.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
 
+    this.budget_confrim.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.Budget_request_Service.deleteReq(item.id)
+          .subscribe((data) => (
+            this.budget_list_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetchCat(),
+            this.budget_confrim.close()
+          ),
+            (error) => (
+              this.budget_list_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+            )
+          )
+      },
+      reject: () => {
+        this.budget_confrim.close();
+      }
+    });
   }
 
   onRowEdit(budjet: budjet_doc) {
@@ -93,6 +117,16 @@ export class BudgetRequestListComponent implements OnInit {
     this.first = event.first
     this.rows = event.rows
     this.fetchCat()
+  }
+  setClass(deleted: boolean) {
+    let classs = ''
+
+    if (deleted) {
+      classs = 'class-deleted'
+    }
+
+    return classs
+
   }
 
 }
