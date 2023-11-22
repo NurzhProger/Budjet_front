@@ -70,7 +70,7 @@ export class BudgetRequestListComponent implements OnInit {
 
 
   onDelete(item: budjet_doc) {
-    let msg = !item.deleted ? "Пометить " + item._organization.name_rus + " на удаление?" : "Снять с " + item._organization.name_rus + " пометку на удаление?"
+    let msg = !item.deleted ? "Пометить " + item.nom + " на удаление?" : "Снять с " + item.nom + " пометку на удаление?"
     let header = !item.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
     let msgsuccess = !item.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
 

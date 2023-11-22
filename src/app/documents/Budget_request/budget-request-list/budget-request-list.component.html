@@ -27,9 +27,9 @@
     styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header">
       <tr>
-        <th style="width:5%; text-align:center">Номер</th>
+        <th style="width:10%; text-align:center">Номер</th>
         <th style="width:10%; text-align:center">Дата</th>
-        <th style="width:40%; text-align:center">Организация</th>
+        <th style="width:35%; text-align:center">Организация</th>
         <th style="width:15%; text-align:center">Год учета</th>
         <th style="width:10%; text-align:center">Вид данных</th>
         <th style="width:10%; text-align:center">Вид операций</th>
@@ -38,7 +38,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-item let-ri="rowIndex" *ngFor="let item of category.results| keyvalue">
       <tr class="cursor-pointer" (dblclick)="onRowClick(item)">
-        <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+        <td style="text-align: center">
+          <span [ngClass]="setClass(item.deleted)">{{item.nom}}</span>
+        </td>
         <td style="text-align:center">
           <span [ngClass]="setClass(item.deleted)">{{item._date}}</span>
         </td>
