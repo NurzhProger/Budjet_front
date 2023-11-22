@@ -71,48 +71,48 @@ export class LimitElementComponent implements OnInit, DoCheck {
               this.preobGodNumber()
           }
         )
-    }
+    }    
+    // else
+    //   {
+    //   this.limitDetail.head._organization = {
+    //     id: parseInt(this.profileuser.org_id),
+    //     bin: '',
+    //     name_kaz: '',
+    //     name_rus: this.profileuser.org_name,
+    //     adress: '',
+    //     codeorg: '',
+    //     deleted: false,
+    //     _budjet_reg: {
+    //       id: 0,
+    //       code: '',
+    //       name_kaz: '',
+    //       name_rus: ''
+    //     },
+    //     _regiondar: {
+    //       id: 0,
+    //       name: '',
+    //       name_kaz: '',
+    //       name_rus: ''
+    //     },
+    //     _abp: {
+    //       id: 0,
+    //       code: '',
+    //       name_kaz: '',
+    //       name_rus: ''
+    //     },
+    //     parent_organizations: [{
+    //       id: 0,
+    //       _date: '',
+    //       _organization: 0,
+    //       _parent: {
+    //         id: 0,
+    //         name_rus: ''
+    //       }
+    //     }
+    //     ]
 
-    if (this.limitDetail.head._organization.id == 0) {
-      this.limitDetail.head._organization = {
-        id: parseInt(this.profileuser.org_id),
-        bin: '',
-        name_kaz: '',
-        name_rus: this.profileuser.org_name,
-        adress: '',
-        codeorg: '',
-        deleted: false,
-        _budjet_reg: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        _regiondar: {
-          id: 0,
-          name: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        _abp: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        parent_organizations: [{
-          id: 0,
-          _date: '',
-          _organization: 0,
-          _parent: {
-            id: 0,
-            name_rus: ''
-          }
-        }
-        ]
-
-      }
-    }
+    //   }
+    // }
 
   }
   formatNumber(value: number): string {
