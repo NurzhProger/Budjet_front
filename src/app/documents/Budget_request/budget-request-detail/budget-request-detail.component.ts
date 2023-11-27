@@ -103,7 +103,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       _vid_dannyh: '',
       _vid_operacii: '',
       _vid_rashoda: '',
-      comment: ''
+      comment: '',
+      summ: 0
     },
     tbl: [{
       id: 0,

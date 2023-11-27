@@ -20,7 +20,8 @@ export interface budjet_doc {
     _vid_dannyh: string,
     _vid_operacii: string,
     _vid_rashoda: string,
-    comment: string
+    comment: string,
+    summ: number
 }
 
 export interface budjet_detail {
