@@ -85,7 +85,7 @@
                 <div>
                     <p-dropdown placeholder="Выберите вид расхода" [options]="_vid_rashoda" optionLabel="name"
                         optionValue="name" appendTo="body" [(ngModel)]="Budget_detail.doc._vid_rashoda"
-                        formControlName="vid_rashoda">
+                        formControlName="vid_rashoda" [style]="{'max-height': '200px'}">
                     </p-dropdown>
                 </div>
                 <span class="p-invalid"

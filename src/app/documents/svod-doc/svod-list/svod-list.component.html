@@ -1,0 +1,22 @@
+<p-toolbar>
+
+    <div class="p-toolbar-group-left" *ngIf="data!==false">
+      <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+        (click)="openNew()"></button>
+    </div>
+  
+    <div class="p-toolbar-group-right">
+      <span class="p-input-icon-left" style="margin-right: 10px;">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="поиск..." />
+      </span>
+      <div style="padding-right: 10px;">
+          <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+              styleClass="p-button-sm" (click)="fetch()"></button>
+      </div>
+      <div>
+          <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+            (click)="closeform()"></button>
+      </div>
+  </div>
+  </p-toolbar>

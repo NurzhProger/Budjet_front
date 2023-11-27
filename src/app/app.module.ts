@@ -129,6 +129,8 @@ import { ChangepassComponent } from './services/changepass/changepass.component'
 import { StartPageComponent } from './main/startpage/startpage.component';
 import { UserhistoryDetailComponent } from './main/userhistory-detail/userhistory-detail.component';
 import { PeriodDetailComponent } from './directory/period/period-detail/period-detail.component';
+import { SvodListComponent } from './documents/svod-doc/svod-list/svod-list.component';
+import { SvodDetailComponent } from './documents/svod-doc/svod-detail/svod-detail.component';
 
 @NgModule({
   imports: [
@@ -260,7 +262,9 @@ import { PeriodDetailComponent } from './directory/period/period-detail/period-d
     ChangepassComponent,
     StartPageComponent,
     UserhistoryDetailComponent,
-    PeriodDetailComponent],
+    PeriodDetailComponent,
+    SvodListComponent,
+    SvodDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {

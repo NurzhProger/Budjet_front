@@ -189,6 +189,10 @@
                     [Budget_doc_id]="number" (closeEvent)="removetab()">
                 </app-budget-request-detail>
 
+                <app-svod-list *ngIf="context.selector=='app-svod-list'" [data]="true"
+                (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                (closeEvent)="removetab()">
+                </app-svod-list>
 
                 <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'"
                     (closeEvent)="removetab()">
