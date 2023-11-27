@@ -19,7 +19,8 @@ export interface budjet_doc {
     deleted: boolean,
     _vid_dannyh: string,
     _vid_operacii: string,
-    _vid_rashoda: string
+    _vid_rashoda: string,
+    comment: string
 }
 
 export interface budjet_detail {

@@ -48,6 +48,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   _lastfkr = 0
   allrecord = true
 
+
   fkr: fkr_detail = {
     id: 0,
     code: '',
@@ -101,7 +102,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       god_ucheta: '',
       _vid_dannyh: '',
       _vid_operacii: '',
-      _vid_rashoda: ''
+      _vid_rashoda: '',
+      comment: ''
     },
     tbl: [{
       id: 0,
