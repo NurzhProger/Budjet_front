@@ -39,7 +39,7 @@ export class BudgetRequestListComponent implements OnInit {
   selected: any
 
 
-  ngOnInit(): void {
+  ngOnInit  (): void {
     this.fetchCat()
   }
 
