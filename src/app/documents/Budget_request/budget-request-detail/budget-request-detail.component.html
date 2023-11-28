@@ -123,6 +123,11 @@
                     <span *ngIf="form.controls['vid_operacii'].errors?.required">Выберите вид операции</span>
                 </span>
             </div>
+            <div class="pInputText">
+                <label for="number_doc" style="padding-right: 10px;">Общая сумма документа</label>
+                <input id="summ" type="number" pInputText [(ngModel)]="Budget_detail.doc.summ"
+                     style="width: 100%; height: 25px;" />
+            </div>
 
         </div>
     </form>
@@ -224,10 +229,14 @@
         <div class="pInputText">
             <label for="number_doc" style="padding-right: 10px;">Комментарии</label>
             <input id="comment" type="text" pInputText [(ngModel)]="Budget_detail.doc.comment"
+<<<<<<< Updated upstream
                  style="width: 40%; height: 25px;" />
                  <label for="number_doc" style="padding-right: 10px;">Сумма</label>
             <input id="summ" type="number" pInputText [(ngModel)]="Budget_detail.doc.summ"
                  style="width: 40%; height: 25px;" />
+=======
+                 style="width: 100%; height: 25px;" />
+>>>>>>> Stashed changes
         </div>
        
     </div>
