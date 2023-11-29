@@ -37,12 +37,17 @@ export interface svod_head {
 
 export interface svod_doc_tab {
     id: number,
-    _planirovanie: budjet_detail,
+    _planirovanie: {
+        id: number,
+        nom: string,
+        org_name: string
+    },
     summ: number
 }
 export interface svod_detail {
     head: svod_head,
-    tbl: svod_doc_tab
+    tbl: [svod_doc_tab],
+    tbl_plan: [svod_tbl_plan]
 }
 export interface svod_tbl_plan {
     fkr_code: string,

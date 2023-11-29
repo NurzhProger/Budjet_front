@@ -137,100 +137,66 @@
         <ng-template pTemplate>
             <div style="width: 100%;">
                 <p-tabView>
-                    <p-tabPanel header="Бюджетная заявка">
-                        <!-- <div style="padding: 0 0 10px 10px;">
-                            <button pButton pRipple label="добавить ФКР" icon="pi pi-plus"
-                                class="p-button-success p-mr-2" (click)="add_fkr()"></button>
-                        </div> -->
-                        <p-table (value)="svod_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+                    <p-tabPanel header="Список заявок">                      
+                        <p-table [value]="svod_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
                             selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th  style="text-align:center; width: 20%;">Номер</th>
-                                    <th  style="text-align:center;width: 20%;">Дата</th>
-                                    <th  style="text-align:center; width: 40%;">Организация</th>
+                                    <th  style="text-align:center; width: 15%;">Номер</th>
+                                    <th  style="text-align:center; width: 35%;">Организация</th>
+                                    <th  style="text-align:center;width: 30%;">Документ</th>
                                     <th  style="text-align:center; width: 20%;">Сумма</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
-                                <tr class="cursor-pointer">
-                                    <td> 
-                                        <div class="p-inputgroup w-full">
-                                            {{ izm.head.nom}}
-                                        </div>
+                                <tr class="cursor-pointer">                                    
+                                    <td style="text-align: center;">                                        
+                                            {{ izm._planirovanie.nom}}                                       
+                                    </td>
+                                    <td>                                      
+                                            {{ izm._planirovanie.org_name}}                                      
                                     </td>
                                     <td>
-                                        <div class="p-inputgroup w-full">
-                                            {{ izm.head._date}}
-                                        </div>
+                                            {{ 'Бюджетная заявка' +  ' - ' + '"' + izm._planirovanie.nom + '"'}}
                                     </td>
                                     <td style="text-align:center;">
-                                        {{izm.head._organization.name_rus}}
-                                    </td>
-                                    <td>
-                                     {{izm.tbl.summ}}
+                                            {{izm.summ}}
                                     </td>
                                 </tr>
                             </ng-template>
                         </p-table>
-                    </p-tabPanel>
-
-                    
+                    </p-tabPanel>                   
                 </p-tabView>
             </div>
         </ng-template>
         <ng-template pTemplate>
             <div style="width: 100%;">
                 <p-tabView>
-                    <p-tabPanel header="Заявки">
-<!-- 
-                        <div class="p-toolbar-group-left" style="padding: 0 0 10px 10px;">
-                            <div>
-                                <button [disabled]="fkr == undefined || fkr.id == 0" pButton pRipple
-                                    label="добавить специфику" icon="pi pi-plus" class="p-button-success p-mr-2"
-                                    (click)="addSpec(fkr)" style="padding-right: 10px; margin-right: 5px;"></button>
-                            </div>
-                            <button type="button" pButton pRipple icon="pi pi-file-excel" styleClass="p-button-sm"
-                                (click)="exportExcel()" class="p-button-info p-mr-2" label="Выгрузить в XLS"
-                                pTooltip="XLS" tooltipPosition="bottom" id="sheetjsexport"></button>
-                        </div> -->
-
-                        <p-table (value)="svod_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+                    <p-tabPanel header="Детали заявки">
+                        <p-table [value]="svod_detail.tbl_plan" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
                             selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th  style="text-align:center; width: 20%;">ФКР</th>
-                                    <th  style="text-align:center;width: 20%;">ЭКР</th>
-                                    <th  style="text-align:center; width: 40%;">Форма</th>
+                                    <th  style="text-align:center; width: 15%;">ФКР</th>
+                                    <th  style="text-align:center;width: 15%;">ЭКР</th>
+                                    <th  style="text-align:center; width: 50%;">Форма</th>
                                     <th  style="text-align:center; width: 20%;">Сумма расхода</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
                                 <tr class="cursor-pointer">
-                                    <td> 
-                                        <div class="p-inputgroup w-full">
-                                            {{ izm.tbl_plan.fkr_code}}
-                                        </div>
+                                    <td style="text-align: center;"> 
+                                            {{ izm.fkr_code}}                                     
+                                    </td>
+                                    <td style="text-align: center;">                                      
+                                            {{ izm.ekr_code}}                                       
                                     </td>
                                     <td>
-                                        <div class="p-inputgroup w-full">
-                                            {{ izm._form.name + '. ' + izm._form.head_form }}
-                                        </div>
+                                            {{izm.form_name + '.' + izm.form_head}}
                                     </td>
-                                    <td style="text-align:center;">
-                                        {{izm.summ.toFixed(3)}}
+                                    <td style="text-align: center;">
+                                            {{izm.summ}}
                                     </td>
-                                    <!-- <td *ngIf="fkr !== undefined && fkr.id !== 0" style="padding: 0; margin:0;">
-                                        <div class="flex align-items-center justify-content-center gap-2">
-                                            <button pButton pRipple type="button" icon="pi pi-pencil"
-                                                class="p-button-rounded p-button-text"
-                                                (click)="onRowEdit(izm, ri)"></button>
-                                            <button pButton pRipple type="button" icon="pi pi-trash"
-                                                (click)="delReq(ri, izm._spec.code)"
-                                                class="p-button-rounded p-button-text"></button>
-                                        </div>
-
-                                    </td> -->
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -239,6 +205,17 @@
             </div>
         </ng-template>
     </p-splitter>
+
+
+    <div class="p-field" style="padding-top: 10px; position: fixed; bottom: 10px; width: 99%; ">
+       
+        <div class="pInputText">
+            <label for="number_doc" style="padding-right: 10px;">Комментарии</label>
+            <input id="comment" type="text" pInputText [(ngModel)]="svod_detail.head.comment"
+                 style="width: 100%; height: 25px;" />
+        </div>
+       
+    </div>
 </div>
 
 <ng-template #loader>

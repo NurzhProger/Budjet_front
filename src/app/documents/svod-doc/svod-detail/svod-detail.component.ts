@@ -8,6 +8,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationDetailComponent } from 'src/app/directory/organization/organization-detail/organization-detail.component';
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
+import { log } from 'mathjs';
 
 @Component({
   selector: 'app-svod-detail',
@@ -57,6 +58,8 @@ export class SvodDetailComponent implements OnInit {
         .subscribe(
           (detail) => {
             this.svod_detail = detail,
+            console.log(this.svod_detail.tbl);
+            
               this.preobGodNumber()
           }
         )
