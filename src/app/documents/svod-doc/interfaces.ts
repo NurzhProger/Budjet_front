@@ -1,4 +1,5 @@
 import { organization_detail } from "src/app/directory/organization/interfaces"
+import { budjet_detail } from "../Budget_request/budget_request.interfaces"
 
 export interface svod_doc {
     id: number,
@@ -36,6 +37,17 @@ export interface svod_head {
 
 export interface svod_doc_tab {
     id: number,
-    _planirovanie: svod_doc,
+    _planirovanie: budjet_detail,
+    summ: number
+}
+export interface svod_detail {
+    head: svod_head,
+    tbl: svod_doc_tab
+}
+export interface svod_tbl_plan {
+    fkr_code: string,
+    ekr_code: string,
+    form_name: string,
+    form_head: string,
     summ: number
 }

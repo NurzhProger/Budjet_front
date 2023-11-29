@@ -189,6 +189,11 @@
                     [Budget_doc_id]="number" (closeEvent)="removetab()">
                 </app-budget-request-detail>
 
+                <app-svod-detail *ngIf="context.selector=='app-svod-detail'"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id, $event.params.data)"
+                    [svod_id]="number" (closeEvent)="removetab()">
+                </app-svod-detail>
+
                 <app-svod-list *ngIf="context.selector=='app-svod-list'" [data]="true"
                 (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
                 (closeEvent)="removetab()">
