@@ -9,6 +9,7 @@ import { OrganizationDetailComponent } from 'src/app/directory/organization/orga
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 import { log } from 'mathjs';
+import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
 
 @Component({
   selector: 'app-svod-detail',
@@ -29,6 +30,7 @@ export class SvodDetailComponent implements OnInit {
     
   ) { }
   items: MenuItem[];
+  
   tbl: any = []
   svod_detail: svod_detail
   godNumber: number
@@ -38,6 +40,7 @@ export class SvodDetailComponent implements OnInit {
   _vid_rashoda: any = []
   _vid_dannyh: any = []
   _vid_operacii: any = []
+  fkr_array: fkr_detail[] = []
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -58,13 +61,35 @@ export class SvodDetailComponent implements OnInit {
         .subscribe(
           (detail) => {
             this.svod_detail = detail,
-            console.log(this.svod_detail.tbl);
-            
-              this.preobGodNumber()
+              this.preobGodNumber(),
+              this.addFKRtoArray()
           }
         )
     } 
   }
+
+  addFKRtoArray() {
+    this.fkr_array = []
+
+    for (let i = 0; i < this.svod_detail.tbl_plan.length; i++) {
+
+      let index = this.fkr_array.findIndex(item => this.svod_detail.tbl_plan[i].fkr_code === item.code)
+
+      if (index !== -1) {
+        continue
+      }
+
+      this.fkr_array.push({
+        id: 0,
+        code: this.svod_detail.tbl_plan[i].fkr_code,
+        name_kaz: '',
+        name_rus: '',
+      })
+
+      
+    }
+  }
+
   selectrashod() {
     let responce: any;
     this.svodService.fetch_vid_rashoda().subscribe(

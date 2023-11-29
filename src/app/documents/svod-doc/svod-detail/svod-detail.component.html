@@ -133,34 +133,22 @@
     </form>
     
 
-    <p-splitter [panelSizes]="[50, 50]" styleClass="mb-5;">
+    <p-splitter [panelSizes]="[20, 80]" styleClass="mb-5;">
         <ng-template pTemplate>
             <div style="width: 100%;">
                 <p-tabView>
-                    <p-tabPanel header="Список заявок">                      
-                        <p-table [value]="svod_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+                    <p-tabPanel header="Программа">                      
+                        <p-table [value]="fkr_array" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
                             selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th  style="text-align:center; width: 15%;">Номер</th>
-                                    <th  style="text-align:center; width: 35%;">Организация</th>
-                                    <th  style="text-align:center;width: 30%;">Документ</th>
-                                    <th  style="text-align:center; width: 20%;">Сумма</th>
+                                    <th  style="text-align:center; width: 15%;">Программа</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
                                 <tr class="cursor-pointer">                                    
                                     <td style="text-align: center;">                                        
-                                            {{ izm._planirovanie.nom}}                                       
-                                    </td>
-                                    <td>                                      
-                                            {{ izm._planirovanie.org_name}}                                      
-                                    </td>
-                                    <td>
-                                            {{ 'Бюджетная заявка' +  ' - ' + '"' + izm._planirovanie.nom + '"'}}
-                                    </td>
-                                    <td style="text-align:center;">
-                                            {{izm.summ}}
+                                        {{ izm.code}}                                       
                                     </td>
                                 </tr>
                             </ng-template>
@@ -172,22 +160,18 @@
         <ng-template pTemplate>
             <div style="width: 100%;">
                 <p-tabView>
-                    <p-tabPanel header="Детали заявки">
+                    <p-tabPanel header="Детали программы">
                         <p-table [value]="svod_detail.tbl_plan" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
                             selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th  style="text-align:center; width: 15%;">ФКР</th>
-                                    <th  style="text-align:center;width: 15%;">ЭКР</th>
-                                    <th  style="text-align:center; width: 50%;">Форма</th>
+                                    <th  style="text-align:center;width: 20%;">ЭКР</th>
+                                    <th  style="text-align:center; width: 60%;">Форма</th>
                                     <th  style="text-align:center; width: 20%;">Сумма расхода</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
                                 <tr class="cursor-pointer">
-                                    <td style="text-align: center;"> 
-                                            {{ izm.fkr_code}}                                     
-                                    </td>
                                     <td style="text-align: center;">                                      
                                             {{ izm.ekr_code}}                                       
                                     </td>
@@ -205,8 +189,35 @@
             </div>
         </ng-template>
     </p-splitter>
-
-
+<div style="padding-top: 10px;">
+    <p-table [value]="svod_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+        selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th  style="text-align:center;width: 20%;">Номер</th>
+                    <th  style="text-align:center; width: 28%;">Организация</th>
+                    <th  style="text-align:center; width: 36%;">Документ</th>
+                    <th  style="text-align:center; width: 16%;">Сумма документа</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-izm let-ri="rowIndex">
+                <tr class="cursor-pointer">
+                    <td style="text-align: center;">                                      
+                        {{ izm._planirovanie.nom}}                                       
+                    </td>
+                    <td>
+                        {{izm._planirovanie.org_name}}
+                    </td>
+                    <td style="text-align: center;">
+                        {{ 'Бюджетная заявка' +  ' - ' + '"' + izm._planirovanie.nom + '"'}}
+                    </td>
+                    <td style="text-align: center;">
+                        {{izm.summ}}
+                    </td>
+                </tr>
+            </ng-template>
+    </p-table>
+</div>
     <div class="p-field" style="padding-top: 10px; position: fixed; bottom: 10px; width: 99%; ">
        
         <div class="pInputText">
@@ -217,6 +228,8 @@
        
     </div>
 </div>
+<p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+</p-confirmDialog>
 
 <ng-template #loader>
     <app-skeleton></app-skeleton>
