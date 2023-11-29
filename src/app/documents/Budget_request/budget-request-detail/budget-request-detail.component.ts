@@ -154,7 +154,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       god_ucheta: new FormControl(null, [Validators.required]),
       vid_rashoda: new FormControl(null, [Validators.required]),
       vid_dannyh: new FormControl(null, [Validators.required]),
-      vid_operacii: new FormControl(null, [Validators.required])
+      vid_operacii: new FormControl(null, [Validators.required]),
+      summ: new FormControl(null)
     })
 
     if (this.Budget_doc_id !== '') {

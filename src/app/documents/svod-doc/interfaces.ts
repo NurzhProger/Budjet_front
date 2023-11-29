@@ -21,3 +21,21 @@ export interface svod_list {
     results: [svod_doc]
 }
 
+export interface svod_head {
+    id: number,
+    _organization: organization_detail,
+    nom: string,
+    _date: string,
+    deleted: boolean,
+    god_ucheta: string,
+    comment: string,
+    _vid_dannyh: string,
+    _vid_operacii: string,
+    _vid_rashoda: string
+}
+
+export interface svod_doc_tab {
+    id: number,
+    _planirovanie: svod_doc,
+    summ: number
+}

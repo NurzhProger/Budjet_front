@@ -12,4 +12,7 @@ export class SvodDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+  
 }
