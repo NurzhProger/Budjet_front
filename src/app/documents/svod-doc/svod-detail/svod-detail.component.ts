@@ -8,7 +8,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationDetailComponent } from 'src/app/directory/organization/organization-detail/organization-detail.component';
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
-import { log } from 'mathjs';
+import { i, log } from 'mathjs';
 import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
 
 @Component({
@@ -41,7 +41,16 @@ export class SvodDetailComponent implements OnInit {
   _vid_dannyh: any = []
   _vid_operacii: any = []
   fkr_array: fkr_detail[] = []
-
+  firstclick = true
+  _lastfkr = 0
+  allrecord = true
+  fkr: fkr_detail = {
+    id: 0,
+    code: '',
+    name_kaz: '',
+    name_rus: ''
+  }
+  
   ngOnInit(): void {
     this.form = new FormGroup({
       number_doc: new FormControl(null),
@@ -61,6 +70,7 @@ export class SvodDetailComponent implements OnInit {
         .subscribe(
           (detail) => {
             this.svod_detail = detail,
+            this.tbl = this.svod_detail.tbl_plan,
               this.preobGodNumber(),
               this.addFKRtoArray()
           }
@@ -90,6 +100,39 @@ export class SvodDetailComponent implements OnInit {
     }
   }
 
+  filterFKR(_fkr: fkr_detail) {
+    if (this.firstclick) {
+      this._lastfkr = _fkr.id
+      this.firstclick = false
+    }
+
+    if (this._lastfkr == _fkr.id) {
+      this.allrecord = !this.allrecord
+    }
+    else {
+      this.allrecord = false
+    }
+
+    if (!this.allrecord) {
+      this.tbl = this.svod_detail.tbl_plan.filter(item => item.fkr_code == _fkr.code)
+
+      this.fkr.id = _fkr.id
+      this.fkr.code = _fkr.code
+      this.fkr.name_kaz = _fkr.name_kaz
+      this.fkr.name_rus = _fkr.name_rus
+
+    }
+    else {
+      this.tbl = this.svod_detail.tbl_plan
+
+      this.fkr.id = 0
+      this.fkr.code = ''
+      this.fkr.name_kaz = ''
+      this.fkr.name_rus = ''
+    }
+
+    this._lastfkr = _fkr.id
+  }
   selectrashod() {
     let responce: any;
     this.svodService.fetch_vid_rashoda().subscribe(

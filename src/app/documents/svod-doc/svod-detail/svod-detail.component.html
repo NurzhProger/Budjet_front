@@ -145,10 +145,10 @@
                                     <th  style="text-align:center; width: 15%;">Программа</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-izm let-ri="rowIndex">
+                            <ng-template pTemplate="body" let-fkr let-ri="rowIndex">
                                 <tr class="cursor-pointer">                                    
-                                    <td style="text-align: center;">                                        
-                                        {{ izm.code}}                                       
+                                    <td style="text-align: center;" (dblclick)="filterFKR(fkr)">                                        
+                                        {{ fkr.code}}                                       
                                     </td>
                                 </tr>
                             </ng-template>
@@ -161,7 +161,7 @@
             <div style="width: 100%;">
                 <p-tabView>
                     <p-tabPanel header="Детали программы">
-                        <p-table [value]="svod_detail.tbl_plan" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+                        <p-table [value]="tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
                             selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
