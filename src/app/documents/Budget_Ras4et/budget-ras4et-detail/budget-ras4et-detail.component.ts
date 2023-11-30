@@ -294,7 +294,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   getKoefficient(ri: number) {
-
     let _category_id = 0
     let _stazh_id = 0
     for (let i = 0; i < this.children[ri].length; i++) {
@@ -321,7 +320,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
         .subscribe(
           (data) => (
             responce = data,
-            this.PasteKoeff(ri, parseInt(responce.znachenie))
+            this.PasteKoeff(ri, parseFloat(responce.znachenie))
           ),
           (error) => (this.Budget_ras4et_Detailmsg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
         )
