@@ -42,7 +42,7 @@ export class SvodDetailComponent implements OnInit {
   _vid_operacii: any = []
   fkr_array: fkr_detail[] = []
   firstclick = true
-  _lastfkr = 0
+  _lastfkr = ''
   allrecord = true
   fkr: fkr_detail = {
     id: 0,
@@ -102,11 +102,11 @@ export class SvodDetailComponent implements OnInit {
 
   filterFKR(_fkr: fkr_detail) {
     if (this.firstclick) {
-      this._lastfkr = _fkr.id
+      this._lastfkr = _fkr.code
       this.firstclick = false
     }
 
-    if (this._lastfkr == _fkr.id) {
+    if (this._lastfkr == _fkr.code) {
       this.allrecord = !this.allrecord
     }
     else {
@@ -130,8 +130,17 @@ export class SvodDetailComponent implements OnInit {
       this.fkr.name_kaz = ''
       this.fkr.name_rus = ''
     }
+    this._lastfkr = _fkr.code
+  }
 
-    this._lastfkr = _fkr.id
+  setClassSelect_pay(code: string) {
+
+    if (!this.allrecord && this._lastfkr == code) {
+      return 'green-class'
+    }
+    else {
+      return ''
+    }
   }
   selectrashod() {
     let responce: any;
