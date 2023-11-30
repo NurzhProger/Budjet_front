@@ -506,7 +506,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
           }
           else if (mass_simv[y] == "БДО") {
             if (koeffBolshe100 == false) {
-              formula = formula + 17967
+              formula = formula + 17697
             } else {
               formula = formula + 1
             }
