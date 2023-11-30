@@ -131,6 +131,7 @@ import { UserhistoryDetailComponent } from './main/userhistory-detail/userhistor
 import { PeriodDetailComponent } from './directory/period/period-detail/period-detail.component';
 import { SvodListComponent } from './documents/svod-doc/svod-list/svod-list.component';
 import { SvodDetailComponent } from './documents/svod-doc/svod-detail/svod-detail.component';
+import { BudjetRequestSelectComponent } from './documents/Budget_request/budjet-request-select/budjet-request-select/budjet-request-select.component';
 
 @NgModule({
   imports: [
@@ -264,7 +265,8 @@ import { SvodDetailComponent } from './documents/svod-doc/svod-detail/svod-detai
     UserhistoryDetailComponent,
     PeriodDetailComponent,
     SvodListComponent,
-    SvodDetailComponent],
+    SvodDetailComponent,
+    BudjetRequestSelectComponent],
   bootstrap: [AppComponent],
   providers: [
     {

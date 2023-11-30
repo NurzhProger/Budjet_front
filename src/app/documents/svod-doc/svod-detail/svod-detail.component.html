@@ -189,6 +189,12 @@
             </div>
         </ng-template>
     </p-splitter>
+
+    <div class="p-toolbar-group-left;" style="padding: 10px 0 0 10px; ">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+          (click)="openNew()"></button>
+    </div>
+
 <div style="padding-top: 10px;">
     <p-table [value]="svod_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
         selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">

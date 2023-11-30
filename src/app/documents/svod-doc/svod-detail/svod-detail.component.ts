@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { svod_detail } from '../interfaces';
+import { svod_detail, svod_list } from '../interfaces';
 import { SvodService } from '../svod.servise';
 import { SHA256 } from 'crypto-js';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
@@ -10,6 +10,9 @@ import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
 import { i, log } from 'mathjs';
 import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
+import { BudjetRequestSelectComponent } from '../../Budget_request/budjet-request-select/budjet-request-select/budjet-request-select.component';
+import { Observable } from 'rxjs';
+import { budjet_doc } from '../../Budget_request/budget_request.interfaces';
 
 @Component({
   selector: 'app-svod-detail',
@@ -18,6 +21,7 @@ import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
 })
 export class SvodDetailComponent implements OnInit {
   @Input() svod_id = ''
+  @Input() data = false
   @Output() closeEvent = new EventEmitter<any>();
   @Output() newItemEvent = new EventEmitter<any>()
   
@@ -30,7 +34,7 @@ export class SvodDetailComponent implements OnInit {
     
   ) { }
   items: MenuItem[];
-  
+  Svod_list$: Observable<svod_list>
   tbl: any = []
   svod_detail: svod_detail
   godNumber: number
@@ -50,6 +54,9 @@ export class SvodDetailComponent implements OnInit {
     name_kaz: '',
     name_rus: ''
   }
+  first = 0
+  rows = 25
+  search = ''
   
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -98,6 +105,16 @@ export class SvodDetailComponent implements OnInit {
 
       
     }
+  }
+  fetchCat() {
+    let params = {
+      limit: this.rows.toString(),
+      offset: this.first.toString(),
+      search: this.search.toString()
+    }
+
+    this.Svod_list$ = this.svodService.fetch(params)
+
   }
 
   filterFKR(_fkr: fkr_detail) {
@@ -262,6 +279,29 @@ export class SvodDetailComponent implements OnInit {
       }
     })
   }
+  openNew() {
+    this.svod_detail_Rer = this.svod_Dialog_Service.open(BudjetRequestSelectComponent,
+      {
+        header: 'Выбор заявки',
+        width: '80%',
+        height: '100%',
+      })
 
+    this.svod_detail_Rer.onClose.subscribe((budjet: budjet_doc) => {
+      if (budjet) {
+        console.log(budjet)        
+        this.svod_detail.tbl.push({
+          id: budjet.id,
+          _planirovanie: {
+            nom: budjet.nom,
+            id: 1,
+            org_name: budjet._organization.name_rus
+          },
+          summ: budjet.summ
+
+      })
+      }
+    })
+  }
   
 }

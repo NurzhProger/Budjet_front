@@ -39,6 +39,9 @@ export class budjetService {
   fetch(params: any): Observable<budget_list> {
     return this.http.get<budget_list>(this.host + 'docs/planirovanie_list', { params })
   }
+  fetchOtbor(params: any): Observable<budget_list> {
+    return this.http.get<budget_list>(this.host + 'docs/planirovanie_list', { params })
+  }
 
   fetch_detail(form_id: string): Observable<budjet_detail> {
     return this.http.get<budjet_detail>(this.host + 'docs/planirovanie_item/' + form_id)
