@@ -288,18 +288,26 @@ export class SvodDetailComponent implements OnInit {
       })
 
     this.svod_detail_Rer.onClose.subscribe((budjet: budjet_doc) => {
-      if (budjet) {
-        console.log(budjet)        
-        this.svod_detail.tbl.push({
+      if (budjet) { 
+        
+      for (let i = 0; i < this.svod_detail.tbl.length; i++) {
+
+      let index = this.svod_detail.tbl.find(item =>  item._planirovanie.id === budjet.id)
+        if (index == undefined) {
+          
+          this.svod_detail.tbl.push({
           id: budjet.id,
           _planirovanie: {
             nom: budjet.nom,
-            id: 1,
+            id: budjet.id,
             org_name: budjet._organization.name_rus
           },
-          summ: budjet.summ
+          summ: budjet.summ})
+        }
+        break
+        
 
-      })
+        }
       }
     })
   }
