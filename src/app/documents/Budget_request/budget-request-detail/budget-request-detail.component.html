@@ -190,7 +190,7 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
-                                <tr class="cursor-pointer">
+                                <tr class="cursor-pointer" (dblclick)="onRowEdit(izm, ri)">
                                     <td> 
                                         <div class="p-inputgroup w-full">
                                             {{ izm._spec.code + '. ' + izm._spec.name_rus }}
