@@ -8,7 +8,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OrganizationDetailComponent } from 'src/app/directory/organization/organization-detail/organization-detail.component';
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { OrganizationSelectComponent } from 'src/app/directory/organization/organization-select/organization-select.component';
-import { i, log } from 'mathjs';
+import { boolean, i, log } from 'mathjs';
 import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
 import { BudjetRequestSelectComponent } from '../../Budget_request/budjet-request-select/budjet-request-select/budjet-request-select.component';
 import { Observable } from 'rxjs';
@@ -213,6 +213,7 @@ export class SvodDetailComponent implements OnInit {
           this.svod_Message_Service.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
         )
       )
+    
   }
   closeaftersave(close: boolean) {
     let objString = JSON.stringify(this.svod_detail)
@@ -288,6 +289,7 @@ export class SvodDetailComponent implements OnInit {
       })
 
     this.svod_detail_Rer.onClose.subscribe((budjet: budjet_doc) => {
+      let close: boolean
       if (budjet) { 
         
       for (let i = 0; i < this.svod_detail.tbl.length; i++) {
@@ -302,12 +304,21 @@ export class SvodDetailComponent implements OnInit {
             id: budjet.id,
             org_name: budjet._organization.name_rus
           },
-          summ: budjet.summ})
+          summ: budjet.summ}),
+          this.saveDoc(close = false),
+          this.svodService.fetch_detail(this.svod_id)
+        .subscribe(
+          (detail) => {
+            this.svod_detail = detail,
+            this.tbl = this.svod_detail.tbl_plan,
+              this.preobGodNumber(),
+              this.addFKRtoArray()
+          }
+        )
         }
         break
-        
-
         }
+        
       }
     })
   }
