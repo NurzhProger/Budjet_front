@@ -40,9 +40,13 @@ export class BudgetRequestListComponent implements OnInit {
 
 
   ngOnInit  (): void {
-    this.fetchCat()
+    this.fetchCat(),
+    this.updateWindowSize()
   }
 
+  private updateWindowSize() {
+    this.windowHeight = window.innerHeight;
+  }
   fetchCat() {
     let params = {
       limit: this.rows.toString(),
@@ -56,7 +60,7 @@ export class BudgetRequestListComponent implements OnInit {
 
 
   openNew() {
-    this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка ', id: '' } });
+    this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка (создание)', id: '' } });
   }
 
   onSelected() {

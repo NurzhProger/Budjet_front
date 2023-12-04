@@ -33,7 +33,13 @@ export class SvodListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetch()
+    this.updateWindowSize()
   }
+
+  private updateWindowSize() {
+    this.windowHeight = window.innerHeight;
+  }
+  
   openNew() {
     this.newItemEvent.emit({ params: { selector: 'app-svod-detail', nomer: 'Свод бюджетной заявки', id: '' } });
   }
