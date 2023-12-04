@@ -150,6 +150,28 @@ export class SvodDetailComponent implements OnInit {
     this._lastfkr = _fkr.code
   }
 
+  delSvod(ind: number) {
+    this.svod_Confirm_Service.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+       let tir = this.svod_detail.tbl[ind]
+       for (let i = 0; i < this.svod_detail.tbl.length; i++) {
+        if (this.svod_detail.tbl[i]._planirovanie == tir._planirovanie) {
+          this.svod_detail.tbl.splice(i,1)
+        }
+       }
+       this.tbl.splice(ind,1)
+       this.svod_Confirm_Service.close()
+       this.saveDoc(false)
+       this.svodService.fetch_detail(this.svod_id)
+      },
+      reject: () => {
+        this.svod_Confirm_Service.close();
+      }
+    })
+  }
   setClassSelect_pay(code: string) {
 
     if (!this.allrecord && this._lastfkr == code) {
@@ -291,13 +313,28 @@ export class SvodDetailComponent implements OnInit {
     this.svod_detail_Rer.onClose.subscribe((budjet: budjet_doc) => {
       let close: boolean
       if (budjet) { 
-        
-      for (let i = 0; i < this.svod_detail.tbl.length; i++) {
+      if (this.svod_detail.tbl.length > 0) {
+        for (let i = 0; i < this.svod_detail.tbl.length; i++) {
 
-      let index = this.svod_detail.tbl.find(item =>  item._planirovanie.id === budjet.id)
-        if (index == undefined) {
+          let index = this.svod_detail.tbl.find(item =>  item._planirovanie.id === budjet.id)
           
-          this.svod_detail.tbl.push({
+          
+            if (index == undefined) {
+              this.svod_detail.tbl.push({
+              id: budjet.id,
+              _planirovanie: {
+                nom: budjet.nom,
+                id: budjet.id,
+                org_name: budjet._organization.name_rus
+              },
+              summ: budjet.summ})
+              this.saveDoc(close = false)
+            }
+            break
+            }
+      } else {
+        
+        this.svod_detail.tbl.push({
           id: budjet.id,
           _planirovanie: {
             nom: budjet.nom,
@@ -305,19 +342,10 @@ export class SvodDetailComponent implements OnInit {
             org_name: budjet._organization.name_rus
           },
           summ: budjet.summ}),
-          this.saveDoc(close = false),
-          this.svodService.fetch_detail(this.svod_id)
-        .subscribe(
-          (detail) => {
-            this.svod_detail = detail,
-            this.tbl = this.svod_detail.tbl_plan,
-              this.preobGodNumber(),
-              this.addFKRtoArray()
-          }
-        )
-        }
-        break
-        }
+          this.saveDoc(close = false)
+         
+      }  
+      
         
       }
     })

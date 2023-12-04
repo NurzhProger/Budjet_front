@@ -203,6 +203,7 @@
                     <th  style="text-align:center; width: 28%;">Организация</th>
                     <th  style="text-align:center; width: 36%;">Документ</th>
                     <th  style="text-align:center; width: 16%;">Сумма документа</th>
+                    <th  style="text-align:center; width: 16%;">Действия</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
@@ -218,6 +219,14 @@
                     </td>
                     <td style="text-align: center;">
                         {{izm.summ}}
+                    </td>
+                    <td>
+                        <div class="flex align-items-center justify-content-center gap-2">
+                            <button pButton pRipple type="button" icon="pi pi-trash"
+                                (click)="delSvod(ri)"
+                                class="p-button-rounded p-button-text"></button>
+                        </div>
+
                     </td>
                 </tr>
             </ng-template>
