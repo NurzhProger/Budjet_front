@@ -71,7 +71,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
               this.preobGodNumber()
           }
         )
-    }    
+    }
     // else
     //   {
     //   this.limitDetail.head._organization = {

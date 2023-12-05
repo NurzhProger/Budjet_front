@@ -152,28 +152,7 @@ export class SvodDetailComponent implements OnInit {
     this._lastfkr = _fkr.code
   }
 
-  delSvod(ind: number) {
-    this.svod_Confirm_Service.confirm({
-      message: 'Вы действительно хотите удалить?',
-      header: 'Удаление',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        let tir = this.svod_detail.tbl[ind]
-        for (let i = 0; i < this.svod_detail.tbl.length; i++) {
-          if (this.svod_detail.tbl[i]._planirovanie == tir._planirovanie) {
-            this.svod_detail.tbl.splice(i, 1)
-          }
-        }
-        this.tbl.splice(ind, 1)
-        this.svod_Confirm_Service.close()
-        this.saveDoc(false)
-        this.svodService.fetch_detail(this.svod_id)
-      },
-      reject: () => {
-        this.svod_Confirm_Service.close();
-      }
-    })
-  }
+
   setClassSelect_pay(code: string) {
 
     if (!this.allrecord && this._lastfkr == code) {
@@ -304,6 +283,36 @@ export class SvodDetailComponent implements OnInit {
       }
     })
   }
+
+  delSvod(ind: number) {
+    this.svod_Confirm_Service.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        let tir = this.svod_detail.tbl[ind]
+        for (let i = 0; i < this.svod_detail.tbl.length; i++) {
+          if (this.svod_detail.tbl[i]._planirovanie == tir._planirovanie) {
+            this.svod_detail.tbl.splice(i, 1)
+          }
+        }
+        this.svod_Confirm_Service.close()
+        this.saveDoc(false)
+        this.svodService.fetch_detail(this.svod_id)
+          .subscribe(
+            (detail) => {
+              this.svod_detail = detail
+              this.tbl = this.svod_detail.tbl_plan
+              this.addFKRtoArray()
+            }
+          )
+      },
+      reject: () => {
+        this.svod_Confirm_Service.close();
+      }
+    })
+  }
+
   openNew() {
     this.svod_detail_Rer = this.svod_Dialog_Service.open(BudjetRequestSelectComponent,
       {
