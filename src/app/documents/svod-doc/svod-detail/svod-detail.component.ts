@@ -223,8 +223,8 @@ export class SvodDetailComponent implements OnInit {
   }
   saveDoc(close: boolean) {
 
-    this.tbl = this.svod_detail.tbl
-    this.svod_detail.tbl = this.tbl
+    this.tbl = this.svod_detail.tbl_plan
+    this.svod_detail.tbl_plan = this.tbl
 
     this.svodService
       .saveSvod(this.svod_detail)
@@ -338,7 +338,7 @@ export class SvodDetailComponent implements OnInit {
                     for (let i = 0; i < aaa.length; i++) {
                       this.svod_detail.tbl_plan.push({
                         fkr_code: aaa[i]._fkr.code,
-                        ekr_code: aaa[i]._spec.name_rus,
+                        ekr_code: aaa[i]._spec.code,
                         form_name: aaa[i]._form.name,
                         form_head: aaa[i]._form.head_form,
                         summ: aaa[i].summ
@@ -348,10 +348,11 @@ export class SvodDetailComponent implements OnInit {
                     this.addFKRtoArray()
                   }
                 )
-              // this.saveDoc(close = false)
+
             }
             break
           }
+          this.saveDoc(close = false)
         } else {
           let id: string
           id = string(budjet.id)
@@ -372,7 +373,7 @@ export class SvodDetailComponent implements OnInit {
                 for (let i = 0; i < aaa.length; i++) {
                   this.svod_detail.tbl_plan.push({
                     fkr_code: aaa[i]._fkr.code,
-                    ekr_code: aaa[i]._spec.name_rus,
+                    ekr_code: aaa[i]._spec.code,
                     form_name: aaa[i]._form.name,
                     form_head: aaa[i]._form.head_form,
                     summ: aaa[i].summ
@@ -382,8 +383,9 @@ export class SvodDetailComponent implements OnInit {
                 this.addFKRtoArray()
               }
             )
+          this.saveDoc(close = false)
         }
-        this.saveDoc(close = false)
+
       }
     })
   }
