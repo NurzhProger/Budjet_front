@@ -145,7 +145,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
         header: 'Выбор ФКР',
         width: '60%',
         height: '80%',
-        data: {_org_id: this.limitDetail.head._organization.id}
+        data: { _org_id: this.limitDetail.head._organization.id }
       })
 
     this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
@@ -205,7 +205,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
       .subscribe(
         (data) => (
           this.limitMessage.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
-          responce = data, this.limitDetail = responce, this.closeaftersave(close)
+          this.closeaftersave(close)
         ),
         (error) => (
           this.limitMessage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })

@@ -329,76 +329,79 @@ export class SvodDetailComponent implements OnInit {
     this.svod_detail_Rer.onClose.subscribe((budjet: budjet_doc) => {
       let close: boolean
       if (budjet) {
-        if (this.svod_detail.tbl.length > 0) {
-          for (let i = 0; i < this.svod_detail.tbl.length; i++) {
-            let index = this.svod_detail.tbl.find(item => item._planirovanie.id === budjet.id)
-            if (index == undefined) {
-              this.svod_detail.tbl.push({
-                id: budjet.id,
-                _planirovanie: {
-                  nom: budjet.nom,
+        if (budjet.deleted == false) {
+          if (this.svod_detail.tbl.length > 0) {
+            for (let i = 0; i < this.svod_detail.tbl.length; i++) {
+              let index = this.svod_detail.tbl.find(item => item._planirovanie.id === budjet.id)
+              if (index == undefined) {
+                this.svod_detail.tbl.push({
                   id: budjet.id,
-                  org_name: budjet._organization.name_rus
-                },
-                summ: budjet.summ
-              })
-              // let id: string
-              // id = string(budjet.id)
-              // let aaa: any
-              // this.budjetService.fetch_detail(id)
-              //   .subscribe(
-              //     (detail) => {
-              //       aaa = detail.tbl
-              //       for (let i = 0; i < aaa.length; i++) {
-              //         this.svod_detail.tbl_plan.push({
-              //           fkr_code: aaa[i]._fkr.code,
-              //           ekr_code: aaa[i]._spec.code,
-              //           form_name: aaa[i]._form.name,
-              //           form_head: aaa[i]._form.head_form,
-              //           summ: aaa[i].summ
-              //         })
-              //       }
-              //       this.tbl = this.svod_detail.tbl_plan
-              //       this.addFKRtoArray()
-              //     }
-              //   )
+                  _planirovanie: {
+                    nom: budjet.nom,
+                    id: budjet.id,
+                    org_name: budjet._organization.name_rus
+                  },
+                  summ: budjet.summ
+                })
+                // let id: string
+                // id = string(budjet.id)
+                // let aaa: any
+                // this.budjetService.fetch_detail(id)
+                //   .subscribe(
+                //     (detail) => {
+                //       aaa = detail.tbl
+                //       for (let i = 0; i < aaa.length; i++) {
+                //         this.svod_detail.tbl_plan.push({
+                //           fkr_code: aaa[i]._fkr.code,
+                //           ekr_code: aaa[i]._spec.code,
+                //           form_name: aaa[i]._form.name,
+                //           form_head: aaa[i]._form.head_form,
+                //           summ: aaa[i].summ
+                //         })
+                //       }
+                //       this.tbl = this.svod_detail.tbl_plan
+                //       this.addFKRtoArray()
+                //     }
+                //   )
 
+              }
+              break
             }
-            break
-          }
-          this.saveDoc(close = false)
-        } else {
-          // let id: string
-          // id = string(budjet.id)
-          // let aaa: any
-          this.svod_detail.tbl.push({
-            id: budjet.id,
-            _planirovanie: {
-              nom: budjet.nom,
+            this.saveDoc(close = false)
+          } else {
+            // let id: string
+            // id = string(budjet.id)
+            // let aaa: any
+            this.svod_detail.tbl.push({
               id: budjet.id,
-              org_name: budjet._organization.name_rus
-            },
-            summ: budjet.summ
-          })
-          // this.budjetService.fetch_detail(id)
-          //   .subscribe(
-          //     (detail) => {
-          //       aaa = detail.tbl
-          //       for (let i = 0; i < aaa.length; i++) {
-          //         this.svod_detail.tbl_plan.push({
-          //           fkr_code: aaa[i]._fkr.code,
-          //           ekr_code: aaa[i]._spec.code,
-          //           form_name: aaa[i]._form.name,
-          //           form_head: aaa[i]._form.head_form,
-          //           summ: aaa[i].summ
-          //         })
-          //       }
-          //       this.tbl = this.svod_detail.tbl_plan
-          //       this.addFKRtoArray()
-          //     }
-          //   )
-          this.saveDoc(close = false)
+              _planirovanie: {
+                nom: budjet.nom,
+                id: budjet.id,
+                org_name: budjet._organization.name_rus
+              },
+              summ: budjet.summ
+            })
+            // this.budjetService.fetch_detail(id)
+            //   .subscribe(
+            //     (detail) => {
+            //       aaa = detail.tbl
+            //       for (let i = 0; i < aaa.length; i++) {
+            //         this.svod_detail.tbl_plan.push({
+            //           fkr_code: aaa[i]._fkr.code,
+            //           ekr_code: aaa[i]._spec.code,
+            //           form_name: aaa[i]._form.name,
+            //           form_head: aaa[i]._form.head_form,
+            //           summ: aaa[i].summ
+            //         })
+            //       }
+            //       this.tbl = this.svod_detail.tbl_plan
+            //       this.addFKRtoArray()
+            //     }
+            //   )
+            this.saveDoc(close = false)
+          }
         }
+
 
       }
     })
