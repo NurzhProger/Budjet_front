@@ -144,7 +144,8 @@ export class LimitElementComponent implements OnInit, DoCheck {
       {
         header: 'Выбор ФКР',
         width: '60%',
-        height: '80%'
+        height: '80%',
+        data: {_org_id: this.limitDetail.head._organization.id}
       })
 
     this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
