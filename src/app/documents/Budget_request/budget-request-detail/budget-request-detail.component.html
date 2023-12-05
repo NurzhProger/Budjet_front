@@ -126,7 +126,7 @@
             <div class="pInputText">
                 <label for="number_doc" style="padding-right: 10px;">Общая сумма документа</label>
                 <input id="summ" type="number" pInputText [(ngModel)]="Budget_detail.doc.summ"
-                     style="width: 100%;" formControlName="summ"/>
+                     style="width: 100%; " formControlName="summ"/>
             </div>
 
         </div>
@@ -179,7 +179,7 @@
                                 pTooltip="XLS" tooltipPosition="bottom" id="sheetjsexport"></button>
                         </div>
 
-                        <p-table [value]="tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+                        <p-table [value]="tbl" [scrollable]="true" scrollHeight="calc(75vh - 200px)"
                             selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
