@@ -79,16 +79,16 @@ export class SvodDetailComponent implements OnInit {
     }
   }
 
-  fetch_detail(){
+  fetch_detail() {
     this.svodService.fetch_detail(this.svod_id)
-        .subscribe(
-          (detail) => {
-            this.svod_detail = detail,
-              this.tbl = this.svod_detail.tbl_plan,
-              this.preobGodNumber(),
-              this.addFKRtoArray()
-          }
-        )
+      .subscribe(
+        (detail) => {
+          this.svod_detail = detail,
+            this.tbl = this.svod_detail.tbl_plan,
+            this.preobGodNumber(),
+            this.addFKRtoArray()
+        }
+      )
   }
 
   addFKRtoArray() {
@@ -231,7 +231,7 @@ export class SvodDetailComponent implements OnInit {
     if (close) {
       this.closeEvent.emit()
     }
-    else(
+    else (
       this.fetch_detail()
     )
   }
@@ -292,20 +292,20 @@ export class SvodDetailComponent implements OnInit {
   }
 
   delSvod(ind: number) {
-    
+
     this.svod_Confirm_Service.confirm({
       message: 'Вы действительно хотите удалить?',
       header: 'Удаление',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         let tir = this.svod_detail.tbl[ind]
-        
+
         for (let i = 0; i < this.svod_detail.tbl.length; i++) {
           if (this.svod_detail.tbl[i]._planirovanie == tir._planirovanie) {
             this.svod_detail.tbl.splice(i, 1)
           }
         }
-        
+
         this.saveDoc(false)
 
         this.svod_Confirm_Service.close()
@@ -342,35 +342,35 @@ export class SvodDetailComponent implements OnInit {
                 },
                 summ: budjet.summ
               })
-              let id: string
-              id = string(budjet.id)
-              let aaa: any
-              this.budjetService.fetch_detail(id)
-                .subscribe(
-                  (detail) => {
-                    aaa = detail.tbl
-                    for (let i = 0; i < aaa.length; i++) {
-                      this.svod_detail.tbl_plan.push({
-                        fkr_code: aaa[i]._fkr.code,
-                        ekr_code: aaa[i]._spec.code,
-                        form_name: aaa[i]._form.name,
-                        form_head: aaa[i]._form.head_form,
-                        summ: aaa[i].summ
-                      })
-                    }
-                    this.tbl = this.svod_detail.tbl_plan
-                    this.addFKRtoArray()
-                  }
-                )
+              // let id: string
+              // id = string(budjet.id)
+              // let aaa: any
+              // this.budjetService.fetch_detail(id)
+              //   .subscribe(
+              //     (detail) => {
+              //       aaa = detail.tbl
+              //       for (let i = 0; i < aaa.length; i++) {
+              //         this.svod_detail.tbl_plan.push({
+              //           fkr_code: aaa[i]._fkr.code,
+              //           ekr_code: aaa[i]._spec.code,
+              //           form_name: aaa[i]._form.name,
+              //           form_head: aaa[i]._form.head_form,
+              //           summ: aaa[i].summ
+              //         })
+              //       }
+              //       this.tbl = this.svod_detail.tbl_plan
+              //       this.addFKRtoArray()
+              //     }
+              //   )
 
             }
             break
           }
           this.saveDoc(close = false)
         } else {
-          let id: string
-          id = string(budjet.id)
-          let aaa: any
+          // let id: string
+          // id = string(budjet.id)
+          // let aaa: any
           this.svod_detail.tbl.push({
             id: budjet.id,
             _planirovanie: {
@@ -380,23 +380,23 @@ export class SvodDetailComponent implements OnInit {
             },
             summ: budjet.summ
           })
-          this.budjetService.fetch_detail(id)
-            .subscribe(
-              (detail) => {
-                aaa = detail.tbl
-                for (let i = 0; i < aaa.length; i++) {
-                  this.svod_detail.tbl_plan.push({
-                    fkr_code: aaa[i]._fkr.code,
-                    ekr_code: aaa[i]._spec.code,
-                    form_name: aaa[i]._form.name,
-                    form_head: aaa[i]._form.head_form,
-                    summ: aaa[i].summ
-                  })
-                }
-                this.tbl = this.svod_detail.tbl_plan
-                this.addFKRtoArray()
-              }
-            )
+          // this.budjetService.fetch_detail(id)
+          //   .subscribe(
+          //     (detail) => {
+          //       aaa = detail.tbl
+          //       for (let i = 0; i < aaa.length; i++) {
+          //         this.svod_detail.tbl_plan.push({
+          //           fkr_code: aaa[i]._fkr.code,
+          //           ekr_code: aaa[i]._spec.code,
+          //           form_name: aaa[i]._form.name,
+          //           form_head: aaa[i]._form.head_form,
+          //           summ: aaa[i].summ
+          //         })
+          //       }
+          //       this.tbl = this.svod_detail.tbl_plan
+          //       this.addFKRtoArray()
+          //     }
+          //   )
           this.saveDoc(close = false)
         }
 
