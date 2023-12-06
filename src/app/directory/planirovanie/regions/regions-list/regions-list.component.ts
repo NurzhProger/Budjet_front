@@ -88,8 +88,6 @@ export class RegionsListComponent implements OnInit {
 
     this.regions_list_dialog_ref.onClose.subscribe((save: boolean) => {
       if (save) {
-        console.log('sss');
-
         this.fetchList()
       }
     })
