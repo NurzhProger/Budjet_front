@@ -38,10 +38,10 @@ export class RegionsElementComponent implements OnInit {
       this.RegionsService.fetchRegion(this.regions_element.id)
         .subscribe(
           (data) => (
-              this.regions_element = data
-            )
+            this.regions_element = data
+          )
         )
-            
+
     }
   }
 
@@ -50,23 +50,22 @@ export class RegionsElementComponent implements OnInit {
   }
 
   saveRegions() {
-    if (this.regions_element.id == 0){      
+    if (this.regions_element.id == 0) {
       this.RegionsService.add(this.regions_element)
         .subscribe(
           (data) => (
             this.regions_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Область сохранен!' })
           ),
           (error) => (this.regions_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
-        }
-     else {
-          this.RegionsService.edit(this.regions_element)
-          .subscribe((data) => (
-            this.regions_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Область сохранен!' })
-          ),
+    }
+    else {
+      this.RegionsService.edit(this.regions_element)
+        .subscribe((data) => (
+          this.regions_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Область сохранен!' })
+        ),
           (error) => (this.regions_massage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })))
-        }
+    }
     this.closeRegions(true);
-    this.regions_list.fetchList()
   }
 
 }

@@ -21,12 +21,13 @@ export class RegionsListComponent implements OnInit {
   constructor(
     private RegionsService: RegionsService,
     private regions_dialog_ref: DynamicDialogRef,
-    private regions_dialog_servis: DialogService
+    private regions_dialog_servis: DialogService,
+    private regions_list_dialog_ref: DynamicDialogRef
   ) { }
 
   ngOnInit(): void {
     this.fetchList(),
-    this.updateWindowSize() 
+      this.updateWindowSize()
   }
 
   private updateWindowSize() {
@@ -42,12 +43,11 @@ export class RegionsListComponent implements OnInit {
         data: { regions_id: 0 }
       })
 
-      this.regions_dialog_ref.onClose.subscribe((save: boolean) => {
-      
-        if (save) {
-          this.fetchList()
-        }
-      })
+    this.regions_dialog_ref.onClose.subscribe((save: boolean) => {
+      if (save) {
+        this.fetchList()
+      }
+    })
   }
 
   fetchList() {
@@ -73,18 +73,26 @@ export class RegionsListComponent implements OnInit {
       this.onRowEdit(regions)
     }
     else {
-      this.regions_dialog_ref.close(regions) 
+      this.regions_dialog_ref.close(regions)
     }
   }
 
   onRowEdit(regions: regions__element) {
-    this.regions_dialog_ref = this.regions_dialog_servis.open(RegionsElementComponent,
+    this.regions_list_dialog_ref = this.regions_dialog_servis.open(RegionsElementComponent,
       {
         header: 'Редактирование региона',
         width: '60%',
         height: '40%',
         data: { regions_id: regions.id }
       })
+
+    this.regions_list_dialog_ref.onClose.subscribe((save: boolean) => {
+      if (save) {
+        console.log('sss');
+
+        this.fetchList()
+      }
+    })
   }
 
 }
