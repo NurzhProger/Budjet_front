@@ -123,14 +123,17 @@ export class OrganizationDetailComponent implements OnInit {
       }
     })
   }
+
   SelectPeriod(org: organization_detail) {
-    this.period_dialog_ref = this.org_dialog_service.open(PeriodDetailComponent,
+    
+    this.org_dialog_ref = this.org_dialog_service.open(PeriodDetailComponent,
       {
         header: 'Выбор периода',
         width: '25%',
         height: '50%'
       })
-    this.period_dialog_ref.onClose.subscribe((date: any) => {
+
+    this.org_dialog_ref.onClose.subscribe((date: any) => {
       if (date) {
         let new_date = this.toLocaleDate(date)
         date = new Date(date).toLocaleDateString()
@@ -283,6 +286,6 @@ export class OrganizationDetailComponent implements OnInit {
   }
 
   closeOrg() {
-    this.org_dialog_ref.close(this.saved)
+    this.period_dialog_ref.close(this.saved)
   }
 }
