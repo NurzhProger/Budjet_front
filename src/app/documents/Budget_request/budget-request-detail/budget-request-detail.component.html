@@ -37,7 +37,7 @@
                 <label for="date_doc">Дата <span style="color: red;">*</span></label>
                 <div class="p-inputgroup">
                     <input id="date_doc" type="date" pInputText [(ngModel)]="Budget_detail.doc._date"
-                        formControlName="date_doc" style="width: 130px;" />
+                        formControlName="date_doc" style="width: 130px;" (change)="changeDate()" />
                 </div>
                 <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
                     <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
