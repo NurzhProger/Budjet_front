@@ -245,7 +245,7 @@ export class MainComponent implements OnInit {
                 label: 'Подклассы',
                 command: () => this.openTab('app-podclass-list', 'Подклассы', '')
               }, {
-                label: 'Спецификации',
+                label: 'Специфика поступления',
                 command: () => this.openTab('app-specification-income-list', 'Спецификации', '')
               }, {
                 label: 'Бюджет',

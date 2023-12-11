@@ -557,7 +557,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
     this.Budget_detail_ryref.onClose.subscribe((fkr_detail: fkr_detail) => {
       if (fkr_detail) {
-        this.addSpec(fkr_detail),
+        // this.addSpec(fkr_detail),
           this.fkr_array.push({
             id: fkr_detail.id,
             code: fkr_detail.code,
