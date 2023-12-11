@@ -19,22 +19,27 @@
             <tr>
                 <th style="text-align:center">Добавленные</th>
                 <th style="text-align:center">Сумма доплаты</th>
+                <th style="text-align:center">Действия</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
-            <tr class="cursor-pointer" (dblclick)="onRowClickForDelete(adddopl, ri)">
+            <tr class="cursor-pointer">
                 <td>
                     {{adddopl._doplata_name}}
                 </td>
                 <td style="text-align:center">
                     {{adddopl.summ}}
                 </td>
+                <td style="text-align:center">
+                    <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                        (click)="onRowClickForDelete(adddopl, ri)"></button>
+                </td>
             </tr>
         </ng-template>
     </p-table>
 
     <div style="padding-right: 10px;">
-        <button pButton pRipple label="Сохранить" icon="pi pi-save" class="p-button-secondary p-mr-2"
+        <button pButton pRipple label="Перенести в документ" icon="pi pi-save" class="p-button-secondary p-mr-2"
             (click)="saveDoplata()"></button>
     </div>
 </div>

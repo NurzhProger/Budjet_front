@@ -89,8 +89,9 @@
               </div>
               <!-- число -->
               <p-inputNumber *ngIf="kolon.zn == 'float'" type="number" [min]="0" [ngModel]="kolon.zn_float"
-              [readonly]="kolon.name == 'Коэффициент'" [minFractionDigits]="2" [maxFractionDigits]="2"
-                [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" (ngModelChange)="onInputChange($event, kolon, ri)">
+                [readonly]="kolon.name == 'Коэффициент'" [minFractionDigits]="2" [maxFractionDigits]="2"
+                [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                (ngModelChange)="onInputChange($event, kolon, ri)">
               </p-inputNumber>
               <!-- <input type="number" *ngIf="kolon.zn == 'float'" [ngModel]="kolon.zn_float"
                 (ngModelChange)="onInputChange($event, kolon, ri)" [readonly]="kolon.name == 'Коэффициент'" min="1"> -->
