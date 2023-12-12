@@ -132,6 +132,8 @@ import { PeriodDetailComponent } from './directory/period/period-detail/period-d
 import { SvodListComponent } from './documents/svod-doc/svod-list/svod-list.component';
 import { SvodDetailComponent } from './documents/svod-doc/svod-detail/svod-detail.component';
 import { BudjetRequestSelectComponent } from './documents/Budget_request/budjet-request-select/budjet-request-select/budjet-request-select.component';
+import { BudgetIncomeListComponent } from './documents/budget_income/budget-income-list/budget-income-list.component';
+import { BudgetIncomeDetailComponent } from './documents/budget_income/budget-income-detail/budget-income-detail.component';
 
 @NgModule({
   imports: [
@@ -266,6 +268,8 @@ import { BudjetRequestSelectComponent } from './documents/Budget_request/budjet-
     PeriodDetailComponent,
     SvodListComponent,
     SvodDetailComponent,
+    BudgetIncomeListComponent,
+    BudgetIncomeDetailComponent,
     BudjetRequestSelectComponent],
   bootstrap: [AppComponent],
   providers: [

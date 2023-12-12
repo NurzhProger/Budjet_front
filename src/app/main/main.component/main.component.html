@@ -199,6 +199,16 @@
                 (closeEvent)="removetab()">
                 </app-svod-list>
 
+                <app-budget-income-detail *ngIf="context.selector=='app-budget-income-detail'"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id, $event.params.data)"
+                    [budjet_income_id]="number" (closeEvent)="removetab()">
+                </app-budget-income-detail>
+
+                <app-budget-income-list *ngIf="context.selector=='app-budget-income-list'" [data]="true"
+                (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                (closeEvent)="removetab()">
+                </app-budget-income-list>
+
                 <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'"
                     (closeEvent)="removetab()">
                 </app-budget-ras4et-detail>
