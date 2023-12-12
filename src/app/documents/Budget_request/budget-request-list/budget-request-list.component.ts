@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { budjetService } from '../budget_request.servise'
 import { budget_list, budjet_doc } from '../budget_request.interfaces';
-import { log } from 'mathjs';
+import { boolean, log } from 'mathjs';
 
 @Component({
   selector: 'app-budget-request-list',
@@ -117,7 +117,6 @@ export class BudgetRequestListComponent implements OnInit {
         this.Budget_request_Service.deleteReq(item.id)
           .subscribe((data) => (
             this.budget_list_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
-            this.fetchCat(),
             this.budget_confrim.close()
           ),
             (error) => (
@@ -125,6 +124,7 @@ export class BudgetRequestListComponent implements OnInit {
             )
           )
       },
+      
       reject: () => {
         this.budget_confrim.close();
       }

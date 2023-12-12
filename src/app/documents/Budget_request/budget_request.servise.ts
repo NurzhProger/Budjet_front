@@ -69,8 +69,7 @@ export class budjetService {
 }
 
 del_Past() {
-  return this.http.delete(this.host + 'docs/planirovanie_del_pust')
+  return this.http.get(this.host + 'docs/planirovanie_del_pust')  
 }
-
 
 }
