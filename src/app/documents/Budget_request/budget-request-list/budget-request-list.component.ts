@@ -63,6 +63,37 @@ export class BudgetRequestListComponent implements OnInit {
     this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка (создание)', id: '' } });
   }
 
+
+
+  delPast() {
+    this.budget_confrim.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.budget_Servise.del_Past()
+          .subscribe((data) => (
+            this.budget_list_messageServicedelSelect.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchCat(),
+            this.budget_confrim.close()
+          ),
+            (error) => (this.budget_list_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.budget_confrim.close();
+      }
+    })
+  }
+
+
+
   onSelected() {
 
   }

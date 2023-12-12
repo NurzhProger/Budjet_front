@@ -57,86 +57,87 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     name_rus: ''
   }
 
-  Budget_detail: budjet_detail = {
-    doc: {
-      id: 0,
-      _organization: {
-        id: 0,
-        bin: '',
-        name_kaz: '',
-        name_rus: '',
-        adress: '',
-        codeorg: '',
-        deleted: false,
-        _budjet_reg: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        _regiondar: {
-          id: 0,
-          name: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        _abp: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        parent_organizations: [{
-          id: 0,
-          _date: '',
-          _organization: 0,
-          _parent: {
-            id: 0,
-            name_rus: ''
-          }
-        }
-        ]
-      },
-      nom: '',
-      _date: '',
-      deleted: false,
-      god_ucheta: '',
-      _vid_dannyh: '',
-      _vid_operacii: '',
-      _vid_rashoda: '',
-      comment: '',
-      summ: 0
-    },
-    tbl: [{
-      id: 0,
-      _fkr: {
-        id: 0,
-        code: '',
-        name_kaz: '',
-        name_rus: ''
-      },
-      _spec: {
-        id: 0,
-        code: '',
-        name_kaz: '',
-        name_rus: ''
-      },
-      _form: {
-        id: 0,
-        _spec: {
-          id: 0,
-          code: '',
-          name_kaz: '',
-          name_rus: ''
-        },
-        name: '',
-        head_form: '',
-        num_app: 0
-      },
-      summ: 0,
-      _planirovanie: 0
-    }]
-  }
+  Budget_detail: budjet_detail
+  //  = {
+  //   doc: {
+  //     id: 0,
+  //     _organization: {
+  //       id: 0,
+  //       bin: '',
+  //       name_kaz: '',
+  //       name_rus: '',
+  //       adress: '',
+  //       codeorg: '',
+  //       deleted: false,
+  //       _budjet_reg: {
+  //         id: 0,
+  //         code: '',
+  //         name_kaz: '',
+  //         name_rus: ''
+  //       },
+  //       _regiondar: {
+  //         id: 0,
+  //         name: '',
+  //         name_kaz: '',
+  //         name_rus: ''
+  //       },
+  //       _abp: {
+  //         id: 0,
+  //         code: '',
+  //         name_kaz: '',
+  //         name_rus: ''
+  //       },
+  //       parent_organizations: [{
+  //         id: 0,
+  //         _date: '',
+  //         _organization: 0,
+  //         _parent: {
+  //           id: 0,
+  //           name_rus: ''
+  //         }
+  //       }
+  //       ]
+  //     },
+  //     nom: '',
+  //     _date: '',
+  //     deleted: false,
+  //     god_ucheta: '',
+  //     _vid_dannyh: '',
+  //     _vid_operacii: '',
+  //     _vid_rashoda: '',
+  //     comment: '',
+  //     summ: 0
+  //   },
+  //   tbl: [{
+  //     id: 0,
+  //     _fkr: {
+  //       id: 0,
+  //       code: '',
+  //       name_kaz: '',
+  //       name_rus: ''
+  //     },
+  //     _spec: {
+  //       id: 0,
+  //       code: '',
+  //       name_kaz: '',
+  //       name_rus: ''
+  //     },
+  //     _form: {
+  //       id: 0,
+  //       _spec: {
+  //         id: 0,
+  //         code: '',
+  //         name_kaz: '',
+  //         name_rus: ''
+  //       },
+  //       name: '',
+  //       head_form: '',
+  //       num_app: 0
+  //     },
+  //     summ: 0,
+  //     _planirovanie: 0
+  //   }]
+  // }
 
   godNumber: number
   nochanged = true
@@ -159,9 +160,11 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       summ: new FormControl(null)
     })
 
-    if (this.Budget_doc_id !== '') {
-      this.fetch_form()
+    if (this.Budget_doc_id == '') {
+      this.Budget_doc_id = '0'
     }
+    
+    this.fetch_form()
     this.selectrashod()
     this.selectdannyi()
     this.selectoperacii()
@@ -283,11 +286,11 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
           this.pushArray(fkr_detail, spec_detail, form_detail)
 
-          let indexx = this.Budget_detail.tbl.findIndex(item => item['_spec'].id == spec_detail.id)
+          // let indexx = this.Budget_detail.tbl.findIndex(item => item['_spec'].id == spec_detail.id)
 
-          if (indexx !== -1) {
-            this.saveNewSpecific(indexx, fkr_detail)
-          }
+          // if (indexx !== -1) {
+          //   this.saveNewSpecific(indexx, fkr_detail)
+          // }
         }
       }
       )
@@ -318,7 +321,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   saveDoc(close: boolean) {
     let responce: any
-    this.tbl = this.Budget_detail.tbl
+    // this.tbl = this.Budget_detail.tbl
     this.Budget_detail.tbl = this.tbl
 
     this.Budget_Servise
@@ -484,7 +487,6 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   onRowEdit(izm: any, ri: number) {
 
-
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(BudgetRas4etDetailComponent,
       {
         header: 'Редактирование расчетной таблицы',
@@ -531,6 +533,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         summ: 0,
         _planirovanie: this.Budget_detail.doc.id
       })
+      this.tbl = this.Budget_detail.tbl
   }
 
   addSpec(fkr_detail: fkr_detail) {
@@ -556,7 +559,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   }
 
   add_fkr() {
-
+    
+    
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(FkrSelectComponent,
       {
         header: 'Выбор ФКР',
@@ -567,17 +571,18 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
     this.Budget_detail_ryref.onClose.subscribe((fkr_detail: fkr_detail) => {
       if (fkr_detail) {
-        this.addSpec(fkr_detail),
+        // this.addSpec(fkr_detail),
           this.fkr_array.push({
             id: fkr_detail.id,
             code: fkr_detail.code,
             name_kaz: fkr_detail.name_kaz,
             name_rus: fkr_detail.name_rus
           })
+          // this.fetch_form()
       }
     }
     )
-    this.fetch_form()
+    
   }
 
   add_dopl() {

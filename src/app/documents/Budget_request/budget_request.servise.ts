@@ -68,5 +68,9 @@ export class budjetService {
     return this.http.delete(this.host + `docs/planirovanie_delete/${item_id}`)
 }
 
+del_Past() {
+  return this.http.delete(this.host + 'docs/planirovanie_del_pust')
+}
+
 
 }

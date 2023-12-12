@@ -106,6 +106,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     if (this.Ras4et_detail.new_dopl.length > 0) {
       this.have_dopl = true
     }
+    console.log(this.izm);
     if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
