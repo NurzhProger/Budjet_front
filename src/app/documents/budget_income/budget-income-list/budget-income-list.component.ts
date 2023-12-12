@@ -65,30 +65,30 @@ export class BudgetIncomeListComponent implements OnInit {
   }
 
   onDelete(item: budget_income_doc) {
-    // let msg = !item.deleted ? "Пометить " + item.nom + " на удаление?" : "Снять с " + item.nom + " пометку на удаление?"
-    // let header = !item.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
-    // let msgsuccess = !item.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
+    let msg = !item.deleted ? "Пометить " + item.nom + " на удаление?" : "Снять с " + item.nom + " пометку на удаление?"
+    let header = !item.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
+    let msgsuccess = !item.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
 
-    // this.svod_confrim.confirm({
-    //   message: msg,
-    //   header: header,
-    //   icon: 'pi pi-exclamation-triangle',
-    //   accept: () => {
-    //     this.Svod_doc_Service.deleteReq(item.id)
-    //       .subscribe((data) => (
-    //         this.svod_message.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
-    //         this.fetch(),
-    //         this.svod_confrim.close()
-    //       ),
-    //         (error) => (
-    //           this.svod_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
-    //         )
-    //       )
-    //   },
-    //   reject: () => {
-    //     this.svod_confrim.close();
-    //   }
-    // });
+    this.budget_income_confrim.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.budget_income_service.deleteInc(item.id)
+          .subscribe((data) => (
+            this.budget_income_message.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetch(),
+            this.budget_income_confrim.close()
+          ),
+            (error) => (
+              this.budget_income_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+            )
+          )
+      },
+      reject: () => {
+        this.budget_income_confrim.close();
+      }
+    });
   }
 
   setClass(deleted: boolean) {

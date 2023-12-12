@@ -61,9 +61,9 @@ export class BudgetIncomeService {
 //   }
 
 
-//   deleteReq(item_id: number = 0) {
-//     return this.http.delete(this.host + `docs/svod_plandelete/${item_id}`)
-// }
+deleteInc(item_id: number = 0) {
+    return this.http.delete(this.host + `docs/budjet_income_delete/${item_id}`)
+  }
 
 
 }
