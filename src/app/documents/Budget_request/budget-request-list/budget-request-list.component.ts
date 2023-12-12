@@ -45,9 +45,10 @@ export class BudgetRequestListComponent implements OnInit {
   }
 
   private updateWindowSize() {
-    this.windowHeight = window.innerHeight;
+    this.windowHeight = window.innerHeight
   }
-  fetchCat() {
+
+  fetchCat(){
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
@@ -55,7 +56,6 @@ export class BudgetRequestListComponent implements OnInit {
     }
 
     this.Budget_list$ = this.budget_Servise.fetch(params)
-
   }
 
 
