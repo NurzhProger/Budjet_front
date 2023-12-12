@@ -117,7 +117,8 @@ export class BudgetRequestListComponent implements OnInit {
         this.Budget_request_Service.deleteReq(item.id)
           .subscribe((data) => (
             this.budget_list_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
-            this.budget_confrim.close()
+            this.budget_confrim.close(),
+            this.fetchCat()
           ),
             (error) => (
               this.budget_list_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })

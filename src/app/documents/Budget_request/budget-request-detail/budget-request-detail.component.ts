@@ -476,7 +476,9 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         // this.tbl = this.Budget_detail.tbl.filter(item => item.id !== )
         // }
         this.Budget_Confirmation.close()
-        this.saveDoc(false)
+        if (this.Budget_doc_id !== '0') {
+          this.saveDoc(false)
+        }
       },
       reject: () => {
         this.Budget_Confirmation.close();
