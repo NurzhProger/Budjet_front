@@ -276,6 +276,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'Свод бюджетной заявки',
                 command: () => this.openTab('app-svod-list', 'Свод бюджетной заявки', '')
+              },
+              {
+                label: 'Бюджетная заявка поступлений',
+                command: () => this.openTab('app-budget-income-list', 'Бюджетная заявка поступлений', '')
               }
               ]
             }

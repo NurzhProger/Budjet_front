@@ -43,6 +43,7 @@ export class SvodListComponent implements OnInit {
   openNew() {
     this.newItemEvent.emit({ params: { selector: 'app-svod-detail', nomer: 'Свод бюджетной заявки', id: '' } });
   }
+  
   fetch(){
     let params = {
       limit: this.rows.toString(),

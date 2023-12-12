@@ -20,11 +20,11 @@ export class SpecificationIncomeService {
 
 
     fetch(params: any): Observable<specification_income_list> {
-        return this.http.get<specification_income_list>(this.host + 'dirs/specexplist', { params })
+        return this.http.get<specification_income_list>(this.host + 'dirs/specinclist', { params })
     }
 
     fetchid(id: number): Observable<specification_income_detail> {
-        return this.http.get<specification_income_detail>(this.host + `dirs/specexpitem/${id}`)
+        return this.http.get<specification_income_detail>(this.host + `dirs/specincitem/${id}`)
     }
 
     saveSpec(spec: specification_income_detail) {
