@@ -77,8 +77,9 @@
             </div>
              <div class="pInputText">
                 <label for="number_doc" style="padding-right: 10px;">Общая сумма документа</label>
-                <input id="summ" type="number" pInputText [(ngModel)]="budget_income_detail.head.summ"
-                     style="width: 100%;" formControlName="summ"/>
+                <input id="summ" type="number" pInputText [(ngModel)]="budget_income_detail.head.summ" style="width: 100%;" formControlName="summ"/>
+
+
             </div>
         </div>
     </form>
@@ -111,7 +112,7 @@
                     </td>
                     <td style="text-align: center;">
                         <input type="number" [(ngModel)]="izm.summ"
-                        style="text-align:center; width: 100%; height: 100%;">
+                        style="text-align:center; width: 100%; height: 100%;" (ngModelChange)="onTableValuesChange()">
                     </td>
                     <td>
                         <div class="flex align-items-center justify-content-center gap-2">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { budget_income_detail, budget_income_list } from '../budget_income_interfaces';
+import { budget_income_detail, budget_income_head, budget_income_list } from '../budget_income_interfaces';
 import { BudgetIncomeService } from '../budget_income.servise';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { SHA256 } from 'crypto-js';
@@ -40,7 +40,8 @@ export class BudgetIncomeDetailComponent implements OnInit {
   form: FormGroup
   first = 0
   rows = 25
-  
+  totalSum: number
+  head: budget_income_head
   
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -54,8 +55,26 @@ export class BudgetIncomeDetailComponent implements OnInit {
     if (this.budjet_income_id !== '') {
       this.fetch_detail()
     }
+
   }
 
+  fetch_detail() {
+    this.budgetincService.fetch_detail(this.budjet_income_id)
+      .subscribe(
+        (detail) => {
+          this.budget_income_detail = detail,
+          this.preobGodNumber(),
+          this.calculateTotalSum()
+        }
+      )
+  }
+
+  onTableValuesChange() {
+    this.calculateTotalSum();
+  }
+  calculateTotalSum() {
+    this.budget_income_detail.head.summ = this.budget_income_detail.tbl.reduce((sum, row) => sum + row.summ, 0);
+  } 
 
   saveDoc(close: boolean) {
 
@@ -127,17 +146,6 @@ export class BudgetIncomeDetailComponent implements OnInit {
     else (
       this.fetch_detail()
     )
-  }
-
-  fetch_detail() {
-    this.budgetincService.fetch_detail(this.budjet_income_id)
-      .subscribe(
-        (detail) => {
-          this.budget_income_detail = detail,
-            this.tbl = this.budget_income_detail.tbl,
-            this.preobGodNumber()    
-        }
-      )
   }
 
   viewOrg() {
