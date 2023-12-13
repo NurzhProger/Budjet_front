@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { budget_income_doc, budget_income_list } from '../budget_income_interfaces';
 import { Observable } from 'rxjs';
 import { BudgetIncomeService } from '../budget_income.servise';
@@ -10,7 +10,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './budget-income-list.component.html',
   styleUrls: ['./budget-income-list.component.css']
 })
-export class BudgetIncomeListComponent implements OnInit {
+export class BudgetIncomeListComponent implements OnInit, OnChanges {
 
   constructor(
     private budget_income_service: BudgetIncomeService,
@@ -18,6 +18,7 @@ export class BudgetIncomeListComponent implements OnInit {
     private budget_income_confrim: ConfirmationService,
     private budget_income_message: MessageService
   ) { }
+  @Input() tabcount = 0
   @Output() closeEvent = new EventEmitter<any>()
   @Output() newItemEvent = new EventEmitter<any>();
   @Input() data = false
@@ -26,11 +27,23 @@ export class BudgetIncomeListComponent implements OnInit {
   selected: any
   first = 0
   rows = 25
+  old_tabcount = 0
 
   ngOnInit(): void {
+    this.old_tabcount = this.tabcount
     this.fetch()
+    this.updateWindowSize()
   }
 
+  ngOnChanges(): void {
+    if (this.tabcount == this.old_tabcount) {
+      this.fetch()
+    }
+  }
+
+  private updateWindowSize() {
+    this.windowHeight = window.innerHeight;
+  }
 
   openNew() {
     this.newItemEvent.emit({ params: { selector: 'app-budget-income-detail', nomer: 'Бюджетная заявка поступлений (создание)', id: 0 } });

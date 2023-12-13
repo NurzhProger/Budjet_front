@@ -211,7 +211,7 @@
 
                 <app-budget-income-list *ngIf="context.selector=='app-budget-income-list'" [data]="true"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                    (closeEvent)="removetab()">
+                    (closeEvent)="removetab()" [tabcount]="this.tabcount">
                 </app-budget-income-list>
 
                 <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'"
