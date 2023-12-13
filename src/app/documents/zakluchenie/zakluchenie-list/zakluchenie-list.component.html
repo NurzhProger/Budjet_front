@@ -39,7 +39,8 @@
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-zakluchenie let-ri="rowIndex">
+        <ng-template pTemplate="body" let-zakluchenie let-ri="rowIndex"
+            *ngFor="let zakluchenie of zakluchenie.results| keyvalue">
             <tr class="cursor-pointer" (dblclick)="onRowClick(zakluchenie)">
                 <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="text-align:center">

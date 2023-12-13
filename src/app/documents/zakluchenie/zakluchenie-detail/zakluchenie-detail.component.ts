@@ -11,6 +11,8 @@ import { OrganizationSelectComponent } from 'src/app/directory/organization/orga
 import { budjetService } from '../../Budget_request/budget_request.servise';
 import { fkr_detail } from 'src/app/directory/expenses/fkr/interfaces';
 import { FkrSelectComponent } from 'src/app/directory/expenses/fkr/fkr-select/fkr-select.component';
+import { SpecificationExpSelectComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-select/specification-exp-select.component';
+import { specification_expenses_detail } from 'src/app/directory/expenses/specification-exp/interfaces';
 
 @Component({
   selector: 'app-zakluchenie-detail',
@@ -41,6 +43,8 @@ export class ZakluchenieDetailComponent implements OnInit {
     private zaklDialog: DialogService,
     private Budget_Servise: budjetService,
     private Budget_detail_messageServicedelSelect: MessageService,
+    private fkrRef: DynamicDialogRef,
+    private specRef: DynamicDialogRef
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +104,55 @@ export class ZakluchenieDetailComponent implements OnInit {
     })
   }
 
+  editFKR(ri: number) {
+    this.fkrRef = this.zaklDialog.open(FkrSelectComponent,
+      {
+        header: 'Выбор ФКР',
+        width: '60%',
+        height: '80%',
+        data: { _org_id: this.zakluchenie_detail.head._organization.id }
+      })
+    this.fkrRef.onClose.subscribe((fkr: fkr_detail) => {
+      if (fkr) {
+        this.zakluchenie_detail.tbl[ri]._fkr = {
+          id: fkr.id,
+          code: fkr.code,
+          name_rus: fkr.name_rus
+        }
+      }
+    })
+  }
+
+  editSpec(ri: number) {
+    this.specRef = this.zaklDialog.open(SpecificationExpSelectComponent,
+      {
+        header: 'Выбор ФКР',
+        width: '60%',
+        height: '80%',
+      })
+    this.specRef.onClose.subscribe((spec: specification_expenses_detail) => {
+      if (spec) {
+        this.zakluchenie_detail.tbl[ri]._spec = {
+          id: spec.id,
+          code: spec.code,
+          name_rus: spec.name_rus
+        }
+      }
+    })
+  }
+
+  onTableValuesChange(ri: number) {
+    if (this.zakluchenie_detail.tbl[ri].changes_summ < 0) {
+      this.zakluchenie_detail.tbl[ri].final_summ = this.zakluchenie_detail.tbl[ri].original_summ + this.zakluchenie_detail.tbl[ri].changes_summ
+    } else {
+      this.zakluchenie_detail.tbl[ri].final_summ = this.zakluchenie_detail.tbl[ri].original_summ - this.zakluchenie_detail.tbl[ri].changes_summ;
+    }
+    this.zakluchenie_detail.head.summ = this.zakluchenie_detail.tbl.reduce((sum, row) => sum + row.final_summ, 0);
+  }
+
+  calculateTotalSum() {
+  }
+
   selectrashod() {
     let responce: any;
     this.Budget_Servise.fetch_vid_rashoda().subscribe(
@@ -121,8 +174,6 @@ export class ZakluchenieDetailComponent implements OnInit {
   }
 
   saveDoc(close: boolean): void {
-    this.tbl = this.zakluchenie_detail.tbl
-
 
     this.zakluchenie_service
       .save(this.zakluchenie_detail)

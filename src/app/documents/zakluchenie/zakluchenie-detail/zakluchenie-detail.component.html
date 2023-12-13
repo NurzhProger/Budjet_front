@@ -147,18 +147,31 @@
                         {{ri + 1}}
                     </td>
                     <td style="text-align: center;">
-                        {{ zakl._fkr.code}}
+                        <div class="p-inputgroup" style="height: 20px;">
+                            <input type="text" [readonly]="true" pInputText [ngModel]="zakl._fkr.code" />
+                            <button pButton pRipple type="button" icon="pi pi-pencil"
+                                class="p-button-outlined p-button-text" style="color:dimgrey;"
+                                (click)="editFKR(ri)"></button>
+                        </div>
                     </td>
                     <td style="text-align: center;">
-                        {{ zakl._spec.code + ' - ' + '"' + zakl._spec.name_rus + '"'}}
+                        <div class="p-inputgroup" style="height: 20px;">
+                            <input type="text" [readonly]="true" pInputText
+                                [ngModel]="zakl._spec.code + ' - ' + zakl._spec.name_rus" />
+                            <button pButton pRipple type="button" icon="pi pi-pencil"
+                                class="p-button-outlined p-button-text" style="color:dimgrey;"
+                                (click)="editSpec(ri)"></button>
+                        </div>
                     </td>
                     <td style="text-align: center;">
                         <input type="number" [(ngModel)]="zakl.original_summ"
-                            style="text-align:center; width: 100%; height: 100%;">
+                            style="text-align:center; width: 100%; height: 100%;"
+                            (ngModelChange)="onTableValuesChange(ri)">
                     </td>
                     <td style="text-align: center;">
                         <input type="number" [(ngModel)]="zakl.changes_summ"
-                            style="text-align:center; width: 100%; height: 100%;">
+                            style="text-align:center; width: 100%; height: 100%;"
+                            (ngModelChange)="onTableValuesChange(ri)">
                     </td>
                     <td style="text-align: center;">
                         <input type="number" [(ngModel)]="zakl.final_summ"

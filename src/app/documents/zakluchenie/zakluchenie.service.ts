@@ -34,8 +34,8 @@ export class ZakluchenieService {
   // edit(param: limit_doc) {
   //   return this.http.post(this.host + 'docs/oblasti_regedit', param)
   // }
-  // delLimit(limit_id: number = 0) {
-  //   return this.http.delete(this.host + `docs/limit_plandelete/${limit_id}`)
-  // }
+  del(limit_id: number = 0) {
+    return this.http.delete(this.host + `docs/zakluchenie_delete/${limit_id}`)
+  }
 
 }

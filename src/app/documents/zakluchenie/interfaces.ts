@@ -1,3 +1,4 @@
+
 export interface zakluchenie_doc {
     id: number,
     nom: string,
