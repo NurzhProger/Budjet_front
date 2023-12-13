@@ -42,7 +42,7 @@ export class BudgetIncomeDetailComponent implements OnInit {
   rows = 25
   totalSum: number
   head: budget_income_head
-  
+
   ngOnInit(): void {
     this.form = new FormGroup({
       number_doc: new FormControl(null),
@@ -51,7 +51,7 @@ export class BudgetIncomeDetailComponent implements OnInit {
       god_ucheta: new FormControl(null, [Validators.required]),
       summ: new FormControl(null)
     })
-    
+
     if (this.budjet_income_id !== '') {
       this.fetch_detail()
     }
@@ -63,8 +63,8 @@ export class BudgetIncomeDetailComponent implements OnInit {
       .subscribe(
         (detail) => {
           this.budget_income_detail = detail,
-          this.preobGodNumber(),
-          this.calculateTotalSum()
+            this.preobGodNumber(),
+            this.calculateTotalSum()
         }
       )
   }
@@ -74,12 +74,12 @@ export class BudgetIncomeDetailComponent implements OnInit {
   }
   calculateTotalSum() {
     this.budget_income_detail.head.summ = this.budget_income_detail.tbl.reduce((sum, row) => sum + row.summ, 0);
-  } 
+  }
 
   saveDoc(close: boolean) {
 
     this.tbl = this.budget_income_detail.tbl
-    
+
 
     this.budgetincService
       .saveInc(this.budget_income_detail)
@@ -99,7 +99,7 @@ export class BudgetIncomeDetailComponent implements OnInit {
   //     offset: this.first.toString()
   //   }
   //   this.Budget_income_list$ = this.budget_income_service.fetch(params)
-    
+
   // }
 
 
@@ -236,7 +236,7 @@ export class BudgetIncomeDetailComponent implements OnInit {
     });
   }
 
-  
+
 
 
 }

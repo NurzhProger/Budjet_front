@@ -46,8 +46,9 @@
             <div class="p-field" style="padding-right: 10px; width: 20rem;">
                 <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
                 <div class="p-inputgroup">
-                    <input id="org_name" type="text" pInputText [(ngModel)]="budget_income_detail.head._organization.name_rus"
-                        formControlName="org_name" style="width: 130px;" />
+                    <input id="org_name" type="text" pInputText
+                        [(ngModel)]="budget_income_detail.head._organization.name_rus" formControlName="org_name"
+                        style="width: 130px;" />
                     <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg() " style="width: 30px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                             class="bi bi-files" viewBox="0 0 16 16">
@@ -75,16 +76,17 @@
                     <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
                 </span>
             </div>
-             <div class="pInputText">
+            <div class="pInputText">
                 <label for="number_doc" style="padding-right: 10px;">Общая сумма документа</label>
-                <input id="summ" type="number" pInputText [(ngModel)]="budget_income_detail.head.summ" style="width: 100%;" formControlName="summ"/>
+                <input id="summ" type="number" pInputText [(ngModel)]="budget_income_detail.head.summ"
+                    style="width: 100%;" formControlName="summ" />
 
 
             </div>
         </div>
     </form>
 
-    
+
 
     <div class="p-toolbar-group-left;" style="padding: 10px 0 0 10px; ">
         <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
@@ -112,18 +114,20 @@
                     </td>
                     <td style="text-align: center;">
                         <input type="number" [(ngModel)]="izm.summ"
-                        style="text-align:center; width: 100%; height: 100%;" (ngModelChange)="onTableValuesChange()">
+                            style="text-align:center; width: 100%; height: 100%;"
+                            (ngModelChange)="onTableValuesChange()">
                     </td>
                     <td>
                         <div class="flex align-items-center justify-content-center gap-2">
-                            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                            <button pButton pRipple type="button" icon="pi pi-trash"
+                                class="p-button-rounded p-button-text"
                                 (click)="onDelete(izm._spec_income.id, izm._spec_income.name_rus)"></button>
                         </div>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
-    </div> 
+    </div>
 
     <div class="p-field" style="padding-top: 10px; position: fixed; bottom: 10px; width: 99%; ">
         <div class="pInputText">
@@ -133,7 +137,7 @@
         </div>
 
     </div>
-</div> 
+</div>
 
 <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
 </p-confirmDialog>

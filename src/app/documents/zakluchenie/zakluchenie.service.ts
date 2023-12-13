@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { zakluchenie_list } from './interfaces';
+import { zakluchenie_detail, zakluchenie_list } from './interfaces';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/login/auth.service';
 
@@ -23,13 +23,13 @@ export class ZakluchenieService {
     return this.http.get<zakluchenie_list>(this.host + 'docs/zakluchenie_list', { params })
   }
 
-  // fetch_detail(limit_id: string): Observable<limit_detail> {
-  //   return this.http.get<limit_detail>(this.host + 'docs/limit_planitem/' + limit_id)
-  // }
+  fetch_detail(zakluchenie_id: string): Observable<zakluchenie_detail> {
+    return this.http.get<zakluchenie_detail>(this.host + 'docs/zakluchenie_item/' + zakluchenie_id)
+  }
 
-  // saveLimit(limit: limit_detail) {
-  //   return this.http.post(this.host + 'docs/limit_plansave', limit)
-  // }
+  save(limit: zakluchenie_detail) {
+    return this.http.post(this.host + 'docs/zakluchenie_save', limit)
+  }
 
   // edit(param: limit_doc) {
   //   return this.http.post(this.host + 'docs/oblasti_regedit', param)
