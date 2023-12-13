@@ -33,7 +33,7 @@ export class BudgetIncomeListComponent implements OnInit {
 
 
   openNew() {
-    this.newItemEvent.emit({ params: { selector: 'app-budget-income-detail', nomer: 'Бюджетная заявка поступлений (создание)', id: '' } });
+    this.newItemEvent.emit({ params: { selector: 'app-budget-income-detail', nomer: 'Бюджетная заявка поступлений (создание)', id: 0 } });
   }
 
   fetch(){
@@ -51,7 +51,7 @@ export class BudgetIncomeListComponent implements OnInit {
 
   onRowEdit(income: budget_income_doc) {
 
-    this.newItemEvent.emit({ params: { selector: 'app-budget-income-detail', nomer: 'Бюджетная заявка поступлений' + income.nom, id: income.id } });
+    this.newItemEvent.emit({ params: { selector: 'app-budget-income-detail', nomer: 'Бюджетная заявка поступлений ' + income.nom, id: income.id } });
 
 
   }

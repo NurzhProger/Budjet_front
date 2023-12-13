@@ -58,23 +58,23 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.login()
     let responce: any
-    sessionStorage.clear()
-    this.auth
-      .clearToken(this.form.value)
-      .subscribe(
-        (data) => (
-          responce = data,
-          this.changepass(responce)
-        ),
-        error => {
-          this.form.enable()
-          this.msgLogin.add({
-            severity: 'error', summary: 'Ошибка', detail: error.error.detail
-          })
-        }
-      )
+    // sessionStorage.clear()
+    // this.auth
+    //   .clearToken(this.form.value)
+    //   .subscribe(
+    //     (data) => (
+    //       responce = data,
+    //       this.changepass(responce)
+    //     ),
+    //     error => {
+    //       this.form.enable()
+    //       this.msgLogin.add({
+    //         severity: 'error', summary: 'Ошибка', detail: error.error.detail
+    //       })
+    //     }
+    //   )
   }
 
   changepass(responce: any) {
