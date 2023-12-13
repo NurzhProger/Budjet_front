@@ -209,11 +209,6 @@
                     [budjet_income_id]="number" (closeEvent)="removetab()">
                 </app-budget-income-detail>
 
-                <app-zakluchenie-detail *ngIf="context.selector=='app-zakluchenie-detail'"
-                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id, $event.params.data)"
-                    [zakluchenie_id]="number" (closeEvent)="removetab()">
-                </app-zakluchenie-detail>
-
                 <app-budget-income-list *ngIf="context.selector=='app-budget-income-list'" [data]="true"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
                     (closeEvent)="removetab()">
