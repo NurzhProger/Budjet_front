@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { budget_income_detail } from '../budget_income_interfaces';
+import { budget_income_detail, budget_income_list } from '../budget_income_interfaces';
 import { BudgetIncomeService } from '../budget_income.servise';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { SHA256 } from 'crypto-js';
@@ -10,6 +10,7 @@ import { OrganizationSelectComponent } from 'src/app/directory/organization/orga
 import { organization_detail } from 'src/app/directory/organization/interfaces';
 import { SpecificationIncomeSelectComponent } from 'src/app/directory/income/specification-income/specification-income-select/specification-income-select.component';
 import { specification_income_detail } from 'src/app/directory/income/specification-income/interfaces';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-budget-income-detail',
@@ -26,9 +27,10 @@ export class BudgetIncomeDetailComponent implements OnInit {
     private budgetincMessage: MessageService,
     private budgetincConfirmation: ConfirmationService,
     private budgetinc_Rer: DynamicDialogRef,
-    private budgetIncDialog: DialogService
+    private budgetIncDialog: DialogService,
+    private budget_income_service: BudgetIncomeService
   ) { }
-
+  Budget_income_list$: Observable<budget_income_list>
   budget_income_detail: budget_income_detail
   tbl: any = []
   hashBegin = ''
@@ -71,8 +73,15 @@ export class BudgetIncomeDetailComponent implements OnInit {
           this.budgetincMessage.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
         )
       )
-
   }
+  // fetch(){
+  //   let params = {
+  //     limit: this.rows.toString(),
+  //     offset: this.first.toString()
+  //   }
+  //   this.Budget_income_list$ = this.budget_income_service.fetch(params)
+    
+  // }
 
 
   closeform(close: boolean) {
