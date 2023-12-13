@@ -5,7 +5,7 @@ import { vid_rashoda } from "src/app/enums/vid_rashoda/vid-rashoda/interfaces";
 import { vid_dannyh } from "src/app/enums/vid_dannyh/vid-dannyh/interfaces";
 import { vid_operacii } from "src/app/enums/vid_operacii/vid-operacii/interfaces";
 import { AuthService } from "src/app/login/auth.service";
-import { budget_income_list } from "./budget_income_interfaces";
+import { budget_income_detail, budget_income_list } from "./budget_income_interfaces";
 
 
 @Injectable({
@@ -40,9 +40,9 @@ export class BudgetIncomeService {
     return this.http.get<budget_income_list>(this.host + 'docs/budjet_income_list', { params })
   }
 
-//   fetch_detail(svod_id: string): Observable<svod_detail> {
-//     return this.http.get<svod_detail>(this.host + 'docs/svod_planitem/' + svod_id)
-//   }
+  fetch_detail(budget_inc_id: string): Observable<budget_income_detail> {
+    return this.http.get<budget_income_detail>(this.host + 'docs/budjet_income_item/' + budget_inc_id)
+  }
 
 //   fetch_vid_rashoda(): Observable<vid_rashoda> {
 //     return this.http.get<vid_rashoda>(this.host + 'enums/vid_rashodalist')
@@ -56,9 +56,9 @@ export class BudgetIncomeService {
 //     return this.http.get<vid_operacii>(this.host + 'enums/vid_operaciilist')
 //   }
 
-//   saveSvod(budjet: svod_detail) {
-//     return this.http.post(this.host + 'docs/svod_plansave', budjet)
-//   }
+  saveInc(budjet: budget_income_detail) {
+    return this.http.post(this.host + 'docs/budjet_income_save', budjet)
+  }
 
 
 deleteInc(item_id: number = 0) {
