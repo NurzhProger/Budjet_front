@@ -1,1 +1,93 @@
-<p>zakluchenie-list works!</p>
+<p-toolbar>
+
+    <div class="p-toolbar-group-left" *ngIf="data!==false">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+        <span class="p-input-icon-left" style="margin-right: 10px;">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" placeholder="поиск..." />
+        </span>
+        <div style="padding-right: 10px;">
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+                styleClass="p-button-sm" (click)="fetch()"></button>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+                (click)="closeform()"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(zakluchenie_list$ | async) as zakluchenie; else loader">
+    <p-table *ngIf="zakluchenie.count !== 0; else empty" [value]="zakluchenie.results" [scrollable]="true"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%; text-align:center">Номер</th>
+                <th style="width:5%; text-align:center">Дата</th>
+                <th style="width:10%; text-align:center">Номер документа</th>
+                <th style="width:10%; text-align:center">Год учета</th>
+                <th style="width:25%; text-align:center">Организация</th>
+                <th style="width:15%; text-align:center">Сумма</th>
+                <th style="width:25%; text-align:center">Комментарий</th>
+                <th style="width:5%; text-align:center">Действия</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-zakluchenie let-ri="rowIndex">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(zakluchenie)">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie._date}}</span>
+                </td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.nom}}</span>
+                </td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.god_ucheta}}</span>
+                </td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie._organization.name_rus}}</span>
+                </td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.summ}}</span>
+                </td>
+                <td style="text-align:center">
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.comment}}</span>
+                </td>
+                <td style="padding: 0; margin:0;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+                            (click)="onRowEdit(zakluchenie)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                            (click)="onDelete(zakluchenie)"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <ng-template #empty>
+        <div class="center">
+            Нет ни одного элемента
+        </div>
+    </ng-template>
+    <div *ngIf="zakluchenie.count !== 0" class="flex align-items-center justify-content-center">
+        <span class="mx-1 text-color">Указано</span>
+        <p-paginator [first]="first" [rows]="rows" [totalRecords]="zakluchenie.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (zakluchenie.count || 0)  ? zakluchenie.count : first + rows }} из {{zakluchenie.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+    </div>
+    <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+    </p-confirmDialog>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>
