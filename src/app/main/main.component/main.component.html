@@ -195,9 +195,14 @@
                 </app-svod-detail>
 
                 <app-svod-list *ngIf="context.selector=='app-svod-list'" [data]="true"
-                (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                (closeEvent)="removetab()">
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                    (closeEvent)="removetab()">
                 </app-svod-list>
+
+                <app-zakluchenie-list *ngIf="context.selector=='app-zakluchenie-list'" [data]="true"
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                    (closeEvent)="removetab()">
+                </app-zakluchenie-list>
 
                 <app-budget-income-detail *ngIf="context.selector=='app-budget-income-detail'"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id, $event.params.data)"
@@ -205,8 +210,8 @@
                 </app-budget-income-detail>
 
                 <app-budget-income-list *ngIf="context.selector=='app-budget-income-list'" [data]="true"
-                (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                (closeEvent)="removetab()">
+                    (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
+                    (closeEvent)="removetab()">
                 </app-budget-income-list>
 
                 <app-budget-ras4et-detail *ngIf="context.selector=='app-budget-ras4et-detail'"
