@@ -11,16 +11,16 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrls: ['./budget-income-list.component.css']
 })
 export class BudgetIncomeListComponent implements OnInit {
-
+  @Output() closeEvent = new EventEmitter<any>()
+  @Output() newItemEvent = new EventEmitter<any>();
+  @Input() data = false
   constructor(
     private budget_income_service: BudgetIncomeService,
     private budget_income_ryref: DynamicDialogRef,
     private budget_income_confrim: ConfirmationService,
     private budget_income_message: MessageService
   ) { }
-  @Output() closeEvent = new EventEmitter<any>()
-  @Output() newItemEvent = new EventEmitter<any>();
-  @Input() data = false
+
   Budget_income_list$: Observable<budget_income_list>
   windowHeight: number
   selected: any
@@ -36,16 +36,16 @@ export class BudgetIncomeListComponent implements OnInit {
     this.newItemEvent.emit({ params: { selector: 'app-budget-income-detail', nomer: 'Бюджетная заявка поступлений (создание)', id: 0 } });
   }
 
-  fetch(){
+  fetch() {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString()
     }
     this.Budget_income_list$ = this.budget_income_service.fetch(params)
-    
+
   }
 
-  closeform(){
+  closeform() {
     this.closeEvent.emit()
   }
 

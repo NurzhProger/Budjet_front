@@ -1,1 +1,202 @@
-<p>zakluchenie-detail works!</p>
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <div style="padding-right: 10px;">
+            <button [disabled]="form.invalid" pButton pRipple label="Записать" icon="pi pi-save"
+                class="p-button-secondary p-mr-2" (click)="saveDoc(false)"></button>
+        </div>
+        <button [disabled]="form.invalid" pButton pRipple label="Записать и закрыть" icon="pi pi-save"
+            class="p-button-info p-mr-2" (click)="saveDoc(true)"></button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+        <div style="padding-right: 10px;">
+            <p-splitButton appendTo="body" label="Еще" [model]="this.items"
+                styleClass="p-button-outlined p-button-plain p-mr-2"></p-splitButton>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined p-button-plain p-mr-2"
+                styleClass="p-button-sm" (click)="closeform(true)"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(zakluchenie_detail) as Svod_detail; else loader">
+    <form class="card" [formGroup]="form" style="display: flex; padding-bottom: 10px;">
+
+        <div style="display: flex; padding-bottom: 10px;">
+            <div class="p-field" style="padding-right: 10px; ">
+                <label for="number_doc">Номер</label>
+                <div class="p-inputgroup">
+                    <input id="number_doc" type="text" pInputText [(ngModel)]="zakluchenie_detail.head.nom"
+                        formControlName="number_doc" style="width: 130px;" />
+                </div>
+            </div>
+
+            <div class="p-field" style="padding-right: 10px;">
+                <label for="date_doc">Дата <span style="color: red;">*</span></label>
+                <div class="p-inputgroup">
+                    <input id="date_doc" type="date" pInputText [(ngModel)]="zakluchenie_detail.head._date"
+                        formControlName="date_doc" style="width: 130px;" />
+                </div>
+                <span class="p-invalid" *ngIf="form.controls['date_doc'].invalid && form.controls['date_doc'].touched">
+                    <span *ngIf="form.controls['date_doc'].errors?.required">Дата не должна быть пустой</span>
+                </span>
+            </div>
+
+            <div class="p-field" style="padding-right: 10px; width: 20rem;">
+                <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
+                <div class="p-inputgroup">
+                    <input id="org_name" type="text" pInputText
+                        [(ngModel)]="zakluchenie_detail.head._organization.name_rus" formControlName="org_name"
+                        style="width: 130px;" />
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg() " style="width: 30px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
+                            class="bi bi-files" viewBox="0 0 16 16">
+                            <path
+                                d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                        </svg>
+                    </span>
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()"
+                        style="width: 30px;">...</span>
+                </div>
+                <span class="p-invalid" *ngIf="form.controls['org_name'].invalid && form.controls['org_name'].touched">
+                    <span *ngIf="form.controls['org_name'].errors?.required">Организация не должно быть
+                        пустым</span>
+                </span>
+            </div>
+            <div class="p-field" style="padding-right: 10px;">
+
+                <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
+                <div class="p-inputgroup">
+                    <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()"
+                        formControlName="god_ucheta" style="width: 130px;" />
+                </div>
+                <span class="p-invalid"
+                    *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
+                    <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
+                </span>
+            </div>
+            <div class="pInputText">
+                <label for="number_doc" style="padding-right: 10px;">Cумма документа</label>
+                <input id="summ" type="number" pInputText [(ngModel)]="zakluchenie_detail.head.summ"
+                    style="width: 100%;" formControlName="summ" />
+
+
+            </div>
+        </div>
+
+        <div style="display: flex; padding-bottom: 10px; padding-left: 10px;">
+            <!-- вид расхода -->
+            <div class="p-field" style="padding-right: 10px;">
+                <label for="vid_rashoda">Вид расхода<span style="color: red;">*</span></label>
+                <div>
+                    <p-dropdown placeholder="Выберите вид расхода" [options]="_vid_rashoda" optionLabel="name"
+                        optionValue="name" appendTo="body" [(ngModel)]="zakluchenie_detail.head._vid_rashoda"
+                        formControlName="vid_rashoda" [style]="{'max-height': '200px'}">
+                    </p-dropdown>
+                </div>
+                <span class="p-invalid"
+                    *ngIf="form.controls['vid_rashoda'].invalid && form.controls['vid_rashoda'].touched">
+                    <span *ngIf="form.controls['vid_rashoda'].errors?.required">Выберите вид расход</span>
+                </span>
+            </div>
+
+            <!-- вид данных -->
+            <div class="p-field" style="padding-right: 10px;">
+                <label for="vid_dannyh">Вид данных<span style="color: red;">*</span></label>
+                <div>
+                    <p-dropdown placeholder="Выберите вид данных" [options]="_vid_dannyh" optionLabel="name"
+                        optionValue="name" appendTo="body" [(ngModel)]="zakluchenie_detail.head._vid_dannyh"
+                        formControlName="vid_dannyh">
+                    </p-dropdown>
+                </div>
+                <span class="p-invalid"
+                    *ngIf="form.controls['vid_dannyh'].invalid && form.controls['vid_dannyh'].touched">
+                    <span *ngIf="form.controls['vid_dannyh'].errors?.required">Выберите вид данных</span>
+                </span>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="p-toolbar-group-left;" style="padding: 10px 0 0 10px; ">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
+    </div>
+
+    <div style="padding-top: 10px;">
+        <p-table [value]="zakluchenie_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+            styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:5%; text-align:center">Номер</th>
+                    <th style="text-align:center; width: 15%;">ФКР</th>
+                    <th style="text-align:center; width: 15%;">Специфика</th>
+                    <th style="text-align:center; width: 10%;">Исходная сумма</th>
+                    <th style="text-align:center; width: 10%;">Изменение суммы</th>
+                    <th style="text-align:center; width: 10%;">Окончательная сумма</th>
+                    <th style="text-align:center; width: 15%;">Характеристика</th>
+                    <th style="text-align:center; width: 15%;">Описание</th>
+                    <th style="text-align:center; width: 5%;">Действия</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-zakl let-ri="rowIndex">
+                <tr class="cursor-pointer">
+                    <td style="text-align: center; font-weight: 700;">
+                        {{ri + 1}}
+                    </td>
+                    <td style="text-align: center;">
+                        {{ zakl._fkr.code}}
+                    </td>
+                    <td style="text-align: center;">
+                        {{ zakl._spec.code + ' - ' + '"' + zakl._spec.name_rus + '"'}}
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="number" [(ngModel)]="zakl.original_summ"
+                            style="text-align:center; width: 100%; height: 100%;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="number" [(ngModel)]="zakl.changes_summ"
+                            style="text-align:center; width: 100%; height: 100%;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="number" [(ngModel)]="zakl.final_summ"
+                            style="text-align:center; width: 100%; height: 100%;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="text" [(ngModel)]="zakl.characteristics"
+                            style="text-align:center; width: 100%; height: 100%;">
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="text" [(ngModel)]="zakl.description"
+                            style="text-align:center; width: 100%; height: 100%;">
+                    </td>
+                    <td>
+                        <div class="flex align-items-center justify-content-center gap-2">
+                            <button pButton pRipple type="button" icon="pi pi-trash"
+                                class="p-button-rounded p-button-text"
+                                (click)="onDelete(zakl._fkr.id, zakl._fkr.name_rus)"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div class="p-field" style="padding-top: 10px; position: fixed; bottom: 10px; width: 99%; ">
+        <div class="pInputText">
+            <label for="comment" style="padding-right: 10px;">Комментарии</label>
+            <input id="comment" type="text" pInputText [(ngModel)]="zakluchenie_detail.head.comment"
+                style="width: 100%; height: 25px;" />
+        </div>
+
+    </div>
+</div>
+
+<p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+</p-confirmDialog>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>
