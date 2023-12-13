@@ -40,7 +40,8 @@ export class BudgetIncomeDetailComponent implements OnInit {
   form: FormGroup
   first = 0
   rows = 25
-
+  totalSum: number
+  head: budget_income_head
   
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -92,7 +93,14 @@ export class BudgetIncomeDetailComponent implements OnInit {
         )
       )
   }
- 
+  // fetch(){
+  //   let params = {
+  //     limit: this.rows.toString(),
+  //     offset: this.first.toString()
+  //   }
+  //   this.Budget_income_list$ = this.budget_income_service.fetch(params)
+    
+  // }
 
 
   closeform(close: boolean) {
