@@ -85,10 +85,10 @@
 
     
 
-    <!-- <div class="p-toolbar-group-left;" style="padding: 10px 0 0 10px; ">
+    <div class="p-toolbar-group-left;" style="padding: 10px 0 0 10px; ">
         <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="openNew()"></button>
-    </div> -->
+    </div>
 
     <div style="padding-top: 10px;">
         <p-table [value]="budget_income_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
@@ -96,8 +96,9 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width:5%; text-align:center">Номер</th>
-                    <th style="text-align:center; width: 80%;">Специфика поступления</th>
+                    <th style="text-align:center; width: 70%;">Специфика поступления</th>
                     <th style="text-align:center; width: 15%;">Сумма</th>
+                    <th style="text-align:center; width: 10%;">Действия</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
@@ -105,11 +106,18 @@
                     <td style="text-align: center; font-weight: 700;">
                         {{ri + 1}}
                     </td>
-                    <td style="text-align: center;">
+                    <td style="text-align: left;">
                         {{ izm._spec_income.code + ' - ' + '"' + izm._spec_income.name_rus + '"'}}
                     </td>
                     <td style="text-align: center;">
-                        {{izm.summ}}
+                        <input type="number" [(ngModel)]="izm.summ"
+                        style="text-align:center; width: 100%; height: 100%;">
+                    </td>
+                    <td>
+                        <div class="flex align-items-center justify-content-center gap-2">
+                            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                                (click)="onDelete(izm._spec_income.id, izm._spec_income.name_rus)"></button>
+                        </div>
                     </td>
                 </tr>
             </ng-template>
