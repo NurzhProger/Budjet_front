@@ -29,10 +29,10 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:5%; text-align:center">Номер</th>
-                <th style="width:15%; text-align:center">Номер документа</th>
-                <th style="width:60%; text-align:center">Организация</th>
-                <th style="width:15%; text-align:center">Год учета</th>
-                <th style="width:5%; text-align:center">Действия</th>
+                <th style="width:20%; text-align:center">Номер документа</th>
+                <th style="width:55%; text-align:center">Организация</th>
+                <th style="width:10%; text-align:center">Год учета</th>
+                <th style="width:10%; text-align:center">Действия</th>
             </tr>
         </ng-template>
 
@@ -47,7 +47,7 @@
 
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(limit.deleted)">{{limit.god_ucheta}}</span>
+                    <span [ngClass]="setClass(limit.deleted)">{{limit.god_ucheta| date: 'yyyy'}}</span>
                 </td>
                 <td style="padding: 0; margin:0;">
                     <div class="flex align-items-center justify-content-center gap-2">

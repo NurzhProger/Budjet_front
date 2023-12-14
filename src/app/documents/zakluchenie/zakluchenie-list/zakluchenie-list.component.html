@@ -50,7 +50,7 @@
                     <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.nom}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.god_ucheta}}</span>
+                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.god_ucheta | date: 'yyyy'}}</span>
                 </td>
                 <td style="text-align:center">
                     <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie._organization.name_rus}}</span>
