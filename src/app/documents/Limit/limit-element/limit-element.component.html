@@ -84,10 +84,10 @@
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template class="" pTemplate="header">
             <tr>
-                <th style="text-align:center;">Номер</th>
-                <th style="text-align:center;">Функциональная классификация расходов</th>
-                <th style="text-align:center;">Сумма на год</th>
-                <th style="text-align:center;">Действия</th>
+                <th style="text-align:center;width:5%">Номер</th>
+                <th style="text-align:center;width:75%">Функциональная классификация расходов</th>
+                <th style="text-align:center;width:10%">Сумма на год</th>
+                <th style="text-align:center;width:10%">Действия</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-lim let-ri="rowIndex">
@@ -107,8 +107,10 @@
                     </div>
                 </td>
                 <td style="text-align:center;">
-                    <input type="number" [ngModel]="formatNumber(lim.summ)"
-                        style="text-align:center; width: 100%; height: 100%;">
+                    <p-inputNumber type="number" 
+                    [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" [minFractionDigits]="2" [maxFractionDigits]="2"
+                    [(ngModel)]="lim.summ"
+                        style="text-align:center; width: 100%; height: 100%;"></p-inputNumber>
                 </td>
                 <td>
                     <div class="flex align-items-center justify-content-center gap-2">
