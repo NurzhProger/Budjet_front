@@ -106,7 +106,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     if (this.Ras4et_detail.new_dopl.length > 0) {
       this.have_dopl = true
     }
-    console.log(this.izm);
     if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
@@ -581,7 +580,10 @@ export class BudgetRas4etDetailComponent implements OnInit {
       .saveLimit(this.Ras4et_detail)
       .subscribe(
         (data) => (
+          responce = data,
+          this.Ras4et_detail.head = responce,
           this.Budget_ras4et_Detailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          // this.Ras4et_detail.head.id = responce.head.id,
           this.closeaftersave(close)
         ),
         (error) => (
@@ -597,7 +599,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.hashBegin = this.hashEnd
 
     if (close) {
-      this.Budget_ras4et_DetailrefModal.close(this.Ras4et_detail.head.summ)
+      this.Budget_ras4et_DetailrefModal.close(this.Ras4et_detail)
     }
   }
 

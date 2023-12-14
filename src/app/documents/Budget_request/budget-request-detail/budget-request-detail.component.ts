@@ -47,7 +47,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   selected = false;
   _lastfkr = 0
   allrecord = true
-  
+
 
 
   fkr: fkr_detail = {
@@ -163,13 +163,13 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     if (this.Budget_doc_id == '') {
       this.Budget_doc_id = '0'
     }
-    
+
     this.fetch_form()
     this.selectrashod()
     this.selectdannyi()
     this.selectoperacii()
   }
-  
+
   changeDate() {
     let selectedDate = new Date(this.Budget_detail.doc._date);
     let selectedYear = selectedDate.getFullYear();
@@ -464,7 +464,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         // this.tbl.splice(ind, 1)
         let tek = this.tbl[ind]
         // let dd = this.Budget_detail.tbl.filter(item => item._fkr == tek._fkr && item._spec == tek._spec && item._form == tek._form)
-        // console.log(dd);
+        // s.log(dd);
         for (let i = 0; i < this.Budget_detail.tbl.length; i++) {
           if (this.Budget_detail.tbl[i]._fkr == tek._fkr && this.Budget_detail.tbl[i]._spec == tek._spec && this.Budget_detail.tbl[i]._form == tek._form) {
             this.Budget_detail.tbl.splice(i, 1)
@@ -500,9 +500,13 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         }
       })
 
-    this.Budget_detail_ryref.onClose.subscribe((summ: number) => {
-      if (summ) {
-        izm.summ = summ
+    this.Budget_detail_ryref.onClose.subscribe((detail: any) => {
+
+      if (detail) {
+        this.fetch_form()
+        console.log(detail.head.summ);
+
+        // izm.summ = detail.head.summ
       }
     })
 
@@ -535,7 +539,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         summ: 0,
         _planirovanie: this.Budget_detail.doc.id
       })
-      this.tbl = this.Budget_detail.tbl
+    this.tbl = this.Budget_detail.tbl
   }
 
   addSpec(fkr_detail: fkr_detail) {
@@ -561,8 +565,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   }
 
   add_fkr() {
-    
-    
+
+
     this.Budget_detail_ryref = this.Budget_detail_dialog.open(FkrSelectComponent,
       {
         header: 'Выбор ФКР',
@@ -574,17 +578,17 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail_ryref.onClose.subscribe((fkr_detail: fkr_detail) => {
       if (fkr_detail) {
         // this.addSpec(fkr_detail),
-          this.fkr_array.push({
-            id: fkr_detail.id,
-            code: fkr_detail.code,
-            name_kaz: fkr_detail.name_kaz,
-            name_rus: fkr_detail.name_rus
-          })
-          // this.fetch_form()
+        this.fkr_array.push({
+          id: fkr_detail.id,
+          code: fkr_detail.code,
+          name_kaz: fkr_detail.name_kaz,
+          name_rus: fkr_detail.name_rus
+        })
+        // this.fetch_form()
       }
     }
     )
-    
+
   }
 
   add_dopl() {

@@ -15,8 +15,8 @@ export class AuthService {
 
     private auth_token = ''
     // host = "http://192.168.10.200:9999/"
-    host = "http://192.168.5.27:9900/"
-    // host = "https://planback.qazna24.kz/"
+    // host = "http://192.168.5.27:9900/"
+    host = "https://planback.qazna24.kz/"
     // host = "https://tstplansrv.qazna24.kz/"
 
 
