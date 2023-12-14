@@ -142,11 +142,7 @@ export class ZakluchenieDetailComponent implements OnInit {
   }
 
   onTableValuesChange(ri: number) {
-    if (this.zakluchenie_detail.tbl[ri].changes_summ < 0) {
-      this.zakluchenie_detail.tbl[ri].final_summ = this.zakluchenie_detail.tbl[ri].original_summ + this.zakluchenie_detail.tbl[ri].changes_summ
-    } else {
-      this.zakluchenie_detail.tbl[ri].final_summ = this.zakluchenie_detail.tbl[ri].original_summ - this.zakluchenie_detail.tbl[ri].changes_summ;
-    }
+    this.zakluchenie_detail.tbl[ri].changes_summ = this.zakluchenie_detail.tbl[ri].final_summ - this.zakluchenie_detail.tbl[ri].original_summ
     this.zakluchenie_detail.head.summ = this.zakluchenie_detail.tbl.reduce((sum, row) => sum + row.final_summ, 0);
   }
 
