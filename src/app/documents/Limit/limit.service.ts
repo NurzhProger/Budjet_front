@@ -37,5 +37,8 @@ export class LimitService {
   delLimit(limit_id: number = 0) {
     return this.http.delete(this.host + `docs/limit_plandelete/${limit_id}`)
 }
+del_Past() {
+  return this.http.get(this.host + 'docs/limit_planempty')  
+}
 
 }

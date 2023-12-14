@@ -107,5 +107,31 @@ export class LimitListComponent implements OnInit {
     return classs
 
   }
+  delPast() {
+    this.limit_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.LimitService.del_Past()
+          .subscribe((data) => (
+            this.limit_message_service.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetchList(),
+            this.limit_confirm.close()
+          ),
+            (error) => (this.limit_message_service.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.limit_confirm.close();
+      }
+    })
+  }
 
 }
