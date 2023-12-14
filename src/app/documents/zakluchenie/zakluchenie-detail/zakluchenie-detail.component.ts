@@ -126,7 +126,7 @@ export class ZakluchenieDetailComponent implements OnInit {
   editSpec(ri: number) {
     this.specRef = this.zaklDialog.open(SpecificationExpSelectComponent,
       {
-        header: 'Выбор ФКР',
+        header: 'Выбор специфики',
         width: '60%',
         height: '80%',
       })
