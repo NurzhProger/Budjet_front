@@ -323,21 +323,21 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
   saveDoc(close: boolean) {
     let responce: any
-    // this.tbl = this.Budget_detail.tbl
-    this.Budget_detail.tbl = this.tbl
 
-    this.Budget_Servise
-      .saveLimit(this.Budget_detail)
-      .subscribe(
-        (data) => (
-          this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
-          this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0),
-          this.closeaftersave(close)
-        ),
-        (error) => (
-          this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+    // this.tbl = this.Budget_detail.tbl
+    // this.Budget_detail.tbl = this.tbl
+    this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0),
+      this.Budget_Servise
+        .saveLimit(this.Budget_detail)
+        .subscribe(
+          (data) => (
+            this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+            this.closeaftersave(close)
+          ),
+          (error) => (
+            this.Budget_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+          )
         )
-      )
   }
 
   closeaftersave(close: boolean) {
@@ -349,9 +349,11 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     if (close) {
       this.closeEvent.emit()
     } else {
-      this.fetch_form()
+      this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0),
+        this.fetch_form()
+
     }
-    this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0)
+
   }
 
 
