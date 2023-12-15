@@ -564,8 +564,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
     }
     this.summdoc = summdoc;
     this.Ras4et_detail.head.summ = this.summdoc;
-
-
   }
 
   dobavlenya(tip: string, doc: number) {
@@ -583,6 +581,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
           responce = data,
           this.Ras4et_detail.head = responce,
           this.Budget_ras4et_Detailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          this.calculate(),
           // this.Ras4et_detail.head.id = responce.head.id,
           this.closeaftersave(close)
         ),

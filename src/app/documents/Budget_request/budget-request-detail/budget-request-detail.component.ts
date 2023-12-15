@@ -285,6 +285,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         if (form_detail) {
 
           this.pushArray(fkr_detail, spec_detail, form_detail)
+          this.saveDoc(false)
+
 
           // let indexx = this.Budget_detail.tbl.findIndex(item => item['_spec'].id == spec_detail.id)
 
@@ -329,6 +331,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       .subscribe(
         (data) => (
           this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0),
           this.closeaftersave(close)
         ),
         (error) => (
@@ -345,6 +348,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
     if (close) {
       this.closeEvent.emit()
+    } else {
+      this.fetch_form()
     }
   }
 
@@ -503,13 +508,13 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail_ryref.onClose.subscribe((detail: any) => {
 
       if (detail) {
-        this.fetch_form()
-        console.log(detail.head.summ);
+        izm.summ = detail.head.summ,
+          this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0)
 
-        // izm.summ = detail.head.summ
+        // this.saveDoc(false)
       }
     })
-
+    // this.fetch_form()
     // this.newItemEvent.emit({ params: { selector: 'app-budget-ras4et-detail', nomer: 'Расшифровка заявки ' + izm._form.name, id: izm } });
   }
 
