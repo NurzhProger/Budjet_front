@@ -351,6 +351,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     } else {
       this.fetch_form()
     }
+    this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0)
   }
 
 
