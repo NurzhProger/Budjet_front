@@ -22,6 +22,7 @@ export class BudgetIncomeDetailComponent implements OnInit {
   @Input() data = false
   @Output() closeEvent = new EventEmitter<any>();
   @Output() newItemEvent = new EventEmitter<any>()
+  izm: any;
   constructor(
     private budgetincService: BudgetIncomeService,
     private budgetincMessage: MessageService,
@@ -42,6 +43,8 @@ export class BudgetIncomeDetailComponent implements OnInit {
   rows = 25
   totalSum: number
   head: budget_income_head
+  isTenge: boolean = true;
+  tablisa: any = []
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -93,14 +96,18 @@ export class BudgetIncomeDetailComponent implements OnInit {
         )
       )
   }
-  // fetch(){
-  //   let params = {
-  //     limit: this.rows.toString(),
-  //     offset: this.first.toString()
+  
+  // getValue(ri: number) {
+  //   let baseValue = this.izm.summ || 0; 
+  //   for (let i = 0; i < this.tablisa[ri].length; i++){
+  //     if (this.isTenge) {
+  //       return baseValue + ' тенге';
+  //     } else {
+  //       return (baseValue * 1000) + ' тенге'; 
+  //     }
+  //     }
   //   }
-  //   this.Budget_income_list$ = this.budget_income_service.fetch(params)
-
-  // }
+    
 
 
   closeform(close: boolean) {
