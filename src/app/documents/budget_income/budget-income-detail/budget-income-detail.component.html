@@ -110,7 +110,10 @@
                         {{ri + 1}}
                     </td>
                     <td style="text-align: left;">
-                        {{ izm._spec_income.code + ' - ' + '"' + izm._spec_income.name_rus + '"'}}
+                        <div class="p-inputgroup w-full">
+                            <input pInputText [readOnly]="true" [(ngModel)]="izm._spec_income.code + ' - ' + izm._spec_income.name_rus" />
+                            <span class="p-inputgroup-addon" (click)="editFKR(ri)">...</span>
+                        </div>
                     </td>
                     <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="izm.summ"

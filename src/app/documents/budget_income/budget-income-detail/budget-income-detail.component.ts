@@ -180,6 +180,26 @@ export class BudgetIncomeDetailComponent implements OnInit {
     })
   }
 
+  editFKR(ri: number) {
+    this.budgetinc_Rer = this.budgetIncDialog.open(SpecificationIncomeSelectComponent,
+      {
+        header: 'Выбор ФКР',
+        width: '60%',
+        height: '80%',
+        data: { _org_id: this.budget_income_detail.head._organization.id }
+      })
+    this.budgetinc_Rer.onClose.subscribe((spec: specification_income_detail) => {
+      if (spec) {
+        this.budget_income_detail.tbl[ri]._spec_income = {
+          id: spec.id,
+          code: spec.code,
+          name_kaz: spec.name_kaz,
+          name_rus: spec.name_rus
+        }
+      }
+    })
+  }
+
   changeGodUch() {
     this.budget_income_detail.head.god_ucheta = String(this.godNumber + '-01-01')
   }
