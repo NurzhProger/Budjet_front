@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { zakluchenie_doc, zakluchenie_list } from '../interfaces';
 import { Observable } from 'rxjs';
 import { ZakluchenieService } from '../zakluchenie.service';
@@ -10,8 +10,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './zakluchenie-list.component.html',
   styleUrls: ['./zakluchenie-list.component.css']
 })
-export class ZakluchenieListComponent implements OnInit {
-
+export class ZakluchenieListComponent implements OnInit, OnChanges {
+  @Input() tabcount = 0
   @Input() data = false
   @Output() newItemEvent = new EventEmitter<any>()
   @Output() closeEvent = new EventEmitter<any>()
@@ -21,6 +21,7 @@ export class ZakluchenieListComponent implements OnInit {
   rows = 25
   windowHeight: number
   selected: any
+  old_tabcount = 0
 
   constructor(
     private zakluchenie_service: ZakluchenieService,
@@ -30,7 +31,14 @@ export class ZakluchenieListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.old_tabcount = this.tabcount
     this.fetch()
+  }
+
+  ngOnChanges(): void {
+    if (this.tabcount == this.old_tabcount) {
+      this.fetch()
+    }
   }
 
   openNew() {

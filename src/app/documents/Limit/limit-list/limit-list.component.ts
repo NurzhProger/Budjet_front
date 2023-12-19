@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { limit_doc, limit_list } from '../interfaces';
 import { LimitService } from '../limit.service';
@@ -11,7 +11,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './limit-list.component.html',
   styleUrls: ['./limit-list.component.css']
 })
-export class LimitListComponent implements OnInit {
+export class LimitListComponent implements OnInit, OnChanges {
+  @Input() tabcount = 0
   @Input() data = false
   @Output() newItemEvent = new EventEmitter<any>()
   @Output() closeEvent = new EventEmitter<any>()
@@ -20,6 +21,7 @@ export class LimitListComponent implements OnInit {
   selected: any
   first = 0
   rows = 25
+  old_tabcount = 0
   constructor(
     private LimitService: LimitService,
     private limit_dialog_ref: DynamicDialogRef,
@@ -29,8 +31,15 @@ export class LimitListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.old_tabcount = this.tabcount
     this.fetchList(),
     this.updateWindowSize() 
+  }
+
+  ngOnChanges(): void {
+    if (this.tabcount == this.old_tabcount) {
+      this.fetchList()
+    }
   }
 
   private updateWindowSize() {

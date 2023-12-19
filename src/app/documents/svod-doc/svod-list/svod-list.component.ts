@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { svod_doc, svod_list } from '../interfaces';
 import { Observable } from 'rxjs';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -10,7 +10,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './svod-list.component.html',
   styleUrls: ['./svod-list.component.css']
 })
-export class SvodListComponent implements OnInit {
+export class SvodListComponent implements OnInit, OnChanges {
 
  
   constructor(
@@ -21,6 +21,7 @@ export class SvodListComponent implements OnInit {
     private svod_message: MessageService
 
   ) { }
+  @Input() tabcount = 0
   @Output() closeEvent = new EventEmitter<any>()
   @Output() newItemEvent = new EventEmitter<any>();
   @Input() data = false
@@ -30,10 +31,18 @@ export class SvodListComponent implements OnInit {
   search: ''
   first = 0
   rows = 25
+  old_tabcount = 0
 
   ngOnInit(): void {
+    this.old_tabcount = this.tabcount
     this.fetch()
     this.updateWindowSize()
+  }
+
+  ngOnChanges(): void {
+    if (this.tabcount == this.old_tabcount) {
+      this.fetch()
+    }
   }
 
   private updateWindowSize() {

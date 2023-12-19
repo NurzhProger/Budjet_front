@@ -99,7 +99,7 @@
 
                 <app-limit-list *ngIf="context.selector=='app-limit-list'" [data]="true"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                    (closeEvent)="removetab()">
+                    (closeEvent)="removetab()" [tabcount]="this.tabcount">
                 </app-limit-list>
 
                 <app-limit-element *ngIf="context.selector=='app-limit-element'" [limit_id]="number"
@@ -196,12 +196,12 @@
 
                 <app-svod-list *ngIf="context.selector=='app-svod-list'" [data]="true"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                    (closeEvent)="removetab()">
+                    (closeEvent)="removetab()" [tabcount]="this.tabcount">
                 </app-svod-list>
 
                 <app-zakluchenie-list *ngIf="context.selector=='app-zakluchenie-list'" [data]="true"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
-                    (closeEvent)="removetab()">
+                    (closeEvent)="removetab()" [tabcount]="this.tabcount">
                 </app-zakluchenie-list>
 
                 <app-zakluchenie-detail *ngIf="context.selector=='app-zakluchenie-detail'"

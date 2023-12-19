@@ -41,9 +41,11 @@ export class BudgetRequestListComponent implements OnInit, OnChanges {
 
 
   ngOnInit  (): void {
+    this.old_tabcount = this.tabcount
     this.fetchCat(),
     this.updateWindowSize()
   }
+  
   ngOnChanges(): void {
     if (this.tabcount == this.old_tabcount) {
       this.fetchCat()
@@ -58,7 +60,7 @@ export class BudgetRequestListComponent implements OnInit, OnChanges {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
-      // search: this.searcforms.toString()
+      search: this.searcforms.toString()
     }
 
     this.Budget_list$ = this.budget_Servise.fetch(params)
