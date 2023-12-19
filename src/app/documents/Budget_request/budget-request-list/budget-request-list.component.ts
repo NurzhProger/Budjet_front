@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { MessageService, ConfirmationService } from 'primeng/api';
@@ -11,7 +11,7 @@ import { boolean, log } from 'mathjs';
   templateUrl: './budget-request-list.component.html',
   styleUrls: ['./budget-request-list.component.css']
 })
-export class BudgetRequestListComponent implements OnInit {
+export class BudgetRequestListComponent implements OnInit, OnChanges {
 
 
 
@@ -26,7 +26,7 @@ export class BudgetRequestListComponent implements OnInit {
 
 
 
-
+  @Input() tabcount = 0
   @Output() closeEvent = new EventEmitter<any>()
   @Output() newItemEvent = new EventEmitter<any>();
   @Input() data = false
@@ -37,11 +37,17 @@ export class BudgetRequestListComponent implements OnInit {
   searcforms = ""
   windowHeight: number
   selected: any
+  old_tabcount = 0
 
 
   ngOnInit  (): void {
     this.fetchCat(),
     this.updateWindowSize()
+  }
+  ngOnChanges(): void {
+    if (this.tabcount == this.old_tabcount) {
+      this.fetchCat()
+    }
   }
 
   private updateWindowSize() {
@@ -52,7 +58,7 @@ export class BudgetRequestListComponent implements OnInit {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
-      search: this.searcforms.toString()
+      // search: this.searcforms.toString()
     }
 
     this.Budget_list$ = this.budget_Servise.fetch(params)

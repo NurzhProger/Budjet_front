@@ -110,12 +110,11 @@ export class FormDetailComponent implements OnInit {
     this.selectTipTop()
 
     if (this.form_doc_id !== '') {
-      // console.log(this.form_doc_id)
       this.form_Servise.fetch_detail(this.form_doc_id)
         .subscribe(
           (detail) => {
             this.form_detail = detail
-            console.log(this.form_detail)
+            
             let objString = JSON.stringify(this.form_detail)
             this.hashBegin = SHA256(objString).toString()
           }
@@ -178,7 +177,7 @@ export class FormDetailComponent implements OnInit {
       { label: 'Марки автомобилей', value: 'marki_avto' }
     ];
 
-    // console.log(this.sposobOptions)
+    
 
     this.updateWindowSize()
 
@@ -191,15 +190,13 @@ export class FormDetailComponent implements OnInit {
   selectTipTop(){
     let responce: any;
     this.sposob_servise.fetch().subscribe(
-      (data) => (responce = data, this.tip_options = responce.results,
-        console.log(this.tip_options)
+      (data) => (responce = data, this.tip_options = responce.results
       ),
         (error) => (this.form_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
 
   }
 
   saveDoc(close: boolean){
-    // console.log(this.form_detail)
     this.form_Servise.saveforms(this.form_detail)
     .subscribe(
       (data) => (this.form_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
