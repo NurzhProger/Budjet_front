@@ -34,12 +34,12 @@ export class ZakluchenieService {
   // edit(param: limit_doc) {
   //   return this.http.post(this.host + 'docs/oblasti_regedit', param)
   // }
-  del(zakl_id: any) {
-    return this.http.delete(this.host + 'docs/zakluchenie_delete', { body: zakl_id })
+  del(zakl_id: number = 0) {
+    return this.http.delete(this.host + `docs/zakluchenie_delete/${zakl_id}`)
   }
 
   del_Past() {
-    return this.http.get(this.host + 'docs/zakluchenie_del_empty')  
+    return this.http.get(this.host + 'docs/budjet_income_del_empty')  
   }
 
 }

@@ -141,22 +141,30 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
   }
 
   onDelete(zakl: zakluchenie_doc) {
-
-    if (this.selected && this.selected.length !== 1) {
-      this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите только один документ!' })
-      return
-    }
-
     let msg = !zakl.deleted ? "Пометить " + zakl.nom + " на удаление?" : "Снять с " + zakl.nom + " пометку на удаление?"
     let header = !zakl.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
     let msgsuccess = !zakl.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
 
-    let body = {
-      shift: false,
-      mass_doc_id: [zakl.id]
-    }
-
-    this.deleteService(msg, header, msgsuccess, body)
+    this.zakluchenie_confirm.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.zakluchenie_service.del(zakl.id)
+          .subscribe((data) => (
+            this.zakluchenie_message.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetch(),
+            this.zakluchenie_confirm.close()
+          ),
+            (error) => (
+              this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+            )
+          )
+      },
+      reject: () => {
+        this.zakluchenie_confirm.close();
+      }
+    });
   }
 
   onPageChange(event: any) {
