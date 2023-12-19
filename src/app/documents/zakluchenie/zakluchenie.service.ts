@@ -45,7 +45,7 @@ export class ZakluchenieService {
 
 
   del_Past() {
-    return this.http.get(this.host + 'docs/budjet_income_del_empty')  
+    return this.http.get(this.host + 'docs/zakluchenie_del_empty')  
   }
 
 }

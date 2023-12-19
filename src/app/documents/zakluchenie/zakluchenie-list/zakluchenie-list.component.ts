@@ -100,7 +100,7 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
       let header = !shift ? "Пометка на удаление" : "Удаление документов"
       let msgsuccess = !shift ? "Документы помечены на удаление" : "Документы удалены"
 
-      let mass_doc_id = []
+      let mass_doc_id = [0]
 
       for (let i = 0; i < this.selected.length; i++) {
         mass_doc_id.push(this.selected[i].id)
