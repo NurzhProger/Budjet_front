@@ -25,7 +25,8 @@
 
 <div class="card" *ngIf="(zakluchenie_list$ | async) as zakluchenie; else loader">
     <p-table *ngIf="zakluchenie.count !== 0; else empty" [value]="zakluchenie.results" [scrollable]="true"
-        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="multiple" [(selection)]="selected"
+        [metaKeySelection]="true"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
 
         <ng-template pTemplate="header">
@@ -43,7 +44,8 @@
 
         <ng-template pTemplate="body" let-zakluchenie let-ri="rowIndex"
             *ngFor="let zakluchenie of zakluchenie.results| keyvalue">
-            <tr class="cursor-pointer" (dblclick)="onRowClick(zakluchenie)">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(zakluchenie)"[pSelectableRow]="zakluchenie"
+            [pSelectableRowIndex]="ri">
                 <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="text-align:center">
                     <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie._date}}</span>

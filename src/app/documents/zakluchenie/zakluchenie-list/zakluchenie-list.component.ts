@@ -16,6 +16,15 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
   @Output() newItemEvent = new EventEmitter<any>()
   @Output() closeEvent = new EventEmitter<any>()
 
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.shiftKey && event.key === 'Delete' && this.isAdmin() && (this.tabcount == this.old_tabcount)) {
+      this.massDelete(true)
+    }
+    else if (event.key === 'Delete' && (this.tabcount == this.old_tabcount)) {
+      this.massDelete(false)
+    }
+  }
+
   zakluchenie_list$: Observable<zakluchenie_list>
   first = 0
   rows = 25
@@ -39,6 +48,10 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
     if (this.tabcount == this.old_tabcount) {
       this.fetch()
     }
+  }
+
+  isAdmin() {
+    return true
   }
 
   openNew() {
@@ -77,24 +90,47 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
 
   }
 
-  onDelete(zakl: zakluchenie_doc) {
-    let msg = !zakl.deleted ? "Пометить " + zakl.nom + " на удаление?" : "Снять с " + zakl.nom + " пометку на удаление?"
-    let header = !zakl.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
-    let msgsuccess = !zakl.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
+  massDelete(shift: boolean) {
+
+    if (this.selected) {
+      let msg = !shift ? "Пометить документы на удаление?" : "Вы точно хотите удалить документы?"
+      let header = !shift ? "Пометка на удаление" : "Удаление документов"
+      let msgsuccess = !shift ? "Документы помечены на удаление" : "Документы удалены"
+
+      let mass_doc_id = []
+
+      for (let i = 0; i < this.selected.length; i++) {
+        mass_doc_id.push(this.selected[i].id)
+      }
+
+      let body = {
+        shift: shift,
+        mass_doc_id: mass_doc_id
+      }
+
+      this.deleteService(msg, header, msgsuccess, body)
+    }
+    else {
+      this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: 'Документ не выбран' })
+    }
+  }
+
+  deleteService(msg: string, header: string, msgsuccess: string, body: any) {
 
     this.zakluchenie_confirm.confirm({
       message: msg,
       header: header,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.zakluchenie_service.del(zakl.id)
+        this.zakluchenie_service.
+        del(body)
           .subscribe((data) => (
             this.zakluchenie_message.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
             this.fetch(),
             this.zakluchenie_confirm.close()
           ),
             (error) => (
-              this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+              this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось выполнить операцию!' })
             )
           )
       },
@@ -102,6 +138,25 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
         this.zakluchenie_confirm.close();
       }
     });
+  }
+
+  onDelete(zakl: zakluchenie_doc) {
+
+    if (this.selected && this.selected.length !== 1) {
+      this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите только один документ!' })
+      return
+    }
+
+    let msg = !zakl.deleted ? "Пометить " + zakl.nom + " на удаление?" : "Снять с " + zakl.nom + " пометку на удаление?"
+    let header = !zakl.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
+    let msgsuccess = !zakl.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
+
+    let body = {
+      shift: false,
+      mass_doc_id: [zakl.id]
+    }
+
+    this.deleteService(msg, header, msgsuccess, body)
   }
 
   onPageChange(event: any) {
