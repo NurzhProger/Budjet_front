@@ -38,4 +38,8 @@ export class ZakluchenieService {
     return this.http.delete(this.host + `docs/zakluchenie_delete/${limit_id}`)
   }
 
+  del_Past() {
+    return this.http.get(this.host + 'docs/zakluchenie_del_empty')  
+  }
+
 }

@@ -61,8 +61,12 @@ export class BudgetIncomeService {
   }
 
 
-deleteInc(item_id: number = 0) {
+  deleteInc(item_id: number = 0) {
     return this.http.delete(this.host + `docs/budjet_income_delete/${item_id}`)
+  }
+
+  del_Past() {
+    return this.http.get(this.host + 'docs/budjet_income_del_empty')  
   }
 
 

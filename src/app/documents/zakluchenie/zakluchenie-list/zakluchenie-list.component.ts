@@ -105,4 +105,31 @@ export class ZakluchenieListComponent implements OnInit {
   closeform() {
     this.closeEvent.emit()
   }
+
+  delPast() {
+    this.zakluchenie_confirm.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.zakluchenie_service.del_Past()
+          .subscribe((data) => (
+            this.zakluchenie_message.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetch(),
+            this.zakluchenie_confirm.close()
+          ),
+            (error) => (this.zakluchenie_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.zakluchenie_confirm.close();
+      }
+    })
+  }
 }

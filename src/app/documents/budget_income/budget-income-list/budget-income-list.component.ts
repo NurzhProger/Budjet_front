@@ -121,4 +121,31 @@ export class BudgetIncomeListComponent implements OnInit, OnChanges {
     this.fetch()
   }
 
+  delPast() {
+    this.budget_income_confrim.confirm({
+      message: 'Вы действительно хотите удалить?',
+      header: 'Удаление',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.budget_income_service.del_Past()
+          .subscribe((data) => (
+            this.budget_income_message.add(
+              {
+                severity: 'success',
+                summary: 'Успешно',
+                detail: ' Объект удален!'
+              }
+            ),
+            this.fetch(),
+            this.budget_income_confrim.close()
+          ),
+            (error) => (this.budget_income_message.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status }))
+          )
+      },
+      reject: () => {
+        this.budget_income_confrim.close();
+      }
+    })
+  }
+
 }
