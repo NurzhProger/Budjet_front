@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { zakluchenie_doc, zakluchenie_list } from '../interfaces';
 import { Observable } from 'rxjs';
 import { ZakluchenieService } from '../zakluchenie.service';
@@ -15,6 +15,9 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
   @Input() data = false
   @Output() newItemEvent = new EventEmitter<any>()
   @Output() closeEvent = new EventEmitter<any>()
+  @HostListener('window:resize', ['$event'])
+
+  @HostListener('window:keydown', ['$event'])
 
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.shiftKey && event.key === 'Delete' && this.isAdmin() && (this.tabcount == this.old_tabcount)) {
@@ -123,7 +126,7 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.zakluchenie_service.
-        del(body)
+        delShift(body)
           .subscribe((data) => (
             this.zakluchenie_message.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
             this.fetch(),

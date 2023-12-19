@@ -38,6 +38,12 @@ export class ZakluchenieService {
     return this.http.delete(this.host + `docs/zakluchenie_delete/${zakl_id}`)
   }
 
+
+  delShift(body: any) {
+    return this.http.delete(this.host + 'docs/zakluchenie_shiftdelete', { body })
+  }
+
+
   del_Past() {
     return this.http.get(this.host + 'docs/budjet_income_del_empty')  
   }
