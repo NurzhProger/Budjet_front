@@ -24,7 +24,11 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
       this.massDelete(true)
     }
     else if (event.key === 'Delete' && (this.tabcount == this.old_tabcount)) {
-      this.massDelete(false)
+      if (this.selected.length > 0 )  {
+        this.onDelete(this.selected[0])
+        this.selected = []
+      } 
+      
     }
   }
 
@@ -147,7 +151,7 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
     let msg = !zakl.deleted ? "Пометить " + zakl.nom + " на удаление?" : "Снять с " + zakl.nom + " пометку на удаление?"
     let header = !zakl.deleted ? "Пометка на удаление" : "Снять с пометки на удаление"
     let msgsuccess = !zakl.deleted ? "Документ помечен на удаление" : "С документа снята пометка на удаление"
-
+    
     this.zakluchenie_confirm.confirm({
       message: msg,
       header: header,
