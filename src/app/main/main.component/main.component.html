@@ -194,7 +194,7 @@
                     [svod_id]="number" (closeEvent)="removetab()">
                 </app-svod-detail>
 
-                <app-svod-list *ngIf="context.selector=='app-svod-list'" [data]="true"
+                <app-svod-list *ngIf="context.selector=='app-svod-list'" [data]="true" [start]="context.data"
                     (newItemEvent)="openTab($event.params.selector, $event.params.nomer, $event.params.id)"
                     (closeEvent)="removetab()" [tabcount]="this.tabcount">
                 </app-svod-list>

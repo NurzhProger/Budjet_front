@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SvodService } from '../svod.servise';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { log } from 'mathjs';
 
 @Component({
   selector: 'app-svod-list',
@@ -25,6 +26,7 @@ export class SvodListComponent implements OnInit, OnChanges {
   @Output() closeEvent = new EventEmitter<any>()
   @Output() newItemEvent = new EventEmitter<any>();
   @Input() data = false
+  @Input() start = false
   Svod_list$: Observable<svod_list>
   windowHeight: number
   selected: any
@@ -50,7 +52,7 @@ export class SvodListComponent implements OnInit, OnChanges {
   }
   
   openNew() {
-    this.newItemEvent.emit({ params: { selector: 'app-svod-detail', nomer: 'Свод бюджетной заявки', id: '' } });
+    this.newItemEvent.emit({ params: { selector: 'app-svod-detail', nomer: 'Свод бюджетной заявки (создание)', id: 0 } });
   }
   
   fetch(){

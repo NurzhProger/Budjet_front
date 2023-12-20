@@ -1,5 +1,5 @@
 <p-toolbar>
-
+<div *ngIf="start!==true">
     <div class="p-toolbar-group-left" *ngIf="data!==false">
       <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
         (click)="openNew()"></button>
@@ -19,7 +19,8 @@
             (click)="closeform()"></button>
       </div>
   </div>
-  </p-toolbar>
+</div>
+</p-toolbar>
 
   <div class="card" *ngIf="(Svod_list$ | async) as category; else loader">
     <p-table *ngIf="category.count !== 0; else empty" [value]="category.results" [scrollable]="true"

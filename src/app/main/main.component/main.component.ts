@@ -104,9 +104,9 @@ export class MainComponent implements OnInit {
           this.profileuser.budjet_name = responce.profile._organization._budjet_reg.name_rus,
           this.history = responce.history,
           this.formMenu(),
-          this.openTab("startpage-element", "Начальная страница", ''))
+          this.openTab('app-svod-list', "Свод бюджетной заявки", '', true))
       )
-
+      
     this.config.setTranslation({
       monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
       monthNamesShort: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
@@ -275,7 +275,7 @@ export class MainComponent implements OnInit {
               },
               {
                 label: 'Свод бюджетной заявки',
-                command: () => this.openTab('app-svod-list', 'Свод бюджетной заявки', '')
+                command: () => this.openTab('app-svod-list', 'Свод бюджетной заявки', '', false)
               },
               {
                 label: 'Бюджетная заявка поступлений',
