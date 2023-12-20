@@ -586,6 +586,8 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     this.Budget_detail_ryref.onClose.subscribe((fkr_detail: fkr_detail) => {
       if (fkr_detail) {
         // this.addSpec(fkr_detail),
+        console.log(this.fkr_array.length);
+
         if (this.fkr_array.length > 0) {
           for (let i = 0; i < this.fkr_array.length; i++) {
             let index = this.fkr_array.find(item => item.id === fkr_detail.id)
@@ -599,6 +601,13 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
             }
             break
           }
+        } else {
+          this.fkr_array.push({
+            id: fkr_detail.id,
+            code: fkr_detail.code,
+            name_kaz: fkr_detail.name_kaz,
+            name_rus: fkr_detail.name_rus
+          })
         }
 
         // this.fetch_form()
