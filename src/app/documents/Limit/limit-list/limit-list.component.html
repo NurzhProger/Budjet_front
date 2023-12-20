@@ -3,9 +3,9 @@
     <div class="p-toolbar-group-left" *ngIf="data!==false">
         <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="openNew()"></button>
-            <button pButton pRipple label="Удалить" icon="pi pi-trash" severity="danger p-mr-2"
+            <!-- <button pButton pRipple label="Удалить" icon="pi pi-trash" severity="danger p-mr-2"
             style="margin-left: 5px;"
-            (click)="delPast()"></button>
+            (click)="delPast()"></button> -->
     </div>
     <div class="p-toolbar-group-right">
         <span class="p-input-icon-left" style="margin-right: 10px;">
@@ -26,7 +26,8 @@
 
 <div class="card" *ngIf="(limit | async) as limit; else loader">
     <p-table *ngIf="limit.count !== 0; else empty" [value]="limit.results" [scrollable]="true"
-        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="multiple" [(selection)]="selected"
+        [metaKeySelection]="true"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
 
         <ng-template pTemplate="header">
@@ -40,7 +41,8 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-limit let-ri="rowIndex">
-            <tr class="cursor-pointer" (dblclick)="onRowClick(limit)">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(limit)" [pSelectableRow]="limit"
+            [pSelectableRowIndex]="ri">
                 <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="text-align:center">
                     <span [ngClass]="setClass(limit.deleted)">{{limit.nom}}</span>

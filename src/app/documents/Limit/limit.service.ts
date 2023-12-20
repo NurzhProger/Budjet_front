@@ -41,4 +41,8 @@ del_Past() {
   return this.http.get(this.host + 'docs/limit_planempty')  
 }
 
+delShift(body: any) {
+  return this.http.delete(this.host + 'docs/limit_plan_shiftdelete', { body })
+}
+
 }

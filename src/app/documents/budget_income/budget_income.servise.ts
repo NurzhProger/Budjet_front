@@ -69,5 +69,8 @@ export class BudgetIncomeService {
     return this.http.get(this.host + 'docs/budjet_income_del_empty')  
   }
 
+  delShift(body: any) {
+    return this.http.delete(this.host + 'docs/budjet_income_shiftdelete', { body })
+  }
 
 }

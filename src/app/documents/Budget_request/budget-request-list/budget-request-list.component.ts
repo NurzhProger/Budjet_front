@@ -30,6 +30,25 @@ export class BudgetRequestListComponent implements OnInit, OnChanges {
   @Output() closeEvent = new EventEmitter<any>()
   @Output() newItemEvent = new EventEmitter<any>();
   @Input() data = false
+
+  @HostListener('window:resize', ['$event'])
+
+  @HostListener('window:keydown', ['$event'])
+
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.shiftKey && event.key === 'Delete' && this.isAdmin() && (this.tabcount == this.old_tabcount)) {
+      this.massDelete(true)
+    }
+    else if (event.key === 'Delete' && (this.tabcount == this.old_tabcount)) {
+      if (this.selected.length > 0 )  {
+        this.onDelete(this.selected[0])
+        this.selected = []
+      } 
+      
+    }
+  }
+  length: any
   Budget_list$: Observable<budget_list>
   first = 0
   rows = 25
@@ -66,12 +85,63 @@ export class BudgetRequestListComponent implements OnInit, OnChanges {
     this.Budget_list$ = this.budget_Servise.fetch(params)
   }
 
+  isAdmin() {
+    return true
+  }
 
   openNew() {
     this.newItemEvent.emit({ params: { selector: 'app-budget-request-detail', nomer: 'Бюджетная заявка (создание)', id: '' } });
   }
 
+  massDelete(shift: boolean) {
 
+    if (this.selected) {
+      let msg = !shift ? "Пометить документы на удаление?" : "Вы точно хотите удалить документы?"
+      let header = !shift ? "Пометка на удаление" : "Удаление документов"
+      let msgsuccess = !shift ? "Документы помечены на удаление" : "Документы удалены"
+
+      let mass_doc_id = [0]
+
+      for (let i = 0; i < this.selected.length; i++) {
+        mass_doc_id.push(this.selected[i].id)
+      }
+
+      let body = {
+        shift: shift,
+        mass_doc_id: mass_doc_id
+      }
+
+      this.deleteService(msg, header, msgsuccess, body)
+    }
+    else {
+      this.budget_list_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Документ не выбран' })
+    }
+  }
+
+  deleteService(msg: string, header: string, msgsuccess: string, body: any) {
+
+    this.budget_confrim.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.budget_Servise.
+        delShift(body)
+          .subscribe((data) => (
+            this.budget_list_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetchCat(),
+            this.budget_confrim.close()
+          ),
+            (error) => (
+              this.budget_list_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось выполнить операцию!' })
+            )
+          )
+      },
+      reject: () => {
+        this.budget_confrim.close();
+      }
+    });
+  }
 
   delPast() {
     this.budget_confrim.confirm({

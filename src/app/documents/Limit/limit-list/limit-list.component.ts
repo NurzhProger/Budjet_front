@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { limit_doc, limit_list } from '../interfaces';
 import { LimitService } from '../limit.service';
@@ -16,6 +16,25 @@ export class LimitListComponent implements OnInit, OnChanges {
   @Input() data = false
   @Output() newItemEvent = new EventEmitter<any>()
   @Output() closeEvent = new EventEmitter<any>()
+  @HostListener('window:resize', ['$event'])
+
+  @HostListener('window:keydown', ['$event'])
+
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.shiftKey && event.key === 'Delete' && this.isAdmin() && (this.tabcount == this.old_tabcount)) {
+      this.massDelete(true)
+    }
+    else if (event.key === 'Delete' && (this.tabcount == this.old_tabcount)) {
+      if (this.selected.length > 0 )  {
+        this.onDelete(this.selected[0])
+        this.selected = []
+      } 
+      
+    }
+  }
+
+
   limit: Observable<limit_list>
   windowHeight: number
   selected: any
@@ -46,6 +65,10 @@ export class LimitListComponent implements OnInit, OnChanges {
     this.windowHeight = window.innerHeight;
   }
 
+  isAdmin() {
+    return true
+  }
+
   openNew() {
     this.newItemEvent.emit({ params: { selector: 'app-limit-element', nomer: 'Лимит на годовой бюджет ', id: 0 } });
   }
@@ -67,6 +90,57 @@ export class LimitListComponent implements OnInit, OnChanges {
     this.rows = event.rows
     this.fetchList()
   }
+
+  massDelete(shift: boolean) {
+
+    if (this.selected) {
+      let msg = !shift ? "Пометить документы на удаление?" : "Вы точно хотите удалить документы?"
+      let header = !shift ? "Пометка на удаление" : "Удаление документов"
+      let msgsuccess = !shift ? "Документы помечены на удаление" : "Документы удалены"
+
+      let mass_doc_id = [0]
+
+      for (let i = 0; i < this.selected.length; i++) {
+        mass_doc_id.push(this.selected[i].id)
+      }
+
+      let body = {
+        shift: shift,
+        mass_doc_id: mass_doc_id
+      }
+
+      this.deleteService(msg, header, msgsuccess, body)
+    }
+    else {
+      this.limit_message_service.add({ severity: 'error', summary: 'Ошибка', detail: 'Документ не выбран' })
+    }
+  }
+
+  deleteService(msg: string, header: string, msgsuccess: string, body: any) {
+
+    this.limit_confirm.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.LimitService.
+        delShift(body)
+          .subscribe((data) => (
+            this.limit_message_service.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetchList(),
+            this.limit_confirm.close()
+          ),
+            (error) => (
+              this.limit_message_service.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось выполнить операцию!' })
+            )
+          )
+      },
+      reject: () => {
+        this.limit_confirm.close();
+      }
+    });
+  }
+
 
   onDelete(limit: limit_doc) {
     let msg = !limit.deleted ? "Пометить " + limit.nom + " на удаление?" : "Снять с " + limit.nom + " пометку на удаление?"

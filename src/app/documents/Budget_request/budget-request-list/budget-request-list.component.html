@@ -3,8 +3,8 @@
   <div class="p-toolbar-group-left" *ngIf="data!==false">
     <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
       (click)="openNew()"></button>
-    <button pButton pRipple label="Удалить" icon="pi pi-trash" severity="danger p-mr-2" style="margin-left: 5px;"
-      (click)="delPast()"></button>
+    <!-- <button pButton pRipple label="Удалить" icon="pi pi-trash" severity="danger p-mr-2" style="margin-left: 5px;"
+      (click)="delPast()"></button> -->
   </div>
   <div class="p-toolbar-group-right">
     <span class="p-input-icon-left" style="margin-right: 10px;">
@@ -24,7 +24,8 @@
 
 <div class="card" *ngIf="(Budget_list$ | async) as category; else loader">
   <p-table *ngIf="category.count !== 0; else empty" [value]="category.results" [scrollable]="true"
-    scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+    scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="multiple" [(selection)]="selected"
+    [metaKeySelection]="true"
     styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header">
       <tr>
@@ -39,7 +40,8 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item let-ri="rowIndex" *ngFor="let item of category.results| keyvalue">
-      <tr class="cursor-pointer" (dblclick)="onRowClick(item)">
+      <tr class="cursor-pointer" (dblclick)="onRowClick(item)" [pSelectableRow]="item"
+      [pSelectableRowIndex]="ri">
         <td style="text-align: center">
           <span [ngClass]="setClass(item.deleted)">{{item.nom}}</span>
         </td>

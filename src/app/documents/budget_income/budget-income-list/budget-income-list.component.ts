@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { budget_income_doc, budget_income_list } from '../budget_income_interfaces';
 import { Observable } from 'rxjs';
 import { BudgetIncomeService } from '../budget_income.servise';
@@ -22,6 +22,23 @@ export class BudgetIncomeListComponent implements OnInit, OnChanges {
   @Output() closeEvent = new EventEmitter<any>()
   @Output() newItemEvent = new EventEmitter<any>();
   @Input() data = false
+  @HostListener('window:resize', ['$event'])
+
+  @HostListener('window:keydown', ['$event'])
+
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.shiftKey && event.key === 'Delete' && this.isAdmin() && (this.tabcount == this.old_tabcount)) {
+      this.massDelete(true)
+    }
+    else if (event.key === 'Delete' && (this.tabcount == this.old_tabcount)) {
+      if (this.selected.length > 0 )  {
+        this.onDelete(this.selected[0])
+        this.selected = []
+      } 
+      
+    }
+  }
   Budget_income_list$: Observable<budget_income_list>
   windowHeight: number
   selected: any
@@ -43,6 +60,10 @@ export class BudgetIncomeListComponent implements OnInit, OnChanges {
 
   private updateWindowSize() {
     this.windowHeight = window.innerHeight;
+  }
+
+  isAdmin() {
+    return true
   }
 
   openNew() {
@@ -75,6 +96,56 @@ export class BudgetIncomeListComponent implements OnInit, OnChanges {
     else {
       this.budget_income_ryref.close(income)
     }
+  }
+
+  massDelete(shift: boolean) {
+
+    if (this.selected) {
+      let msg = !shift ? "Пометить документы на удаление?" : "Вы точно хотите удалить документы?"
+      let header = !shift ? "Пометка на удаление" : "Удаление документов"
+      let msgsuccess = !shift ? "Документы помечены на удаление" : "Документы удалены"
+
+      let mass_doc_id = [0]
+
+      for (let i = 0; i < this.selected.length; i++) {
+        mass_doc_id.push(this.selected[i].id)
+      }
+
+      let body = {
+        shift: shift,
+        mass_doc_id: mass_doc_id
+      }
+
+      this.deleteService(msg, header, msgsuccess, body)
+    }
+    else {
+      this.budget_income_message.add({ severity: 'error', summary: 'Ошибка', detail: 'Документ не выбран' })
+    }
+  }
+
+  deleteService(msg: string, header: string, msgsuccess: string, body: any) {
+
+    this.budget_income_confrim.confirm({
+      message: msg,
+      header: header,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.budget_income_service.
+        delShift(body)
+          .subscribe((data) => (
+            this.budget_income_message.add({ severity: 'success', summary: 'Успешно', detail: msgsuccess }),
+            this.fetch(),
+            this.budget_income_confrim.close()
+          ),
+            (error) => (
+              this.budget_income_message.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось выполнить операцию!' })
+            )
+          )
+      },
+      reject: () => {
+        this.budget_income_confrim.close();
+      }
+    });
   }
 
   onDelete(item: budget_income_doc) {
