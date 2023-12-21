@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ZakluchenieService } from '../zakluchenie.service';
 import { zakluchenie_detail } from '../interfaces';
@@ -24,6 +24,16 @@ export class ZakluchenieDetailComponent implements OnInit {
   @Input() data = false
   @Output() closeEvent = new EventEmitter<any>();
   @Output() newItemEvent = new EventEmitter<any>()
+  @HostListener('window:keydown', ['$event'])
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'F9' && this.selected){
+        if(this.selected.length > 0 ) {
+          this.copySelectedRow()
+          this.selected = []
+      }
+    }
+  }
 
   zakluchenie_detail: zakluchenie_detail
   tbl: any
@@ -35,6 +45,7 @@ export class ZakluchenieDetailComponent implements OnInit {
   items: MenuItem[];
   _vid_dannyh: any = []
   _vid_rashoda: any = []
+  selected: any
   constructor(
     private zakluchenie_service: ZakluchenieService,
     private zakluchenieMessage: MessageService,
@@ -147,6 +158,35 @@ export class ZakluchenieDetailComponent implements OnInit {
   }
 
   calculateTotalSum() {
+  }
+
+  copySelectedRow() {
+    if (this.selected) {
+      this.zakluchenie_detail.tbl.push(
+        {
+          _fkr: {
+            id: this.selected[0]._fkr.id,
+            code: this.selected[0]._fkr.code,
+            name_rus: this.selected[0]._fkr.name_rus
+          },
+          id: 0,
+          _zakluchenie: {
+            id: this.selected[0]._zakluchenie.id,
+            nom: this.selected[0]._zakluchenie.nom,
+            org_name: this.selected[0]._zakluchenie.id.org_name
+          },
+          _spec: {
+            id: this.selected[0]._spec.id,
+            code: this.selected[0]._spec.code,
+            name_rus: this.selected[0]._spec.name_rus
+          },
+          original_summ: this.selected[0].original_summ,
+          changes_summ: this.selected[0].changes_summ,
+          final_summ: this.selected[0].final_summ,
+          description: this.selected[0].description,
+          characteristics: this.selected[0].characteristics
+        })    
+    }
   }
 
   selectrashod() {
