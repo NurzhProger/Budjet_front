@@ -75,7 +75,13 @@ export interface forms_tab1 {
   zn_dopl_nadb: null,
   zn_oblasti_reg: null,
   zn_marki_avto: null,
-  zn_ed_izm: null
+  zn_ed_izm: null,
+  head: string,
+  head_kaz: string,
+  head_level: number,
+  name_kaz: string,
+  _sposob_ras: string,
+  basic_column: boolean
 }
 
 

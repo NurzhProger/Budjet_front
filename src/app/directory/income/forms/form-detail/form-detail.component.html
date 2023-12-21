@@ -95,14 +95,19 @@
         <ng-template pTemplate="header">
           <tr>
             <th style="text-align:center">Номер</th>
-            <th style="text-align:center">Имя</th>
+            <th style="text-align:center; width: 20%;">Имя</th>
+            <th style="text-align:center; width: 20%;">Имя Каз</th>
+            <th style="text-align:center; width: 10%;">Способ расчета</th>
+            <th style="text-align:center; width: 15%;">Заголовок</th>
+            <th style="text-align:center; width: 15%;">Заголовок Каз</th>
+            <th style="text-align:center">Уровень заголовка</th>
             <th style="text-align:center">Значение</th>
-
             <th style="text-align:center">Колонка</th>
             <th style="text-align:center">Используемые колонки</th>
+            <th style="text-align:center">Basic column</th>
             <th style="text-align:center">Итоговая сумма</th>
             <th style="text-align:center">Суммируемая колонка</th>
-            <th style="text-align:center"></th>
+            <th style="text-align:center">Действия</th>
           </tr>
         </ng-template>
 
@@ -116,6 +121,57 @@
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item.name}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="item.name_kaz" style="width: 100%;">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item.name_kaz}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <p-dropdown [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name"
+                    [(ngModel)]="item._sposob_ras" [style]="{'width':'100%'}"></p-dropdown>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item._sposob_ras}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="item.head" style="width: 100%;">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item.head}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="item.head_kaz" style="width: 100%;">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item.head_kaz}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td style="text-align:center">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="number" [(ngModel)]="item.head_level" style="width: 100%;">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item.head_level}}
                 </ng-template>
               </p-cellEditor>
             </td>
@@ -162,6 +218,16 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
+                  <input type="checkbox" [(ngModel)]="item.basic_column" style="width: 100%;">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  <input type="checkbox" [(ngModel)]="item.basic_column" [disabled]="true">
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
                   <input type="checkbox" [(ngModel)]="item.itog" style="width: 100%;">
                 </ng-template>
                 <ng-template pTemplate="output">
@@ -187,7 +253,8 @@
                   class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
                   class="p-button-rounded p-button-text p-button-danger"></button>
-                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deleted_tbl(ri)"></button>
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                  (click)="deleted_tbl(ri)"></button>
               </div>
             </td>
           </tr>
@@ -221,11 +288,11 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                <div class="p-inputgroup">
-                  <input  type="text" pInputText [(ngModel)]="item._doplata_name"/>
-                  <span class="p-inputgroup-addon cursor-pointer" (click)="selectDoplata(ri)">...</span>
-                </div>
-              </ng-template>
+                  <div class="p-inputgroup">
+                    <input type="text" pInputText [(ngModel)]="item._doplata_name" />
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="selectDoplata(ri)">...</span>
+                  </div>
+                </ng-template>
                 <ng-template pTemplate="output">
                   {{item._doplata_name}}
                 </ng-template>
@@ -234,8 +301,8 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <p-dropdown [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name" [(ngModel)]="item._sposob_ras"
-                    [style]="{'width':'100%'}"></p-dropdown>
+                  <p-dropdown [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name"
+                    [(ngModel)]="item._sposob_ras" [style]="{'width':'100%'}"></p-dropdown>
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item._sposob_ras}}
@@ -280,7 +347,8 @@
                   class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
                   class="p-button-rounded p-button-text p-button-danger"></button>
-                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" (click)="deleted_dopl(ri)"></button>
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                  (click)="deleted_dopl(ri)"></button>
               </div>
             </td>
           </tr>

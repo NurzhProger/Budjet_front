@@ -1,8 +1,8 @@
 import { Component, DoCheck, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ConfirmationService, MenuItem, MessageService,SelectItem  } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService, SelectItem } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { form_list, form_list_doc,form_detail,forms_tab1 } from "../forms_interfaces";
+import { form_list, form_list_doc, form_detail, forms_tab1 } from "../forms_interfaces";
 import { formsService } from '../forms_servise'
 import { Observable } from 'rxjs';
 import { SpecificationIncomeDetailComponent } from '../../specification-income/specification-income-detail/specification-income-detail.component'
@@ -30,9 +30,9 @@ export class FormDetailComponent implements OnInit {
     private form_detail_ryref: DynamicDialogRef,
     private form_detail_messageServicedelSelect: MessageService,
     private form_detail_dialog: DialogService,
-    private form_Servise:formsService,
-    private sposob_servise:Sposob_ras4eta_servise,
-    private form_Confirmation:ConfirmationService)  { }
+    private form_Servise: formsService,
+    private sposob_servise: Sposob_ras4eta_servise,
+    private form_Confirmation: ConfirmationService) { }
 
 
 
@@ -46,7 +46,7 @@ export class FormDetailComponent implements OnInit {
   hashEnd = ''
   readerOptions = [{ label: 'Да', value: 'true' }, { label: 'Нет', value: 'false' }]
   statuses!: SelectItem[]
-  tip_options: any =[]
+  tip_options: any = []
   windowHeight: number
 
   form_detail: form_detail = {
@@ -80,7 +80,13 @@ export class FormDetailComponent implements OnInit {
       zn_dopl_nadb: null,
       zn_oblasti_reg: null,
       zn_marki_avto: null,
-      zn_ed_izm: null
+      zn_ed_izm: null,
+      head: '',
+      head_kaz: '',
+      head_level: 0,
+      name_kaz: '',
+      _sposob_ras: '',
+      basic_column: false
     }],
     dopl: [{
       id: 0,
@@ -114,7 +120,7 @@ export class FormDetailComponent implements OnInit {
         .subscribe(
           (detail) => {
             this.form_detail = detail
-            
+
             let objString = JSON.stringify(this.form_detail)
             this.hashBegin = SHA256(objString).toString()
           }
@@ -177,7 +183,7 @@ export class FormDetailComponent implements OnInit {
       { label: 'Марки автомобилей', value: 'marki_avto' }
     ];
 
-    
+
 
     this.updateWindowSize()
 
@@ -187,25 +193,25 @@ export class FormDetailComponent implements OnInit {
     this.windowHeight = window.innerHeight * 0.85;
   }
 
-  selectTipTop(){
+  selectTipTop() {
     let responce: any;
     this.sposob_servise.fetch().subscribe(
       (data) => (responce = data, this.tip_options = responce.results
       ),
-        (error) => (this.form_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
+      (error) => (this.form_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось загрузить данные!' })));
 
   }
 
-  saveDoc(close: boolean){
+  saveDoc(close: boolean) {
     this.form_Servise.saveforms(this.form_detail)
-    .subscribe(
-      (data) => (this.form_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
-        this.closeaftersave(close)
-      ),
-      (error) => (
-        this.form_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+      .subscribe(
+        (data) => (this.form_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
+          this.closeaftersave(close)
+        ),
+        (error) => (
+          this.form_detail_messageServicedelSelect.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
       )
-    )
 
   }
 
@@ -221,7 +227,7 @@ export class FormDetailComponent implements OnInit {
   }
 
 
-  closeform(close: boolean){
+  closeform(close: boolean) {
 
     let objString = JSON.stringify(this.form_detail)
     this.hashEnd = SHA256(objString).toString()
@@ -249,26 +255,34 @@ export class FormDetailComponent implements OnInit {
 
 
 
-  add_tbl(){
+  add_tbl() {
     this.form_detail.tbl.push(
-      {id: 0,
-      name: "",
-      _column: 0,
-      columns_used: "",
-      itog: false,
-      total: false,
-      zn: "",
-      zn_string: null,
-      zn_float: null,
-      zn_enstru: null,
-      zn_stazh_category: null,
-      zn_category_sotr: null,
-      zn_dolzhnost: null,
-      zn_podrazdelenie: null,
-      zn_dopl_nadb: null,
-      zn_oblasti_reg: null,
-      zn_marki_avto: null,
-      zn_ed_izm: null}
+      {
+        id: 0,
+        name: "",
+        _column: 0,
+        columns_used: "",
+        itog: false,
+        total: false,
+        zn: "",
+        zn_string: null,
+        zn_float: null,
+        zn_enstru: null,
+        zn_stazh_category: null,
+        zn_category_sotr: null,
+        zn_dolzhnost: null,
+        zn_podrazdelenie: null,
+        zn_dopl_nadb: null,
+        zn_oblasti_reg: null,
+        zn_marki_avto: null,
+        zn_ed_izm: null,
+        head: '',
+        head_kaz: '',
+        head_level: 0,
+        name_kaz: '',
+        _sposob_ras: '',
+        basic_column: false
+      }
 
     )
 
@@ -285,16 +299,18 @@ export class FormDetailComponent implements OnInit {
   //   delete this.clonedProducts[String(product.id) as string];
   // }
 
-  add_dopl(){
+  add_dopl() {
     this.form_detail.dopl.push(
-      {id: 0,
+      {
+        id: 0,
         columns_used: "",
         summ: 0,
         _form: 0,
         _column: 0,
         _doplata: 0,
         _doplata_name: "",
-        _sposob_ras: "",}
+        _sposob_ras: "",
+      }
 
     )
 
@@ -302,27 +318,27 @@ export class FormDetailComponent implements OnInit {
 
 
 
-  viewspec(){
+  viewspec() {
 
     this.form_detail_ryref = this.form_detail_dialog.open(SpecificationExpDetailComponent,
       {
         header: 'Редактирование специфики',
         width: '60%',
         height: '80%',
-        data: { spec_inc: this.form_detail.form._spec}
+        data: { spec_inc: this.form_detail.form._spec }
       })
 
     this.form_detail_ryref.onClose.subscribe((spec: specification_expenses_detail) => {
       if (spec) {
         this.form_detail.form._spec.id = spec.id,
-        this.form_detail.form._spec.code = spec.code,
-        this.form_detail.form._spec.name_rus = spec.name_rus
+          this.form_detail.form._spec.code = spec.code,
+          this.form_detail.form._spec.name_rus = spec.name_rus
       }
     })
 
   }
 
-  selectspec(){
+  selectspec() {
 
     this.form_detail_ryref = this.form_detail_dialog.open(SpecificationExpSelectComponent,
       {
@@ -334,15 +350,15 @@ export class FormDetailComponent implements OnInit {
     this.form_detail_ryref.onClose.subscribe((spec: specification_expenses_detail) => {
       if (spec) {
         this.form_detail.form._spec.id = spec.id,
-        this.form_detail.form._spec.code = spec.code,
-        this.form_detail.form._spec.name_rus = spec.name_rus
+          this.form_detail.form._spec.code = spec.code,
+          this.form_detail.form._spec.name_rus = spec.name_rus
       }
     })
 
   }
 
 
-  selectDoplata(index:number){
+  selectDoplata(index: number) {
     this.form_detail_ryref = this.form_detail_dialog.open(DoplNadbavkaListComponent,
       {
         header: 'Выбор доплаты',
@@ -363,11 +379,11 @@ export class FormDetailComponent implements OnInit {
 
 
 
-  deleted_tbl(index:number){
-    this.form_detail.tbl.splice(index,1)
+  deleted_tbl(index: number) {
+    this.form_detail.tbl.splice(index, 1)
   }
 
-  deleted_dopl(index:number){
-    this.form_detail.dopl.splice(index,1)
+  deleted_dopl(index: number) {
+    this.form_detail.dopl.splice(index, 1)
   }
 }
