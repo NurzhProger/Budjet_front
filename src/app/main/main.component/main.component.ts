@@ -273,10 +273,10 @@ export class MainComponent implements OnInit {
                 label: 'Лимит на годовой бюджет',
                 command: () => this.openTab('app-limit-list', 'Лимит на годовой бюджет', '')
               },
-              {
-                label: 'Свод бюджетной заявки',
-                command: () => this.openTab('app-svod-list', 'Свод бюджетной заявки', '', false)
-              },
+              // {
+              //   label: 'Свод бюджетной заявки',
+              //   command: () => this.openTab('app-svod-list', 'Свод бюджетной заявки', '', false)
+              // },
               {
                 label: 'Бюджетная заявка поступлений',
                 command: () => this.openTab('app-budget-income-list', 'Бюджетная заявка поступлений', '')
