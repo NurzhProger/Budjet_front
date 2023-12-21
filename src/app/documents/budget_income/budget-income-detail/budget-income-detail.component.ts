@@ -25,12 +25,11 @@ export class BudgetIncomeDetailComponent implements OnInit {
   @HostListener('window:keydown', ['$event'])
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'F9') {
-      if (this.selected.length > 0 ) {
-        this.copySelectedRow()
-        this.selected = []
+    if (event.key === 'F9' && this.selected){
+        if(this.selected.length > 0 ) {
+          this.copySelectedRow()
+          this.selected = []
       }
-
     }
   }
 
@@ -87,6 +86,7 @@ export class BudgetIncomeDetailComponent implements OnInit {
   }
 
   copySelectedRow() {
+    
     if (this.selected) {
       this.budget_income_detail.tbl.push(
         {
