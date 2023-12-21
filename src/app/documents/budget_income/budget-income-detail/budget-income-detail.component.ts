@@ -87,7 +87,6 @@ export class BudgetIncomeDetailComponent implements OnInit {
   }
 
   copySelectedRow() {
-    console.log(this.selected);
     if (this.selected) {
       this.budget_income_detail.tbl.push(
         {
