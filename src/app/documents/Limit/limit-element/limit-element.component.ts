@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { limit_detail, limit_doc } from '../interfaces';
@@ -21,6 +21,16 @@ import { MainComponent } from 'src/app/main/main.component/main.component';
 export class LimitElementComponent implements OnInit, DoCheck {
   @Output() closeEvent = new EventEmitter<any>();
   @Input() limit_id = ''
+  @HostListener('window:keydown', ['$event'])
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'F9' && this.selected){
+        if(this.selected.length > 0 ) {
+          this.copySelectedRow()
+          this.selected = []
+      }
+    }
+  }
   constructor(
     private LimitService: LimitService,
     private limitMessage: MessageService,
@@ -44,7 +54,7 @@ export class LimitElementComponent implements OnInit, DoCheck {
   profileuser: profileuser
   items: MenuItem[];
   form: FormGroup;
-  selected = false;
+  selected: any;
 
   limitDetail: limit_detail
 
@@ -137,6 +147,23 @@ export class LimitElementComponent implements OnInit, DoCheck {
 
   changeGodUch() {
     this.limitDetail.head.god_ucheta = String(this.godNumber + '-01-01')
+  }
+
+  copySelectedRow() {
+    if (this.selected) {
+      this.limitDetail.tbl.push(
+        {
+          _fkr: {
+            id: this.selected[0]._fkr.id,
+            code: this.selected[0]._fkr.code,
+            name_kaz: this.selected[0]._fkr.name_kaz,
+            name_rus: this.selected[0]._fkr.name_rus
+          },
+          id: 0,
+          summ: this.selected[0].summ,
+          _limit_plan: this.selected[0]._limit_plan
+        })   
+    }
   }
 
   addFKR() {
