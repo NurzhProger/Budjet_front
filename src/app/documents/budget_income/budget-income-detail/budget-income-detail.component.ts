@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { budget_income_detail, budget_income_head, budget_income_list } from '../budget_income_interfaces';
 import { BudgetIncomeService } from '../budget_income.servise';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
@@ -22,6 +22,18 @@ export class BudgetIncomeDetailComponent implements OnInit {
   @Input() data = false
   @Output() closeEvent = new EventEmitter<any>();
   @Output() newItemEvent = new EventEmitter<any>()
+  @HostListener('window:keydown', ['$event'])
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'F9') {
+      if (this.selected.length > 0 ) {
+        this.copySelectedRow()
+        this.selected = []
+      }
+
+    }
+  }
+
   izm: any;
   constructor(
     private budgetincService: BudgetIncomeService,
@@ -45,6 +57,8 @@ export class BudgetIncomeDetailComponent implements OnInit {
   head: budget_income_head
   isTenge: boolean = true;
   tablisa: any = []
+  selected: any
+  
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -71,6 +85,29 @@ export class BudgetIncomeDetailComponent implements OnInit {
         }
       )
   }
+
+  copySelectedRow() {
+    console.log(this.selected);
+    if (this.selected) {
+      this.budget_income_detail.tbl.push(
+        {
+          _spec_income: {
+            id: this.selected[0]._spec_income.id,
+            code: this.selected[0]._spec_income.code,
+            name_kaz: this.selected[0]._spec_income.name_kaz,
+            name_rus: this.selected[0]._spec_income.name_rus
+          },
+          id: 0,
+          summ: this.selected[0].summ,
+          _budjet_income: {
+            id: this.selected[0]._budjet_income.id,
+            nom: this.selected[0]._budjet_income.nom,
+            org_name: this.selected[0]._budjet_income.org_name
+          }
+        })     
+    }
+  }
+
 
   onTableValuesChange() {
     this.calculateTotalSum();

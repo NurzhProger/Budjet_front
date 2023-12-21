@@ -96,6 +96,7 @@
 
     <div style="padding-top: 10px;">
         <p-table [value]="budget_income_detail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
+        [(selection)]="selected" selectionMode="multiple" [metaKeySelection]="true"
             styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
             <ng-template pTemplate="header">
                 <tr>
@@ -106,7 +107,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
-                <tr class="cursor-pointer">
+                <tr class="cursor-pointer"  [pSelectableRow]="izm">
                     <td style="text-align: center; font-weight: 700;">
                         {{ri + 1}}
                     </td>
