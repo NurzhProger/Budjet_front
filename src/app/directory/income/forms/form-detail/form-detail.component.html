@@ -138,12 +138,12 @@
             <td>
               <p-cellEditor>
                 <ng-template pTemplate="input">
-                  <p-dropdown [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name"
+                  <p-dropdown placeholder="Выберите способ расчета" [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name"
                     [(ngModel)]="item._sposob_ras" [style]="{'width':'100%'}"></p-dropdown>
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{item._sposob_ras}}
-                </ng-template>
+                </ng-template>    
               </p-cellEditor>
             </td>
             <td>

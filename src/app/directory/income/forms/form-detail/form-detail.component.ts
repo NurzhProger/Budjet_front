@@ -219,6 +219,7 @@ export class FormDetailComponent implements OnInit {
 
 
   add_tbl() {
+
     this.form_detail.tbl.push(
       {
         id: 0,
