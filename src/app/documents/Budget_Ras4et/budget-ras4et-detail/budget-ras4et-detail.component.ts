@@ -103,6 +103,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   preob() {
 
     this.column = this.Ras4et_detail.tbl[0]
+
     if (this.Ras4et_detail.new_dopl.length > 0) {
       this.have_dopl = true
     }

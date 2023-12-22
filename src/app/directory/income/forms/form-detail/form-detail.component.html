@@ -104,9 +104,10 @@
             <th style="text-align:center">Значение</th>
             <th style="text-align:center">Колонка</th>
             <th style="text-align:center">Используемые колонки</th>
-            <th style="text-align:center">Basic column</th>
+            <th style="text-align:center">Основные колонки</th>
             <th style="text-align:center">Итоговая сумма</th>
             <th style="text-align:center">Суммируемая колонка</th>
+            <th style="text-align:center">Размер</th>
             <th style="text-align:center">Действия</th>
           </tr>
         </ng-template>
@@ -242,6 +243,16 @@
                 </ng-template>
                 <ng-template pTemplate="output">
                   <input type="checkbox" [(ngModel)]="item.total" [disabled]="true">
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td style="text-align:center">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="number" [(ngModel)]="item.razmer" style="width: 100%;">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{item.razmer}}
                 </ng-template>
               </p-cellEditor>
             </td>

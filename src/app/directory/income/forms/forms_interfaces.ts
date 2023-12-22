@@ -81,7 +81,8 @@ export interface forms_tab1 {
   head_level: number,
   name_kaz: string,
   _sposob_ras: string,
-  basic_column: boolean
+  basic_column: boolean,
+  razmer: number
 }
 
 

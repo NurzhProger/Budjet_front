@@ -86,7 +86,8 @@ export class FormDetailComponent implements OnInit {
       head_level: 0,
       name_kaz: '',
       _sposob_ras: '',
-      basic_column: false
+      basic_column: false,
+      razmer: 0
     }],
     dopl: [{
       id: 0,
@@ -281,7 +282,8 @@ export class FormDetailComponent implements OnInit {
         head_level: 0,
         name_kaz: '',
         _sposob_ras: '',
-        basic_column: false
+        basic_column: false,
+        razmer: 0
       }
 
     )
