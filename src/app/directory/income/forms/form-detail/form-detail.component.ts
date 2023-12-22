@@ -114,7 +114,7 @@ export class FormDetailComponent implements OnInit {
       // budjet_name: new FormControl(null, [Validators.required])
     })
 
-    this.selectTipTop()
+
 
     if (this.form_doc_id !== '') {
       this.form_Servise.fetch_detail(this.form_doc_id)
@@ -128,47 +128,9 @@ export class FormDetailComponent implements OnInit {
         )
     }
     else {
-      // this.form_detail = {
-      //   form: {
-      //     id: 0,
-      //     name: "",
-      //     head_form: "",
-      //     num_app: 0,
-      //     spec_code: "",
-      //     spec_name: "",
-      //     _spec: 0
-      //   },
-      //   tbl: [{
-      //     id: 0,
-      //     name: "",
-      //     column: 0,
-      //     columns_used: "",
-      //     zn: "",
-      //     zn_string: null,
-      //     zn_float: null,
-      //     zn_enstru: null,
-      //     zn_stazh_category: null,
-      //     zn_category_sotr: null,
-      //     zn_dolzhnost: null,
-      //     zn_podrazdelenie: null,
-      //     zn_dopl_nadb: null,
-      //     zn_oblasti_reg: null,
-      //     zn_marki_avto: null,
-      //     zn_ed_izm: null
-      //   }],
-      //   dopl: [{
-      //     id: 0,
-      //     columns_used: "",
-      //     summ: 0,
-      //     _form: 0,
-      //     _doplata: 0,
-      //     _doplata_name: "",
-      //     _sposob_ras: "",
-      //   }]
-      // }
-
-
     }
+
+    this.selectTipTop()
 
     this.statuses = [
       { label: 'Строка', value: 'string' },
