@@ -116,8 +116,9 @@ export class SelectRas4etComponent implements OnInit {
       kolon.zn_float = value;
     }
 
-    mass = [this.new_ras[ri]];
-
+    mass = [this.tbl];
+    console.log(mass);
+    
     let mass_arr = mass[0];
     let aaa = '1234567890';
     let koeffBolshe100 = false
