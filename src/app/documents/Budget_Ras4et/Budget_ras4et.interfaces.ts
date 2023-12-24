@@ -9,6 +9,7 @@ import { stazh_category_element } from "src/app/directory/planirovanie/stazh-cat
 export interface Ras4et_doc {
   head: Ras4et_head,
   head_table: [Ras4et_head_table],
+  head_basic: [Ras4et_head_basic],
   tbl: [ChildItem],
   dopl: [Ras4et_dopl],
   new_dopl: [Ras4et_new_dopl],
@@ -16,6 +17,10 @@ export interface Ras4et_doc {
 }
 
 export interface Ras4et_head_table {
+  name: string
+}
+
+export interface Ras4et_head_basic {
   name: string
 }
 
@@ -48,6 +53,9 @@ export interface ChildItem {
   id: number;
   name: string;
   column: number;
+  basic_column: boolean
+  razmer: number
+  _sposob_ras: string
   columns_used: string;
   itog: boolean;
   total: boolean;

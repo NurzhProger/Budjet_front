@@ -136,6 +136,7 @@ import { BudgetIncomeListComponent } from './documents/budget_income/budget-inco
 import { BudgetIncomeDetailComponent } from './documents/budget_income/budget-income-detail/budget-income-detail.component';
 import { ZakluchenieListComponent } from './documents/zakluchenie/zakluchenie-list/zakluchenie-list.component';
 import { ZakluchenieDetailComponent } from './documents/zakluchenie/zakluchenie-detail/zakluchenie-detail.component';
+import { SelectRas4etComponent } from './documents/Budget_Ras4et/select-ras4et/select-ras4et.component';
 
 @NgModule({
   imports: [
@@ -274,7 +275,8 @@ import { ZakluchenieDetailComponent } from './documents/zakluchenie/zakluchenie-
     BudgetIncomeDetailComponent,
     BudjetRequestSelectComponent,
     ZakluchenieListComponent,
-    ZakluchenieDetailComponent],
+    ZakluchenieDetailComponent,
+    SelectRas4etComponent],
   bootstrap: [AppComponent],
   providers: [
     {

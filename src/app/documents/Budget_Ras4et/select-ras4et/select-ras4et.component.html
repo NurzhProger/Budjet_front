@@ -1,0 +1,72 @@
+<div class="p-field">
+    <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="tbl">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="text-align:center">Доплаты</th>
+                <th style="text-align:center">Сумма доплаты</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
+            <tr>
+                <td>
+                    {{adddopl.name}}
+                </td>
+                <td style="text-align:center">
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'enstru'">
+                        <input id="enstru" type="text" [ngModel]="adddopl.zn_enstru.name_rus" [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'category_sotr'">
+                        <input id="category_sotr" type="text" [ngModel]="adddopl.zn_category_sotr.name"
+                            [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <p-inputNumber *ngIf="adddopl.zn == 'float'" type="number" [min]="0" [ngModel]="adddopl.zn_float"
+                        [readonly]="adddopl.name == 'Коэффициент'" [minFractionDigits]="2" [maxFractionDigits]="2"
+                        [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                        (ngModelChange)="onInputChange($event, adddopl, ri)">
+                    </p-inputNumber>
+
+                    <input type="text" *ngIf="adddopl.zn == 'string'" [ngModel]="adddopl.zn_string">
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'ed_izm'">
+                        <input type="text" [ngModel]="adddopl.zn_ed_izm.name" [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'dolzhnost'">
+                        <input id="dolzhnost" type="text" [ngModel]="adddopl.zn_dolzhnost.name_rus" [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'podrazdelenie'">
+                        <input id="podrazdelenie" type="text" [ngModel]="adddopl.zn_podrazdelenie.name_rus"
+                            [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'dopl_nadb'">
+                        <input id="dopl_nadb" type="text" [ngModel]="adddopl.zn_dopl_nadb.name_rus" [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'oblasti_reg'">
+                        <input id="oblasti_reg" type="text" [ngModel]="adddopl.zn_oblasti_reg.name" [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'marki_avto'">
+                        <input id="marki_avto" type="text" [ngModel]="adddopl.zn_marki_avto.name" [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                    <div class="p-inputgroup" *ngIf="adddopl.zn == 'stazh_category'">
+                        <input id="stazh_category" type="text" [ngModel]="adddopl.zn_stazh_category.name"
+                            [readonly]="true">
+                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                    </div>
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div style="padding-right: 10px;">
+        <button pButton pRipple label="Перенести в документ" icon="pi pi-save" class="p-button-secondary p-mr-2"
+            (click)="saveDoplata()"></button>
+    </div>
+</div>

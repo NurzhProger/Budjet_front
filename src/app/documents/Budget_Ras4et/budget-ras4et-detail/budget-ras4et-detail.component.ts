@@ -39,6 +39,7 @@ import { EdIzmSelectComponent } from 'src/app/directory/planirovanie/ed-izm/ed-i
 import { MarkiAvtoSelectComponent } from 'src/app/directory/planirovanie/marki_avto/marki-avto-select/marki-avto-select.component';
 import { DoplNadbavkaSelectComponent } from 'src/app/directory/planirovanie/dopl_nadbavka/dopl-nadbavka-select/dopl-nadbavka-select.component';
 import { string } from 'mathjs';
+import { SelectRas4etComponent } from '../select-ras4et/select-ras4et.component';
 
 @Component({
   selector: 'app-budget-ras4et-detail',
@@ -61,11 +62,11 @@ export class BudgetRas4etDetailComponent implements OnInit {
   // @Input() form_id = ''
   izm: any
   tbl: ChildItem
-  new_dopl: [Ras4et_new_dopl]
+  // new_dopl: [Ras4et_new_dopl]
   form: FormGroup
   items: MenuItem[]
   Ras4et_detail: Ras4et_doc
-  dopl: [Ras4et_dopl]
+  // dopl: [Ras4et_dopl]
   children: any = []
   copy_str: any = []
   column: any
@@ -101,20 +102,125 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   preob() {
-
     this.column = this.Ras4et_detail.tbl[0]
-
-    if (this.Ras4et_detail.new_dopl.length > 0) {
-      this.have_dopl = true
-    }
+    let mass: any = []
+    let asd: any = []
+    // if (this.Ras4et_detail.new_dopl.length > 0) {
+    //   this.have_dopl = true
+    // }
     if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
     else {
+
       for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
-        this.children.push(this.Ras4et_detail.tbl[i])
+        mass = this.Ras4et_detail.tbl[i]
+        for (let i = 0; mass.length > i; i++) {
+          if (mass[i].basic_column == true) {
+            asd.push(mass[i])
+          }
+        }
+        this.children.push(asd)
+        asd = []
       }
+
+
+
+
     }
+  }
+
+  selectRas(ri: number) {
+
+    // let add_dopl: any = []
+    // let _dopl: any = []
+    // let new_dopl: any = []
+    let wws: any = []
+    let new_ras: any = []
+    let tbl: any = []
+    let stroka: number = 0
+    // let ind_dopl: number
+    // let naiden: boolean = false
+    wws = this.children[ri]
+
+    for (let i = 0; wws.length > i; i++) {
+      stroka = wws[i].stroka
+    }
+
+    // for (let y = 0; this.Ras4et_detail.dopl.length > y; y++) {
+    //   if (naiden == false) {
+    //     mal = this.Ras4et_detail.dopl[y]
+
+    //     if (stroka == mal[0].stroka) {
+    //       naiden = true
+    //     }
+    //   }
+    //   if (naiden == true) {
+    //     add_dopl = this.Ras4et_detail.dopl[y]
+    //     ind_dopl = y
+    //     break
+    //   }
+    // }
+
+    // if (add_dopl !== undefined) {
+    //   if (add_dopl.length > 0) {
+    //     for (let i = 0; add_dopl.length > i; i++) {
+    //       _dopl.push(add_dopl[i]._doplata)
+    //     }
+    //   }
+    // }
+
+    // for (let i = 0; this.Ras4et_detail.new_dopl.length > i; i++) {
+    //   let newDoplItem = this.Ras4et_detail.new_dopl[i];
+    //   let found = _dopl.find((item: number) => item === newDoplItem._doplata);
+    //   if (!found) {
+    //     new_dopl.push(newDoplItem);
+    //   }
+    // }
+    tbl = this.Ras4et_detail.tbl[stroka - 1]
+    new_ras = this.Ras4et_detail.new_str[0]
+
+    this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectRas4etComponent,
+      {
+        header: 'Таблица расчета',
+        width: 'calc(60%)',
+        height: 'calc(80%)',
+        data: {
+          period: this.period,
+          tbl: tbl,
+          new_ras: new_ras,
+          stroka: stroka
+        }
+      }
+    )
+
+    this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
+      if (dopl) {
+        // let fff: any = []
+        // fff = JSON.parse(JSON.stringify(dopl))
+        // for (let ss = 0; fff.length > ss; ss++) {
+        //   fff[ss].stroka = stroka
+        // }
+
+        // if (ind_dopl !== undefined) {
+        //   this.Ras4et_detail.dopl.splice(ind_dopl, 1)
+        // }
+
+        // if (fff.length !== 0) {
+        //   this.Ras4et_detail.dopl.push(fff);
+        // }
+
+
+        // let column = dopl[0]._column
+        // let summ_mass = 0
+
+        // for (let i = 0; dopl.length > i; i++) {
+        //   summ_mass = summ_mass + dopl[i].summ
+        // }
+
+        // wws[column - 1].zn_float = summ_mass
+      }
+    })
   }
 
   selectDopl(ri: number) {
@@ -215,13 +321,24 @@ export class BudgetRas4etDetailComponent implements OnInit {
   add_tbl() {
     let newnew: any = []
     this.copy_str = JSON.parse(JSON.stringify(this.Ras4et_detail.new_str));
+
+
     newnew = this.copy_str[0]
     let asd: any = []
-    asd = newnew
+
     for (let i = 0; newnew.length > i; i++) {
+      if (newnew[i].basic_column == true) {
+        asd.push(newnew[i])
+      }
+    }
+    // asd = newnew
+    for (let i = 0; asd.length > i; i++) {
       asd[i].stroka = this.children.length + 1
     }
     this.children.push(asd)
+    this.Ras4et_detail.tbl.push(newnew)
+
+
   }
 
   delStr(ind: number) {
@@ -233,7 +350,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.children.splice(ind, 1)
-        add_dopl = this.Ras4et_detail.dopl.splice(ind, 1)
+        // add_dopl = this.Ras4et_detail.dopl.splice(ind, 1)
         this.Budget_Confirmation.close()
       },
       reject: () => {
@@ -574,7 +691,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   saveDoc(close: boolean): void {
     let responce: any
-    this.Ras4et_detail.tbl = this.children
+    // this.Ras4et_detail.tbl = this.children
     this.Budget_ras4et_Service
       .saveLimit(this.Ras4et_detail)
       .subscribe(
