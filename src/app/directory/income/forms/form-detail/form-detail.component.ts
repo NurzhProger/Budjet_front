@@ -110,6 +110,7 @@ export class FormDetailComponent implements OnInit {
     this.form = new FormGroup({
       number_doc: new FormControl(null, [Validators.required]),
       name_doc: new FormControl(null, [Validators.required]),
+      name_doc_kaz: new FormControl(null, [Validators.required]),
       spec_name: new FormControl(null, [Validators.required]),
       nomer_form: new FormControl(null, [Validators.required]),
       // budjet_name: new FormControl(null, [Validators.required])

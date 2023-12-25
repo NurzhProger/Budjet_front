@@ -50,13 +50,13 @@
     
     <div class="p-field" style="padding-right: 10px;">
 
-      <label for="name_doc">Наименование(каз) <span style="color: red;">*</span></label>
+      <label for="name_doc_kaz">Наименование(каз) <span style="color: red;">*</span></label>
       <div class="p-inputgroup">
-        <input id="name_doc" type="text" pInputText [(ngModel)]="form_detail.form.head_form_kaz"
-          formControlName="name_doc" />
+        <input id="name_doc_kaz" type="text" pInputText [(ngModel)]="form_detail.form.head_form_kaz"
+          formControlName="name_doc_kaz" />
       </div>
-      <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
-        <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должна быть пустой</span>
+      <span class="p-invalid" *ngIf="form.controls['name_doc_kaz'].invalid && form.controls['name_doc_kaz'].touched">
+        <span *ngIf="form.controls['name_doc_kaz'].errors?.required">Наименование не должна быть пустой</span>
       </span>
     </div>
 
