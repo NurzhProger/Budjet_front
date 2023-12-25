@@ -62,7 +62,7 @@
                     </div>
                 </td>
                 <td style="text-align:center">
-                    <p-inputNumber type="number" [min]="0" [ngModel]="adddopl.razmer" [minFractionDigits]="2"
+                    <p-inputNumber type="number" [min]="0" [(ngModel)]="adddopl.razmer" [minFractionDigits]="2"
                         [maxFractionDigits]="2"
                         [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
                         (ngModelChange)="onInputChange($event, adddopl, ri)">

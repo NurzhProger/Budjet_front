@@ -17,6 +17,7 @@ export class SelectRas4etComponent implements OnInit {
   fff: any = []
   added_dopl: any = []
   tbl: any = []
+  copytbl: any = []
   stroka: number
   new_ras: any = []
   period = ''
@@ -33,7 +34,9 @@ export class SelectRas4etComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tbl = this.select_dialog_config.data.tbl
+    // this.tbl = JSON.parse(this.select_dialog_config.data.tbl)
+    this.copytbl = this.select_dialog_config.data.tbl
+    this.tbl = JSON.parse(JSON.stringify(this.copytbl))
     this.new_ras = this.select_dialog_config.data.new_ras
     this.stroka = this.select_dialog_config.data.stroka
     this.period = this.select_dialog_config.data.period
@@ -165,6 +168,8 @@ export class SelectRas4etComponent implements OnInit {
     }
 
     mass = [this.tbl];
+    console.log(mass);
+    
 
     let mass_arr = mass[0];
 
