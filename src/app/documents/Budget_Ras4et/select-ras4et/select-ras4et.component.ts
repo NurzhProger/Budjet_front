@@ -22,6 +22,8 @@ export class SelectRas4etComponent implements OnInit {
   period = ''
   rezult = 0
   summdoc = 0
+  MRP: number
+  BDO: number
 
   constructor(
     private select_budjetRas4et_Service: budjetRas4et_Service,
@@ -31,49 +33,93 @@ export class SelectRas4etComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.period = this.select_dialog_config.data.period
     this.tbl = this.select_dialog_config.data.tbl
     this.new_ras = this.select_dialog_config.data.new_ras
     this.stroka = this.select_dialog_config.data.stroka
+    this.period = this.select_dialog_config.data.period
+    this.getMRP()
+    this.getBDO()
 
 
   }
 
+  getMRP() {
+    let paramsMRP = {
+      period: this.period,
+      _pokazatel: "МРП"
+    }
+
+    let responce: any
+
+    this.select_budjetRas4et_Service
+      .period_pokazatel_detail(paramsMRP)
+      .subscribe(
+        (data) => (
+          responce = data,
+          this.MRP = parseFloat(responce.znachenie)
+        ),
+        (error) => (
+          this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
+      )
+  }
+
+  getBDO() {
+    let paramsMRP = {
+      period: this.period,
+      _pokazatel: "БДО"
+    }
+
+    let responce: any
+
+    this.select_budjetRas4et_Service
+      .period_pokazatel_detail(paramsMRP)
+      .subscribe(
+        (data) => (
+          responce = data,
+          this.BDO = parseFloat(responce.znachenie)
+        ),
+        (error) => (
+          this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+        )
+      )
+  }
+
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {
 
-    let filter_dopl: any = []
-    filter_dopl = this.first_dopl.filter(item => item._doplata == dopl._doplata)
+    // let filter_dopl: any = []
+    // filter_dopl = this.first_dopl.filter(item => item._doplata == dopl._doplata)
 
 
-    if (filter_dopl.length > 0) {
-      if (filter_dopl[0].stavka_name !== '') {
+    // if (filter_dopl.length > 0) {
+    //   if (filter_dopl[0].stavka_name !== '') {
 
-        let params = {
-          period: this.period,
-          _pokazatel: filter_dopl[0].stavka_name
-        }
+    //     let params = {
+    //       period: this.period,
+    //       _pokazatel: filter_dopl[0].stavka_name
+    //     }
 
-        let responce: any
+    //     let responce: any
 
-        this.select_budjetRas4et_Service
-          .period_pokazatel_detail(params)
-          .subscribe(
-            (data) => (
-              responce = data,
-              this.rashetSummyStavka(dopl, responce.znachenie, filter_dopl, ri)
-            ),
-            (error) => (
-              this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
-            )
-          )
-      }
-      else {
-        this.rashetSummy(dopl, filter_dopl, ri)
-      }
-    }
-    else {
-      this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось найти доплату ' + dopl._doplata_name })
-    }
+    //     this.select_budjetRas4et_Service
+    //       .period_pokazatel_detail(params)
+    //       .subscribe(
+    //         (data) => (
+    //           responce = data,
+    //           this.rashetSummyStavka(dopl, responce.znachenie, filter_dopl, ri)
+    //         ),
+    //         (error) => (
+    //           this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
+    //         )
+    //       )
+    //   }
+    //   else {
+    //     this.rashetSummy(dopl, filter_dopl, ri)
+    //   }
+    // }
+    // else {
+    //   this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось найти доплату ' + dopl._doplata_name })
+    // }
   }
 
   rashetSummy(dopl: Ras4et_new_dopl, filter_dopl: any, ri: number) {
@@ -110,6 +156,8 @@ export class SelectRas4etComponent implements OnInit {
 
   onInputChange(value: number, kolon: any, ri: number) {
     let mass: any;
+    let K_mass: any;
+    let new_mass_simv: any
     if (value == undefined) {
       kolon.zn_float = 0;
     } else {
@@ -117,10 +165,11 @@ export class SelectRas4etComponent implements OnInit {
     }
 
     mass = [this.tbl];
-    console.log(mass);
-    
+
     let mass_arr = mass[0];
+
     let aaa = '1234567890';
+    let kkk = 'К'
     let koeffBolshe100 = false
 
     for (let i = 0; i < mass[0].length; i++) {
@@ -130,31 +179,46 @@ export class SelectRas4etComponent implements OnInit {
         }
       }
     }
+
     // this.Ras4et_detail.tbl[ri].
     for (let i = 0; i < mass[0].length; i++) {
       if (mass_arr[i].columns_used !== '') {
         let formula = '';
         let mass_simv = mass_arr[i].columns_used.split(' ');
         for (let y = 0; y < mass_simv.length; y++) {
-          if (aaa.includes(mass_simv[y])) {
-            formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
-          }
-          else if (mass_simv[y] > mass_arr.length) {
-            formula = formula + mass_simv[y];
-          }
-          else if (aaa.includes(mass_simv[y][1])) {
-            formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
+
+          K_mass = mass_simv[y][mass_simv[y].length - 1]
+
+          if (kkk.includes(K_mass)) {
+            mass_simv[y] = mass_simv[y].slice(0, -1)
+            if (aaa.includes(mass_simv[y])) {
+              formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
+            }
+            else if (mass_simv[y] > mass_arr.length) {
+              formula = formula + mass_simv[y];
+            }
+            else if (aaa.includes(mass_simv[y][1])) {
+              formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
+            }
+
           }
           else if (mass_simv[y] == "БДО") {
             if (koeffBolshe100 == false) {
-              formula = formula + 17697
+              formula = formula + this.BDO
             } else {
               formula = formula + 1
             }
           }
+          else if (mass_simv[y] == "Р") {
+            formula = formula + mass_arr[i].razmer;
+          }
+          else if (mass_simv[y] == "МРП") {
+            formula = formula + this.MRP
+          }
           else {
             formula = formula + mass_simv[y];
           }
+
         }
         mass_arr[i].zn_float = math.evaluate(formula);
       }

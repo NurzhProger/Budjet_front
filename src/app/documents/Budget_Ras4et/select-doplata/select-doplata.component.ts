@@ -20,6 +20,7 @@ export class SelectDoplataComponent implements OnInit {
   period = ''
   rezult = 0
 
+
   constructor(
     private select_budjetRas4et_Service: budjetRas4et_Service,
     private select_dialog_config: DynamicDialogConfig,
@@ -37,6 +38,7 @@ export class SelectDoplataComponent implements OnInit {
       this.added_dopl = this.select_dialog_config.data.added_dopl
     }
     this.tbl = this.select_dialog_config.data.tbl
+
   }
 
   onRowClick(dopl: Ras4et_new_dopl, ri: number) {

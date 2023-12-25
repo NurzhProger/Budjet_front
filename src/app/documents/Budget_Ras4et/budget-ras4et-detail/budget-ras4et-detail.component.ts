@@ -196,11 +196,11 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       if (dopl) {
-        // let fff: any = []
-        // fff = JSON.parse(JSON.stringify(dopl))
-        // for (let ss = 0; fff.length > ss; ss++) {
-        //   fff[ss].stroka = stroka
-        // }
+        let fff: any = []
+        fff = JSON.parse(JSON.stringify(dopl))
+        for (let ss = 0; fff.length > ss; ss++) {
+          fff[ss].stroka = stroka
+        }
 
         // if (ind_dopl !== undefined) {
         //   this.Ras4et_detail.dopl.splice(ind_dopl, 1)

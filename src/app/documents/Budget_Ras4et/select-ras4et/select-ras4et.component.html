@@ -4,6 +4,7 @@
             <tr>
                 <th style="text-align:center">Доплаты</th>
                 <th style="text-align:center">Сумма доплаты</th>
+                <th style="text-align:center">Размер</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
@@ -60,7 +61,13 @@
                         <span class="p-inputgroup-addon cursor-pointer">...</span>
                     </div>
                 </td>
-
+                <td style="text-align:center">
+                    <p-inputNumber type="number" [min]="0" [ngModel]="adddopl.razmer" [minFractionDigits]="2"
+                        [maxFractionDigits]="2"
+                        [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                        (ngModelChange)="onInputChange($event, adddopl, ri)">
+                    </p-inputNumber>
+                </td>
             </tr>
         </ng-template>
     </p-table>
