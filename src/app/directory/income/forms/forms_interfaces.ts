@@ -39,6 +39,7 @@ export interface form_list_doc {
   _spec: specification_income_detail,
   name: string,
   head_form: string,
+  head_form_kaz: string,
   num_app: number
 }
 

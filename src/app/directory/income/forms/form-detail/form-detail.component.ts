@@ -60,6 +60,7 @@ export class FormDetailComponent implements OnInit {
       },
       name: '',
       head_form: '',
+      head_form_kaz: '',
       num_app: 0
     },
     tbl: [{

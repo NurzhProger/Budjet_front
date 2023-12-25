@@ -47,6 +47,18 @@
       </span>
     </div>
 
+    
+    <div class="p-field" style="padding-right: 10px;">
+
+      <label for="name_doc">Наименование(каз) <span style="color: red;">*</span></label>
+      <div class="p-inputgroup">
+        <input id="name_doc" type="text" pInputText [(ngModel)]="form_detail.form.head_form_kaz"
+          formControlName="name_doc" />
+      </div>
+      <span class="p-invalid" *ngIf="form.controls['name_doc'].invalid && form.controls['name_doc'].touched">
+        <span *ngIf="form.controls['name_doc'].errors?.required">Наименование не должна быть пустой</span>
+      </span>
+    </div>
 
     <div class="p-field" style="padding-right: 10px; min-width: 20rem;">
       <label for="spec_name">Специфика <span style="color: red;">*</span></label>

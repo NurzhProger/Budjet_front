@@ -542,6 +542,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
           _spec: form_detail._spec,
           name: form_detail.name,
           head_form: form_detail.head_form,
+          head_form_kaz: form_detail.head_form_kaz,
           num_app: form_detail.num_app
         },
         summ: 0,
