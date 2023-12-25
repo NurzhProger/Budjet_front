@@ -101,6 +101,16 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   }
 
+  fetch_detail() {
+    this.Budget_ras4et_Service.fetch_detail(this.izm)
+      .subscribe(
+        (data) => (
+          this.Ras4et_detail = data,
+          this.preob()
+        )
+      )
+  }
+
   preob() {
     this.column = this.Ras4et_detail.tbl[0]
     let mass: any = []
@@ -195,30 +205,12 @@ export class BudgetRas4etDetailComponent implements OnInit {
     )
 
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
+      let close: boolean
       if (dopl) {
         let fff: any = []
         fff = JSON.parse(JSON.stringify(dopl))
-        for (let ss = 0; fff.length > ss; ss++) {
-          fff[ss].stroka = stroka
-        }
-
-        // if (ind_dopl !== undefined) {
-        //   this.Ras4et_detail.dopl.splice(ind_dopl, 1)
-        // }
-
-        // if (fff.length !== 0) {
-        //   this.Ras4et_detail.dopl.push(fff);
-        // }
-
-
-        // let column = dopl[0]._column
-        // let summ_mass = 0
-
-        // for (let i = 0; dopl.length > i; i++) {
-        //   summ_mass = summ_mass + dopl[i].summ
-        // }
-
-        // wws[column - 1].zn_float = summ_mass
+        this.Ras4et_detail.tbl[stroka - 1] = fff
+        // this.saveDoc(close = false)
       }
     })
   }
@@ -718,6 +710,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
     if (close) {
       this.Budget_ras4et_DetailrefModal.close(this.Ras4et_detail)
     }
+    else (
+      this.fetch_detail()
+    )
   }
 
   closeform(close: boolean) {

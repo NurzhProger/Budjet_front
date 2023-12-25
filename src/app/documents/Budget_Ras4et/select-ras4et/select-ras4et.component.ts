@@ -168,8 +168,6 @@ export class SelectRas4etComponent implements OnInit {
     }
 
     mass = [this.tbl];
-    console.log(mass);
-    
 
     let mass_arr = mass[0];
 
