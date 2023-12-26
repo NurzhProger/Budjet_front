@@ -82,55 +82,38 @@
 
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'enstru'">
                   <input id="enstru" type="text" [ngModel]="kolon.zn_enstru.name_rus" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer" (click)="selectENSTRU(kolon.zn_enstru)">...</span>
                 </div>
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'category_sotr'">
                   <input id="category_sotr" type="text" [ngModel]="kolon.zn_category_sotr.name" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectCategorySotr(kolon.zn_category_sotr, ri)">...</span>
                 </div>
                 <p-inputNumber *ngIf="kolon.zn == 'float'" type="number" [min]="0" [ngModel]="kolon.zn_float"
                   [readonly]="kolon.name == 'Коэффициент'" [minFractionDigits]="2" [maxFractionDigits]="2"
-                  [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
-                  (ngModelChange)="onInputChange($event, kolon, ri)" [readonly]="true">
+                  [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" [readonly]="true">
                 </p-inputNumber>
 
                 <input type="text" *ngIf="kolon.zn == 'string'" [ngModel]="kolon.zn_string"
                   (ngModelChange)="onInputChangeString($event, kolon, ri)">
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'ed_izm'">
                   <input type="text" [ngModel]="kolon.zn_ed_izm.name" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer" (click)="selectEd_Izm(kolon.zn_ed_izm)">...</span>
                 </div>
 
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'dolzhnost'">
                   <input id="dolzhnost" type="text" [ngModel]="kolon.zn_dolzhnost.name_rus" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectDolzhnost(kolon.zn_dolzhnost)">...</span>
                 </div>
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'podrazdelenie'">
                   <input id="podrazdelenie" type="text" [ngModel]="kolon.zn_podrazdelenie.name_rus" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectPodrazdelenie(kolon.zn_podrazdelenie)">...</span>
                 </div>
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'dopl_nadb'">
                   <input id="dopl_nadb" type="text" [ngModel]="kolon.zn_dopl_nadb.name_rus" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectDoplNadb(kolon.zn_dopl_nadb)">...</span>
                 </div>
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'oblasti_reg'">
                   <input id="oblasti_reg" type="text" [ngModel]="kolon.zn_oblasti_reg.name" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectOblreg(kolon.zn_oblasti_reg)">...</span>
                 </div>
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'marki_avto'">
                   <input id="marki_avto" type="text" [ngModel]="kolon.zn_marki_avto.name" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectMarkiAvto(kolon.zn_marki_avto)">...</span>
                 </div>
                 <div class="p-inputgroup" *ngIf="kolon.zn == 'stazh_category'">
                   <input id="stazh_category" type="text" [ngModel]="kolon.zn_stazh_category.name" [readonly]="true">
-                  <span class="p-inputgroup-addon cursor-pointer"
-                    (click)="selectStazh(kolon.zn_stazh_category, ri)">...</span>
                 </div>
               </ng-container>
 

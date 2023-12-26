@@ -207,8 +207,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.Budget_ras4et_Detailref.onClose.subscribe((dopl: any) => {
       let close: boolean
       if (dopl) {
+
         let fff: any = []
-        fff = JSON.parse(JSON.stringify(dopl))
+        fff = dopl
         this.Ras4et_detail.tbl[stroka - 1] = fff
         // this.saveDoc(close = false)
       }

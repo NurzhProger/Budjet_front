@@ -15,47 +15,58 @@
                 <td style="text-align:center">
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'enstru'">
                         <input id="enstru" type="text" [ngModel]="adddopl.zn_enstru.name_rus">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectENSTRU(adddopl.zn_enstru)">...</span>
                     </div>
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'category_sotr'">
                         <input id="category_sotr" type="text" [ngModel]="adddopl.zn_category_sotr.name">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer" style="text-align:center"
+                            (click)="selectCategorySotr(adddopl.zn_category_sotr, ri)">...</span>
                     </div>
+
                     <p-inputNumber *ngIf="adddopl.zn == 'float'" type="number" [min]="0" [ngModel]="adddopl.zn_float"
                         [readonly]="adddopl.name == 'Коэффициент'" [minFractionDigits]="2" [maxFractionDigits]="2"
                         [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
                         (ngModelChange)="onInputChange($event, adddopl, ri)">
                     </p-inputNumber>
 
-                    <input type="text" *ngIf="adddopl.zn == 'string'" [ngModel]="adddopl.zn_string">
+                    <input type="text" *ngIf="adddopl.zn == 'string'" [ngModel]="adddopl.zn_string"
+                        (ngModelChange)="onInputChangeString($event, adddopl, ri)">
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'ed_izm'">
                         <input type="text" [ngModel]="adddopl.zn_ed_izm.name">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectEd_Izm(adddopl.zn_ed_izm)">...</span>
                     </div>
 
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'dolzhnost'">
                         <input id="dolzhnost" type="text" [ngModel]="adddopl.zn_dolzhnost.name_rus">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectDolzhnost(adddopl.zn_dolzhnost)">...</span>
                     </div>
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'podrazdelenie'">
                         <input id="podrazdelenie" type="text" [ngModel]="adddopl.zn_podrazdelenie.name_rus">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectPodrazdelenie(adddopl.zn_podrazdelenie)">...</span>
                     </div>
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'dopl_nadb'">
                         <input id="dopl_nadb" type="text" [ngModel]="adddopl.zn_dopl_nadb.name_rus">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectDoplNadb(adddopl.zn_dopl_nadb)">...</span>
                     </div>
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'oblasti_reg'">
                         <input id="oblasti_reg" type="text" [ngModel]="adddopl.zn_oblasti_reg.name">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectOblreg(adddopl.zn_oblasti_reg)">...</span>
                     </div>
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'marki_avto'">
                         <input id="marki_avto" type="text" [ngModel]="adddopl.zn_marki_avto.name">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectMarkiAvto(adddopl.zn_marki_avto)">...</span>
                     </div>
                     <div class="p-inputgroup" *ngIf="adddopl.zn == 'stazh_category'">
                         <input id="stazh_category" type="text" [ngModel]="adddopl.zn_stazh_category.name">
-                        <span class="p-inputgroup-addon cursor-pointer">...</span>
+                        <span class="p-inputgroup-addon cursor-pointer"
+                            (click)="selectStazh(adddopl.zn_stazh_category, ri)">...</span>
                     </div>
                 </td>
                 <td style="text-align:center">
