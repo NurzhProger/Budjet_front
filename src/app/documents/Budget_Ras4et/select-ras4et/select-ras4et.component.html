@@ -10,21 +10,18 @@
         <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
             <tr>
                 <td style="height: 5px; padding: 0;">
-                    {{adddopl.name}}
+                    {{adddopl.head_table}}
                 </td>
                 <td style="text-align:center; height: 5px; padding: 0;">
-                    <div class="flex justify-content-center" *ngIf="adddopl.zn == 'enstru'"
-                    style="padding: 0 0 5px 0;">
-                        <input id="enstru" type="text" [ngModel]="adddopl.zn_enstru.name_rus"
-                        style="height: 20px;">
-                        <span class="p-inputgroup-addon cursor-pointer"
-                            (click)="selectENSTRU(adddopl.zn_enstru)"
+                    <div class="flex justify-content-center" *ngIf="adddopl.zn == 'enstru'" style="padding: 0 0 5px 0;">
+                        <input id="enstru" type="text" [ngModel]="adddopl.zn_enstru.name_rus" style="height: 20px;">
+                        <span class="p-inputgroup-addon cursor-pointer" (click)="selectENSTRU(adddopl.zn_enstru)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'category_sotr'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="category_sotr" type="text" [ngModel]="adddopl.zn_category_sotr.name"
-                        style="height: 20px; text-align: center;">
+                            style="height: 20px; text-align: center;">
                         <span class="p-inputgroup-addon cursor-pointer"
                             (click)="selectCategorySotr(adddopl.zn_category_sotr, ri)"
                             style="height: 20px; text-align: center;">...</span>
@@ -38,59 +35,52 @@
 
                     <input type="text" *ngIf="adddopl.zn == 'string'" [ngModel]="adddopl.zn_string"
                         (ngModelChange)="onInputChangeString($event, adddopl, ri)">
-                    <div class="flex justify-content-center" *ngIf="adddopl.zn == 'ed_izm'"
-                    style="padding: 0 0 5px 0;">
-                        <input type="text" [ngModel]="adddopl.zn_ed_izm.name"
-                        style="height: 20px; text-align: center;">
-                        <span class="p-inputgroup-addon cursor-pointer"
-                            (click)="selectEd_Izm(adddopl.zn_ed_izm)"
+                    <div class="flex justify-content-center" *ngIf="adddopl.zn == 'ed_izm'" style="padding: 0 0 5px 0;">
+                        <input type="text" [ngModel]="adddopl.zn_ed_izm.name" style="height: 20px; text-align: center;">
+                        <span class="p-inputgroup-addon cursor-pointer" (click)="selectEd_Izm(adddopl.zn_ed_izm)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
 
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'dolzhnost'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="dolzhnost" type="text" [ngModel]="adddopl.zn_dolzhnost.name_rus"
-                        style="height: 20px; text-align: center;">
-                        <span class="p-inputgroup-addon cursor-pointer"
-                            (click)="selectDolzhnost(adddopl.zn_dolzhnost)"
+                            style="height: 20px; text-align: center;">
+                        <span class="p-inputgroup-addon cursor-pointer" (click)="selectDolzhnost(adddopl.zn_dolzhnost)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'podrazdelenie'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="podrazdelenie" type="text" [ngModel]="adddopl.zn_podrazdelenie.name_rus"
-                        style="height: 20px; text-align: center;">
+                            style="height: 20px; text-align: center;">
                         <span class="p-inputgroup-addon cursor-pointer"
                             (click)="selectPodrazdelenie(adddopl.zn_podrazdelenie)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'dopl_nadb'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="dopl_nadb" type="text" [ngModel]="adddopl.zn_dopl_nadb.name_rus"
-                        style="height: 20px; text-align: center;">
-                        <span class="p-inputgroup-addon cursor-pointer"
-                            (click)="selectDoplNadb(adddopl.zn_dopl_nadb)"
+                            style="height: 20px; text-align: center;">
+                        <span class="p-inputgroup-addon cursor-pointer" (click)="selectDoplNadb(adddopl.zn_dopl_nadb)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'oblasti_reg'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="oblasti_reg" type="text" [ngModel]="adddopl.zn_oblasti_reg.name"
-                        style="height: 20px; text-align: center;">
-                        <span class="p-inputgroup-addon cursor-pointer"
-                            (click)="selectOblreg(adddopl.zn_oblasti_reg)"
+                            style="height: 20px; text-align: center;">
+                        <span class="p-inputgroup-addon cursor-pointer" (click)="selectOblreg(adddopl.zn_oblasti_reg)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'marki_avto'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="marki_avto" type="text" [ngModel]="adddopl.zn_marki_avto.name"
-                        style="height: 20px; text-align: center;">
-                        <span class="p-inputgroup-addon cursor-pointer"
-                            (click)="selectMarkiAvto(adddopl.zn_marki_avto)"
+                            style="height: 20px; text-align: center;">
+                        <span class="p-inputgroup-addon cursor-pointer" (click)="selectMarkiAvto(adddopl.zn_marki_avto)"
                             style="height: 20px; text-align: center;">...</span>
                     </div>
                     <div class="flex justify-content-center" *ngIf="adddopl.zn == 'stazh_category'"
-                    style="padding: 0 0 5px 0;">
+                        style="padding: 0 0 5px 0;">
                         <input id="stazh_category" type="text" [ngModel]="adddopl.zn_stazh_category.name"
-                        style="height: 20px; text-align: center;">
+                            style="height: 20px; text-align: center;">
                         <span class="p-inputgroup-addon cursor-pointer"
                             (click)="selectStazh(adddopl.zn_stazh_category, ri)"
                             style="height: 20px; text-align: center;">...</span>

@@ -35,6 +35,7 @@ export class SelectRas4etComponent implements OnInit {
   fff: any = []
   added_dopl: any = []
   tbl: any = []
+  head_table: any = []
   copytbl: any = []
   stroka: number
   new_ras: any = []
@@ -74,13 +75,19 @@ export class SelectRas4etComponent implements OnInit {
     // this.tbl = JSON.parse(this.select_dialog_config.data.tbl)
     this.copytbl = this.select_dialog_config.data.tbl
     this.tbl = JSON.parse(JSON.stringify(this.select_dialog_config.data.tbl))
+    this.head_table = this.select_dialog_config.data.head_table
     this.new_ras = this.select_dialog_config.data.new_ras
     this.stroka = this.select_dialog_config.data.stroka
     this.period = this.select_dialog_config.data.period
     this.getMRP()
     this.getBDO()
+    this.add_head()
+  }
 
-
+  add_head() {
+    for (let i = 0; i < this.tbl.length; i++) {
+      this.tbl[i]['head_table'] = this.head_table[i]
+    }
   }
 
   getMRP() {

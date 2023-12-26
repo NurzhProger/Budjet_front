@@ -148,6 +148,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     let wws: any = []
     let new_ras: any = []
     let tbl: any = []
+    let head_table: any = []
     let stroka: number = 0
     // let ind_dopl: number
     // let naiden: boolean = false
@@ -189,6 +190,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     // }
     tbl = this.Ras4et_detail.tbl[stroka - 1]
     new_ras = this.Ras4et_detail.new_str[0]
+    head_table = this.Ras4et_detail.head_table
 
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectRas4etComponent,
       {
@@ -199,7 +201,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
           period: this.period,
           tbl: tbl,
           new_ras: new_ras,
-          stroka: stroka
+          stroka: stroka,
+          head_table: head_table
         }
       }
     )
