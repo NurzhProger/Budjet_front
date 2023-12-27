@@ -23,6 +23,7 @@ import { MarkiAvtoSelectComponent } from 'src/app/directory/planirovanie/marki_a
 import { stazh_category_element } from 'src/app/directory/planirovanie/stazh-category/interfaces';
 import { StazhCategorySelectComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-select/stazh-category-select.component';
 import { OtborENSSelectComponent } from 'src/app/directory/planirovanie/otborEnsTRU/otborENS_select/otbor-ens-select/otbor-ens-select.component';
+import { otbor_ensTRU_element } from 'src/app/directory/planirovanie/otborEnsTRU/interfaces';
 
 @Component({
   selector: 'app-select-ras4et',
@@ -422,10 +423,11 @@ export class SelectRas4etComponent implements OnInit {
           _form: this.head._form.id
         }
       })
-    this.select_dialog_Detailref_ens.onClose.subscribe((ensTRU_element: ensTRU_element) => {
+    this.select_dialog_Detailref_ens.onClose.subscribe((ensTRU_element: otbor_ensTRU_element) => {
       if (ensTRU_element) {
-        ensTRU.name_rus = ensTRU_element.name_rus
-        ensTRU.id = ensTRU_element.id
+        
+        ensTRU.name_rus = ensTRU_element._enstru.name_rus
+        ensTRU.id = ensTRU_element._enstru.id
       }
     })
 
