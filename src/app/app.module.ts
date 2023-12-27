@@ -137,6 +137,9 @@ import { BudgetIncomeDetailComponent } from './documents/budget_income/budget-in
 import { ZakluchenieListComponent } from './documents/zakluchenie/zakluchenie-list/zakluchenie-list.component';
 import { ZakluchenieDetailComponent } from './documents/zakluchenie/zakluchenie-detail/zakluchenie-detail.component';
 import { SelectRas4etComponent } from './documents/Budget_Ras4et/select-ras4et/select-ras4et.component';
+import { OtborENSListComponent } from './directory/planirovanie/otborEnsTRU/otborENS_list/otbor-ens-list/otbor-ens-list.component';
+import { OtborENSSelectComponent } from './directory/planirovanie/otborEnsTRU/otborENS_select/otbor-ens-select/otbor-ens-select.component';
+import { OtborENSDetailComponent } from './directory/planirovanie/otborEnsTRU/otborENS-element/otbor-ens-detail/otbor-ens-detail.component';
 
 @NgModule({
   imports: [
@@ -276,7 +279,10 @@ import { SelectRas4etComponent } from './documents/Budget_Ras4et/select-ras4et/s
     BudjetRequestSelectComponent,
     ZakluchenieListComponent,
     ZakluchenieDetailComponent,
-    SelectRas4etComponent],
+    SelectRas4etComponent,
+    OtborENSListComponent,
+    OtborENSSelectComponent,
+    OtborENSDetailComponent],
   bootstrap: [AppComponent],
   providers: [
     {

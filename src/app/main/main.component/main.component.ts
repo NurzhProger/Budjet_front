@@ -106,7 +106,7 @@ export class MainComponent implements OnInit {
           this.formMenu(),
           this.openTab('app-svod-list', "Свод бюджетной заявки", '', true))
       )
-      
+
     this.config.setTranslation({
       monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
       monthNamesShort: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
@@ -150,6 +150,10 @@ export class MainComponent implements OnInit {
               {
                 label: 'ЕНС ТРУ',
                 command: () => this.openTab('app-enstru-list', 'ЕНС ТРУ', '')
+              },
+              {
+                label: 'Отборочные ЕНС ТРУ',
+                command: () => this.openTab('app-otbor-ens-list', 'Отборочные ЕНС ТРУ', '')
               },
               {
                 label: 'Периодические показатели',

@@ -87,6 +87,10 @@
                 <app-enstru-list *ngIf="context.selector=='app-enstru-list'" [data]="true" (closeEvent)="removetab()">
                 </app-enstru-list>
 
+                <app-otbor-ens-list *ngIf="context.selector=='app-otbor-ens-list'" [data]="true"
+                    (closeEvent)="removetab()">
+                </app-otbor-ens-list>
+
                 <app-period-pokaz-list *ngIf="context.selector=='app-period-pokaz-list'" [data]="true"
                     (closeEvent)="removetab()">
                 </app-period-pokaz-list>
