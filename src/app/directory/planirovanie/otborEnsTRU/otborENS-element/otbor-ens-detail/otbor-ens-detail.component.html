@@ -1,1 +1,60 @@
-<p>otbor-ens-detail works!</p>
+<form class="card" [formGroup]="form">
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="ENSTRU_name">ЕНС ТРУ<span style="color: red;">*</span></label>
+        <div class="p-inputgroup" style="height: 20px;">
+            <input id="ENSTRU_name" type="text" [readonly]="true" pInputText
+                [(ngModel)]="otborENS_element._enstru.name_rus" formControlName="ENSTRU_name"
+                placeholder="Выберите ЕНС ТРУ" (click)="selectENS()" />
+            <span class="p-inputgroup-addon cursor-pointer" (click)="clearENS()">×</span>
+            <button pButton pRipple type="button" (click)="selectENS()" icon="pi pi-pencil"
+                class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['ENSTRU_name'].invalid && form.controls['ENSTRU_name'].touched">
+            <span *ngIf="form.controls['ENSTRU_name'].errors?.required">ЕНС ТРУ не должно быть пустым</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="spec_name">Специфика<span style="color: red;">*</span></label>
+        <div class="p-inputgroup" style="height: 20px;">
+            <input id="spec_name" type="text" [readonly]="true" pInputText [(ngModel)]="otborENS_element._spec.name_rus"
+                formControlName="spec_name" placeholder="Выберите специфику" (click)="selectSpec()" />
+            <span class="p-inputgroup-addon cursor-pointer">×</span>
+            <button pButton pRipple type="button" (click)="selectSpec()" icon="pi pi-pencil"
+                class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['spec_name'].invalid && form.controls['spec_name'].touched">
+            <span *ngIf="form.controls['spec_name'].errors?.required">Форма не должно быть пустым</span>
+        </span>
+    </div>
+
+    <div class="p-field" style="padding-bottom: 10px;">
+        <label for="Forma_name">Форма<span style="color: red;">*</span></label>
+        <div class="p-inputgroup" style="height: 20px;">
+            <input id="Forma_name" type="text" [readonly]="true" pInputText
+                [(ngModel)]="otborENS_element._form.head_form" formControlName="Forma_name" placeholder="Выберите Форму"
+                (click)="selectForma()" />
+            <span class="p-inputgroup-addon cursor-pointer">×</span>
+            <button pButton pRipple type="button" (click)="selectForma()" icon="pi pi-pencil"
+                class="p-button-outlined p-button-text" style="color:dimgrey"></button>
+        </div>
+        <span class="p-invalid" *ngIf="form.controls['Forma_name'].invalid && form.controls['Forma_name'].touched">
+            <span *ngIf="form.controls['Forma_name'].errors?.required">Форма не должно быть пустым</span>
+        </span>
+    </div>
+
+
+
+
+
+    <div style="width:100%; padding: 10px 0;">
+        <label style="color: red;">* - обязательные поля</label>
+    </div>
+</form>
+
+<div class="flex align-items-center justify-content-center gap-2">
+    <button id="save" pButton pRipple label="Сохранить" (click)="saveENS()" icon="pi pi-check"
+        [disabled]="form.invalid || form.disabled" class="p-button-outlined p-button-success"></button>
+    <button pButton pRipple label="Отмена" icon="pi pi-times" (click)="closeENS(false)"
+        class="p-button-outlined p-button-warning"></button>
+</div>

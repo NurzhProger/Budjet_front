@@ -1,1 +1,73 @@
-<p>otbor-ens-list works!</p>
+<p-toolbar>
+    <div class="p-toolbar-group-left" *ngIf="data!==false">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
+    </div>
+    <div class="p-toolbar-group-right">
+        <div style="padding-right: 10px;">
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"
+                styleClass="p-button-sm" (click)="fetchList()"></button>
+        </div>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined" styleClass="p-button-sm"
+                (click)="closeform()"></button>
+        </div>
+    </div>
+</p-toolbar>
+
+<div class="card" *ngIf="(ens_TRU | async) as ens_TRU; else loader">
+    <p-table *ngIf="ens_TRU.count !== 0; else empty" [value]="ens_TRU.results" [scrollable]="true"
+        scrollHeight="calc({{windowHeight}}px - 230px)" selectionMode="single" [(selection)]="selected"
+        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%; text-align:center">Номер</th>
+                <th style="width:30%; text-align:center">ЕНС ТРУ</th>
+                <th style="width:30%; text-align:center">Форма</th>
+                <th style="width:30%; text-align:center">Специфика</th>
+                <th style="width:5%; text-align:center">Действия</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-dolzh let-ri="rowIndex">
+            <tr class="cursor-pointer" (dblclick)="onRowClick(dolzh)">
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+                <td style="text-align:center">
+                    {{dolzh._enstru.code}}. {{dolzh._enstru.name_rus}}
+                </td>
+                <td style="text-align:center">
+                    {{dolzh._form.name}}. {{dolzh._form.head_form}}
+                </td>
+                <td style="text-align:center">
+                    {{dolzh._spec.code}}. {{dolzh._spec.name_rus}}
+                </td>
+                <td style="padding: 0; margin:0;">
+                    <div class="flex align-items-center justify-content-center gap-2">
+                        <button pButton pRipple type="button" icon="pi pi-trash"
+                            class="p-button-rounded p-button-text"></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+    <ng-template #empty>
+        <div class="center">
+            ЕНС ТРУ не заполнено
+        </div>
+    </ng-template>
+
+    <div *ngIf="ens_TRU.count !== 0" class="flex align-items-center justify-content-center">
+        <span class="mx-1 text-color">Указано</span>
+        <p-paginator [first]="first" [rows]="rows" [totalRecords]="ens_TRU.count || 0"
+            (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{{first+1}} - {{(first + rows) > (ens_TRU.count || 0)  ? ens_TRU.count : first + rows }} из {{ens_TRU.count}} элементов"
+            [showPageLinks]="true" [showFirstLastIcon]="true"></p-paginator>
+    </div>
+    <p-confirmDialog [closeOnEscape]="true" acceptLabel="Да" rejectLabel="Нет" [style]="{width: '450px'}">
+    </p-confirmDialog>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>
