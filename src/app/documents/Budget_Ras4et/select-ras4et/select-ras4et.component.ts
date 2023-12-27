@@ -22,6 +22,7 @@ import { marki_avto_element } from 'src/app/directory/planirovanie/marki_avto/in
 import { MarkiAvtoSelectComponent } from 'src/app/directory/planirovanie/marki_avto/marki-avto-select/marki-avto-select.component';
 import { stazh_category_element } from 'src/app/directory/planirovanie/stazh-category/interfaces';
 import { StazhCategorySelectComponent } from 'src/app/directory/planirovanie/stazh-category/stazh-category-select/stazh-category-select.component';
+import { OtborENSSelectComponent } from 'src/app/directory/planirovanie/otborEnsTRU/otborENS_select/otbor-ens-select/otbor-ens-select.component';
 
 @Component({
   selector: 'app-select-ras4et',
@@ -36,6 +37,7 @@ export class SelectRas4etComponent implements OnInit {
   added_dopl: any = []
   tbl: any = []
   head_table: any = []
+  head: any = []
   copytbl: any = []
   stroka: number
   new_ras: any = []
@@ -76,6 +78,7 @@ export class SelectRas4etComponent implements OnInit {
     this.copytbl = this.select_dialog_config.data.tbl
     this.tbl = JSON.parse(JSON.stringify(this.select_dialog_config.data.tbl))
     this.head_table = this.select_dialog_config.data.head_table
+    this.head = this.select_dialog_config.data.head
     this.new_ras = this.select_dialog_config.data.new_ras
     this.stroka = this.select_dialog_config.data.stroka
     this.period = this.select_dialog_config.data.period
@@ -409,11 +412,15 @@ export class SelectRas4etComponent implements OnInit {
 
   selectENSTRU(ensTRU: ensTRU_element) {
 
-    this.select_dialog_Detailref_ens = this.select_dialog_service_ens.open(EnstruSelectComponent,
+    this.select_dialog_Detailref_ens = this.select_dialog_service_ens.open(OtborENSSelectComponent,
       {
         header: 'Выбор ЕНСТРУ',
         width: 'calc(60%)',
-        height: 'calc(80%)'
+        height: 'calc(80%)',
+        data: {
+          _spec: this.head._spec.id,
+          _form: this.head._form.id
+        }
       })
     this.select_dialog_Detailref_ens.onClose.subscribe((ensTRU_element: ensTRU_element) => {
       if (ensTRU_element) {

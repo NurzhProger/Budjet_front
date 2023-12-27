@@ -60,9 +60,14 @@ export class OtborENSSelectComponent implements OnInit {
   }
 
   fetchList() {
+
     let params = {
-      _spec: this._spec_id,
-      _form: this._form_id
+      _form: {
+        "id": this._form_id
+      },
+      _spec: {
+        "id": this._spec_id
+      }
     }
     this.ens_TRU = this.OtborEnsTRUService.fetchSelect(params);
   }

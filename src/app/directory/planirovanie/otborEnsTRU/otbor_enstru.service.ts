@@ -24,7 +24,7 @@ export class OtborEnsTRUService {
   }
 
   fetchSelect(params: any): Observable<otbor_ensTRU_list> {
-    return this.http.get<otbor_ensTRU_list>(this.host + 'dirs/tru_filter_select', { params })
+    return this.http.post<otbor_ensTRU_list>(this.host + 'dirs/tru_filter_select', { params })
   }
 
   fetchEnsTRU(ensTRU_id: number): Observable<otbor_ensTRU_element> {
