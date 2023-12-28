@@ -136,43 +136,6 @@ export class SelectRas4etComponent implements OnInit {
       )
   }
 
-  onRowClick(dopl: Ras4et_new_dopl, ri: number) {
-
-    // let filter_dopl: any = []
-    // filter_dopl = this.first_dopl.filter(item => item._doplata == dopl._doplata)
-
-
-    // if (filter_dopl.length > 0) {
-    //   if (filter_dopl[0].stavka_name !== '') {
-
-    //     let params = {
-    //       period: this.period,
-    //       _pokazatel: filter_dopl[0].stavka_name
-    //     }
-
-    //     let responce: any
-
-    //     this.select_budjetRas4et_Service
-    //       .period_pokazatel_detail(params)
-    //       .subscribe(
-    //         (data) => (
-    //           responce = data,
-    //           this.rashetSummyStavka(dopl, responce.znachenie, filter_dopl, ri)
-    //         ),
-    //         (error) => (
-    //           this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: error.error.status })
-    //         )
-    //       )
-    //   }
-    //   else {
-    //     this.rashetSummy(dopl, filter_dopl, ri)
-    //   }
-    // }
-    // else {
-    //   this.select_dialog_msg.add({ severity: 'error', summary: 'Ошибка', detail: 'Не удалось найти доплату ' + dopl._doplata_name })
-    // }
-  }
-
   rashetSummy(dopl: Ras4et_new_dopl, filter_dopl: any, ri: number) {
 
     let mass: any;
@@ -298,23 +261,6 @@ export class SelectRas4etComponent implements OnInit {
       }
     }
 
-    // if (this.Ras4et_detail.tbl[ri].zn_category_sotr.id !== 0) {
-    //   this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(StazhCategorySelectComponent,
-    //     {
-    //       header: 'Выбор стажа',
-    //       width: 'calc(60%)',
-    //       height: 'calc(80%)',
-    //       data: { category_id: this.Ras4et_detail.tbl[ri].zn_category_sotr.id }
-    //     })
-
-    //   this.Budget_ras4et_Detailref.onClose.subscribe((stazh_category_element: stazh_category_element) => {
-    //     if (stazh_category_element) {
-    //       stazh_cat.name = stazh_category_element.name
-    //       stazh_cat.id = stazh_category_element.id
-    //       this.getKoefficient(ri)
-    //     }
-    //   })
-    // } else {
     this.select_dialog_Detailref_stazh = this.select_dialog_service_stazh.open(StazhCategorySelectComponent,
       {
         header: 'Выбор стажа',
@@ -330,7 +276,6 @@ export class SelectRas4etComponent implements OnInit {
         this.getKoefficient(ri)
       }
     })
-    // }
 
 
 
@@ -425,7 +370,7 @@ export class SelectRas4etComponent implements OnInit {
       })
     this.select_dialog_Detailref_ens.onClose.subscribe((ensTRU_element: otbor_ensTRU_element) => {
       if (ensTRU_element) {
-        
+
         ensTRU.name_rus = ensTRU_element._enstru.name_rus
         ensTRU.id = ensTRU_element._enstru.id
       }
@@ -528,17 +473,6 @@ export class SelectRas4etComponent implements OnInit {
 
   rashetSummyStavka(dopl: Ras4et_new_dopl, znachenie: number, filter_dopl: any, ri: number) {
 
-    // let mass = dopl._sposob_ras.split(" ")
-
-    // if (mass.length > 0) {
-
-    //   if (mass[0] == 'Процент') {
-    //     dopl.summ = dopl.summ * zn.znachenie / 100
-    //   }
-    //   else if (mass[0] == 'Количество') {
-    //     dopl.summ = dopl.summ * zn.znachenie
-    //   }
-    // }
     if (dopl._sposob_ras == 'Процент МРП') {
       dopl.summ = filter_dopl[0].summ * znachenie / 100
     } else if (dopl._sposob_ras == 'Количество МРП') {
@@ -555,31 +489,9 @@ export class SelectRas4etComponent implements OnInit {
   }
 
   onInputChangeString(value: string, kolon: any, ri: number) {
-    // let mass: any;
 
     kolon.zn_string = value;
 
-    // mass = [this.children[ri]];
-
-    // let mass_arr = mass[0];
-    // let aaa = '1234567890';
-    // // this.Ras4et_detail.tbl[ri].
-    // for (let i = 0; i < mass[0].length; i++) {
-    //   if (mass_arr[i].columns_used !== '') {
-    //     let formula = '';
-    //     let mass_simv = mass_arr[i].columns_used.split(' ');
-    //     for (let y = 0; y < mass_simv.length; y++) {
-    //       if (aaa.includes(mass_simv[y])) {
-    //         formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
-    //       }
-    //       else {
-    //         formula = formula + mass_simv[y];
-    //       }
-    //     }
-    //     mass_arr[i].zn_float = math.evaluate(formula);
-    //   }
-    // }
-    // this.calculate();
   }
 
   onRowClickForDelete(dopl: Ras4et_new_dopl, ri: number) {

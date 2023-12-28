@@ -115,9 +115,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.column = this.Ras4et_detail.tbl[0]
     let mass: any = []
     let asd: any = []
-    // if (this.Ras4et_detail.new_dopl.length > 0) {
-    //   this.have_dopl = true
-    // }
+
     if (this.izm.id == 0) {
       this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
     }
@@ -142,53 +140,19 @@ export class BudgetRas4etDetailComponent implements OnInit {
 
   selectRas(ri: number) {
 
-    // let add_dopl: any = []
-    // let _dopl: any = []
-    // let new_dopl: any = []
     let wws: any = []
     let new_ras: any = []
     let tbl: any = []
     let head_table: any = []
     let head: any = []
     let stroka: number = 0
-    // let ind_dopl: number
-    // let naiden: boolean = false
+
     wws = this.children[ri]
 
     for (let i = 0; wws.length > i; i++) {
       stroka = wws[i].stroka
     }
 
-    // for (let y = 0; this.Ras4et_detail.dopl.length > y; y++) {
-    //   if (naiden == false) {
-    //     mal = this.Ras4et_detail.dopl[y]
-
-    //     if (stroka == mal[0].stroka) {
-    //       naiden = true
-    //     }
-    //   }
-    //   if (naiden == true) {
-    //     add_dopl = this.Ras4et_detail.dopl[y]
-    //     ind_dopl = y
-    //     break
-    //   }
-    // }
-
-    // if (add_dopl !== undefined) {
-    //   if (add_dopl.length > 0) {
-    //     for (let i = 0; add_dopl.length > i; i++) {
-    //       _dopl.push(add_dopl[i]._doplata)
-    //     }
-    //   }
-    // }
-
-    // for (let i = 0; this.Ras4et_detail.new_dopl.length > i; i++) {
-    //   let newDoplItem = this.Ras4et_detail.new_dopl[i];
-    //   let found = _dopl.find((item: number) => item === newDoplItem._doplata);
-    //   if (!found) {
-    //     new_dopl.push(newDoplItem);
-    //   }
-    // }
     tbl = this.Ras4et_detail.tbl[stroka - 1]
     new_ras = this.Ras4et_detail.new_str[0]
     head_table = this.Ras4et_detail.head_table
@@ -217,7 +181,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
         let fff: any = []
         fff = dopl
         this.Ras4et_detail.tbl[stroka - 1] = fff
-        // this.saveDoc(close = false)
+        this.saveDoc(close = false)
       }
     })
   }
@@ -341,7 +305,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   }
 
   delStr(ind: number) {
-
+    let close: boolean
     let add_dopl: any = []
     this.Budget_Confirmation.confirm({
       message: 'Вы действительно хотите удалить?',
@@ -349,7 +313,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.children.splice(ind, 1)
-        // add_dopl = this.Ras4et_detail.dopl.splice(ind, 1)
+        this.Ras4et_detail.tbl.splice(ind, 1)
+        this.saveDoc(close = false)
         this.Budget_Confirmation.close()
       },
       reject: () => {
@@ -699,7 +664,6 @@ export class BudgetRas4etDetailComponent implements OnInit {
           this.Ras4et_detail.head = responce,
           this.Budget_ras4et_Detailmsg.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
           this.calculate(),
-          // this.Ras4et_detail.head.id = responce.head.id,
           this.closeaftersave(close)
         ),
         (error) => (
@@ -718,6 +682,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       this.Budget_ras4et_DetailrefModal.close(this.Ras4et_detail)
     }
     else (
+      this.children = [],
       this.fetch_detail()
     )
   }
