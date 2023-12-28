@@ -124,6 +124,7 @@ export class MainComponent implements OnInit {
       {
         label: 'Справочники',
         icon: 'pi pi-fw pi-folder',
+        style: { 'font-size': '14px'},
         items: [
           [
             {
@@ -295,6 +296,7 @@ export class MainComponent implements OnInit {
       {
         label: 'Документы',
         icon: 'pi pi-fw pi-file',
+        style: { 'font-size': '14px'},
         items: [
           [
             {
@@ -331,6 +333,7 @@ export class MainComponent implements OnInit {
       {
         label: 'Отчеты',
         icon: 'pi pi-fw pi-folder',
+        style: { 'font-size': '14px'},
         items: [
           [
             {

@@ -2,13 +2,15 @@
     <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="tbl">
         <ng-template pTemplate="header">
             <tr>
-                <th style="text-align:center; width: 50%;">Доплаты</th>
+                <th style="text-align:center; width: 5%;">Номер</th>
+                <th style="text-align:center; width: 45%;">Доплаты</th>
                 <th style="text-align:center; width: 25%;">Сумма доплаты</th>
                 <th style="text-align:center; width: 25%;">Размер</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
             <tr>
+                <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="height: 5px; padding: 0;">
                     {{adddopl.head_table}}
                 </td>
