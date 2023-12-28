@@ -198,17 +198,17 @@ export class MainComponent implements OnInit {
               label: 'Категория',
               items: [{
                 label: 'Категория сотрудника',
-                icon: 'pi pi-sort-alpha-down',
+                icon: 'pi pi-sort-alpha-up',
                 command: () => this.openTab('app-category-sotr-list', 'Категория сотрудника', '')
               },
               {
                 label: 'Стаж категории',
-                icon: 'pi pi-sort-amount-down-alt',
+                icon: 'pi pi-sort-amount-up',
                 command: () => this.openTab('app-stazh-category-list', 'Стаж категории', '')
               },
               {
                 label: 'Коэффициент категории',
-                icon: 'pi pi-sort-numeric-down-alt',
+                icon: 'pi pi-sort-numeric-up-alt',
                 command: () => this.openTab('app-koeff-category-list', 'Коэффициент категории', '')
               },
               {
