@@ -130,14 +130,17 @@ export class MainComponent implements OnInit {
               label: 'Организация',
               items: [{
                 label: 'Организации',
+                icon: 'pi pi-building',
                 command: () => this.openTab('app-organization', 'Организации', '')
               },
               {
                 label: 'Подразделения',
+                icon: 'pi pi-align-center',              
                 command: () => this.openTab('app-podrazdelenie-list', 'Подразделения', '')
               },
               {
                 label: 'Пользователи',
+                icon: 'pi pi-user',
                 command: () => this.openTab('app-user-list', 'Пользователи', '')
               }]
             },
@@ -145,38 +148,47 @@ export class MainComponent implements OnInit {
               label: 'Служебные',
               items: [{
                 label: 'Виды доплат и надбавок',
+                icon: 'pi pi-caret-down',
                 command: () => this.openTab('app-dopl-nadbavka-list', 'Виды доплат и надбавок', '')
               },
               {
                 label: 'ЕНС ТРУ',
+                icon: 'pi pi-list',
                 command: () => this.openTab('app-enstru-list', 'ЕНС ТРУ', '')
               },
               {
                 label: 'Отборочные ЕНС ТРУ',
+                icon: 'pi pi-list',
                 command: () => this.openTab('app-otbor-ens-list', 'Отборочные ЕНС ТРУ', '')
               },
               {
                 label: 'Периодические показатели',
+                icon: 'pi pi-calendar-plus',
                 command: () => this.openTab('app-period-pokaz-list', 'Периодические показатели', '')
               },
               {
                 label: 'Марки авто',
+                icon: 'pi pi-car',
                 command: () => this.openTab('app-marki-avto-list', 'Марки авто', '')
               },
               {
                 label: 'Области',
+                icon: 'pi pi-map-marker',
                 command: () => this.openTab('app-oblasti-regiony-list', 'Области', '')
               },
               {
                 label: 'Регионы',
+                icon: 'pi pi-sitemap',
                 command: () => this.openTab('app-regions-list', 'Регионы', '')
               },
               {
                 label: 'Единицы измерения',
+                icon: 'pi pi-sliders-v',
                 command: () => this.openTab('app-ed-izm-list', 'Единицы измерения', '')
               },
               {
                 label: 'Бюджеты регионов',
+                icon: 'pi pi-server',
                 command: () => this.openTab('app-budjet-reg-list', 'Бюджеты регионов', '')
               }]
             }
@@ -186,22 +198,27 @@ export class MainComponent implements OnInit {
               label: 'Категория',
               items: [{
                 label: 'Категория сотрудника',
+                icon: 'pi pi-sort-alpha-down',
                 command: () => this.openTab('app-category-sotr-list', 'Категория сотрудника', '')
               },
               {
                 label: 'Стаж категории',
+                icon: 'pi pi-sort-amount-down-alt',
                 command: () => this.openTab('app-stazh-category-list', 'Стаж категории', '')
               },
               {
                 label: 'Коэффициент категории',
+                icon: 'pi pi-sort-numeric-down-alt',
                 command: () => this.openTab('app-koeff-category-list', 'Коэффициент категории', '')
               },
               {
                 label: 'Должности',
+                icon: 'pi pi-users',
                 command: () => this.openTab('app-dolznost-list', 'Должности', '')
               },
               {
                 label: 'Шаблон формы',
+                icon: 'pi pi-table',
                 command: () => this.openTab('app-formlist', 'Шаблон формы', '')
               },
               ]
@@ -212,26 +229,33 @@ export class MainComponent implements OnInit {
               label: 'Расходы',
               items: [{
                 label: 'Функциональные группы',
+                icon: 'pi pi-slack',
                 command: () => this.openTab('app-functional-group-list', 'Функциональные группы', '', true)
               }, {
                 label: 'Функциональные подгруппы',
+                icon: 'pi pi-slack',
                 command: () => this.openTab('app-functional-podgroup-list', 'Функциональные подгруппы', '', true)
               },
               {
                 label: 'АБП',
+                icon: 'pi pi-eject',
                 command: () => this.openTab('app-abp-list', 'АБП', '', true)
               },
               {
                 label: 'Программы',
+                icon: 'pi pi-list',
                 command: () => this.openTab('app-programm-list', 'Программы', '', true)
               }, {
                 label: 'Подпрограммы',
+                icon: 'pi pi-list',
                 command: () => this.openTab('app-podprogramm-list', 'Подпрограммы', '', true)
               }, {
                 label: 'ФКР',
+                icon: 'pi pi-sliders-h',
                 command: () => this.openTab('app-fkr-list', 'ФКР', '', true)
               }, {
                 label: 'Спецификации',
+                icon: 'pi pi-sliders-h',
                 command: () => this.openTab('app-specification-exp-list', 'Спецификации', '')
               }]
             }
@@ -241,21 +265,27 @@ export class MainComponent implements OnInit {
               label: 'Доходы',
               items: [{
                 label: 'Категории',
+                icon: 'pi pi-database',
                 command: () => this.openTab('app-category-income', 'Категории', '')
               }, {
                 label: 'Классы',
+                icon: 'pi pi-chart-bar',
                 command: () => this.openTab('app-class-income-list', 'Классы', '')
               }, {
                 label: 'Подклассы',
+                icon: 'pi pi-chart-bar',
                 command: () => this.openTab('app-podclass-list', 'Подклассы', '')
               }, {
                 label: 'Специфика поступления',
+                icon: 'pi pi-cloud-download',
                 command: () => this.openTab('app-specification-income-list', 'Спецификации', '')
               }, {
                 label: 'Бюджет',
+                icon: 'pi pi-dollar',
                 command: () => this.openTab('app-budjet-list', 'Бюджет', '')
               }, {
                 label: 'Классификации',
+                icon: 'pi pi-book',
                 command: () => this.openTab('app-classification-income-list', 'Классификации', '', true)
               }]
             }
@@ -271,10 +301,12 @@ export class MainComponent implements OnInit {
               label: 'Документы',
               items: [{
                 label: 'Бюджетная заявка',
+                icon: 'pi pi-angle-double-right',
                 command: () => this.openTab('app-budget-request-list', 'Бюджетная заявка', '')
               },
               {
                 label: 'Лимит на годовой бюджет',
+                icon: 'pi pi-angle-double-right',
                 command: () => this.openTab('app-limit-list', 'Лимит на годовой бюджет', '')
               },
               // {
@@ -283,10 +315,12 @@ export class MainComponent implements OnInit {
               // },
               {
                 label: 'Бюджетная заявка поступлений',
+                icon: 'pi pi-angle-double-right',
                 command: () => this.openTab('app-budget-income-list', 'Бюджетная заявка поступлений', '')
               },
               {
                 label: 'Заключение по бюджетным заявкам',
+                icon: 'pi pi-angle-double-right',
                 command: () => this.openTab('app-zakluchenie-list', 'Заключение по бюджетным заявкам', '')
               }
               ]
@@ -303,10 +337,12 @@ export class MainComponent implements OnInit {
               label: 'Приложения',
               items: [{
                 label: 'Приложение 60',
+                icon: 'pi pi-bars',
                 command: () => this.openTab('app-prilozhenie60-new', 'Приложение 60', '')
               },
               {
                 label: 'Приложение №57, 58',
+                icon: 'pi pi-bars',
                 command: () => this.openTab('app-prilozhenie5758', 'Приложение №57, 58', '')
               }]
             }
