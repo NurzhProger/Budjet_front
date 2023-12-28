@@ -181,7 +181,9 @@ export class BudgetRas4etDetailComponent implements OnInit {
         let fff: any = []
         fff = dopl
         this.Ras4et_detail.tbl[stroka - 1] = fff
-        this.saveDoc(close = false)
+        this.children = []
+        this.preob()
+        // this.saveDoc(close = false)
       }
     })
   }
@@ -314,7 +316,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
       accept: () => {
         this.children.splice(ind, 1)
         this.Ras4et_detail.tbl.splice(ind, 1)
-        this.saveDoc(close = false)
+        // this.saveDoc(close = false)
         this.Budget_Confirmation.close()
       },
       reject: () => {

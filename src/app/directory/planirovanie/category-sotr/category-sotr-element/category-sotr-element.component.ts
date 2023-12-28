@@ -141,7 +141,10 @@ export class CategorySotrElementComponent implements OnInit {
       {
         header: 'Выбор стажа',
         width: '60%',
-        height: '80%'
+        height: '80%',
+        data: {
+          category_id: 0
+        }
       })
 
     this.koeff_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
@@ -189,7 +192,10 @@ export class CategorySotrElementComponent implements OnInit {
       {
         header: 'Выбор стажа',
         width: '60%',
-        height: '80%'
+        height: '80%',
+        data: {
+          category_id: 0
+        }
       })
     this.stazh_dialog_ref.onClose.subscribe((stazh: stazh_category_element) => {
       if (stazh) {
@@ -211,7 +217,7 @@ export class CategorySotrElementComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.category_sotr_element.tbl.splice(ri, 1),
-        this.category_sotr_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Удален коэфициент категории!' })
+          this.category_sotr_massage.add({ severity: 'success', summary: 'Успешно', detail: 'Удален коэфициент категории!' })
       },
       reject: () => {
         this.koef_cate_confirm.close();
