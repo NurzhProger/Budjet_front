@@ -18,6 +18,7 @@ import { OrganizationSelectComponent } from 'src/app/directory/organization/orga
 import { SpecificationExpDetailComponent } from 'src/app/directory/expenses/specification-exp/specification-exp-detail/specification-exp-detail.component';
 import { FormlistComponent } from 'src/app/directory/income/forms/formlist/formlist.component';
 import { FormSelectComponent } from 'src/app/directory/income/forms/form-select/form-select.component';
+import { string } from 'mathjs';
 @Component({
   selector: 'app-budget-request-detail',
   templateUrl: './budget-request-detail.component.html',
@@ -286,8 +287,6 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
           this.pushArray(fkr_detail, spec_detail, form_detail)
           this.saveDoc(false)
-
-
           // let indexx = this.Budget_detail.tbl.findIndex(item => item['_spec'].id == spec_detail.id)
 
           // if (indexx !== -1) {
@@ -478,14 +477,15 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
             this.Budget_detail.tbl.splice(i, 1)
           }
         }
-        this.tbl.splice(ind, 1)
+        this.tbl = []
+        this.tbl = this.Budget_detail.tbl
 
         // for (let ff in this.tbl) {
         // this.tbl = this.Budget_detail.tbl.filter(item => item.id !== )
         // }
         this.Budget_Confirmation.close()
         if (this.Budget_doc_id !== '0') {
-          this.saveDoc(false)
+          // this.saveDoc(false)
         }
       },
       reject: () => {
@@ -514,7 +514,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         izm.summ = detail.head.summ,
           this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0)
 
-        // this.saveDoc(false)
+        this.saveDoc(false)
       }
     })
     // this.fetch_form()

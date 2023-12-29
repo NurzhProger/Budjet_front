@@ -117,10 +117,21 @@ export class BudgetRas4etDetailComponent implements OnInit {
     let asd: any = []
 
     if (this.izm.id == 0) {
-      this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
+      // this.Ras4et_detail.tbl.splice(0, this.Ras4et_detail.tbl.length)
+      // console.log(this.Ras4et_detail.tbl);
+      for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
+        mass = this.Ras4et_detail.tbl[i]
+        for (let i = 0; mass.length > i; i++) {
+          if (mass[i].basic_column == true) {
+            asd.push(mass[i])
+          }
+        }
+        this.children.push(asd)
+        asd = []
+      }
+
     }
     else {
-
       for (let i = 0; this.Ras4et_detail.tbl.length > i; i++) {
         mass = this.Ras4et_detail.tbl[i]
         for (let i = 0; mass.length > i; i++) {
@@ -658,6 +669,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   saveDoc(close: boolean): void {
     let responce: any
     // this.Ras4et_detail.tbl = this.children
+
     this.Budget_ras4et_Service
       .saveLimit(this.Ras4et_detail)
       .subscribe(
