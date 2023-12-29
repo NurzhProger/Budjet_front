@@ -79,7 +79,7 @@
             (click)="addFKR()"></button>
     </div>
 
-    <p-table *ngIf="limitDetail.tbl" [value]="limitDetail.tbl" [scrollable]="true" scrollHeight="calc(100vh - 200px)"
+    <p-table *ngIf="limitDetail.tbl" [value]="limitDetail.tbl" [scrollable]="true" scrollHeight="calc(80vh - 200px)"
         [(selection)]="selected" selectionMode="multiple" [metaKeySelection]="true"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template class="" pTemplate="header">
