@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService, MenuItem, ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -58,6 +58,20 @@ export class BudgetRas4etDetailComponent implements OnInit {
     private Budget_ras4et_DetailrefModal: DynamicDialogRef) { }
 
   @Output() closeEvent = new EventEmitter<any>()
+  @HostListener('window:keydown', ['$event'])
+
+
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'F9' && this.selected){
+        if(this.selected.length > 0 ) {
+          this.copySelectedRow()
+          this.selected = []
+      }
+    }
+  }
+
+
   // @Input() izm: any
   // @Input() form_id = ''
   izm: any
@@ -77,6 +91,7 @@ export class BudgetRas4etDetailComponent implements OnInit {
   summdoc = 0
   have_dopl = false
   period = ''
+  selected: any
 
 
   ngOnInit(): void {
@@ -110,6 +125,25 @@ export class BudgetRas4etDetailComponent implements OnInit {
         )
       )
   }
+
+
+
+
+
+
+  
+  copySelectedRow() {
+    
+    if (this.selected) {
+      let clone = Object.assign([0], this.selected);
+      this.Ras4et_detail.tbl.push(clone)
+      this.preob()      
+    }
+  }
+  
+
+
+
 
   preob() {
     this.column = this.Ras4et_detail.tbl[0]

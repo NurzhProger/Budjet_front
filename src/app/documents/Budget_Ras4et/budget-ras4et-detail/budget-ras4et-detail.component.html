@@ -63,7 +63,8 @@
 
   <div class="card">
     <div class="p-field">
-      <p-table [value]="children" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+      <p-table [value]="children" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
+      [(selection)]="selected" selectionMode="multiple" [metaKeySelection]="true">
         <ng-template pTemplate="header">
           <tr style="text-align: center; font-weight: 700;">
             <th style="text-align: center; max-width: 1%;">Номер</th>
@@ -73,7 +74,7 @@
           </tr>
         </ng-template>
         <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body">
-          <tr>
+          <tr class="cursor-pointer"  [pSelectableRow]="ChildItem">
             <td style="text-align: center;">{{ri + 1}}</td>
 
             <td *ngFor="let kolon of ChildItem" style="text-align: center;">
