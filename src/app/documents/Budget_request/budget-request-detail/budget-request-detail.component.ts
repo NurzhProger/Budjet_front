@@ -356,7 +356,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
       if (this.Budget_doc_id !== '0') {
         this.fetch_form()
       } else {
-        this.Budget_Servise.fetch_detail(string(this.responce.doc.id))
+        this.Budget_Servise.fetch_detail(string(this.responce.doc_id))
           .subscribe(
             (detail) => {
               this.Budget_detail = detail,
