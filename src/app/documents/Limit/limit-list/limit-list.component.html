@@ -42,17 +42,17 @@
 
         <ng-template pTemplate="body" let-limit let-ri="rowIndex">
             <tr class="cursor-pointer" (dblclick)="onRowClick(limit)" [pSelectableRow]="limit"
-            [pSelectableRowIndex]="ri">
+            [pSelectableRowIndex]="ri" [ngClass]="{'deleted': limit.deleted}">
                 <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(limit.deleted)">{{limit.nom}}</span>
+                    <span>{{limit.nom}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(limit.deleted)">{{limit._organization.name_rus}}</span>
+                    <span>{{limit._organization.name_rus}}</span>
 
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(limit.deleted)">{{limit.god_ucheta| date: 'yyyy'}}</span>
+                    <span>{{limit.god_ucheta| date: 'yyyy'}}</span>
                 </td>
                 <td style="padding: 0; margin:0;">
                     <div class="flex align-items-center justify-content-center gap-2">

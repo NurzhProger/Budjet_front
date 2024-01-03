@@ -41,27 +41,27 @@
     </ng-template>
     <ng-template pTemplate="body" let-item let-ri="rowIndex" *ngFor="let item of category.results| keyvalue">
       <tr class="cursor-pointer" (dblclick)="onRowClick(item)" [pSelectableRow]="item"
-      [pSelectableRowIndex]="ri">
+      [pSelectableRowIndex]="ri" [ngClass]="{'deleted': item.deleted}">
         <td style="text-align: center">
-          <span [ngClass]="setClass(item.deleted)">{{item.nom}}</span>
+          <span>{{item.nom}}</span>
         </td>
         <td style="text-align:center">
-          <span [ngClass]="setClass(item.deleted)">{{item._date}}</span>
+          <span>{{item._date}}</span>
         </td>
         <td>
-          <span [ngClass]="setClass(item.deleted)">{{item._organization.name_rus}}</span>
+          <span>{{item._organization.name_rus}}</span>
         </td>
         <td style="text-align:center">
-          <span [ngClass]="setClass(item.deleted)">{{item.summ}}</span>
+          <span>{{item.summ}}</span>
         </td>
         <td style="text-align:center">
-          <span [ngClass]="setClass(item.deleted)">{{item.god_ucheta | date: 'yyyy'}}</span>
+          <span>{{item.god_ucheta | date: 'yyyy'}}</span>
         </td>
         <td>
-          <span [ngClass]="setClass(item.deleted)">{{item._vid_dannyh}}</span>
+          <span>{{item._vid_dannyh}}</span>
         </td>
         <td>
-          <span [ngClass]="setClass(item.deleted)">{{item._vid_operacii}}</span>
+          <span>{{item._vid_operacii}}</span>
         </td>
         <td style="padding: 0; margin:0;">
           <div class="flex align-items-center justify-content-center gap-2">

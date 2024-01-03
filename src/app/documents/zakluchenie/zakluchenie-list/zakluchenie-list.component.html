@@ -45,25 +45,25 @@
         <ng-template pTemplate="body" let-zakluchenie let-ri="rowIndex"
             *ngFor="let zakluchenie of zakluchenie.results| keyvalue">
             <tr class="cursor-pointer" (dblclick)="onRowClick(zakluchenie)"[pSelectableRow]="zakluchenie"
-            [pSelectableRowIndex]="ri">
+            [pSelectableRowIndex]="ri" [ngClass]="{'deleted': zakluchenie.deleted}">
                 <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie._date}}</span>
+                    <span>{{zakluchenie._date}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.nom}}</span>
+                    <span>{{zakluchenie.nom}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.god_ucheta | date: 'yyyy'}}</span>
+                    <span>{{zakluchenie.god_ucheta | date: 'yyyy'}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie._organization.name_rus}}</span>
+                    <span>{{zakluchenie._organization.name_rus}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.summ}}</span>
+                    <span>{{zakluchenie.summ}}</span>
                 </td>
                 <td style="text-align:center">
-                    <span [ngClass]="setClass(zakluchenie.deleted)">{{zakluchenie.comment}}</span>
+                    <span>{{zakluchenie.comment}}</span>
                 </td>
                 <td style="padding: 0; margin:0;">
                     <div class="flex align-items-center justify-content-center gap-2">
