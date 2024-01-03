@@ -30,6 +30,7 @@ export class OtborENSSelectComponent implements OnInit {
   selected: any
   _spec_id: 0
   _form_id: 0
+  search: ''
 
   ngOnInit(): void {
     this._spec_id = this.select_dialog_config.data._spec
@@ -67,7 +68,8 @@ export class OtborENSSelectComponent implements OnInit {
       },
       _spec: {
         "id": this._spec_id
-      }
+      },
+      search: this.search.toString()
     }
     this.ens_TRU = this.OtborEnsTRUService.fetchSelect(params);
   }
