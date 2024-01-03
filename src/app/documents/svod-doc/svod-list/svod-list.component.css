@@ -1,6 +1,6 @@
 tr.cursor-pointer.deleted {
-    text-decoration: line-through;
-    text-decoration-color: red;
-    font-weight: bold;
-    color: #999;
-  }
+  text-decoration: line-through;
+  text-decoration-color: red;
+  font-weight: bold;
+  color: #999;
+}
