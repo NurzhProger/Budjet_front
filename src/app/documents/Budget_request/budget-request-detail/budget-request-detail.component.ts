@@ -48,6 +48,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   selected = false;
   _lastfkr = 0
   allrecord = true
+  responce: any = []
 
 
 
@@ -287,6 +288,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
 
           this.pushArray(fkr_detail, spec_detail, form_detail)
           this.saveDoc(false)
+
           // let indexx = this.Budget_detail.tbl.findIndex(item => item['_spec'].id == spec_detail.id)
 
           // if (indexx !== -1) {
@@ -321,7 +323,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
   }
 
   saveDoc(close: boolean) {
-    let responce: any
+    // let responce: any
 
     // this.tbl = this.Budget_detail.tbl
     // this.Budget_detail.tbl = this.tbl
@@ -330,6 +332,7 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
         .saveLimit(this.Budget_detail)
         .subscribe(
           (data) => (
+            this.responce = data,
             this.Budget_detail_messageServicedelSelect.add({ severity: 'success', summary: 'Успешно', detail: 'Документ успешно записан!' }),
             this.closeaftersave(close)
           ),
@@ -348,8 +351,21 @@ export class BudgetRequestDetailComponent implements OnInit, DoCheck {
     if (close) {
       this.closeEvent.emit()
     } else {
-      this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0),
+      this.Budget_detail.doc.summ = this.Budget_detail.tbl.reduce((sum, row) => sum + row.summ, 0)
+
+      if (this.Budget_doc_id !== '0') {
         this.fetch_form()
+      } else {
+        this.Budget_Servise.fetch_detail(string(this.responce.doc.id))
+          .subscribe(
+            (detail) => {
+              this.Budget_detail = detail,
+                this.tbl = this.Budget_detail.tbl,
+                this.preobGodNumber(),
+                this.addFKRtoArray()
+            }
+          )
+      }
 
     }
 

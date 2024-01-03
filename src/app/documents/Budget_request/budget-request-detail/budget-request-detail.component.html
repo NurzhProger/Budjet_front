@@ -48,8 +48,7 @@
                 <div class="p-inputgroup">
                     <input id="org_name" type="text" pInputText [(ngModel)]="Budget_detail.doc._organization.name_rus"
                         formControlName="org_name" style="width: 130px;" />
-                    <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg() "
-                        style="width: 30px;">
+                    <span class="p-inputgroup-addon cursor-pointer" (click)="viewOrg() " style="width: 30px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                             class="bi bi-files" viewBox="0 0 16 16">
                             <path
@@ -100,7 +99,7 @@
                 <div>
                     <p-dropdown placeholder="Выберите вид данных" [options]="_vid_dannyh" optionLabel="name"
                         optionValue="name" appendTo="body" [(ngModel)]="Budget_detail.doc._vid_dannyh"
-                        formControlName="vid_dannyh" >
+                        formControlName="vid_dannyh">
                     </p-dropdown>
                 </div>
                 <span class="p-invalid"
@@ -115,7 +114,7 @@
                 <div>
                     <p-dropdown placeholder="Выберите вид операции" [options]="_vid_operacii" optionLabel="name"
                         optionValue="name" appendTo="body" [(ngModel)]="Budget_detail.doc._vid_operacii"
-                        formControlName="vid_operacii" >
+                        formControlName="vid_operacii">
                     </p-dropdown>
                 </div>
                 <span class="p-invalid"
@@ -125,8 +124,8 @@
             </div>
             <div class="pInputText">
                 <label for="number_doc" style="padding-right: 10px;">Общая сумма документа</label>
-                <input id="summ" type="number" pInputText [(ngModel)]="Budget_detail.doc.summ"
-                     style="width: 100%; " formControlName="summ"/>
+                <input id="summ" type="number" pInputText [(ngModel)]="Budget_detail.doc.summ" style="width: 100%; "
+                    formControlName="summ" />
             </div>
 
         </div>
@@ -139,7 +138,7 @@
                 <p-tabView>
                     <p-tabPanel header="Основная">
                         <div style="padding: 0 0 10px 10px;">
-                            <button pButton pRipple label="добавить ФКР" icon="pi pi-plus"
+                            <button [disabled]="form.invalid" pButton pRipple label="добавить ФКР" icon="pi pi-plus"
                                 class="p-button-success p-mr-2" (click)="add_fkr()"></button>
                         </div>
                         <p-table [value]="fkr_array" [scrollable]="true" scrollHeight="calc(100vh - 200px)"
@@ -180,18 +179,20 @@
                         </div>
 
                         <p-table [value]="tbl" [scrollable]="true" scrollHeight="calc(70vh - 200px)"
-                            selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+                            selectionMode="single"
+                            styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th  style="text-align:center; width: 35%;">Код специфики</th>
-                                    <th  style="text-align:center;width: 35%;">Форма</th>
-                                    <th  style="text-align:center; width: 15%;">Прогноз</th>
-                                    <th  *ngIf="fkr !== undefined && fkr.id !== 0" style="text-align:center; width: 15%;">Действия</th>
+                                    <th style="text-align:center; width: 35%;">Код специфики</th>
+                                    <th style="text-align:center;width: 35%;">Форма</th>
+                                    <th style="text-align:center; width: 15%;">Прогноз</th>
+                                    <th *ngIf="fkr !== undefined && fkr.id !== 0"
+                                        style="text-align:center; width: 15%;">Действия</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-izm let-ri="rowIndex">
                                 <tr class="cursor-pointer" (dblclick)="onRowEdit(izm, ri)">
-                                    <td> 
+                                    <td>
                                         <div class="p-inputgroup w-full">
                                             {{ izm._spec.code + '. ' + izm._spec.name_rus }}
                                         </div>
@@ -225,16 +226,16 @@
     </p-splitter>
 
     <div class="p-field" style="padding-top: 10px; position: fixed; bottom: 10px; width: 99%; ">
-       
+
         <div class="pInputText">
             <label for="number_doc" style="padding-right: 10px;">Комментарии</label>
             <input id="comment" type="text" pInputText [(ngModel)]="Budget_detail.doc.comment"
-                 style="width: 100%; height: 25px;" />
+                style="width: 100%; height: 25px;" />
         </div>
-       
+
     </div>
 
-    
+
 
 
 

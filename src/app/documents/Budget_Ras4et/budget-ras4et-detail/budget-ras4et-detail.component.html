@@ -64,17 +64,18 @@
   <div class="card">
     <div class="p-field">
       <p-table [value]="children" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
-      [(selection)]="selected" selectionMode="multiple" [metaKeySelection]="true">
+        [(selection)]="selected" selectionMode="multiple" [metaKeySelection]="true">
         <ng-template pTemplate="header">
           <tr style="text-align: center; font-weight: 700;">
             <th style="text-align: center; max-width: 1%;">Номер</th>
-            <th style="text-align: center; width: 30%;" *ngFor="let header of Ras4et_detail.head_basic">{{ header }}</th>
+            <th style="text-align: center; width: 30%;" *ngFor="let header of Ras4et_detail.head_basic">{{ header }}
+            </th>
             <th style="text-align: center; width: 10%;">Рассчет</th>
             <th style="text-align: center; width: 5%;">Действия</th>
           </tr>
         </ng-template>
         <ng-template let-ChildItem let-ri="rowIndex" pTemplate="body">
-          <tr class="cursor-pointer"  [pSelectableRow]="ChildItem">
+          <tr class="cursor-pointer" [pSelectableRow]="ChildItem">
             <td style="text-align: center;">{{ri + 1}}</td>
 
             <td *ngFor="let kolon of ChildItem" style="text-align: center;">
@@ -86,7 +87,7 @@
                 </div>
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'category_sotr'">
                   <input id="category_sotr" type="text" [ngModel]="kolon.zn_category_sotr.name" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
                 <p-inputNumber *ngIf="kolon.zn == 'float'" type="number" [min]="0" [ngModel]="kolon.zn_float"
                   [readonly]="kolon.name == 'Коэффициент'" [minFractionDigits]="2" [maxFractionDigits]="2"
@@ -101,27 +102,27 @@
 
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'dolzhnost'" style="text-align: center;">
                   <input id="dolzhnost" type="text" [ngModel]="kolon.zn_dolzhnost.name_rus" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'podrazdelenie'">
                   <input id="podrazdelenie" type="text" [ngModel]="kolon.zn_podrazdelenie.name_rus" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'dopl_nadb'">
                   <input id="dopl_nadb" type="text" [ngModel]="kolon.zn_dopl_nadb.name_rus" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'oblasti_reg'">
                   <input id="oblasti_reg" type="text" [ngModel]="kolon.zn_oblasti_reg.name" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'marki_avto'">
                   <input id="marki_avto" type="text" [ngModel]="kolon.zn_marki_avto.name" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
                 <div class="flex justify-content-center" *ngIf="kolon.zn == 'stazh_category'">
                   <input id="stazh_category" type="text" [ngModel]="kolon.zn_stazh_category.name" [readonly]="true"
-                  style="width: 100%; height: 25px; text-align: center;">
+                    style="width: 100%; height: 25px; text-align: center;">
                 </div>
               </ng-container>
 
