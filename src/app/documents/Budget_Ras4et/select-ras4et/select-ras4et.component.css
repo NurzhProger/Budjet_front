@@ -1,9 +1,16 @@
+
+
+.p-field {
+    flex: 1; 
+    padding-bottom: 3%; 
+}
+
 footer.bottom-fixed-container {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 10px;
-    background-color: #fff; /* Фоновый цвет (если необходимо) */
-    border-top: 1px solid #ccc; /* Граница сверху (если необходимо) */
+    background-color: #fff; 
+    border-top: 1px solid #ccc; 
 }
