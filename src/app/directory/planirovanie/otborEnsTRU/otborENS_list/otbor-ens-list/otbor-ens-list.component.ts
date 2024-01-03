@@ -58,7 +58,7 @@ export class OtborENSListComponent implements OnInit {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
-      search: this.search.toString()
+      search: this.search
     }
     this.ens_TRU = this.OtborEnsTRUService.fetch(params);
   }

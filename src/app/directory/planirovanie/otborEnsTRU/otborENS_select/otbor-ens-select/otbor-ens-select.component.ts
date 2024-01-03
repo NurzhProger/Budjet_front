@@ -69,7 +69,7 @@ export class OtborENSSelectComponent implements OnInit {
       _spec: {
         "id": this._spec_id
       },
-      search: this.search.toString()
+      search: this.search
     }
     this.ens_TRU = this.OtborEnsTRUService.fetchSelect(params);
   }
