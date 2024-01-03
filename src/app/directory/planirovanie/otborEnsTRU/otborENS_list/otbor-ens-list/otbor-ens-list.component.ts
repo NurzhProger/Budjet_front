@@ -26,6 +26,7 @@ export class OtborENSListComponent implements OnInit {
   rows = 25
   windowHeight: number
   selected: any
+  search: ''
 
   ngOnInit(): void {
     this.fetchList(),
@@ -57,6 +58,7 @@ export class OtborENSListComponent implements OnInit {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
+      search: this.search.toString()
     }
     this.ens_TRU = this.OtborEnsTRUService.fetch(params);
   }
