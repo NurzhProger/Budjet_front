@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { programmService } from '../programm.services';
 import { programm_detail, programm_select } from '../interfaces';
@@ -18,6 +18,7 @@ export class ProgrammSelectComponent implements OnInit {
     private programmSelectconfirm: ConfirmationService,
     private programmSelectdialog: DialogService,
     private programmSelectmessage: MessageService,
+    private select_config: DynamicDialogConfig
   ) { }
 
   @Output() closeEvent = new EventEmitter<any>()
@@ -28,6 +29,7 @@ export class ProgrammSelectComponent implements OnInit {
   rows = 25
   selected: any
   windowHeight: number
+  abp_id: number
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -35,8 +37,10 @@ export class ProgrammSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.abp_id = this.select_config.data.abp_id
+
     this.fetchPr(),
-    this.updateWindowSize()
+      this.updateWindowSize()
   }
 
   private updateWindowSize() {
@@ -46,9 +50,12 @@ export class ProgrammSelectComponent implements OnInit {
 
   fetchPr() {
     let params = {
+      abp_id: this.abp_id,
       limit: this.rows.toString(),
       offset: this.first.toString()
     }
+    console.log(params);
+
 
     this.Prog$ = this.programmSelectService.fetch(params)
   }

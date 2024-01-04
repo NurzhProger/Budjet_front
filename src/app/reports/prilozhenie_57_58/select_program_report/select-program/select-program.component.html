@@ -1,0 +1,31 @@
+<p-toolbar>
+
+    <div class="p-toolbar-group-left">
+        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+            (click)="openNew()"></button>
+    </div>
+
+
+</p-toolbar>
+
+<div class="p-field">
+    <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="mass_program">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="text-align:center; width: 90%;">Код</th>
+                <th style="text-align:center; width: 10%;">Действия</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-adddopl let-ri="rowIndex">
+            <tr class="cursor-pointer">
+                <td style="text-align:center;">
+                    {{adddopl.code}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<ng-template #loader>
+    <app-skeleton></app-skeleton>
+</ng-template>

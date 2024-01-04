@@ -140,6 +140,7 @@ import { SelectRas4etComponent } from './documents/Budget_Ras4et/select-ras4et/s
 import { OtborENSListComponent } from './directory/planirovanie/otborEnsTRU/otborENS_list/otbor-ens-list/otbor-ens-list.component';
 import { OtborENSSelectComponent } from './directory/planirovanie/otborEnsTRU/otborENS_select/otbor-ens-select/otbor-ens-select.component';
 import { OtborENSDetailComponent } from './directory/planirovanie/otborEnsTRU/otborENS-element/otbor-ens-detail/otbor-ens-detail.component';
+import { SelectProgramComponent } from './reports/prilozhenie_57_58/select_program_report/select-program/select-program.component';
 
 @NgModule({
   imports: [
@@ -282,7 +283,8 @@ import { OtborENSDetailComponent } from './directory/planirovanie/otborEnsTRU/ot
     SelectRas4etComponent,
     OtborENSListComponent,
     OtborENSSelectComponent,
-    OtborENSDetailComponent],
+    OtborENSDetailComponent,
+    SelectProgramComponent],
   bootstrap: [AppComponent],
   providers: [
     {
