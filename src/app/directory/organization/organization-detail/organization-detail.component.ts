@@ -241,7 +241,7 @@ export class OrganizationDetailComponent implements OnInit {
         header: 'Выбор АБП',
         width: 'calc(60%)',
         height: 'calc(80%)',
-        data: { apb_id: this.org_detail._abp.id }
+        data: { apb_id: this.org_detail._abp != null ? this.org_detail._abp.id : 0 }
       })
     this.budjet_select_dialog_ref.onClose.subscribe((abp: abp_detail) => {
       if (abp) {
