@@ -24,7 +24,7 @@ export class PodprogrammListComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
   podProg$: Observable<podprogramm_list>
-  searchfuncPr = ''
+  search = ''
   first = 0
   rows = 25
   windowHeight: number
@@ -46,7 +46,8 @@ export class PodprogrammListComponent implements OnInit {
   fetchpodPr() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search
     }
 
     this.podProg$ = this.podprListService.fetch(params)
@@ -72,7 +73,7 @@ export class PodprogrammListComponent implements OnInit {
     this.closeEvent.emit()
   }
 
-  search() {
+  searh() {
 
   }
 

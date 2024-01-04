@@ -24,7 +24,7 @@ export class PodprogrammSelectComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
   podProg$: Observable<podprogramm_select>
-  searchfuncPr = ''
+  search = ''
   first = 0
   rows = 25
   selected: any
@@ -48,7 +48,8 @@ export class PodprogrammSelectComponent implements OnInit {
   fetchpodPr() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search
     }
 
     this.podProg$ = this.podprSelectService.fetch(params)
@@ -76,7 +77,7 @@ export class PodprogrammSelectComponent implements OnInit {
     this.closeEvent.emit()
   }
 
-  search() {
+  searh() {
 
   }
 

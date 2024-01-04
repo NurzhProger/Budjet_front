@@ -29,7 +29,7 @@ export class SpecificationExpListComponent implements OnInit {
   }
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
-  searchspec = ''
+  search = ''
   first = 0
   rows = 25
   specif: any
@@ -57,7 +57,7 @@ export class SpecificationExpListComponent implements OnInit {
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
-      searchspec: this.searchspec
+      search: this.search
     }
 
     this.spec$ = this.specService.fetch(params)
@@ -138,12 +138,12 @@ export class SpecificationExpListComponent implements OnInit {
     });
   }
 
-  search() {
+  searh() {
 
     let params = {
       limit: this.rows.toString(),
       offset: this.first.toString(),
-      searchspec: this.searchspec
+      search: this.search
     }
 
     this.spec$ = this.specService.fetch(params)
