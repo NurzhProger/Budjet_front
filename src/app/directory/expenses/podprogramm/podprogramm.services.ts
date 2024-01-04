@@ -21,7 +21,7 @@ export class podprogrammService {
 
 
     fetch(params: any): Observable<podprogramm_list> {
-        return this.http.get<podprogramm_list>(this.host + 'dirs/podprogramlist', { params })
+        return this.http.post<podprogramm_list>(this.host + 'dirs/podprogramlist', params)
     }
 
 }

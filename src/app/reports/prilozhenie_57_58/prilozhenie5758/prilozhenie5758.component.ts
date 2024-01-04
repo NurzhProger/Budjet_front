@@ -14,6 +14,7 @@ import { MainComponent } from 'src/app/main/main.component/main.component';
 import { ABPSelectComponent } from 'src/app/directory/expenses/ABP/abp-select/abp-select.component';
 import { abp_detail } from 'src/app/directory/expenses/ABP/interfaces';
 import { SelectProgramComponent } from '../select_program_report/select-program/select-program.component';
+import { SelectPodprogramComponent } from '../select_podprogram_report/select-podprogram/select-podprogram.component';
 
 @Component({
   selector: 'app-prilozhenie5758',
@@ -38,7 +39,7 @@ export class Prilozhenie5758Component implements OnInit {
   dimension: any = []
   url: any = ''
   prilozhenieValue = 'prilozhenie57'
-  dimensionValue = '1'
+  dimensionValue = 1
   tochnost = 0
   languageValue = 'kz'
   _organization = {
@@ -86,8 +87,8 @@ export class Prilozhenie5758Component implements OnInit {
       { label: 'Рус', value: 'ru' }
     ]
     this.dimension = [
-      { label: 'тенге', value: '1' },
-      { label: 'тыс. тенге', value: '1000' }
+      { label: 'тенге', value: 1 },
+      { label: 'тыс. тенге', value: 1000 }
     ]
   }
 
@@ -228,16 +229,17 @@ export class Prilozhenie5758Component implements OnInit {
           ]
         }
       }
+
     })
   }
 
   selectPodprogram() {
-    this.ReportPodProgramref = this.ReportPodProgdialog.open(SelectProgramComponent,
+    this.ReportPodProgramref = this.ReportPodProgdialog.open(SelectPodprogramComponent,
       {
         header: 'Список подпрограмм',
         width: '80%',
         height: '80%',
-        data: { program: this._program, abp_id: this._abp.id }
+        data: { podprogram: this._podprogram, abp_id: this._abp.id, program: this._program }
       })
 
     this.ReportPodProgramref.onClose.subscribe((select: any) => {
