@@ -55,7 +55,6 @@ export class ProgrammSelectComponent implements OnInit {
       offset: this.first.toString(),
       search: this.search
     }
-    console.log(params);
 
 
     this.Prog$ = this.programmSelectService.fetch(params)

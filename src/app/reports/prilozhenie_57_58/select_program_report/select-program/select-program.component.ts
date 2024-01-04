@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { programm_detail } from 'src/app/directory/expenses/programm/interfaces';
 import { ProgrammSelectComponent } from 'src/app/directory/expenses/programm/programm-select/programm-select.component';
 
 @Component({
@@ -13,12 +14,16 @@ export class SelectProgramComponent implements OnInit {
   constructor(
     private select_config: DynamicDialogConfig,
     private select_dialog_ref: DynamicDialogRef,
-    private select_dialog_servis: DialogService
+    private select_dialog_servis: DialogService,
+    private select_dialog_Detailref: DynamicDialogRef
   ) { }
 
   ngOnInit(): void {
     this.abp_id = this.select_config.data.abp_id
-    this.mass_program = this.select_config.data.program
+    if (this.select_config.data.program[0].id !== 0) {
+      this.mass_program = JSON.parse(JSON.stringify(this.select_config.data.program))
+    }
+
   }
 
   openNew() {
@@ -30,11 +35,19 @@ export class SelectProgramComponent implements OnInit {
         data: { abp_id: this.abp_id }
       })
 
-    this.select_dialog_ref.onClose.subscribe((save: boolean) => {
+    this.select_dialog_ref.onClose.subscribe((programm_detail: programm_detail) => {
 
-      if (save) {
-        // this.fetchList()
+      if (programm_detail) {
+        this.mass_program.push(programm_detail)
       }
     })
+  }
+
+  onDelete(ri: number) {
+    this.mass_program.splice(ri, 1)
+  }
+
+  save() {
+    this.select_dialog_Detailref.close(this.mass_program)
   }
 }
