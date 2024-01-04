@@ -24,7 +24,7 @@ export class OrganizationComponent implements OnInit {
   organizations$: Observable<organization_list>
   first = 0
   rows = 25
-  searchorg = ''
+  search = ''
   selected: any
   windowHeight: number
 
@@ -51,7 +51,8 @@ export class OrganizationComponent implements OnInit {
 
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search
     }
 
     this.organizations$ = this.orgService.fetch(params)
@@ -100,7 +101,7 @@ export class OrganizationComponent implements OnInit {
     this.org_dialog_ref.close(org)
   }
 
-  search() {
+  searh() {
 
   }
 
