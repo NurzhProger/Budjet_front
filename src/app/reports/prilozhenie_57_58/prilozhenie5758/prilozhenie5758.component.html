@@ -48,6 +48,12 @@
                     </div>
 
 
+                    <div class="p-field">
+                        <label for="" style="padding-right: 10px; padding-left: 10px;">Год учета: </label>
+                        <div class="card flex justify-content-center">
+                            <p-inputNumber type="number" [(ngModel)]="godUcheta"></p-inputNumber>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -133,6 +139,18 @@
                                 <input type="text" [(ngModel)]="_podprogram[0].code" placeholder="Выберите подпрограмму"
                                     readonly="true" />
                                 <span class="p-inputgroup-addon cursor-pointer" (click)="selectPodprogram()">...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-field"
+                        style="padding-right: 10px; padding-bottom: 10px; display: flex; align-items: center;">
+                        <label for="" style="padding-right: 10px; padding-left: 10px;">Специфика: </label>
+                        <div class="card flex justify-content-center">
+                            <div class="p-inputgroup" style="padding-right: 10px;">
+                                <input type="text" [(ngModel)]="_spec[0].code" placeholder="Выберите специфику"
+                                    readonly="true" />
+                                <span class="p-inputgroup-addon cursor-pointer" (click)="selectSpec()">...</span>
                             </div>
                         </div>
                     </div>

@@ -142,6 +142,7 @@ import { OtborENSSelectComponent } from './directory/planirovanie/otborEnsTRU/ot
 import { OtborENSDetailComponent } from './directory/planirovanie/otborEnsTRU/otborENS-element/otbor-ens-detail/otbor-ens-detail.component';
 import { SelectProgramComponent } from './reports/prilozhenie_57_58/select_program_report/select-program/select-program.component';
 import { SelectPodprogramComponent } from './reports/prilozhenie_57_58/select_podprogram_report/select-podprogram/select-podprogram.component';
+import { SelectSpecComponent } from './reports/prilozhenie_57_58/select_spec_report/select-spec/select-spec.component';
 
 @NgModule({
   imports: [
@@ -286,7 +287,8 @@ import { SelectPodprogramComponent } from './reports/prilozhenie_57_58/select_po
     OtborENSSelectComponent,
     OtborENSDetailComponent,
     SelectProgramComponent,
-    SelectPodprogramComponent],
+    SelectPodprogramComponent,
+    SelectSpecComponent],
   bootstrap: [AppComponent],
   providers: [
     {

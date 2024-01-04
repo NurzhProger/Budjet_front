@@ -15,6 +15,7 @@ import { ABPSelectComponent } from 'src/app/directory/expenses/ABP/abp-select/ab
 import { abp_detail } from 'src/app/directory/expenses/ABP/interfaces';
 import { SelectProgramComponent } from '../select_program_report/select-program/select-program.component';
 import { SelectPodprogramComponent } from '../select_podprogram_report/select-podprogram/select-podprogram.component';
+import { SelectSpecComponent } from '../select_spec_report/select-spec/select-spec.component';
 
 @Component({
   selector: 'app-prilozhenie5758',
@@ -32,6 +33,8 @@ export class Prilozhenie5758Component implements OnInit {
     private Reportmsg: MessageService,
     private Prilozhenie5758Service: Prilozhenie5758Service,
     private sanitizer: DomSanitizer,
+    private ReportSpecref: DynamicDialogRef,
+    private ReportSpecdialog: DialogService
   ) { this.profileuser = this.MainComponent.profileuser }
   profileuser: profileuser
   prilozhenieType: any = []
@@ -63,6 +66,12 @@ export class Prilozhenie5758Component implements OnInit {
       'code': ''
     }
   ]
+  _spec = [
+    {
+      'id': 0,
+      'code': ''
+    }
+  ]
   _date: Date = new Date;
   _date_min: Date;
   _date_max: Date;
@@ -74,6 +83,7 @@ export class Prilozhenie5758Component implements OnInit {
 
   ngOnInit(): void {
     this._date_min = new Date(this._date.getFullYear(), 0, 1)
+    this.godUcheta = Number(new Date(this._date.getFullYear()))
     this._date_max = this._date
     this._organization = {
       id: parseInt(this.profileuser.org_id),
@@ -106,6 +116,7 @@ export class Prilozhenie5758Component implements OnInit {
       _dimension: this.dimensionValue,
       _tochnost: this.tochnost,
       _abp: this._abp.id,
+      _spec: this._spec
     }
 
     if (this._organization.id == 0) {
@@ -248,6 +259,31 @@ export class Prilozhenie5758Component implements OnInit {
       if (select) {
         if (select.length > 0) {
           this._podprogram = select
+        } else {
+          this._podprogram = [
+            {
+              'id': 0,
+              'code': ''
+            }
+          ]
+        }
+      }
+    })
+  }
+
+  selectSpec() {
+    this.ReportSpecref = this.ReportSpecdialog.open(SelectSpecComponent,
+      {
+        header: 'Список cпецифик',
+        width: '80%',
+        height: '80%',
+        data: { spec: this._spec }
+      })
+
+    this.ReportSpecref.onClose.subscribe((select: any) => {
+      if (select) {
+        if (select.length > 0) {
+          this._spec = select
         } else {
           this._podprogram = [
             {
