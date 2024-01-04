@@ -61,6 +61,7 @@ export class Prilozhenie5758Component implements OnInit {
     'name': '',
     'code': ''
   }
+
   ngOnInit(): void {
     this._date_min = new Date(this._date.getFullYear(), 0, 1)
     this._date_max = this._date
@@ -83,11 +84,17 @@ export class Prilozhenie5758Component implements OnInit {
   }
 
   form() {
+
     let params = {
       org_id: this._organization.id,
       fkr_id: this._fkr.id,
       _date_min: this.toLocaleDate(this._date_min),
-      _date_max: this.toLocaleDate(this._date_max)
+      _date_max: this.toLocaleDate(this._date_max),
+      _program: this._program,
+      _language: this.languageValue,
+      _dimension: this.dimensionValue,
+      _tochnost: this.tochnost,
+      _abp: this._abp.id,
     }
 
     if (this._organization.id == 0) {
@@ -200,12 +207,20 @@ export class Prilozhenie5758Component implements OnInit {
         data: { program: this._program, abp_id: this._abp.id }
       })
 
-    // this.Reportref.onClose.subscribe((fkr: fkr_detail) => {
-    //   if (fkr) {
-    //     this._fkr.id = fkr.id,
-    //       this._fkr.name = fkr.code + '. ' + fkr.name_rus
-    //   }
-    // })
+    this.Reportref.onClose.subscribe((select: any) => {
+      if (select) {
+        if (select.length > 0) {
+          this._program = select
+        } else {
+          this._program = [
+            {
+              'id': 0,
+              'code': ''
+            }
+          ]
+        }
+      }
+    })
   }
 
   changePrilozhenie() {
