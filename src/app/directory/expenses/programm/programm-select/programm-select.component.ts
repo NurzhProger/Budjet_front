@@ -24,7 +24,7 @@ export class ProgrammSelectComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
   Prog$: Observable<programm_select>
-  searchfuncPr = ''
+  search = ''
   first = 0
   rows = 25
   selected: any
@@ -52,7 +52,8 @@ export class ProgrammSelectComponent implements OnInit {
     let params = {
       abp_id: this.abp_id,
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search
     }
     console.log(params);
 
@@ -81,7 +82,7 @@ export class ProgrammSelectComponent implements OnInit {
     this.programmSelectref.close(programm_detail)
   }
 
-  search() {
+  searh() {
 
   }
 

@@ -23,7 +23,7 @@ export class ProgrammListComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
   Prog$: Observable<programm_list>
-  searchfuncPr = ''
+  search = ''
   first = 0
   rows = 25
   windowHeight: number
@@ -45,7 +45,8 @@ export class ProgrammListComponent implements OnInit {
   fetchPr() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search
     }
 
     this.Prog$ = this.programmListService.fetch(params)
@@ -65,7 +66,7 @@ export class ProgrammListComponent implements OnInit {
 
   }
 
-  search() {
+  searh() {
 
   }
 
