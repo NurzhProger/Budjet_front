@@ -38,6 +38,8 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
   windowHeight: number
   selected: any
   old_tabcount = 0
+  periods: any
+  searchZakl: any
 
   constructor(
     private zakluchenie_service: ZakluchenieService,
@@ -66,11 +68,32 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
   }
 
   fetch() {
-    let params = {
-      limit: this.rows.toString(),
-      offset: this.first.toString()
+    if (this.periods!=null) {
+      if (this.periods[0]!=null && this.periods[1]!=null) {
+        let date_start = this.periods[0].toLocaleDateString()
+        let date_stop = this.periods[1].toLocaleDateString()
+        
+        let params = {
+          limit: this.rows.toString(),
+          offset: this.first.toString(),
+          search: this.searchZakl,
+          date_start: date_start,
+          date_stop: date_stop
+        }
+        this.zakluchenie_list$ = this.zakluchenie_service.fetch(params)
+      }
     }
-    this.zakluchenie_list$ = this.zakluchenie_service.fetch(params)
+    else{
+      let params = {
+        limit: this.rows.toString(),
+        offset: this.first.toString(),
+        search: this.searchZakl,
+        date_start: '01.01.2000',
+        date_stop: '31.12.2050'
+      }
+      this.zakluchenie_list$ = this.zakluchenie_service.fetch(params)
+    }
+    
   }
 
   onRowEdit(zakluchenie: zakluchenie_doc) {
@@ -209,5 +232,9 @@ export class ZakluchenieListComponent implements OnInit, OnChanges {
         this.zakluchenie_confirm.close();
       }
     })
+  }
+
+  searh() {
+    
   }
 }

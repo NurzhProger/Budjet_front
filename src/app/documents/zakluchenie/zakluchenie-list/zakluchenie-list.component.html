@@ -9,8 +9,18 @@
 
     <div class="p-toolbar-group-right">
         <span class="p-input-icon-left" style="margin-right: 10px;">
+            <p-calendar [(ngModel)]="periods" 
+                        selectionMode="range" 
+                        appendTo="body"
+                        [showIcon]="!periods"
+                        [readonlyInput]="true" 
+                        (ngModelChange)="fetch()"
+                        [showClear]="!!periods"
+                        ></p-calendar>
+        </span>
+        <span class="p-input-icon-left" style="margin-right: 10px;">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" placeholder="поиск..." />
+            <input pInputText type="text" [(ngModel)]="searchZakl" (change)="fetch()"placeholder="поиск..." />
         </span>
         <div style="padding-right: 10px;">
             <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined"

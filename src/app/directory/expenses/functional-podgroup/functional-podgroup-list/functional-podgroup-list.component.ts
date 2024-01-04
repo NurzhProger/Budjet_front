@@ -47,7 +47,8 @@ export class FunctionalPodgroupListComponent implements OnInit {
   fetchGr() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.searchfuncpodGr
     }
 
     this.funcpodGr$ = this.funcpodGrService.fetch(params)

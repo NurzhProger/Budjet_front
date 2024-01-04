@@ -46,7 +46,8 @@ export class FunctionalGroupListComponent implements OnInit {
   fetchGr() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.searchfuncGr
     }
 
     this.funcGr$ = this.funcGrService.fetch(params)
