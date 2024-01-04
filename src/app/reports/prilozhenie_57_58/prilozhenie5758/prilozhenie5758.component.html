@@ -122,6 +122,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="p-field"
+                        style="padding-right: 10px; padding-bottom: 10px; display: flex; align-items: center;">
+                        <label for="" style="padding-right: 10px; padding-left: 10px;">Подпрограмма: </label>
+                        <div class="card flex justify-content-center">
+                            <div class="p-inputgroup" style="padding-right: 10px;">
+                                <input type="text" [(ngModel)]="_podprogram[0].code" placeholder="Выберите подпрограмму"
+                                    readonly="true" />
+                                <span class="p-inputgroup-addon cursor-pointer" (click)="selectPodprogram()">...</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 

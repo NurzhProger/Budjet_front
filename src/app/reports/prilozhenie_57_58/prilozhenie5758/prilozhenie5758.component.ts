@@ -24,7 +24,9 @@ export class Prilozhenie5758Component implements OnInit {
   @Output() closeEvent = new EventEmitter<any>()
   constructor(
     private Reportref: DynamicDialogRef,
+    private ReportPodProgramref: DynamicDialogRef,
     private Reportdialog: DialogService,
+    private ReportPodProgdialog: DialogService,
     private MainComponent: MainComponent,
     private Reportmsg: MessageService,
     private Prilozhenie5758Service: Prilozhenie5758Service,
@@ -48,6 +50,12 @@ export class Prilozhenie5758Component implements OnInit {
     'code': ''
   }
   _program = [
+    {
+      'id': 0,
+      'code': ''
+    }
+  ]
+  _podprogram = [
     {
       'id': 0,
       'code': ''
@@ -220,6 +228,31 @@ export class Prilozhenie5758Component implements OnInit {
           ]
         }
       }
+    })
+  }
+
+  selectPodprogram() {
+    this.ReportPodProgramref = this.ReportPodProgdialog.open(SelectProgramComponent,
+      {
+        header: 'Список подпрограмм',
+        width: '80%',
+        height: '80%',
+        data: { program: this._program, abp_id: this._abp.id }
+      })
+
+    this.ReportPodProgramref.onClose.subscribe((select: any) => {
+      // if (select) {
+      //   if (select.length > 0) {
+      //     this._program = select
+      //   } else {
+      //     this._program = [
+      //       {
+      //         'id': 0,
+      //         'code': ''
+      //       }
+      //     ]
+      //   }
+      // }
     })
   }
 
