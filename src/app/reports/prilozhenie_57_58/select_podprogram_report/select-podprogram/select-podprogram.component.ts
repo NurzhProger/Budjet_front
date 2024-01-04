@@ -17,7 +17,8 @@ export class SelectPodprogramComponent implements OnInit {
   constructor(
     private select_config: DynamicDialogConfig,
     private select_dialog_ref: DynamicDialogRef,
-    private select_dialog_servis: DialogService
+    private select_dialog_servis: DialogService,
+    private select_dialog_Detailref: DynamicDialogRef
   ) { }
 
   ngOnInit(): void {
@@ -39,18 +40,18 @@ export class SelectPodprogramComponent implements OnInit {
 
     this.select_dialog_ref.onClose.subscribe((podprogramm_detail: podprogramm_detail) => {
 
-      // if (programm_detail) {
-      //   this.mass_program.push(programm_detail)
-      // }
+      if (podprogramm_detail) {
+        this.mass_podprogram.push(podprogramm_detail)
+      }
     })
   }
 
   onDelete(ri: number) {
-
+    this.mass_podprogram.splice(ri, 1)
   }
 
   save() {
-
+    this.select_dialog_Detailref.close(this.mass_podprogram)
   }
 
 }

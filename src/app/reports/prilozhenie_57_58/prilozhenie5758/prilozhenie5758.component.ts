@@ -41,6 +41,7 @@ export class Prilozhenie5758Component implements OnInit {
   prilozhenieValue = 'prilozhenie57'
   dimensionValue = 1
   tochnost = 0
+  godUcheta = 0
   languageValue = 'kz'
   _organization = {
     'id': 0,
@@ -100,6 +101,7 @@ export class Prilozhenie5758Component implements OnInit {
       _date_min: this.toLocaleDate(this._date_min),
       _date_max: this.toLocaleDate(this._date_max),
       _program: this._program,
+      _podprogram: this._podprogram,
       _language: this.languageValue,
       _dimension: this.dimensionValue,
       _tochnost: this.tochnost,
@@ -243,18 +245,18 @@ export class Prilozhenie5758Component implements OnInit {
       })
 
     this.ReportPodProgramref.onClose.subscribe((select: any) => {
-      // if (select) {
-      //   if (select.length > 0) {
-      //     this._program = select
-      //   } else {
-      //     this._program = [
-      //       {
-      //         'id': 0,
-      //         'code': ''
-      //       }
-      //     ]
-      //   }
-      // }
+      if (select) {
+        if (select.length > 0) {
+          this._podprogram = select
+        } else {
+          this._podprogram = [
+            {
+              'id': 0,
+              'code': ''
+            }
+          ]
+        }
+      }
     })
   }
 

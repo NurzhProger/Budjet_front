@@ -33,7 +33,6 @@ export class PodprogrammSelectComponent implements OnInit {
   windowHeight: number
   abp_id: number
   _program: any = []
-  program_id: any = []
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -43,18 +42,6 @@ export class PodprogrammSelectComponent implements OnInit {
   ngOnInit(): void {
     this.abp_id = this.select_config.data.abp_id
     this._program = JSON.parse(JSON.stringify(this.select_config.data.program))
-    // if (this._program.length > 0) {
-    //   for (let i = 0; i < this._program.length; i++) {
-    //     this.program_id[''].push(this._program[i].id)
-    //   }
-
-    // }
-    this._program.forEach((element: any) => {
-      this.program_id.push(element.id)
-    })
-
-
-
     this.fetchpodPr(),
       this.updateWindowSize()
   }
@@ -66,11 +53,9 @@ export class PodprogrammSelectComponent implements OnInit {
 
   fetchpodPr() {
 
-
-
     let params = {
       abp_id: this.abp_id,
-      _program: this.program_id,
+      _program: this._program,
       limit: this.rows.toString(),
       offset: this.first.toString(),
       search: this.search
