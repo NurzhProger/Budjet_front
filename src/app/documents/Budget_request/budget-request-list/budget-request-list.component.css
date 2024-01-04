@@ -4,3 +4,7 @@
     font-weight: bold;
     color: #999;
   }
+
+  .p-button-success {
+    border-radius: 1000px;
+  }
