@@ -25,7 +25,7 @@ export class ABPSelectComponent implements OnInit {
   @Input() data = false
   
   abp_select$: Observable<abp_select>
-  searchfuncGr = ''
+  search = ''
   first = 0
   rows = 25
   selected: any
@@ -48,7 +48,8 @@ export class ABPSelectComponent implements OnInit {
   fetchABP() {
     let params = {
       limit: this.rows.toString(),
-      offset: this.first.toString()
+      offset: this.first.toString(),
+      search: this.search
     }
 
     this.abp_select$ = this.abpSelectService.fetch(params)
@@ -76,7 +77,7 @@ export class ABPSelectComponent implements OnInit {
     this.abpSelectref.close(abp_detail)
   }
 
-  search() {
+  searh() {
 
   }
 
