@@ -40,6 +40,7 @@ export class Prilozhenie5758Component implements OnInit {
   prilozhenieType: any = []
   reportLanguages: any = []
   dimension: any = []
+  byOrg: false
   url: any = ''
   prilozhenieValue = 'prilozhenie57'
   dimensionValue = 1
@@ -116,7 +117,8 @@ export class Prilozhenie5758Component implements OnInit {
       _dimension: this.dimensionValue,
       _tochnost: this.tochnost,
       _abp: this._abp.id,
-      _spec: this._spec
+      _spec: this._spec,
+      byOrg: this.byOrg
     }
 
     if (this._organization.id == 0) {
