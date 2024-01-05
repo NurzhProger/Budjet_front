@@ -92,7 +92,7 @@
                     <p-inputNumber type="number" [min]="0" [(ngModel)]="adddopl.razmer" [minFractionDigits]="2"
                         [maxFractionDigits]="2"
                         [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right', 'height': '10px'}"
-                        [readonly]="hasRInFormula"
+                        [readonly]="trueorfalse(adddopl.columns_used.toString())"
                         (ngModelChange)="onInputChange($event, adddopl, ri)">
                     </p-inputNumber>
                 </td>

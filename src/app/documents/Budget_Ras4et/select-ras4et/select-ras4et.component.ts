@@ -48,8 +48,8 @@ export class SelectRas4etComponent implements OnInit {
   MRP: number
   BDO: number
   windowHeight: number
-  hasRInFormula: boolean
-
+  hasRInFormula: boolean = false
+  asdsasd = 0
 
   constructor(
     private select_budjetRas4et_Service: budjetRas4et_Service,
@@ -90,8 +90,19 @@ export class SelectRas4etComponent implements OnInit {
     this.getBDO()
     this.add_head()
     this.updateWindowSize()
-    this.onInputChange
     
+  }
+
+  trueorfalse(text: any){
+    
+    
+    if (text.includes('Р')){
+      return false
+    }
+    else{
+      return true
+    }
+
   }
 
   add_head() {
@@ -393,10 +404,11 @@ export class SelectRas4etComponent implements OnInit {
 
 
   onInputChange(value: number, kolon: any, ri: number) {
-  
+    
     let mass: any;
     let K_mass: any;
     let new_mass_simv: any
+    
     if (value == undefined) {
       kolon.zn_float = 0;
     } else {
@@ -418,19 +430,21 @@ export class SelectRas4etComponent implements OnInit {
         }
       }
     }
-
+    
     // this.Ras4et_detail.tbl[ri].
     for (let i = 0; i < mass[0].length; i++) {
       if (mass_arr[i].columns_used !== '') {
         let formula = '';
         let mass_simv = mass_arr[i].columns_used.split(' ');
+        
         for (let y = 0; y < mass_simv.length; y++) {
 
           K_mass = mass_simv[y][mass_simv[y].length - 1]
 
           if (kkk.includes(K_mass)) {
             mass_simv[y] = mass_simv[y].slice(0, -1);
-            this.hasRInFormula = false;
+
+            
             if (aaa.includes(mass_simv[y])) {
               formula = formula + mass_arr[mass_simv[y] - 1].zn_float;
             }
@@ -450,8 +464,7 @@ export class SelectRas4etComponent implements OnInit {
             }
           }
           else if (mass_simv[y] == "Р") {
-            formula = formula + mass_arr[i].razmer;
-            this.hasRInFormula = true;
+            formula = formula + mass_arr[i].razmer;        
           }
           else if (mass_simv[y] == "МРП") {
             formula = formula + this.MRP
