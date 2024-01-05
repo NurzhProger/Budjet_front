@@ -206,8 +206,8 @@ export class BudgetRas4etDetailComponent implements OnInit {
     this.Budget_ras4et_Detailref = this.Budget_ras4et_DialogService.open(SelectRas4etComponent,
       {
         header: 'Таблица расчета',
-        width: 'calc(60%)',
-        height: 'calc(80%)',
+        width: 'calc(70%)',
+        height: 'calc(90%)',
         data: {
           period: this.period,
           tbl: tbl,

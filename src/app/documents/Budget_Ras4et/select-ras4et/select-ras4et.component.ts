@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Ras4et_new_dopl } from '../Budget_ras4et.interfaces';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { budjetRas4et_Service } from '../Budget_ras4et.Services'
@@ -31,6 +31,19 @@ import { otbor_ensTRU_element } from 'src/app/directory/planirovanie/otborEnsTRU
   styleUrls: ['./select-ras4et.component.css']
 })
 export class SelectRas4etComponent implements OnInit {
+
+  @HostListener('window:resize', ['$event'])
+
+  @HostListener('window:keydown', ['$event'])
+
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'Enter') {
+      
+    }  
+  }
+
+
 
   new_dopl: [Ras4et_new_dopl]
   first_dopl: [Ras4et_new_dopl]
@@ -532,5 +545,8 @@ export class SelectRas4etComponent implements OnInit {
     this.copytbl = this.tbl
 
     this.select_dialog_Detailref.close(this.copytbl)
+   
   }
+
+  
 }
