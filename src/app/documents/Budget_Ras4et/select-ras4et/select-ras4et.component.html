@@ -1,5 +1,5 @@
 <div class="p-field">
-    <p-table styleClass="p-datatable-striped p-datatable-gridlines" [value]="tbl">
+    <p-table  [value]="tbl" [scrollable]="true" scrollHeight="calc({{windowHeight}}px - 230px)">
         <ng-template pTemplate="header">
             <tr>
                 <th style="text-align:center; width: 5%;">Номер</th>
@@ -99,7 +99,7 @@
         </ng-template>
     </p-table>
 </div>
-<footer class="bottom-fixed-container">
-    <button pButton pRipple label="OK" icon="pi pi-save" class="p-button-secondary p-mr-2"
+<footer class="bottom-fixed-container" style="text-align: right; padding: 5px 15px 5px 0px;">
+    <button pButton pRipple label="Перенести в расчетную таблицу" icon="pi pi-fast-forward" class="p-button-secondary p-mr-2" 
         (click)="saveDoplata()"></button>
 </footer>

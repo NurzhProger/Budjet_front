@@ -47,6 +47,7 @@ export class SelectRas4etComponent implements OnInit {
   summdoc = 0
   MRP: number
   BDO: number
+  windowHeight: number
 
   constructor(
     private select_budjetRas4et_Service: budjetRas4et_Service,
@@ -86,12 +87,17 @@ export class SelectRas4etComponent implements OnInit {
     this.getMRP()
     this.getBDO()
     this.add_head()
+    this.updateWindowSize()
   }
 
   add_head() {
     for (let i = 0; i < this.tbl.length; i++) {
       this.tbl[i]['head_table'] = this.head_table[i]
     }
+  }
+
+  private updateWindowSize() {
+    this.windowHeight = window.innerHeight
   }
 
   getMRP() {
