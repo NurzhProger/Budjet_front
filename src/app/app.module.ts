@@ -143,6 +143,7 @@ import { OtborENSDetailComponent } from './directory/planirovanie/otborEnsTRU/ot
 import { SelectProgramComponent } from './reports/prilozhenie_57_58/select_program_report/select-program/select-program.component';
 import { SelectPodprogramComponent } from './reports/prilozhenie_57_58/select_podprogram_report/select-podprogram/select-podprogram.component';
 import { SelectSpecComponent } from './reports/prilozhenie_57_58/select_spec_report/select-spec/select-spec.component';
+import { SafeHtmlPipe } from './documents/Budget_Ras4et/ras4et-print-form/ras4et-print-form/SafeHtmlPipe.pipe';
 
 @NgModule({
   imports: [
@@ -288,7 +289,8 @@ import { SelectSpecComponent } from './reports/prilozhenie_57_58/select_spec_rep
     OtborENSDetailComponent,
     SelectProgramComponent,
     SelectPodprogramComponent,
-    SelectSpecComponent],
+    SelectSpecComponent,
+    SafeHtmlPipe],
   bootstrap: [AppComponent],
   providers: [
     {

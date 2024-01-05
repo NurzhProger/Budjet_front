@@ -26,7 +26,7 @@
     "bootstrap": "^5.3.1",
     "chart.js": "^3.6.0",
     "crypto-js": "^4.1.1",
-    "exceljs": "^4.3.0",
+    "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "mathjs": "^11.11.1",

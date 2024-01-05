@@ -12,7 +12,7 @@ export class Ras4etPrintFormComponent implements OnInit {
   url: any = ''
   doc = {
     'id': 0
-}
+  }
   constructor(
     private Reportconfig: DynamicDialogConfig,
     private Ras4etPrintService: Ras4etPrintService,
@@ -21,22 +21,22 @@ export class Ras4etPrintFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.doc = this.Reportconfig.data.doc;
-    this.toPrint()  
+    this.toPrint()
   }
 
   toPrint() {
     let params = {
       id: this.doc.id,
-  }
+    }
 
-  this.Ras4etPrintService
+    this.Ras4etPrintService
       .getPrintForm(params)
       .subscribe
       (data => {
-          let blob: Blob = new Blob([data], { type: 'application/pdf' });
-          let url = window.URL.createObjectURL(blob);
-          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-      })  
+        let blob: Blob = new Blob([data], { type: 'application/pdf' });
+        let url = window.URL.createObjectURL(blob);
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+      })
   }
 
 }
