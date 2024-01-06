@@ -149,51 +149,51 @@
                     </td>
                     <td style="text-align: center;">
                         <div class="p-inputgroup w-full">
-                            <input type="text" [readonly]="true" pInputText [ngModel]="zakl._fkr.code" />
+                            <input type="text" [readonly]="true" pInputText [ngModel]="zakl._fkr.code"  style="height: 5px;"/>
                             <button pButton pRipple type="button" icon="pi pi-pencil"
-                                class="p-button-outlined p-button-text" style="color:dimgrey;"
+                                class="p-button-outlined p-button-text" style="color:dimgrey; height: 19px;"
                                 (click)="editFKR(ri)"></button>
                         </div>
                     </td>
                     <td style="text-align: center;">
                         <div class="p-inputgroup w-full">
                             <input type="text" [readonly]="true" pInputText
-                                [ngModel]="zakl._spec.code + ' - ' + zakl._spec.name_rus" />
+                                [ngModel]="zakl._spec.code + ' - ' + zakl._spec.name_rus" style="height: 5px;"/>
                             <button pButton pRipple type="button" icon="pi pi-pencil"
-                                class="p-button-outlined p-button-text" style="color:dimgrey;"
+                                class="p-button-outlined p-button-text" style="color:dimgrey; height: 19px;"
                                 (click)="editSpec(ri)"></button>
                         </div>
                     </td>
                     <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="zakl.original_summ"
-                            [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                            [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" style="height: 5px;"
                             [minFractionDigits]="2" [maxFractionDigits]="2"
                             (ngModelChange)="onTableValuesChange(ri)"></p-inputNumber>
                     </td>
                     <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="zakl.changes_summ"
-                            [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                            [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" style="height: 5px;"
                             [minFractionDigits]="2" [maxFractionDigits]="2" (ngModelChange)="onTableValuesChange(ri)"
                             [readonly]="true"></p-inputNumber>
                     </td>
                     <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="zakl.final_summ"
-                            [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                            [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" style="height: 5px;"
                             [minFractionDigits]="2" [maxFractionDigits]="2"
                             (ngModelChange)="onTableValuesChange(ri)"></p-inputNumber>
                     </td>
-                    <td style="text-align: left; height: 25px;">
+                    <td style="text-align: left; height: 5px;">
                         <input type="text" [(ngModel)]="zakl.characteristics"
-                            style="text-align:center; width: 100%; height: 100%;">
+                            style="text-align:center; width: 100%;">
                     </td>
-                    <td style="text-align: left; height: 25px;">
+                    <td style="text-align: left; height: 5px;">
                         <input type="text" [(ngModel)]="zakl.description"
-                            style="text-align:center; width: 100%; height: 100%;">
+                            style="text-align:center; width: 100%;">
                     </td>
                     <td>
                         <div class="flex align-items-center justify-content-center gap-2">
                             <button pButton pRipple type="button" icon="pi pi-trash"
-                                class="p-button-rounded p-button-text"
+                                class="p-button-rounded p-button-text" style="height: 5px;"
                                 (click)="onDelete(zakl._fkr.id, zakl._fkr.name_rus)"></button>
                         </div>
                     </td>

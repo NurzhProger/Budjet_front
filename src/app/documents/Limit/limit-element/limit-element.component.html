@@ -45,7 +45,7 @@
             <label for="org_name">Наименование организации <span style="color: red;">*</span></label>
             <div class="p-inputgroup">
                 <input id="org_name" type="text" pInputText [(ngModel)]="limitDetail.head._organization.name_rus"
-                    formControlName="org_name"  />
+                    formControlName="org_name" style="height: 25px;" />
                 <span class="p-inputgroup-addon cursor-pointer"  (click)="viewOrg()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-files" viewBox="0 0 16 16">
@@ -64,7 +64,7 @@
             <label for="god_ucheta">Планируемый год <span style="color: red;">*</span></label>
             <div class="p-inputgroup">
                 <input id="god_ucheta" type="number" pInputText [(ngModel)]="godNumber" (change)="changeGodUch()"
-                    formControlName="god_ucheta"  />
+                    formControlName="god_ucheta" style="height: 25px;" />
             </div>
             <span class="p-invalid" *ngIf="form.controls['god_ucheta'].invalid && form.controls['god_ucheta'].touched">
                 <span *ngIf="form.controls['god_ucheta'].errors?.required">Заполните поле</span>
@@ -94,26 +94,27 @@
                 <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
                 <td style="text-align:left">
                     <div class="p-inputgroup w-full">
-                        <input pInputText [readOnly]="true" [(ngModel)]="lim._fkr.code" />
-                        <span class="p-inputgroup-addon" (click)="viewFKR(lim._fkr.id)">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        <input pInputText [readOnly]="true" [(ngModel)]="lim._fkr.code" style="height: 5px;"/>
+                        <span class="p-inputgroup-addon"  style="height: 19px;" (click)="viewFKR(lim._fkr.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor"
                                 class="bi bi-files" viewBox="0 0 16 16">
                                 <path
                                     d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                             </svg>
                         </span>
-                        <span class="p-inputgroup-addon" (click)="editFKR(ri)">...</span>
+                        <span class="p-inputgroup-addon" style="height: 19px;" (click)="editFKR(ri)">...</span>
                     </div>
                 </td>
                 <td style="text-align:center;">
                     <p-inputNumber type="number"
                         [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
+                        style="height: 5px;"
                         [minFractionDigits]="2" [maxFractionDigits]="2" [(ngModel)]="lim.summ">
                     </p-inputNumber>
                 </td>
                 <td>
                     <div class="flex align-items-center justify-content-center gap-2">
-                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text" style="height: 5px;"
                             (click)="onDelete(lim._fkr.id, lim._fkr.name_rus)"></button>
                     </div>
                 </td>

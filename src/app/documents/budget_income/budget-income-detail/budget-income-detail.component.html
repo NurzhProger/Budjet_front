@@ -94,7 +94,7 @@
     </div>
 
     <div style="padding-top: 10px;">
-        <p-table [value]="budget_income_detail.tbl" [scrollable]="true" scrollHeight="calc(70vh - 200px)"
+        <p-table [value]="budget_income_detail.tbl" [scrollable]="true" scrollHeight="calc(78vh - 200px)"
         [(selection)]="selected" selectionMode="multiple" [metaKeySelection]="true"
             styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
             <ng-template pTemplate="header">
@@ -112,19 +112,20 @@
                     </td>
                     <td style="text-align: left;">
                         <div class="p-inputgroup w-full">
-                            <input pInputText [readOnly]="true" [(ngModel)]="izm._spec_income.code + ' - ' + izm._spec_income.name_rus" />
-                            <span class="p-inputgroup-addon" (click)="editFKR(ri)">...</span>
+                            <input pInputText [readOnly]="true" [(ngModel)]="izm._spec_income.code + ' - ' + izm._spec_income.name_rus" style="height: 5px;"/>
+                            <span class="p-inputgroup-addon" style="height: 19px;" (click)="editFKR(ri)">...</span>
                         </div>
                     </td>
                     <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="izm.summ"
-                        [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" [minFractionDigits]="2" [maxFractionDigits]="2"
+                        [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}" style="height: 5px;"
+                        [minFractionDigits]="2" [maxFractionDigits]="2"
                             (ngModelChange)="onTableValuesChange()"></p-inputNumber>
                     </td>
                     <td>
                         <div class="flex align-items-center justify-content-center gap-2">
                             <button pButton pRipple type="button" icon="pi pi-trash"
-                                class="p-button-rounded p-button-text"
+                                class="p-button-rounded p-button-text" style="height: 5px;"
                                 (click)="onDelete(izm._spec_income.id, izm._spec_income.name_rus)"></button>
                         </div>
                     </td>
