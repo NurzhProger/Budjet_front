@@ -32,16 +32,17 @@ import { otbor_ensTRU_element } from 'src/app/directory/planirovanie/otborEnsTRU
 })
 export class SelectRas4etComponent implements OnInit {
 
-  @HostListener('window:resize', ['$event'])
+  
 
   @HostListener('window:keydown', ['$event'])
 
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key === 'Enter') {
-      
+    if (event.keyCode === 13 && event.ctrlKey) {
+      this.saveDoplata();
     }  
   }
+ 
 
 
 
