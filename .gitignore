@@ -3,4 +3,4 @@
 
 #Ignore catalog .angular/cache
 /.angular
-node_modules
+# node_modules
