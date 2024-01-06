@@ -147,16 +147,16 @@
                     <td style="text-align: center; font-weight: 700;">
                         {{ri + 1}}
                     </td>
-                    <td style="text-align: center;height: 25px;">
-                        <div class="p-inputgroup">
+                    <td style="text-align: center;">
+                        <div class="p-inputgroup w-full">
                             <input type="text" [readonly]="true" pInputText [ngModel]="zakl._fkr.code" />
                             <button pButton pRipple type="button" icon="pi pi-pencil"
                                 class="p-button-outlined p-button-text" style="color:dimgrey;"
                                 (click)="editFKR(ri)"></button>
                         </div>
                     </td>
-                    <td style="text-align: center;height: 25px;">
-                        <div class="p-inputgroup">
+                    <td style="text-align: center;">
+                        <div class="p-inputgroup w-full">
                             <input type="text" [readonly]="true" pInputText
                                 [ngModel]="zakl._spec.code + ' - ' + zakl._spec.name_rus" />
                             <button pButton pRipple type="button" icon="pi pi-pencil"
@@ -164,25 +164,25 @@
                                 (click)="editSpec(ri)"></button>
                         </div>
                     </td>
-                    <td style="text-align: center;height: 25px;">
+                    <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="zakl.original_summ"
                             [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
                             [minFractionDigits]="2" [maxFractionDigits]="2"
                             (ngModelChange)="onTableValuesChange(ri)"></p-inputNumber>
                     </td>
-                    <td style="text-align: center;height: 25px;">
+                    <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="zakl.changes_summ"
                             [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
                             [minFractionDigits]="2" [maxFractionDigits]="2" (ngModelChange)="onTableValuesChange(ri)"
                             [readonly]="true"></p-inputNumber>
                     </td>
-                    <td style="text-align: center;height: 25px;">
+                    <td style="text-align: center;">
                         <p-inputNumber type="number" [(ngModel)]="zakl.final_summ"
                             [inputStyle]="{'width': '8%', 'padding-right':'8px', 'text-align':'right'}"
                             [minFractionDigits]="2" [maxFractionDigits]="2"
                             (ngModelChange)="onTableValuesChange(ri)"></p-inputNumber>
                     </td>
-                    <td style="text-align: left;height: 25px;">
+                    <td style="text-align: left; height: 25px;">
                         <input type="text" [(ngModel)]="zakl.characteristics"
                             style="text-align:center; width: 100%; height: 100%;">
                     </td>
