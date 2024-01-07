@@ -16,6 +16,7 @@ import { abp_detail } from 'src/app/directory/expenses/ABP/interfaces';
 import { SelectProgramComponent } from '../select_program_report/select-program/select-program.component';
 import { SelectPodprogramComponent } from '../select_podprogram_report/select-podprogram/select-podprogram.component';
 import { SelectSpecComponent } from '../select_spec_report/select-spec/select-spec.component';
+import { AuthService } from 'src/app/login/auth.service';
 
 @Component({
   selector: 'app-prilozhenie5758',
@@ -23,6 +24,7 @@ import { SelectSpecComponent } from '../select_spec_report/select-spec/select-sp
   styleUrls: ['./prilozhenie5758.component.css']
 })
 export class Prilozhenie5758Component implements OnInit {
+  host = ''
   @Output() closeEvent = new EventEmitter<any>()
   constructor(
     private Reportref: DynamicDialogRef,
@@ -34,8 +36,12 @@ export class Prilozhenie5758Component implements OnInit {
     private Prilozhenie5758Service: Prilozhenie5758Service,
     private sanitizer: DomSanitizer,
     private ReportSpecref: DynamicDialogRef,
-    private ReportSpecdialog: DialogService
-  ) { this.profileuser = this.MainComponent.profileuser }
+    private ReportSpecdialog: DialogService,
+    private authservice: AuthService
+  ) { 
+    this.profileuser = this.MainComponent.profileuser
+    this.host = this.authservice.host;
+   }
   profileuser: profileuser
   prilozhenieType: any = []
   reportLanguages: any = []
@@ -134,9 +140,10 @@ export class Prilozhenie5758Component implements OnInit {
         .getReport57(params)
         .subscribe
         (data => {
-          let blob: Blob = new Blob([data], { type: 'application/pdf' });
-          let url = window.URL.createObjectURL(blob);
-          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+          let asd:any = data
+          // let blob: Blob = new Blob([data], { type: 'application/pdf' });
+          // let url = window.URL.createObjectURL(blob);
+          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + asd.status);
         })
 
     }
