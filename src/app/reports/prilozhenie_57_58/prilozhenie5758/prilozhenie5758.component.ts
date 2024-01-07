@@ -38,10 +38,10 @@ export class Prilozhenie5758Component implements OnInit {
     private ReportSpecref: DynamicDialogRef,
     private ReportSpecdialog: DialogService,
     private authservice: AuthService
-  ) { 
+  ) {
     this.profileuser = this.MainComponent.profileuser
     this.host = this.authservice.host;
-   }
+  }
   profileuser: profileuser
   prilozhenieType: any = []
   reportLanguages: any = []
@@ -52,6 +52,14 @@ export class Prilozhenie5758Component implements OnInit {
   dimensionValue = 1
   tochnost = 0
   godUcheta = 0
+  koeff_1_year_110_130 = 0
+  koeff_1_year_140 = 0
+  koeff_1_year_150 = 0
+  koeff_1_year_160 = 0
+  koeff_2_year_110_130 = 0
+  koeff_2_year_140 = 0
+  koeff_2_year_150 = 0
+  koeff_2_year_160 = 0
   languageValue = 'kz'
   _organization = {
     'id': 0,
@@ -108,6 +116,7 @@ export class Prilozhenie5758Component implements OnInit {
       { label: 'тенге', value: 1 },
       { label: 'тыс. тенге', value: 1000 }
     ]
+
   }
 
   form() {
@@ -124,7 +133,15 @@ export class Prilozhenie5758Component implements OnInit {
       _tochnost: this.tochnost,
       _abp: this._abp.id,
       _spec: this._spec,
-      byOrg: this.byOrg
+      byOrg: this.byOrg,
+      koeff_1_year_110_130: this.koeff_1_year_110_130,
+      koeff_1_year_140: this.koeff_1_year_140,
+      koeff_1_year_150: this.koeff_1_year_150,
+      koeff_1_year_160: this.koeff_1_year_160,
+      koeff_2_year_110_130: this.koeff_2_year_110_130,
+      koeff_2_year_140: this.koeff_2_year_140,
+      koeff_2_year_150: this.koeff_2_year_150,
+      koeff_2_year_160: this.koeff_2_year_160
     }
 
     if (this._organization.id == 0) {
@@ -140,7 +157,7 @@ export class Prilozhenie5758Component implements OnInit {
         .getReport57(params)
         .subscribe
         (data => {
-          let asd:any = data
+          let asd: any = data
           // let blob: Blob = new Blob([data], { type: 'application/pdf' });
           // let url = window.URL.createObjectURL(blob);
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + asd.status);

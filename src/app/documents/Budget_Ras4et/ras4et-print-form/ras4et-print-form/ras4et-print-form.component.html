@@ -1,5 +1,6 @@
 <div *ngIf="url != ''" style="width: 100%; height: calc(110vh - 150px);">
     <div style="width: 100%; height: 100%;">
-        <iframe [src]="url" [allowFullscreen]="true" style="width: 100%; height: 100%; border: none;"></iframe>
+        <iframe sandbox="allow-scripts allow-same-origin" [src]="url" [allowFullscreen]="true"
+            style="width: 100%; height: 100%; border: none;"></iframe>
     </div>
 </div>

@@ -3,6 +3,7 @@ import { log } from 'mathjs';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Ras4etPrintService } from './ras4et_print.services';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from 'src/app/login/auth.service';
 
 @Component({
   selector: 'app-ras4et-print-form',
@@ -10,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class Ras4etPrintFormComponent implements OnInit {
   url: any = ''
+  host = ''
   doc = {
     'id': 0
   }
@@ -17,7 +19,8 @@ export class Ras4etPrintFormComponent implements OnInit {
     private Reportconfig: DynamicDialogConfig,
     private Ras4etPrintService: Ras4etPrintService,
     private sanitizer: DomSanitizer,
-  ) { }
+    private authservice: AuthService
+  ) { this.host = this.authservice.host; }
 
   ngOnInit(): void {
     this.doc = this.Reportconfig.data.doc;
@@ -33,9 +36,10 @@ export class Ras4etPrintFormComponent implements OnInit {
       .getPrintForm(params)
       .subscribe
       (data => {
-        let blob: Blob = new Blob([data], { type: 'application/pdf' });
-        let url = window.URL.createObjectURL(blob);
-        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        let asd: any = data
+        // let blob: Blob = new Blob([data], { type: 'application/pdf' });
+        // let url = window.URL.createObjectURL(blob);
+        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + asd.status);
       })
   }
 

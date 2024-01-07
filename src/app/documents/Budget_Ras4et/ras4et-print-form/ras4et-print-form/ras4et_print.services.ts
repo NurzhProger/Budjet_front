@@ -19,6 +19,6 @@ export class Ras4etPrintService {
 
 
     getPrintForm(params: any) {
-        return this.http.get(this.host + "reports/pechatnaya/" + params.id, { responseType: 'blob' })
+        return this.http.get(this.host + "reports/pechatnaya/" + params.id)
     }
 }
