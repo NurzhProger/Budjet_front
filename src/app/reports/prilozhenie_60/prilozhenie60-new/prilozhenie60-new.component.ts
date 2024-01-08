@@ -121,7 +121,7 @@ export class Prilozhenie60NewComponent implements OnInit {
 
 
   form() {
-    this.isLoading = true;
+    this.isLoading = true
     let params = {
       org_id: this._organization.id,
       _date_min: this.toLocaleDate(this._date_min),
@@ -157,6 +157,7 @@ export class Prilozhenie60NewComponent implements OnInit {
         (data => {
           let bibon: any = data
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + bibon.status);
+          this.isLoading = false
         })
     }
     else if (this.prilozhenieValue == 'prilozhenie61') {
@@ -166,12 +167,9 @@ export class Prilozhenie60NewComponent implements OnInit {
         (data => {
           let bibon: any = data
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + bibon.status);
+          this.isLoading = false
         })
-    }
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 5000)
-    
+    } 
   }
 
   toLocaleDate(dateForStr: Date) {
