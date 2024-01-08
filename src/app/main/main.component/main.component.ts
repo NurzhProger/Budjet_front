@@ -339,7 +339,7 @@ export class MainComponent implements OnInit {
             {
               label: 'Приложения',
               items: [{
-                label: 'Приложение 60',
+                label: 'Приложение №60, 61',
                 icon: 'pi pi-bars',
                 command: () => this.openTab('app-prilozhenie60-new', 'Приложение 60', '')
               },
