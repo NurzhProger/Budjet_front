@@ -36,6 +36,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { SplitterModule } from 'primeng/splitter';
 import { DividerModule } from 'primeng/divider';
+import { SidebarModule } from 'primeng/sidebar';
 
 
 
@@ -78,7 +79,8 @@ import { DividerModule } from 'primeng/divider';
         SkeletonModule,
         ContextMenuModule,
         SplitterModule,
-        DividerModule
+        DividerModule,
+        SidebarModule
     ]
 })
 

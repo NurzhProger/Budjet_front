@@ -3,7 +3,7 @@
         <div style="width: 100%; height: 100%;">
             <div style="display: flex;">
                 <div style="padding: 10px 0; display: flex; height: calc(25vh- 150px); width: 98%;">
-                    <div class="p-field" style="padding-right: 10px;">
+                    <div class="p-field" style="padding: 16px 10px 12px 10px">
                         <button pButton pRipple label="Сформировать" styleClass="p-button-sm" class="p-button-warning"
                             (click)="form()">
                         </button>
@@ -41,8 +41,11 @@
                             <p-inputNumber type="number" [(ngModel)]="godUcheta"></p-inputNumber>
                         </div>
                     </div>
+                </div> 
+                <div style="padding: 25px 0 10px 0;">
+                    <p-button type="button" class="mr-2" (click)="sidebarVisible = true" icon="pi pi-arrow-left"></p-button>
                 </div>
-                <div *ngIf="this.type_report !== ''" style="padding: 10px 0;">
+                <div *ngIf="this.type_report !== ''" style="padding: 25px 10px 0 0;">
                     <button pButton pRipple type="button" icon="pi pi-times"
                         class="p-button-outlined p-button-plain p-mr-2" styleClass="p-button-sm"
                         (click)="closeform()"></button>
@@ -51,8 +54,11 @@
         </div>
     </ng-template>
 
+
+
+
     <ng-template pTemplate>
-        <p-splitter [panelSizes]="[80, 20]">
+        
             <ng-template pTemplate>
                 <div *ngIf="url != ''" style="width: 100%; height: calc(93vh - 150px);">
                     <div style="width: 100%; height: 100%;">
@@ -63,8 +69,11 @@
                     </div>
                 </div>
             </ng-template>
+            <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" position="right" appendTo="body">
+                <h3> Параметры </h3>
             <ng-template pTemplate>
-                <div style="width: 100%; height: calc(93vh - 150px);">
+                
+                
 
                     <div class="p-field"
                         style="padding-right: 10px; padding-bottom: 10px; display: flex; align-items: center; margin-top: 10px;">
@@ -255,11 +264,12 @@
                         </p-accordionTab>
                     </p-accordion>
 
-                </div>
-
+                
+                
+              
 
             </ng-template>
-        </p-splitter>
+            </p-sidebar>
     </ng-template>
 
 

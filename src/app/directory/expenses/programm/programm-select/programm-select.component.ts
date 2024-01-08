@@ -71,7 +71,7 @@ export class ProgrammSelectComponent implements OnInit {
   }
 
   onRowClick(programm_detail: programm_detail) {
-
+    this.programmSelectref.close(programm_detail)
   }
   onSelected(programm_detail: programm_detail) {
     if (!this.selected) {

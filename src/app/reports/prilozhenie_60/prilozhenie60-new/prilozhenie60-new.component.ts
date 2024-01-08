@@ -22,12 +22,16 @@ import { AuthService } from 'src/app/login/auth.service';
   styleUrls: ['./prilozhenie60-new.component.css']
 })
 export class Prilozhenie60NewComponent implements OnInit {
+  
+  sidebarVisible: boolean = false;
   host = ''
   @Output() closeEvent = new EventEmitter<any>()
   constructor(
     private Reportref: DynamicDialogRef,
+    private ReportProgramref: DynamicDialogRef,
     private ReportPodProgramref: DynamicDialogRef,
     private ReportSpecref: DynamicDialogRef,
+    private ReportProgramdialog: DialogService,
     private ReportPodProgdialog: DialogService,
     private ReportSpecdialog: DialogService,
     private MainComponent: MainComponent,
@@ -185,7 +189,7 @@ export class Prilozhenie60NewComponent implements OnInit {
   }
 
   selectProgram() {
-    this.Reportref = this.Reportdialog.open(SelectProgramComponent,
+    this.ReportProgramref = this.ReportProgramdialog.open(SelectProgramComponent,
       {
         header: 'Список программ',
         width: '80%',
@@ -193,7 +197,7 @@ export class Prilozhenie60NewComponent implements OnInit {
         data: { program: this._program, abp_id: this._abp.id }
       })
 
-    this.Reportref.onClose.subscribe((select: any) => {
+    this.ReportProgramref.onClose.subscribe((select: any) => {
       if (select) {
         if (select.length > 0) {
           this._program = select

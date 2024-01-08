@@ -42,6 +42,7 @@ export class Prilozhenie5758Component implements OnInit {
     this.profileuser = this.MainComponent.profileuser
     this.host = this.authservice.host;
   }
+  sidebarVisible: boolean = false;
   profileuser: profileuser
   prilozhenieType: any = []
   reportLanguages: any = []

@@ -43,6 +43,7 @@ export class SelectProgramComponent implements OnInit {
     })
   }
 
+
   onDelete(ri: number) {
     this.mass_program.splice(ri, 1)
   }
