@@ -46,6 +46,7 @@ export class Prilozhenie60NewComponent implements OnInit {
   }
   type_report: ''
   url: any = ''
+  isLoading: boolean = false;
   _organization = {
     'id': 0,
     'name': ''
@@ -95,6 +96,7 @@ export class Prilozhenie60NewComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    
     this._date_min = new Date(this._date.getFullYear(), 0, 1)
     this.godUcheta = Number(new Date(this._date.getFullYear()))
     this._date_max = this._date
@@ -114,12 +116,12 @@ export class Prilozhenie60NewComponent implements OnInit {
       { label: 'тенге', value: 1 },
       { label: 'тыс. тенге', value: 1000 }
     ]
-
+    
   }
 
 
   form() {
-
+    this.isLoading = true;
     let params = {
       org_id: this._organization.id,
       _date_min: this.toLocaleDate(this._date_min),
@@ -139,8 +141,10 @@ export class Prilozhenie60NewComponent implements OnInit {
       koeff_2_year_110_130: this.koeff_2_year_110_130,
       koeff_2_year_140: this.koeff_2_year_140,
       koeff_2_year_150: this.koeff_2_year_150,
-      koeff_2_year_160: this.koeff_2_year_160
+      koeff_2_year_160: this.koeff_2_year_160,
     }
+  
+    
 
     if (this._organization.id == 0) {
       this.Reportmsg.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите организацию' })
@@ -164,7 +168,10 @@ export class Prilozhenie60NewComponent implements OnInit {
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + bibon.status);
         })
     }
-
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 5000)
+    
   }
 
   toLocaleDate(dateForStr: Date) {

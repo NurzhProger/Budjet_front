@@ -71,7 +71,7 @@
         </div>
     </ng-template>
     <ng-template pTemplate>
-        
+        <p-splitter [panelSizes]="[99, 1]">
             <ng-template pTemplate>
 
                 <div *ngIf="url != ''" style="width: 100%; height: calc(93vh - 150px);">
@@ -83,11 +83,11 @@
                     </div>
                 </div>
             </ng-template>
-            <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" position="right" appendTo="body">
-                <h3> Параметры </h3>
+            
             <ng-template pTemplate>
                 <div style="width: 100%; height: calc(93vh - 150px);">
-
+                    <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" position="right" appendTo="body">
+                        <h3> Параметры </h3>
 
                     <div class="p-field"
                         style="padding-right: 10px; padding-bottom: 10px; display: flex; align-items: center; margin-top: 10px;">
@@ -277,11 +277,11 @@
                             </div>
                         </p-accordionTab>
                     </p-accordion>
-
+                </p-sidebar>
                 </div>
 
 
             </ng-template>
-        </p-sidebar>
+        </p-splitter>
     </ng-template>
 </p-splitter>

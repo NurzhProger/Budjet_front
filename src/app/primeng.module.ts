@@ -37,6 +37,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { SplitterModule } from 'primeng/splitter';
 import { DividerModule } from 'primeng/divider';
 import { SidebarModule } from 'primeng/sidebar';
+import { ProgressSpinner, ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 
@@ -80,7 +81,9 @@ import { SidebarModule } from 'primeng/sidebar';
         ContextMenuModule,
         SplitterModule,
         DividerModule,
-        SidebarModule
+        SidebarModule,
+        ProgressSpinnerModule
+       
     ]
 })
 

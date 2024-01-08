@@ -5,7 +5,7 @@
                 <div style="padding: 10px 0; display: flex; height: calc(25vh- 150px); width: 98%;">
                     <div class="p-field" style="padding: 16px 10px 12px 10px">
                         <button pButton pRipple label="Сформировать" styleClass="p-button-sm" class="p-button-warning"
-                            (click)="form()">
+                            (click)="form()" [disabled]="isLoading">                      
                         </button>
                     </div>
                     <div class="p-field" style="padding-right: 10px; display: flex; flex-direction: column;">
@@ -56,13 +56,15 @@
 
 
 
-    <ng-template pTemplate>
-    <p-splitter [panelSizes]="[80, 20]">
+   
+    
         
     <ng-template pTemplate>
-       
+        <p-splitter [panelSizes]="[99, 1]">
             <ng-template pTemplate>
                 <div *ngIf="url != ''" style="width: 100%; height: calc(93vh - 150px);">
+                    <span *ngIf="isLoading">Загружаем отчет...</span>
+                    <p-progressSpinner *ngIf="isLoading" styleClass="custom-spinner" strokeWidth="8" fill="#3498db"></p-progressSpinner>
                     <div style="width: 100%; height: 100%;">
                         <!-- <iframe [src]="url" [allowFullscreen]="true"
                             style="width: 100%; height: 100%; border: none;"></iframe> -->
@@ -73,8 +75,9 @@
             </ng-template>
             
             <ng-template pTemplate>
-                
-                
+                <div style="width: 100%; height: calc(93vh - 150px);">
+                    <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" position="right" appendTo="body">
+                        <h3> Параметры </h3>
 
                     <div class="p-field"
                         style="padding-right: 10px; padding-bottom: 10px; display: flex; align-items: center; margin-top: 10px;">
@@ -268,17 +271,19 @@
                 
                 
               
+                </p-sidebar>
+                </div>
             </ng-template>
             
-        
+        </p-splitter>
        
     </ng-template>
     
    
             
     
-    </p-splitter>
-</ng-template>
+    
+
 
 
 
