@@ -14,6 +14,7 @@ import { abp_detail } from 'src/app/directory/expenses/ABP/interfaces';
 import { SelectProgramComponent } from '../../prilozhenie_57_58/select_program_report/select-program/select-program.component';
 import { SelectPodprogramComponent } from '../../prilozhenie_57_58/select_podprogram_report/select-podprogram/select-podprogram.component';
 import { SelectSpecComponent } from '../../prilozhenie_57_58/select_spec_report/select-spec/select-spec.component';
+import { AuthService } from 'src/app/login/auth.service';
 
 @Component({
   selector: 'app-prilozhenie60-new',
@@ -34,7 +35,11 @@ export class Prilozhenie60NewComponent implements OnInit {
     private Reportmsg: MessageService,
     private Prilozhenie60NewService: Prilozhenie60NewService,
     private sanitizer: DomSanitizer,
-  ) { this.profileuser = this.MainComponent.profileuser }
+    private authservice: AuthService
+  ) {
+    this.profileuser = this.MainComponent.profileuser
+    this.host = this.authservice.host;
+  }
   type_report: ''
   url: any = ''
   _organization = {
@@ -110,8 +115,8 @@ export class Prilozhenie60NewComponent implements OnInit {
 
 
   form() {
-    
-    let params = {  
+
+    let params = {
       org_id: this._organization.id,
       _date_min: this.toLocaleDate(this._date_min),
       _date_max: this.toLocaleDate(this._date_max),
@@ -136,7 +141,7 @@ export class Prilozhenie60NewComponent implements OnInit {
     if (this._organization.id == 0) {
       this.Reportmsg.add({ severity: 'error', summary: 'Ошибка', detail: 'Выберите организацию' })
       return
-    } 
+    }
     if (this.prilozhenieValue == 'prilozhenie60') {
       this.Prilozhenie60NewService
         .getReport60(params)
@@ -148,14 +153,14 @@ export class Prilozhenie60NewComponent implements OnInit {
     }
     else if (this.prilozhenieValue == 'prilozhenie61') {
       this.Prilozhenie60NewService
-      .getReport61(params)
-      .subscribe
-      (data => {
-        let bibon: any = data
-        this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + bibon.status);
-      })
+        .getReport61(params)
+        .subscribe
+        (data => {
+          let bibon: any = data
+          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + bibon.status);
+        })
     }
-    
+
   }
 
   toLocaleDate(dateForStr: Date) {
@@ -254,7 +259,7 @@ export class Prilozhenie60NewComponent implements OnInit {
       }
     })
   }
-  
+
   viewOrg() {
     this.Reportref = this.Reportdialog.open(OrganizationDetailComponent,
       {

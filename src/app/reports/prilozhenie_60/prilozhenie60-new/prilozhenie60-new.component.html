@@ -4,25 +4,25 @@
             <div style="display: flex;">
                 <div style="padding: 10px 0; display: flex; height: calc(25vh- 150px); width: 98%;">
                     <div class="p-field" style="padding-right: 10px;">
-                         <button pButton pRipple label="Сформировать" styleClass="p-button-sm" class="p-button-warning"
-                        (click)="form()">
+                        <button pButton pRipple label="Сформировать" styleClass="p-button-sm" class="p-button-warning"
+                            (click)="form()">
                         </button>
                     </div>
                     <div class="p-field" style="padding-right: 10px; display: flex; flex-direction: column;">
                         <label for="">Дата начала: </label>
                         <p-calendar appendTo="body" placeholder="Дата начала" [(ngModel)]="_date_min"
-                        dateFormat="dd.mm.yy" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                            dateFormat="dd.mm.yy" [readonlyInput]="true" [showIcon]="true"></p-calendar>
                     </div>
                     <div class="p-field" style="padding-right: 10px; display: flex; flex-direction: column;">
                         <label for="">Дата окончания: </label>
                         <p-calendar appendTo="body" placeholder="Дата окончания" [(ngModel)]="_date_max"
-                         dateFormat="dd.mm.yy" [readonlyInput]="true" [showIcon]="true"></p-calendar>
+                            dateFormat="dd.mm.yy" [readonlyInput]="true" [showIcon]="true"></p-calendar>
                     </div>
                     <div class="p-field" style="padding-right: 10px; display: flex; flex-direction: column;">
                         <label for="">Организация: </label>
                         <div class="p-inputgroup" style="padding-right: 10px;">
                             <input id="org_name" type="text" [(ngModel)]="_organization.name"
-                            placeholder="Выберите организацию" readonly="true" />
+                                placeholder="Выберите организацию" readonly="true" />
                             <span class="p-inputgroup-addon cursor-pointer" (click)="selectOrg()">...</span>
                         </div>
                     </div>
@@ -30,8 +30,8 @@
                         <label for="">Приложения: </label>
                         <div class="card flex justify-content-center" style="padding-right: 10px;">
                             <p-dropdown id="type_name" [options]="prilozhenieType" placeholder="Выберите приложение"
-                            optionLabel="label" optionValue="value" appendTo="body" [(ngModel)]="prilozhenieValue"
-                            (ngModelChange)="changePrilozhenie()">
+                                optionLabel="label" optionValue="value" appendTo="body" [(ngModel)]="prilozhenieValue"
+                                (ngModelChange)="changePrilozhenie()">
                             </p-dropdown>
                         </div>
                     </div>
@@ -41,11 +41,12 @@
                             <p-inputNumber type="number" [(ngModel)]="godUcheta"></p-inputNumber>
                         </div>
                     </div>
-                </div>   
+                </div>
                 <div *ngIf="this.type_report !== ''" style="padding: 10px 0;">
-                        <button pButton pRipple type="button" icon="pi pi-times" class="p-button-outlined p-button-plain p-mr-2"
-                        styleClass="p-button-sm" (click)="closeform()"></button>
-                </div>   
+                    <button pButton pRipple type="button" icon="pi pi-times"
+                        class="p-button-outlined p-button-plain p-mr-2" styleClass="p-button-sm"
+                        (click)="closeform()"></button>
+                </div>
             </div>
         </div>
     </ng-template>
@@ -55,7 +56,8 @@
             <ng-template pTemplate>
                 <div *ngIf="url != ''" style="width: 100%; height: calc(93vh - 150px);">
                     <div style="width: 100%; height: 100%;">
-                       
+                        <!-- <iframe [src]="url" [allowFullscreen]="true"
+                            style="width: 100%; height: 100%; border: none;"></iframe> -->
                         <iframe sandbox="allow-scripts allow-same-origin" [allowFullscreen]="true"
                             style="width: 100%; height: 100%; border: none;" [src]="url"></iframe>
                     </div>
@@ -260,5 +262,5 @@
         </p-splitter>
     </ng-template>
 
-   
+
 </p-splitter>
