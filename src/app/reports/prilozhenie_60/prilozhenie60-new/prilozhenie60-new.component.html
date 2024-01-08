@@ -56,9 +56,11 @@
 
 
 
-
     <ng-template pTemplate>
+    <p-splitter [panelSizes]="[80, 20]">
         
+    <ng-template pTemplate>
+       
             <ng-template pTemplate>
                 <div *ngIf="url != ''" style="width: 100%; height: calc(93vh - 150px);">
                     <div style="width: 100%; height: 100%;">
@@ -69,8 +71,7 @@
                     </div>
                 </div>
             </ng-template>
-            <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" position="right" appendTo="body">
-                <h3> Параметры </h3>
+            
             <ng-template pTemplate>
                 
                 
@@ -267,10 +268,18 @@
                 
                 
               
-
             </ng-template>
-            </p-sidebar>
+            
+        
+       
     </ng-template>
+    
+   
+            
+    
+    </p-splitter>
+</ng-template>
+
 
 
 </p-splitter>
