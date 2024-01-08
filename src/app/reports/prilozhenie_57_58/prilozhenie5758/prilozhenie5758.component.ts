@@ -169,9 +169,10 @@ export class Prilozhenie5758Component implements OnInit {
         .getReport58(params)
         .subscribe
         (data => {
-          let blob: Blob = new Blob([data], { type: 'application/pdf' });
-          let url = window.URL.createObjectURL(blob);
-          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+          let asd: any = data
+          // let blob: Blob = new Blob([data], { type: 'application/pdf' });
+          // let url = window.URL.createObjectURL(blob);
+          this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + asd.status);
         })
 
     }

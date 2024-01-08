@@ -20,11 +20,11 @@ export class Prilozhenie5758Service {
 
 
     getReport57(params: any) {
-        return this.http.post(this.host + "reports/prilozhenie57", params )
+        return this.http.post(this.host + "reports/prilozhenie57", params)
     }
 
     getReport58(params: any) {
-        return this.http.post(this.host + "reports/prilozhenie58", params, { responseType: 'blob' })
+        return this.http.post(this.host + "reports/prilozhenie58", params)
     }
 
 }
