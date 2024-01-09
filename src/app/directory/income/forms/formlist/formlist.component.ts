@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 import { form_detail, form_list, form_list_doc } from "../forms_interfaces";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
-import { MessageService,ConfirmationService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { formsService } from '../forms_servise'
 import { FormDetailComponent } from '../form-detail/form-detail.component';
 
@@ -17,10 +17,10 @@ export class FormlistComponent implements OnInit {
     private form_list_ryref: DynamicDialogRef,
     private form_list_messageServicedelSelect: MessageService,
     private form_list_dialog: DialogService,
-    private form_Servise:formsService,
+    private form_Servise: formsService,
     private message_confirm: ConfirmationService,
-    private message_responce: MessageService
-    )  { }
+    private message_responce: MessageService,
+  ) { }
 
 
   @Output() newItemEvent = new EventEmitter<any>();
@@ -29,10 +29,10 @@ export class FormlistComponent implements OnInit {
   @HostListener('window:keydown', ['$event'])
 
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'F9' && this.selected){
-        if(this.selected.length > 0 ) {
-          this.copySelectedRow()
-          this.selected = []
+    if (event.key === 'F9' && this.selected) {
+      if (this.selected.length > 0) {
+        this.copySelectedRow()
+        this.selected = []
       }
     }
   }
@@ -59,42 +59,65 @@ export class FormlistComponent implements OnInit {
     this.form_list$ = this.form_Servise.fetch(params)
   }
 
-  openNew(form_d: form_list_doc){
+  openNew(form_d: form_list_doc) {
     this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ', id: '' } });
   }
 
-  onSelected(form_list: form_list_doc){
+  onSelected(form_list: form_list_doc) {
 
   }
 
-  closeform(){
+  closeform() {
 
     this.closeEvent.emit()
 
   }
 
-  onRowClick(form_doc: form_list_doc){
+  onRowClick(form_doc: form_list_doc) {
     this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
   }
 
 
-  copySelectedRow() { 
-    
-      // this.form_list_ryref = this.form_list_dialog.open(FormDetailComponent,
-      //   {   
-      //   header: 'Создание формы',
-      //   width: '60%',
-      //   height: '80%',    
-        
-      //   })
-      //   if (this.selected) {
-      //     this.form_list_ryref.onClose.subscribe
-      //   }
-      // console.log(this.selected);
-      // let copy = Object.assign([0], this.selected);
-      
-    }
-  
+  copySelectedRow() {
+    let doc_id: string
+    doc_id = String(this.selected[0].id)
+
+    this.form_Servise.fetch_detail(doc_id)
+      .subscribe(
+        (detail) => {
+          this.form_detail = detail,
+            this.form_list_ryref = this.form_list_dialog.open(FormDetailComponent,
+              {
+                header: 'Создание формы',
+                width: '100%',
+                height: '100%',
+                data: { data: this.form_detail }
+              })
+
+          this.form_list_ryref.onClose.subscribe((save: boolean) => {
+
+            if (save) {
+              this.fetchCat()
+            }
+          })
+        }
+      )
+
+
+    // this.form_list_ryref = this.form_list_dialog.open(FormDetailComponent,
+    //   {
+    //     header: 'Создание формы',
+    //     width: '60%',
+    //     height: '80%',
+    //     data: { data: this.form_detail }
+    //   })
+    // if (this.selected) {
+    //   this.form_list_ryref.onClose.subscribe
+    // }
+    // let copy = Object.assign([0], this.selected);
+
+  }
+
 
 
   onDelete(form: form_list_doc) {
@@ -124,8 +147,8 @@ export class FormlistComponent implements OnInit {
     })
   }
 
-  onRowEdit(form_doc: form_list_doc){
-    this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
+  onRowEdit(form_doc: form_list_doc) {
+    this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id, copy_doc: false } });
   }
 
   onPageChange(event: any) {

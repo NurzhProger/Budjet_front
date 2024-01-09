@@ -1,7 +1,7 @@
 import { Component, DoCheck, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService, SelectItem } from 'primeng/api';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { form_list, form_list_doc, form_detail, forms_tab1 } from "../forms_interfaces";
 import { formsService } from '../forms_servise'
 import { Observable } from 'rxjs';
@@ -32,7 +32,9 @@ export class FormDetailComponent implements OnInit {
     private form_detail_dialog: DialogService,
     private form_Servise: formsService,
     private sposob_servise: Sposob_ras4eta_servise,
-    private form_Confirmation: ConfirmationService) { }
+    private form_Confirmation: ConfirmationService,
+    private form_config: DynamicDialogConfig,
+    private select_dialog_Detailref: DynamicDialogRef) { }
 
 
 
@@ -48,7 +50,7 @@ export class FormDetailComponent implements OnInit {
   statuses!: SelectItem[]
   tip_options: any = []
   windowHeight: number
-
+  copy_doc: any
   form_detail: form_detail = {
     form: {
       id: 0,
@@ -117,20 +119,27 @@ export class FormDetailComponent implements OnInit {
     })
 
 
+    if (this.form_config.data) {
+      this.copy_doc = JSON.parse(JSON.stringify(this.form_config.data.data))
+      this.copy_doc.form.id = 0
+      this.copy_doc.form.name = ''
+      this.form_detail = this.copy_doc
 
-    if (this.form_doc_id !== '') {
-      this.form_Servise.fetch_detail(this.form_doc_id)
-        .subscribe(
-          (detail) => {
-            this.form_detail = detail
+    } else {
+      if (this.form_doc_id !== '') {
+        this.form_Servise.fetch_detail(this.form_doc_id)
+          .subscribe(
+            (detail) => {
+              this.form_detail = detail
 
-            let objString = JSON.stringify(this.form_detail)
-            this.hashBegin = SHA256(objString).toString()
-          }
-        )
+              let objString = JSON.stringify(this.form_detail)
+              this.hashBegin = SHA256(objString).toString()
+            }
+          )
+      }
     }
-    else {
-    }
+
+
 
     this.selectTipTop()
 
@@ -187,6 +196,7 @@ export class FormDetailComponent implements OnInit {
     this.hashBegin = this.hashEnd
 
     if (close) {
+      this.select_dialog_Detailref.close(close)
       this.closeEvent.emit()
     }
   }

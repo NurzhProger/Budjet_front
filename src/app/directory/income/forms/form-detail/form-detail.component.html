@@ -1,11 +1,11 @@
 <p-toolbar>
   <div class="p-toolbar-group-left">
     <div style="padding-right: 10px;">
-      <button  pButton pRipple label="Записать" icon="pi pi-save"
-        class="p-button-secondary p-mr-2" (click)="saveDoc(false)"></button>
+      <button pButton pRipple label="Записать" icon="pi pi-save" class="p-button-secondary p-mr-2"
+        (click)="saveDoc(false)" [disabled]="form.invalid || form.disabled"></button>
     </div>
-    <button  pButton pRipple label="Записать и закрыть" icon="pi pi-save"
-      class="p-button-info p-mr-2" (click)="saveDoc(true)"></button>
+    <button pButton pRipple label="Записать и закрыть" icon="pi pi-save" class="p-button-info p-mr-2"
+      (click)="saveDoc(true)" [disabled]="form.invalid || form.disabled"></button>
   </div>
 
   <div class="p-toolbar-group-right">
@@ -47,7 +47,7 @@
       </span>
     </div>
 
-    
+
     <div class="p-field" style="padding-right: 10px;">
 
       <label for="name_doc_kaz">Наименование(каз) <span style="color: red;">*</span></label>
@@ -96,110 +96,110 @@
   <!-- тело элемента -->
   <p-tabView>
     <!-- Страница1 - Основная таблица -->
-    
-      <div style="padding: 0 0 10px 10px;">
-        <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
-          (click)="add_tbl()"></button>
-      </div>
-      <p-table [value]="form_detail.tbl" [scrollable]="true" dataKey="id" editMode="row"
-        scrollHeight="calc(85vh - 200px)" selectionMode="single"
-        styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
-        <ng-template pTemplate="header">
-          <tr>
-            <th style="text-align:center">Номер</th>
-            <th style="text-align:center; width: 20%;">Имя</th>
-            <th style="text-align:center; width: 20%;">Имя Каз</th>
-            <th style="text-align:center; width: 10%;">Способ расчета</th>
-            <th style="text-align:center; width: 15%;">Заголовок</th>
-            <th style="text-align:center; width: 15%;">Заголовок Каз</th>
-            <th style="text-align:center">Уровень заголовка</th>
-            <th style="text-align:center">Значение</th>
-            <th style="text-align:center">Колонка</th>
-            <th style="text-align:center">Используемые колонки</th>
-            <th style="text-align:center">Основные колонки</th>
-            <th style="text-align:center">Итоговая сумма</th>
-            <th style="text-align:center">Суммируемая колонка</th>
-            <th style="text-align:center">Размер</th>
-            <th style="text-align:center">Действия</th>
-          </tr>
-        </ng-template>
 
-        <ng-template pTemplate="body" let-item let-editing="editing" let-ri="rowIndex">
-          <tr [pEditableRow]="item">
-            <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.name" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.name}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.name_kaz" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.name_kaz}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <p-dropdown placeholder="Выберите способ расчета" [options]="tip_options" appendTo="body" optionLabel="name" optionValue="name"
-                    [(ngModel)]="item._sposob_ras" [style]="{'width':'100%'}"></p-dropdown>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item._sposob_ras}}
-                </ng-template>    
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.head" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.head}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.head_kaz" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.head_kaz}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td style="text-align:center">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="number" [(ngModel)]="item.head_level" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.head_level}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <!-- <td>{{item.name}}</td> -->
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="item.zn"
-                    [style]="{'width':'100%'}"></p-dropdown>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.zn}}
-                </ng-template>
-              </p-cellEditor>
-              <!-- <p-cellEditor>
+    <div style="padding: 0 0 10px 10px;">
+      <button pButton pRipple label="добавить" icon="pi pi-plus" class="p-button-success p-mr-2"
+        (click)="add_tbl()"></button>
+    </div>
+    <p-table [value]="form_detail.tbl" [scrollable]="true" dataKey="id" editMode="row" scrollHeight="calc(85vh - 200px)"
+      selectionMode="single" styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="text-align:center">Номер</th>
+          <th style="text-align:center; width: 20%;">Имя</th>
+          <th style="text-align:center; width: 20%;">Имя Каз</th>
+          <th style="text-align:center; width: 10%;">Способ расчета</th>
+          <th style="text-align:center; width: 15%;">Заголовок</th>
+          <th style="text-align:center; width: 15%;">Заголовок Каз</th>
+          <th style="text-align:center">Уровень заголовка</th>
+          <th style="text-align:center">Значение</th>
+          <th style="text-align:center">Колонка</th>
+          <th style="text-align:center">Используемые колонки</th>
+          <th style="text-align:center">Основные колонки</th>
+          <th style="text-align:center">Итоговая сумма</th>
+          <th style="text-align:center">Суммируемая колонка</th>
+          <th style="text-align:center">Размер</th>
+          <th style="text-align:center">Действия</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-item let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="item">
+          <td style="text-align: center; font-weight: 700;">{{ri + 1}}</td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="item.name" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.name}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="item.name_kaz" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.name_kaz}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-dropdown placeholder="Выберите способ расчета" [options]="tip_options" appendTo="body"
+                  optionLabel="name" optionValue="name" [(ngModel)]="item._sposob_ras"
+                  [style]="{'width':'100%'}"></p-dropdown>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item._sposob_ras}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="item.head" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.head}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="item.head_kaz" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.head_kaz}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="item.head_level" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.head_level}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <!-- <td>{{item.name}}</td> -->
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="item.zn"
+                  [style]="{'width':'100%'}"></p-dropdown>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.zn}}
+              </ng-template>
+            </p-cellEditor>
+            <!-- <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input pInputText type="text" [(ngModel)]="item.zn">
                 </ng-template>
@@ -207,83 +207,83 @@
                   {{item.zn}}
                 </ng-template>
               </p-cellEditor> -->
-            </td>
-            <td style="width: 20px;">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item._column" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item._column}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="item.columns_used" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.columns_used}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input type="checkbox" [(ngModel)]="item.basic_column" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  <input type="checkbox" [(ngModel)]="item.basic_column" [disabled]="true">
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input type="checkbox" [(ngModel)]="item.itog" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  <input type="checkbox" [(ngModel)]="item.itog" [disabled]="true">
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input type="checkbox" [(ngModel)]="item.total" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  <input type="checkbox" [(ngModel)]="item.total" [disabled]="true">
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td style="text-align:center">
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="number" [(ngModel)]="item.razmer" style="width: 100%;">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{item.razmer}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td style="padding: 0; margin:0;">
-              <div class="flex align-items-center justify-content-center gap-2">
-                <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-                  class="p-button-rounded p-button-text"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
-                  class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                  class="p-button-rounded p-button-text p-button-danger"></button>
-                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
-                  (click)="deleted_tbl(ri)"></button>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    
+          </td>
+          <td style="width: 20px;">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="item._column" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item._column}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="item.columns_used" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.columns_used}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="checkbox" [(ngModel)]="item.basic_column" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                <input type="checkbox" [(ngModel)]="item.basic_column" [disabled]="true">
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="checkbox" [(ngModel)]="item.itog" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                <input type="checkbox" [(ngModel)]="item.itog" [disabled]="true">
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="checkbox" [(ngModel)]="item.total" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                <input type="checkbox" [(ngModel)]="item.total" [disabled]="true">
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="number" [(ngModel)]="item.razmer" style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{item.razmer}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="padding: 0; margin:0;">
+            <div class="flex align-items-center justify-content-center gap-2">
+              <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                class="p-button-rounded p-button-text"></button>
+              <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                class="p-button-rounded p-button-text p-button-success mr-2"></button>
+              <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                class="p-button-rounded p-button-text p-button-danger"></button>
+              <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
+                (click)="deleted_tbl(ri)"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
     <!-- Страница2 - Доплаты -->
     <!-- <p-tabPanel header="Доплата">
       <div style="padding: 0 0 10px 10px;">
@@ -378,7 +378,7 @@
         </ng-template>
       </p-table> -->
 
-      <!-- <p-table [value]="form_detail.dopl" [scrollable]="true" scrollHeight="calc(100vh - 200px)" selectionMode="single"
+    <!-- <p-table [value]="form_detail.dopl" [scrollable]="true" scrollHeight="calc(100vh - 200px)" selectionMode="single"
         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
         <ng-template pTemplate="header">
           <tr>

@@ -28,8 +28,8 @@
 </p-toolbar>
 
 <div class="card" *ngIf="(form_list$ | async) as category; else loader">
-  <p-table *ngIf="category.count !== 0; else empty" [value]="category.results" [scrollable]="true"
-    scrollHeight="700px" selectionMode="multiple" [(selection)]="selected" [metaKeySelection]="true"
+  <p-table *ngIf="category.count !== 0; else empty" [value]="category.results" [scrollable]="true" scrollHeight="700px"
+    selectionMode="multiple" [(selection)]="selected" [metaKeySelection]="true"
     styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines">
     <ng-template pTemplate="header">
       <tr>
@@ -57,7 +57,7 @@
             <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
               (click)="onRowEdit(form)"></button>
             <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"
-            (click)="onDelete(form)"></button>
+              (click)="onDelete(form)"></button>
           </div>
         </td>
       </tr>
