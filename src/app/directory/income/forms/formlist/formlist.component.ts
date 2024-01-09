@@ -4,6 +4,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { MessageService,ConfirmationService } from 'primeng/api';
 import { formsService } from '../forms_servise'
+import { FormDetailComponent } from '../form-detail/form-detail.component';
 
 @Component({
   selector: 'app-formlist',
@@ -25,6 +26,17 @@ export class FormlistComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<any>();
   @Output() closeEvent = new EventEmitter<any>()
   @Input() data = false
+  @HostListener('window:keydown', ['$event'])
+
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'F9' && this.selected){
+        if(this.selected.length > 0 ) {
+          this.copySelectedRow()
+          this.selected = []
+      }
+    }
+  }
+  form_detail: form_detail
   form_list$: Observable<form_list>
   searcforms = ''
   first = 0
@@ -64,6 +76,26 @@ export class FormlistComponent implements OnInit {
   onRowClick(form_doc: form_list_doc){
     this.newItemEvent.emit({ params: { selector: 'app-form-detail', nomer: 'Шаблон формы ' + form_doc.num_app, id: form_doc.id } });
   }
+
+
+  copySelectedRow() { 
+    
+      // this.form_list_ryref = this.form_list_dialog.open(FormDetailComponent,
+      //   {   
+      //   header: 'Создание формы',
+      //   width: '60%',
+      //   height: '80%',    
+        
+      //   })
+      //   if (this.selected) {
+      //     this.form_list_ryref.onClose.subscribe
+      //   }
+      // console.log(this.selected);
+      // let copy = Object.assign([0], this.selected);
+      
+    }
+  
+
 
   onDelete(form: form_list_doc) {
     this.message_confirm.confirm({
