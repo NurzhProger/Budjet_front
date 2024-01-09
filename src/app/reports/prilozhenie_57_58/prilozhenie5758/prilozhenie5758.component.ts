@@ -43,6 +43,7 @@ export class Prilozhenie5758Component implements OnInit {
     this.host = this.authservice.host;
   }
   sidebarVisible: boolean = false;
+  isLoading: boolean = false;
   profileuser: profileuser
   prilozhenieType: any = []
   reportLanguages: any = []
@@ -121,7 +122,7 @@ export class Prilozhenie5758Component implements OnInit {
   }
 
   form() {
-
+    this.isLoading = true
     let params = {
       org_id: this._organization.id,
       fkr_id: this._fkr.id,
@@ -162,6 +163,7 @@ export class Prilozhenie5758Component implements OnInit {
           // let blob: Blob = new Blob([data], { type: 'application/pdf' });
           // let url = window.URL.createObjectURL(blob);
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + asd.status);
+          this.isLoading = false
         })
 
     }
@@ -174,6 +176,7 @@ export class Prilozhenie5758Component implements OnInit {
           // let blob: Blob = new Blob([data], { type: 'application/pdf' });
           // let url = window.URL.createObjectURL(blob);
           this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.host + asd.status);
+          this.isLoading = false
         })
 
     }

@@ -341,7 +341,7 @@ export class MainComponent implements OnInit {
               items: [{
                 label: 'Приложение №60, 61',
                 icon: 'pi pi-bars',
-                command: () => this.openTab('app-prilozhenie60-new', 'Приложение 60', '')
+                command: () => this.openTab('app-prilozhenie60-new', 'Приложение №60, 61', '')
               },
               {
                 label: 'Приложение №57, 58',
